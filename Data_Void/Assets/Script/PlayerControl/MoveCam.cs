@@ -38,7 +38,7 @@ public class MoveCam : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            transform.Rotate(new Vector3(0, 90, 0));
+            transform.rotation = Quaternion.Lerp(transform.rotation, new Quaternion(0,1,0,0.1f), Time.time * 1);
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
