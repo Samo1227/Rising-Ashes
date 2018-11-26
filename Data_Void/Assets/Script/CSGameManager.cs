@@ -45,16 +45,20 @@ public class CSGameManager : MonoBehaviour {
 
     void Start() {
         MakeMap();
-        foreach (Tile tile in map)
-        {
-            tile.FindNeighbours(tile);
-        }
+        RefreshTile();
         AddRobot(2, 4);
 
 
 
 	}
 	
+    public void RefreshTile()
+    {
+        foreach (Tile tile in map)
+        {
+            tile.FindNeighbours(tile);
+        }
+    }
 
     void MakeMap()
     {
@@ -76,12 +80,35 @@ public class CSGameManager : MonoBehaviour {
         Tile newTile = null;
         newTile = Instantiate(tile);
         newTile.transform.SetParent(gameObject.transform);
-        newTile.x = x;
-        newTile.z = z;
+        newTile.int_X = x;
+        newTile.int_Z = z;
         newTile.transform.position = new Vector3(x, transform.position.y, z);
         Instantiate(Resources.Load<GameObject>("MapParts/MapElement_" + map_layout[x,z]),newTile.gameObject.transform);
+
+        if(map_layout[x, z] == 1)
+        {
+            newTile.bl_Is_Walkable = false;
+            newTile.GetComponent<BoxCollider>().size = new Vector3(1,3,1);
+        }
+
+
         map[x,z] = newTile;
         return newTile;
+    }
+
+    public void SwapTile(int x, int z, int map_Element)
+    {
+       Tile temp_Tile=  map[x, z];
+        Destroy(temp_Tile.gameObject);
+        //SetTile(x, z);    
+        Tile newTile = null;
+        newTile = Instantiate(tile);
+        newTile.transform.SetParent(gameObject.transform);
+        newTile.int_X = x;
+        newTile.int_Z = z;
+        newTile.transform.position = new Vector3(x, transform.position.y, z);
+        Instantiate(Resources.Load<GameObject>("MapParts/MapElement_"+0), newTile.gameObject.transform);
+        newTile.bl_Is_Walkable = true;
     }
 
     public void AddRobot(int cX, int cZ)
@@ -89,8 +116,8 @@ public class CSGameManager : MonoBehaviour {
         Robot tRo = null;
         tRo = Instantiate(pc);
         tRo.transform.position = new Vector3(cX, transform.position.y + 1f, cZ);
-        tRo.x = cX;
-        tRo.z = cZ;
+        tRo.int_x = cX;
+        tRo.int_z = cZ;
     }
 
     public void SetCurrentRobot(Robot selectedRobot)

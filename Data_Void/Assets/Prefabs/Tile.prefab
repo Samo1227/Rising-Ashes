@@ -108,10 +108,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5160d1ff055785846b55b049c0bfe339, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  x: 0
-  z: 0
-  distanceFromStart: 0
-  neighboursList: []
-  walkingSelection: 0
-  colour: {fileID: 0}
-  movecost: 1
+  int_X: 0
+  int_Z: 0
+  int_Distance_From_Start: 0
+  int_Move_Cost: 1
+  ls_Tile_Neighbours: []
+  bl_Is_Walkable: 1
+  bl_Walking_Selection: 0
+  bl_Attack_Selection: 0
+  rend_Colour: {fileID: 0}
