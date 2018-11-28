@@ -29,10 +29,10 @@ public class Tile : MonoBehaviour {
             {
                 rend_Colour.material.color = Color.cyan;
             }
-        else if (bl_Attack_Selection)
-        {
-            rend_Colour.material.color = Color.red;
-        }
+            else if (bl_Attack_Selection)
+            {
+                rend_Colour.material.color = Color.red;
+            }
             else
             {
                 rend_Colour.material.color = Color.white;
@@ -99,7 +99,6 @@ public class Tile : MonoBehaviour {
                     Destroy(hit.collider.gameObject.transform.GetChild(int_Child).gameObject);
                     int_Child++;
                     Debug.Log("Fire!");
-                    // CSGameManager.gameManager.SwapTile(int_X, int_Z, 0);
                     Instantiate(Resources.Load<GameObject>("MapParts/MapElement_" + 0), gameObject.transform);
                     bl_Is_Walkable = true;
                     gameObject.GetComponent<BoxCollider>().size = new Vector3(1, 1, 1);

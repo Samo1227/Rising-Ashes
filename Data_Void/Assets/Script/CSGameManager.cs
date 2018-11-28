@@ -1,14 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System.IO;
 public class CSGameManager : MonoBehaviour {
     public Tile tile;
     public Robot pc;
     public Tile[,] map = new Tile[10, 10];
     public Robot currentRobot;
-
-    int[,] map_layout;
+    public TextAsset txt_level;
+    public string st_level;
+    public string[] arr_at_level;
+    int[,] map_layout = new int[10,10];
+    
 
 
     //============================================
@@ -25,6 +28,8 @@ public class CSGameManager : MonoBehaviour {
             Destroy(gameObject); // kill subsequent versions
         }
 
+        TextToMapInt();
+        /*
         map_layout = new int[,]
         {
         { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
@@ -38,10 +43,50 @@ public class CSGameManager : MonoBehaviour {
         { 1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
         { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
         };
+        */
     }
     //============================================
 
+    void TextToMapInt()
+    {
+        st_level = txt_level.text;
+        arr_at_level = st_level.Split(new string[] { "," }, System.StringSplitOptions.None);
+        int temp_int = 0;
+        for (int j = 0; j < 10; j++)
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                Debug.Log(arr_at_level[temp_int]);
+                map_layout[i, j] = System.Convert.ToInt32(arr_at_level[temp_int]);
+                temp_int++;
+            }
+        }
+        
+        #region text test
+        string str = "";
 
+        for (int j = 0; j < 10; j++)
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                if (i == 0)
+                {
+                    str += "{" + map_layout[i, j];
+                }
+                else if (i == 10 - 1)
+                {
+                    str += ", " + map_layout[i, j] + "}, \n";
+                }
+                else
+                {
+                    str += ", " + map_layout[i, j];
+                }
+            }
+        }
+        Debug.Log(str);
+        #endregion
+        
+    }
 
     void Start() {
         MakeMap();

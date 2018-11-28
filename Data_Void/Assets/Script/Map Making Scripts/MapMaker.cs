@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.IO;
 
 public class MapMaker : MonoBehaviour {
 
@@ -20,6 +21,8 @@ public class MapMaker : MonoBehaviour {
     public int[,] int_map_data = new int[20,20];
 
     public int int_type_shift;
+
+    public int int_level;
 
     // Use this for initialization
     void Start ()
@@ -41,7 +44,6 @@ public class MapMaker : MonoBehaviour {
                 ui_button.GetMap(mM_self);
             }
         }
-
 
     }
 	
@@ -83,5 +85,33 @@ public class MapMaker : MonoBehaviour {
             }
         }
         Debug.Log(str);
+        CreateText();
     }
+
+    void CreateText()
+    {
+        string path = Application.dataPath + "/Map Text/Level" + int_level + ".txt";
+        string sr_temp = null;
+
+        for (int j = 0; j < map_z; j++)
+        {
+            for (int i = 0; i < map_x; i++)
+            {
+                if (i == map_z - 1)
+                {
+                    sr_temp += int_map_data[i, j] +"," + "\n";
+
+                }
+                else
+                {
+                    sr_temp += int_map_data[i, j] + ",";
+                }
+            }
+        }
+        File.WriteAllText(path, sr_temp);
+
+        
+
+    }
+
 }

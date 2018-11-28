@@ -209,6 +209,9 @@ MonoBehaviour:
   tile: {fileID: 114194114040457398, guid: 816c64b0ca862e248a91d9d975409b3d, type: 2}
   pc: {fileID: 114792656839552690, guid: d8a4bb1aeb8583548be1005c57069612, type: 2}
   currentRobot: {fileID: 0}
+  txt_level: {fileID: 4900000, guid: 81ef619df7c1c57449d9d3ef14a74feb, type: 3}
+  st_level: 
+  arr_at_level: []
 --- !u!4 &1857506038
 Transform:
   m_ObjectHideFlags: 0
