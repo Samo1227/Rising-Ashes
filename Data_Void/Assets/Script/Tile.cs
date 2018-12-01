@@ -96,18 +96,27 @@ public class Tile : MonoBehaviour {
                 if (Physics.Raycast(ray_cast, out hit, fl_Ray_Range))
                 {
 
-                    Destroy(hit.collider.gameObject.transform.GetChild(int_Child).gameObject);
-                    int_Child++;
-                    Debug.Log("Fire!");
-                    Instantiate(Resources.Load<GameObject>("MapParts/MapElement_" + 0), gameObject.transform);
-                    bl_Is_Walkable = true;
-                    gameObject.GetComponent<BoxCollider>().size = new Vector3(1, 1, 1);
-                    rend_Colour = gameObject.transform.GetChild(int_Child).GetComponent<Renderer>();
-                    CSGameManager.gameManager.RefreshTile();
+                    if(hit.collider.gameObject.GetComponent<Tile>())
+                    {
+                        hit.collider.gameObject.GetComponent<Tile>().RemoveTile();
+                    }
 
                 }
             }
             //rob.Clear_Selection();
         }
+    }
+
+    public void RemoveTile()
+    {
+        Destroy(gameObject.transform.GetChild(int_Child).gameObject);
+        int_Child++;
+        Debug.Log("Fire!");
+        Instantiate(Resources.Load<GameObject>("MapParts/MapElement_" + 0), gameObject.transform);
+        bl_Is_Walkable = true;
+        gameObject.GetComponent<BoxCollider>().size = new Vector3(1, 1, 1);
+        rend_Colour = gameObject.transform.GetChild(int_Child).GetComponent<Renderer>();
+        CSGameManager.gameManager.RefreshTile();
+
     }
 }
