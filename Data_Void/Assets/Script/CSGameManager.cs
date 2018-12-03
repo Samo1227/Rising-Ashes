@@ -4,14 +4,22 @@ using UnityEngine;
 using System.IO;
 public class CSGameManager : MonoBehaviour {
     public Tile tile;
-    public Robot pc;
+    public PlayerRobot pr_PC;
+    public AICharacter ai_Enemy_Test;
     public Tile[,] map = new Tile[10, 10];
-    public Robot currentRobot;
+    public PlayerRobot pr_currentRobot;
     public TextAsset txt_level;
     public string st_level;
     public string[] arr_at_level;
     int[,] map_layout = new int[10,10];
-    
+    int int_Turn_Count = 0;
+
+    public List<PlayerRobot> ls_Player_Robots_In_Level = new List<PlayerRobot>();//list of live player robots
+    public List<AICharacter> ls_AI_Characters_In_Level = new List<AICharacter>();//list of living enemies (should perhaps be expanded for non hostile AI)
+    public bool bl_Player_Turn = true;
+    public List<PlayerRobot> ls_Player_Robots_With_Turns_Left = new List<PlayerRobot>();
+    public Queue<AICharacter> qu_AI_Turns = new Queue<AICharacter>(); //enemy turn queue
+
 
 
     //============================================
@@ -92,16 +100,17 @@ public class CSGameManager : MonoBehaviour {
         MakeMap();
         RefreshTile();
         AddRobot(2, 4);
+        AddRobot(4, 4);
+        //AddEnemy(8, 1);
+        //AddEnemy(8, 8);
+    }
 
-
-
-	}
-	
     public void RefreshTile()
     {
         foreach (Tile tile in map)
         {
             tile.FindNeighbours(tile);
+            //Debug.Log(tile);
         }
     }
 
@@ -112,10 +121,17 @@ public class CSGameManager : MonoBehaviour {
             for(int x = 0; x < 10; x++)
             {
                 Tile newTile = SetTile(x, z);
+            }
+        }
 
-
-
-
+        for (int z = 0; z < 10; z++)
+        {
+            for (int x = 0; x < 10; x++)
+            {
+                if(map_layout[x, z] == 3)
+                {
+                    AddEnemy(x, z);
+                }
             }
         }
     }
@@ -128,15 +144,27 @@ public class CSGameManager : MonoBehaviour {
         newTile.int_X = x;
         newTile.int_Z = z;
         newTile.transform.position = new Vector3(x, transform.position.y, z);
-        Instantiate(Resources.Load<GameObject>("MapParts/MapElement_" + map_layout[x,z]),newTile.gameObject.transform);
+        //Instantiate(Resources.Load<GameObject>("MapParts/MapElement_" + map_layout[x,z]),newTile.gameObject.transform);
+        if(map_layout[x, z] == 0)
+        {
+            Instantiate(Resources.Load<GameObject>("MapParts/MapElement_" + 0), newTile.gameObject.transform);
+        }
 
-        if(map_layout[x, z] == 1)
+        else if (map_layout[x, z] == 1)
         {
             newTile.bl_Is_Walkable = false;
-            newTile.GetComponent<BoxCollider>().size = new Vector3(1,3,1);
+            newTile.GetComponent<BoxCollider>().size = new Vector3(1, 3, 1);
+            Instantiate(Resources.Load<GameObject>("MapParts/MapElement_" + 1), newTile.gameObject.transform);
+
+        }
+        else if (map_layout[x,z] == 3)
+        {
+            Instantiate(Resources.Load<GameObject>("MapParts/MapElement_" + 0), newTile.gameObject.transform);
+            //AddEnemy(x, z);
         }
 
 
+        newTile.name=("Tile " + x + " " + z);
         map[x,z] = newTile;
         return newTile;
     }
@@ -158,15 +186,87 @@ public class CSGameManager : MonoBehaviour {
 
     public void AddRobot(int cX, int cZ)
     {
-        Robot tRo = null;
-        tRo = Instantiate(pc);
+        PlayerRobot tRo = null;
+        tRo = Instantiate(pr_PC);
         tRo.transform.position = new Vector3(cX, transform.position.y + 1f, cZ);
         tRo.int_x = cX;
         tRo.int_z = cZ;
     }
 
-    public void SetCurrentRobot(Robot selectedRobot)
+    public void AddEnemy(int cX, int cZ)
     {
-        currentRobot = selectedRobot;
+        AICharacter temp_AI = null;
+        temp_AI = Instantiate(ai_Enemy_Test);
+        temp_AI.transform.position = new Vector3(cX, transform.position.y + 1f, cZ);
+        temp_AI.int_x = cX;
+        temp_AI.int_z = cZ;
     }
+
+    public void SetCurrentRobot(PlayerRobot selectedRobot)
+    {
+        pr_currentRobot = null;
+        pr_currentRobot = selectedRobot;
+    }
+
+    #region Turn Manager
+    public void EndPlayerTurn(PlayerRobot pr_Turn_Ended)
+    {
+        ls_Player_Robots_With_Turns_Left.Remove(pr_Turn_Ended);
+        if(ls_Player_Robots_With_Turns_Left.Count <= 0)
+        {
+            bl_Player_Turn = false;
+            PrepareAITurn();
+        }
+    }
+
+    public void PrepareAITurn()
+    {
+        foreach(AICharacter ai_Temp in ls_AI_Characters_In_Level)
+        {
+            qu_AI_Turns.Enqueue(ai_Temp); //add all the living AIs to the turn queue
+        }
+        StartAITurn();
+    }
+
+    public void StartAITurn()
+    {
+        print(qu_AI_Turns.Count);
+        if (qu_AI_Turns.Count > 0)
+        {
+            qu_AI_Turns.Peek().BeginAITurn();
+        }
+    }
+
+    public void EndAITurn()//this does not work OK
+    {
+       qu_AI_Turns.Dequeue();//removes AI from turn queue at end of their specific turn
+      //  print(qu_AI_Turns.Count);
+        if (qu_AI_Turns.Count > 0)
+        {
+            StartAITurn(); //if there are AIs left to go, do the next one.
+        }
+        else
+        {
+
+            print("Player turn");
+            PreparePlayerTurn();
+        }
+    }
+
+    public void PreparePlayerTurn()//this works OK
+    {
+        ls_Player_Robots_With_Turns_Left.Clear();
+        int_Turn_Count++;
+        foreach (PlayerRobot pr_Temp in ls_Player_Robots_In_Level) //refresh turn
+        {
+            if (pr_Temp != null)
+            {
+                pr_Temp.RefreshPCs();
+                ls_Player_Robots_With_Turns_Left.Add(pr_Temp);
+            }
+        }
+        bl_Player_Turn = true;
+    }
+
+    #endregion
 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.574817, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -207,11 +207,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tile: {fileID: 114194114040457398, guid: 816c64b0ca862e248a91d9d975409b3d, type: 2}
-  pc: {fileID: 114792656839552690, guid: d8a4bb1aeb8583548be1005c57069612, type: 2}
-  currentRobot: {fileID: 0}
-  txt_level: {fileID: 4900000, guid: 81ef619df7c1c57449d9d3ef14a74feb, type: 3}
+  pr_PC: {fileID: 114191149532942768, guid: d8a4bb1aeb8583548be1005c57069612, type: 2}
+  ai_Enemy_Test: {fileID: 114241835215912546, guid: 0b24be8f0bee2de4aa5ebc0b12bd2673,
+    type: 2}
+  pr_currentRobot: {fileID: 0}
+  txt_level: {fileID: 4900000, guid: 53f01d159f78e7e4a8b8106ce00c0640, type: 3}
   st_level: 
   arr_at_level: []
+  ls_Player_Robots_In_Level: []
+  ls_AI_Characters_In_Level: []
+  bl_Player_Turn: 1
+  ls_Player_Robots_With_Turns_Left: []
 --- !u!4 &1857506038
 Transform:
   m_ObjectHideFlags: 0
@@ -234,7 +240,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4837553974245042, guid: 84be5a0f827ecd84d9ef3a605abc1019, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4837553974245042, guid: 84be5a0f827ecd84d9ef3a605abc1019, type: 2}
       propertyPath: m_LocalPosition.y
@@ -242,7 +248,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4837553974245042, guid: 84be5a0f827ecd84d9ef3a605abc1019, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4837553974245042, guid: 84be5a0f827ecd84d9ef3a605abc1019, type: 2}
       propertyPath: m_LocalRotation.x

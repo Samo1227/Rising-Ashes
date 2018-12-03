@@ -13,7 +13,14 @@ public class Tile : MonoBehaviour {
     public bool bl_Is_Walkable = true;
     public bool bl_Walking_Selection = false;
     public bool bl_Attack_Selection = false;
-
+    public bool bl_Occupied_By_PC = false;
+    public bool bl_Occupied_By_AI = false;
+    //---------------------------------------
+    public Tile tl_Start_Tile = null;
+    //for A*
+    public float f = 0;
+    public float g = 0;
+    public float h = 0;
     //---------------------------------------
     public Renderer rend_Colour;
     //---------------------------------------
@@ -27,7 +34,7 @@ public class Tile : MonoBehaviour {
         
             if (bl_Walking_Selection)
             {
-                rend_Colour.material.color = Color.cyan;
+                rend_Colour.material.color = Color.blue;
             }
             else if (bl_Attack_Selection)
             {
@@ -42,6 +49,7 @@ public class Tile : MonoBehaviour {
 
     public void FindNeighbours(Tile startTile)
     {
+        ls_Tile_Neighbours.Clear();
         int x = this.int_X;
         int z = this.int_Z;
         CheckTiles(x, z + 1);
@@ -54,7 +62,7 @@ public class Tile : MonoBehaviour {
     public void CheckTiles(int cX, int cZ)
     {
         Tile tT = null;
-        if (cX >= 0 && cX <= 9 && cZ >= 0 && cZ <= 9)
+        if (cX >= 0 && cX <= 9 && cZ >= 0 && cZ <= 9) //needs to be changed to work with any size of map
         {
             tT = CSGameManager.gameManager.map[cX, cZ];
             ls_Tile_Neighbours.Add(tT);
@@ -65,21 +73,31 @@ public class Tile : MonoBehaviour {
     {
         if (bl_Walking_Selection)
         {
-            Robot rob = CSGameManager.gameManager.currentRobot;
-            rob.transform.position = new Vector3(int_X, rob.transform.position.y, int_Z);
-            rob.int_x = int_X;
-            rob.int_z = int_Z;
-            rob.Clear_Selection();
+            if (!bl_Occupied_By_PC && !bl_Occupied_By_AI)
+            {
+                PlayerRobot rob = CSGameManager.gameManager.pr_currentRobot;
+                // 
+                rob.transform.position = new Vector3(int_X, rob.transform.position.y, int_Z);
 
+               // rob.MoveToTargetSquare(this);
+               // rob.bl_Moving = true;                
+                rob.tl_Current_Tile.bl_Occupied_By_PC = false;
+                rob.int_x = int_X;
+                rob.int_z = int_Z;
+                rob.tl_Current_Tile = CSGameManager.gameManager.map[rob.int_x, rob.int_z].gameObject.GetComponent<Tile>();
+                rob.tl_Current_Tile.bl_Occupied_By_PC = true;
+                rob.bl_Has_Moved = true;
+                rob.Clear_Selection();
+            }
         }
 
     }
 
-    private void OnMouseOver()
+    private void OnMouseOver()//this doesn't work for shooting enemies
     {
         if (bl_Attack_Selection)
         {
-            Robot rob = CSGameManager.gameManager.currentRobot;
+            PlayerRobot rob = CSGameManager.gameManager.pr_currentRobot;
 
             RaycastHit hit;
 
@@ -91,13 +109,15 @@ public class Tile : MonoBehaviour {
 
             Debug.DrawRay(rob.transform.position, dir * fl_Ray_Range, Color.green, 0.1f);
 
-            if(Input.GetMouseButtonDown(0))
+            if(Input.GetMouseButtonUp(0))
             {
                 if (Physics.Raycast(ray_cast, out hit, fl_Ray_Range))
                 {
 
                     if(hit.collider.gameObject.GetComponent<Tile>())
                     {
+                        rob.bl_Has_Acted = true;
+                        rob.Clear_Selection();
                         hit.collider.gameObject.GetComponent<Tile>().RemoveTile();
                     }
 

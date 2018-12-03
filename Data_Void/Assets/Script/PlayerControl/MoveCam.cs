@@ -5,6 +5,7 @@ using UnityEngine;
 public class MoveCam : MonoBehaviour {
 
     public float fl_cam_move;
+    public float fl_cam_zoom = 5;
     public Camera cam;
 
 	// Use this for initialization
@@ -47,11 +48,15 @@ public class MoveCam : MonoBehaviour {
 
         if (Input.GetAxis("Mouse ScrollWheel") < 0f) // forward
         {
-            cam.orthographicSize++;
+            fl_cam_zoom++;
         }
         else if (Input.GetAxis("Mouse ScrollWheel") > 0f) // forward
         {
-            cam.orthographicSize--;
+            fl_cam_zoom--;
         }
+
+        fl_cam_zoom = Mathf.Clamp(fl_cam_zoom, 1f,10f);
+
+        cam.orthographicSize = fl_cam_zoom;
     }
 }
