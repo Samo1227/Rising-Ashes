@@ -47,9 +47,6 @@ public class Robot : MonoBehaviour {
 	
 	void Update ()
     {
-       // go_health_bar.transform.localPosition = new Vector3(((float)int_Health - (float)int_Health_max) * (0.5f / int_Health_max), 0,0);
-      //  go_health_bar.transform.localScale = new Vector3((1f / int_Health_max) * int_Health,0.2f,1);
-
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {

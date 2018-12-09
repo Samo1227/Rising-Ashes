@@ -37,21 +37,7 @@ public class CSGameManager : MonoBehaviour {
         }
 
         TextToMapInt();
-        /*
-        map_layout = new int[,]
-        {
-        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-        { 1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        { 1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        { 1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        { 1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        { 1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        { 1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        { 1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        { 1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
-        };
-        */
+
     }
     //============================================
 
@@ -101,8 +87,7 @@ public class CSGameManager : MonoBehaviour {
         RefreshTile();
         AddRobot(2, 4);
         AddRobot(4, 4);
-        //AddEnemy(8, 1);
-        //AddEnemy(8, 8);
+
     }
 
     public void RefreshTile()
