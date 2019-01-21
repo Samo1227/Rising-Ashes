@@ -9,12 +9,15 @@ public class CharacterBase : MonoBehaviour {
     public int int_action_points;
     public int int_action_points_max;
 
+    //the stats are not finalised, this is mainly just to get an idea for what is needed
+
     //Head Stats
     int int_Veiw_Distance;
     int int_Veiw_Type;
     //Body Stats
     public int int_Health;
     public int int_Health_max;
+    //gimmie gimmie gimmie a honk after midnight ♥
 
     //Equiptment Stats
     int int_Attack_Range = 3;
@@ -32,16 +35,16 @@ public class CharacterBase : MonoBehaviour {
     int int_Weight_Current;
     int int_Weight_Max;
 
-    public GameObject go_health_bar;
+    public GameObject go_health_bar;//used to display robots health
     public int int_Robot_State = 0;
 
     public bool bl_Is_Active = false; 
     public bool bl_Moving = false;          //for moving to target pos
     public float fl_Move_Speed = 5f; //how quick it moves to target square
-    Vector3 v3_Velocity = new Vector3();
-    Vector3 v3_Heading = new Vector3();
+    Vector3 v3_Velocity = new Vector3();//used for visually moving to squares
+    Vector3 v3_Heading = new Vector3();//used for visually moving to squares
     public Tile tl_Target_Square;
-    Stack<Tile> st_Path = new Stack<Tile>();
+    Stack<Tile> st_Path = new Stack<Tile>();//used to generate a path that is followed for movement
     public Tile tl_Current_Tile;
     //AI variables
     public float fl_Time_limit = 5f; //For the AI, incase it gets stuck in its turn
@@ -50,20 +53,18 @@ public class CharacterBase : MonoBehaviour {
     protected List<PlayerRobot> ls_PRs_In_Range = new List<PlayerRobot>(); //to store attack targets
     //---------------
 
-    public List<Tile> selectableTiles = new List<Tile>();
+    public List<Tile> selectableTiles = new List<Tile>();//a list of selectable tiles 
+
+    //---------------------------------------------------
 
     void Start()
     {
-        int_Health = int_Health_max;
+        int_Health = int_Health_max;//current health = max health at start
 
      
     }
-    // Update is called once per frame
-    void Update () {
-		
-	}
-
-    //----------------------------------------
+    
+    //---------------------------------------------------
 
     public void FindMoveTiles()
     {
@@ -107,6 +108,8 @@ public class CharacterBase : MonoBehaviour {
 
     }
 
+    //---------------------------------------------------
+
     public void FindMoveTilesAI()
     {
 
@@ -148,7 +151,7 @@ public class CharacterBase : MonoBehaviour {
 
     }
 
-    //----------------------------------------
+    //---------------------------------------------------
 
     public void Find_Attack_Tile_Range()
     {
@@ -176,7 +179,7 @@ public class CharacterBase : MonoBehaviour {
         }
     }
 
-    //--------------------------------------------
+    //---------------------------------------------------
     public void Clear_Selection()
     {
        // Debug.Log("clear");
@@ -197,7 +200,8 @@ public class CharacterBase : MonoBehaviour {
         //}
         selectableTiles.Clear();
     }
-    //---------------------------------------
+
+    //---------------------------------------------------
 
     public void MoveToTarget()
     {
@@ -228,18 +232,23 @@ public class CharacterBase : MonoBehaviour {
         }
     
     }
-    //-------------------------------------------
+
+    //---------------------------------------------------
+
     void CalculateHeading(Vector3 v3_Temp_Target)
     {
         v3_Heading = v3_Temp_Target - transform.position;
         v3_Heading.Normalize();
     }
-    //-------------------------------------------
+
+    //---------------------------------------------------
+
     void SetVelocity()
     {
         v3_Velocity = v3_Heading * fl_Move_Speed;
     }
-    //--------------------------------------------
+
+    //---------------------------------------------------
 
     protected void PathFinding(Tile current_Tile, Tile target_Tile)//A* pathfinding journey ^_^
     {
@@ -303,8 +312,8 @@ public class CharacterBase : MonoBehaviour {
         
     }
 
+    //---------------------------------------------------
 
-    //-----------------------------------------
     protected Tile FindTileWithLowestFCost(List<Tile> list)//similar to finding closest target, but with Tiles 
     {
         Tile til_Lowest_F_Cost = list[0];
@@ -319,7 +328,9 @@ public class CharacterBase : MonoBehaviour {
         list.Remove(til_Lowest_F_Cost);
         return til_Lowest_F_Cost;
     }
-    //----------------------------------
+
+    //---------------------------------------------------
+
     protected Tile FindEndingTile(Tile tile)
     {
         Stack<Tile> st_Temp_Path = new Stack<Tile>();
@@ -348,7 +359,9 @@ public class CharacterBase : MonoBehaviour {
         }
         return tl_End_Tile;
     }
-    //----------------------------------
+
+    //---------------------------------------------------
+
     public void MoveToTargetSquare(Tile tl_Target)//builds a path into a stack for the AI to follow
     {
         st_Path.Clear();
@@ -365,10 +378,14 @@ public class CharacterBase : MonoBehaviour {
         }
     }
 
+    //---------------------------------------------------
+
     protected void SetAttackRange(int int_At_Range)
     {
         int_Attack_Range = int_At_Range;
     }
+
+    //---------------------------------------------------
 
     protected void FindPRsInRange()
     {
@@ -393,6 +410,8 @@ public class CharacterBase : MonoBehaviour {
         }
     }
 
+    //---------------------------------------------------
+
     protected void FindAttackTarget() //can define different ways to prioritise targets here
     {
         PlayerRobot pr_Final_Attack_Target = null;
@@ -410,6 +429,8 @@ public class CharacterBase : MonoBehaviour {
         }
     }
 
+    //---------------------------------------------------
+
     protected void AttackTarget(CharacterBase cb_Attacker, CharacterBase cb_Target)
     {
         if (cb_Target == null)
@@ -423,10 +444,14 @@ public class CharacterBase : MonoBehaviour {
         //cb_Target.go_health_bar.transform.localScale = new Vector3((1f / int_Health_max) * int_Health, 0.2f, 1);
     }
 
+    //---------------------------------------------------
+
     protected void SetDamage(int int_Damage_No)
     {
         int_damage = int_Damage_No;
     }
+
+    //---------------------------------------------------
 
     public void BeginAITurn()
     {
@@ -435,4 +460,6 @@ public class CharacterBase : MonoBehaviour {
         fl_Turn_Timer = 0f;
         fl_Turn_Timer += Time.deltaTime; //if AI gets stuck taking their turn this boots them out!
     }
-}
+
+    //---------------------------------------------------
+}//=======================================================================================
