@@ -69,17 +69,17 @@ public class CharacterBase : MonoBehaviour {
     public void FindMoveTiles()
     {
 
-        Tile currentTile = CSGameManager.gameManager.map[this.int_x, this.int_z];
-       // Debug.Log(currentTile.transform.position.x + " " + currentTile.transform.position.z);
-        Queue<Tile> process = new Queue<Tile>();
-        process.Enqueue(currentTile);
+        Tile currentTile = CSGameManager.gameManager.map[this.int_x, this.int_z];//this shouldn't really be neccessary as it's set outside of this, but this is just to be safe
+    
+        Queue<Tile> process = new Queue<Tile>();//processes all the tiles this can move to, runs till no possible tiles are left
+        process.Enqueue(currentTile);//starts with the current tile this is on
 
         while (process.Count > 0)
         {
             Tile tempTile = process.Dequeue(); //takes the tile out of the queue and processes it
             if (tempTile.bl_Is_Walkable)   //if the tile is walkable add it to the selectable process
             {
-                if (!tempTile.bl_Occupied_By_PC)
+                if (!tempTile.bl_Occupied_By_PC)//can't select a tile that has a player robot but can move through it
                 {
                     selectableTiles.Add(tempTile);
                     tempTile.bl_Walking_Selection = true;
@@ -87,11 +87,12 @@ public class CharacterBase : MonoBehaviour {
 
                 if (tempTile.int_Distance_From_Start < int_Move_Range) // if it's within move range -1 check the neighbours
                 {
-                    foreach (Tile neighbourTile in tempTile.ls_Tile_Neighbours)
+                    foreach (Tile neighbourTile in tempTile.ls_Tile_Neighbours)//for every neihbour, check  
                     {
                         if (neighbourTile != currentTile)//stops path getting stuck looping
                         {
-                            neighbourTile.tl_Start_Tile = tempTile;
+                            if(neighbourTile.tl_Start_Tile==null)//only do if there isn't already a start tile
+                                 neighbourTile.tl_Start_Tile = tempTile;
                         }
                         neighbourTile.int_Distance_From_Start = neighbourTile.int_Move_Cost + tempTile.int_Distance_From_Start;
                         if (neighbourTile.int_Distance_From_Start <= int_Move_Range)//if the neighbours are within movement range add them to the process queue

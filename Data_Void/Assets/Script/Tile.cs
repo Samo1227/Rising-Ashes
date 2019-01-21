@@ -87,10 +87,10 @@ public class Tile : MonoBehaviour {
             if (!bl_Occupied_By_PC && !bl_Occupied_By_AI) //only able to move to unnocupied squares
             {
                 PlayerRobot rob = CSGameManager.gameManager.pr_currentRobot;//gets a reference to the currently selected player robot
-                rob.transform.position = new Vector3(int_X, rob.transform.position.y, int_Z);//atm teleports robot to selected square
+               // rob.transform.position = new Vector3(int_X, rob.transform.position.y, int_Z);//atm teleports robot to selected square
 
-                // rob.MoveToTargetSquare(this);
-                // rob.bl_Moving = true;                
+                 rob.MoveToTargetSquare(this);
+                 rob.bl_Moving = true;                
 
                 //updates and resets the robots position references
                 rob.tl_Current_Tile.bl_Occupied_By_PC = false; //start position tile is no longer occupied
