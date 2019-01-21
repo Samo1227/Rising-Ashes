@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterBase : MonoBehaviour { 
+public class CharacterBase : MonoBehaviour {
+    //---------------------------------------------------
+    #region Variables
     public int int_x;
     public int int_z;
 
@@ -54,18 +56,16 @@ public class CharacterBase : MonoBehaviour {
     //---------------
 
     public List<Tile> selectableTiles = new List<Tile>();//a list of selectable tiles, useful for clearing data on each tile when the selection is done with 
-
+    #endregion
     //---------------------------------------------------
 
     void Start()
     {
         int_Health = int_Health_max;//current health = max health at start
-
-     
     }
-    
-    //---------------------------------------------------
 
+    //---------------------------------------------------
+    #region FindMoveRange Player
     public void FindMoveTiles()//player robot version
     {
 
@@ -122,9 +122,9 @@ public class CharacterBase : MonoBehaviour {
         }
         //----------
     }
-
+    #endregion
     //---------------------------------------------------
-
+    #region FindMoveRange AI
     public void FindMoveTilesAI()//AI robot version, could've been in one method, but it would've made it very messy
     {
 
@@ -181,9 +181,9 @@ public class CharacterBase : MonoBehaviour {
         }
         //-----------
     }
-
+    #endregion
     //---------------------------------------------------
-
+    #region FindAttackRange
     public void Find_Attack_Tile_Range()//very similar to find move range, but it's a little simpler as doesn't have to check for obsticals which it may need to do in future
     {
         Tile currentTile = CSGameManager.gameManager.map[this.int_x, this.int_z];//starts from this robots position as always.
@@ -218,9 +218,9 @@ public class CharacterBase : MonoBehaviour {
         }
         //-----------
     }
-
+    #endregion
     //---------------------------------------------------
-
+    #region ClearSelection
     public void Clear_Selection()//resets all of the variables for each tile in the map 
     {
         //-----------
@@ -234,9 +234,9 @@ public class CharacterBase : MonoBehaviour {
         //-----------
         selectableTiles.Clear();//empties out the selectable tiles list
     }
-
+    #endregion
     //---------------------------------------------------
-
+    #region MovementVisual
     public void MoveToTarget()//used for the visual representation of movement
     {
         //-----------
@@ -285,9 +285,9 @@ public class CharacterBase : MonoBehaviour {
     {
         v3_Velocity = v3_Heading * fl_Move_Speed; //velocity is set by heading (-1 to 1, -1 to 1, -1 to 1) mulitplied by movement speed
     }
-
+    #endregion
     //---------------------------------------------------
-
+    #region PathFinding
     protected void PathFinding(Tile current_Tile, Tile target_Tile)//A* pathfinding journey ^_^
     {
         List<Tile> ls_Open_List = new List<Tile>();
@@ -415,7 +415,7 @@ public class CharacterBase : MonoBehaviour {
             next = next.tl_Start_Tile;
         }
     }
-
+    #endregion
     //---------------------------------------------------
 
     protected void SetAttackRange(int int_At_Range)
@@ -424,7 +424,7 @@ public class CharacterBase : MonoBehaviour {
     }
 
     //---------------------------------------------------
-
+    #region AI Attacking Target
     protected void FindPRsInRange()
     {
         ls_PRs_In_Range.Clear();
@@ -466,9 +466,9 @@ public class CharacterBase : MonoBehaviour {
             AttackTarget(this, pr_Final_Attack_Target);
         }
     }
-
+    #endregion
     //---------------------------------------------------
-
+    #region Attacking a target
     protected void AttackTarget(CharacterBase cb_Attacker, CharacterBase cb_Target)
     {
         if (cb_Target == null)
@@ -488,9 +488,9 @@ public class CharacterBase : MonoBehaviour {
     {
         int_damage = int_Damage_No;
     }
-
+    #endregion
     //---------------------------------------------------
-
+    #region AI TurnStarter
     public void BeginAITurn()
     {
         bl_Is_Active = true;
@@ -498,6 +498,6 @@ public class CharacterBase : MonoBehaviour {
         fl_Turn_Timer = 0f;
         fl_Turn_Timer += Time.deltaTime; //if AI gets stuck taking their turn this boots them out!
     }
-
+    #endregion
     //---------------------------------------------------
 }//=======================================================================================
