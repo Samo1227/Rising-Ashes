@@ -93,6 +93,8 @@ public class MapMaker : MonoBehaviour {
         string path = Application.dataPath + "/Map Text/Level" + int_level + ".txt";
         string sr_temp = null;
 
+        sr_temp += map_x + "," + map_z +"," + "\n";
+
         for (int j = 0; j < map_z; j++)
         {
             for (int i = 0; i < map_x; i++)
@@ -108,8 +110,10 @@ public class MapMaker : MonoBehaviour {
                 }
             }
         }
+
         File.WriteAllText(path, sr_temp);
 
+        //print map_x map_z
         
 
     }

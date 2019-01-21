@@ -294,49 +294,59 @@ public class CharacterBase : MonoBehaviour {
         List<Tile> ls_Closed_List = new List<Tile>();
 
         ls_Open_List.Add(current_Tile);
-            if (Vector3.Distance(current_Tile.transform.position, target_Tile.transform.position) != 0) //if target is not this tile, so AI doesn't move onto the PC square
+        //-----------
+        if (Vector3.Distance(current_Tile.transform.position, target_Tile.transform.position) != 0) //if target is not this tile, so AI doesn't move onto the PC square
             {
             current_Tile.h = (Vector3.Distance(current_Tile.transform.position, target_Tile.transform.position));//doing this through the array would be better probably
                 current_Tile.f = current_Tile.h;
-                while (ls_Open_List.Count > 0)
+            //-----------
+            while (ls_Open_List.Count > 0)
                 {
                 Tile tile_Check = FindTileWithLowestFCost(ls_Open_List);
                     ls_Closed_List.Add(tile_Check);
-
-                    if (tile_Check == target_Tile || tile_Check == null) //arrived at target tile or no path
+                //-----------
+                if (tile_Check == target_Tile || tile_Check == null) //arrived at target tile or no path
                     {
                         tl_Target_Square = FindEndingTile(tile_Check);
+                    //-----------
                     if (tl_Target_Square.bl_Occupied_By_AI) //prevents AI from moving into an ocupied tile
-                    {
-                        tl_Target_Square = tl_Target_Square.tl_Start_Tile;
-                    }
-                        MoveToTargetSquare(tl_Target_Square);
+                        {
+                            tl_Target_Square = tl_Target_Square.tl_Start_Tile;
+                        }
+                    //-----------
+                    MoveToTargetSquare(tl_Target_Square);
                         return;
                     }
-                    foreach (Tile tl_Tile in tile_Check.ls_Tile_Neighbours) //for each neighboring tile
+                //-----------
+                foreach (Tile tl_Tile in tile_Check.ls_Tile_Neighbours) //for each neighboring tile
                     {
+                    //-----------
                     if (ls_Closed_List.Contains(tl_Tile))//already checked
                         {
                             //do nothing
                         }
-                        else if (ls_Open_List.Contains(tl_Tile))
+                    //-----------
+                    else if (ls_Open_List.Contains(tl_Tile))
                         {
                         float fl_Temp_G_Cost = tile_Check.g + Vector3.Distance(tl_Tile.transform.position, tile_Check.transform.position);
-
-                            if (fl_Temp_G_Cost < tl_Tile.g)
+                        //-----------
+                        if (fl_Temp_G_Cost < tl_Tile.g)//if the tile being checked's G cost is lower than the currently best tile tile_Check replaces it
                             {
                                 tl_Tile.tl_Start_Tile = tile_Check;
                                 tl_Tile.g = fl_Temp_G_Cost;
                                 tl_Tile.f = tl_Tile.g + tl_Tile.h;
                             }
-                        }
-                        else
-                        {
+                        //-----------
+                    }
+                    //-----------
+                    else
+                    {
                         tl_Tile.tl_Start_Tile = tile_Check;
                             tl_Tile.g = tile_Check.g + Vector3.Distance(tl_Tile.transform.position, target_Tile.transform.position); //research how to check manhattan distance, as this is a messy way of doing this
                             tl_Tile.h = Vector3.Distance(tl_Tile.transform.position, target_Tile.transform.position);
                             tl_Tile.f = tl_Tile.h + tl_Tile.g;
-                            if (tl_Tile.bl_Is_Walkable)
+                        //-----------
+                        if (tl_Tile.bl_Is_Walkable)
                             {
                                 //if (!tl_Tile.bl_Occupied_By_AI)//won't go into a space with a AI in it... also means it won't walk through AI though
                                 {
@@ -344,10 +354,13 @@ public class CharacterBase : MonoBehaviour {
                                 }
                             }
                         }
-                    }
+                    //-----------
                 }
+                //-----------
             }
-        
+            //-----------
+        }
+        //-----------
     }
 
     //---------------------------------------------------
@@ -418,34 +431,38 @@ public class CharacterBase : MonoBehaviour {
     #endregion
     //---------------------------------------------------
 
-    protected void SetAttackRange(int int_At_Range)
+    protected void SetAttackRange(int int_At_Range)//allows this to be changed by other functions
     {
         int_Attack_Range = int_At_Range;
     }
 
     //---------------------------------------------------
     #region AI Attacking Target
-    protected void FindPRsInRange()
+    protected void FindPRsInRange()//AI finds the Player Robots in range
     {
-        ls_PRs_In_Range.Clear();
-        foreach (PlayerRobot pr_Targets in CSGameManager.gameManager.ls_Player_Robots_In_Level)
+        ls_PRs_In_Range.Clear();//clear the lis of player robots in range (just to be safe)
+        //-----------
+        foreach (PlayerRobot pr_Targets in CSGameManager.gameManager.ls_Player_Robots_In_Level)//checks
         {
             Tile tl_Temp = CSGameManager.gameManager.map[pr_Targets.int_x, pr_Targets.int_z].gameObject.GetComponent<Tile>();
+            //-----------
             if (tl_Temp.bl_Attack_Selection)
             {
                 ls_PRs_In_Range.Add(pr_Targets);
             }
+            //-----------
         }
+        //-----------
         if (ls_PRs_In_Range.Count <= 0)
         {
             return; //prevents AIs from infinitly moving until they are in range to attack if there's no PCs in range
         }
+        //-----------
         else
         {
-           // print("Attacking");
-            FindAttackTarget();
-            //attack
+            FindAttackTarget();//works out which player robot to attack out of the ones in range 
         }
+        //-----------
     }
 
     //---------------------------------------------------

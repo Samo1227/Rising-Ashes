@@ -14,6 +14,9 @@ public class CSGameManager : MonoBehaviour {
     int[,] map_layout = new int[10,10];
     int int_Turn_Count = 0;
 
+    public int int_map_x;
+    public int int_map_z;
+
     public List<PlayerRobot> ls_Player_Robots_In_Level = new List<PlayerRobot>();//list of live player robots
     public List<AICharacter> ls_AI_Characters_In_Level = new List<AICharacter>();//list of living enemies (should perhaps be expanded for non hostile AI)
     public bool bl_Player_Turn = true;
@@ -46,9 +49,16 @@ public class CSGameManager : MonoBehaviour {
         st_level = txt_level.text;
         arr_at_level = st_level.Split(new string[] { "," }, System.StringSplitOptions.None);
         int temp_int = 0;
-        for (int j = 0; j < 10; j++)
+
+        int_map_x = System.Convert.ToInt32(arr_at_level[temp_int]);
+        temp_int++;
+
+        int_map_z = System.Convert.ToInt32(arr_at_level[temp_int]);
+        temp_int++;
+
+        for (int j = 0; j < int_map_z; j++)
         {
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < int_map_x; i++)
             {
                 Debug.Log(arr_at_level[temp_int]);
                 map_layout[i, j] = System.Convert.ToInt32(arr_at_level[temp_int]);
@@ -85,6 +95,7 @@ public class CSGameManager : MonoBehaviour {
     void Start() {
         MakeMap();
         RefreshTile();
+
         AddRobot(2, 4);
         AddRobot(4, 4);
 
@@ -101,17 +112,17 @@ public class CSGameManager : MonoBehaviour {
 
     void MakeMap()
     {
-        for(int z=0; z< 10; z++)
+        for(int z=0; z< int_map_z; z++)
         {
-            for(int x = 0; x < 10; x++)
+            for(int x = 0; x < int_map_x; x++)
             {
                 Tile newTile = SetTile(x, z);
             }
         }
 
-        for (int z = 0; z < 10; z++)
+        for (int z = 0; z < int_map_z; z++)
         {
-            for (int x = 0; x < 10; x++)
+            for (int x = 0; x < int_map_x; x++)
             {
                 if(map_layout[x, z] == 3)
                 {
