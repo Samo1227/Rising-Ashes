@@ -53,7 +53,7 @@ public class CharacterBase : MonoBehaviour {
     protected List<PlayerRobot> ls_PRs_In_Range = new List<PlayerRobot>(); //to store attack targets
     //---------------
 
-    public List<Tile> selectableTiles = new List<Tile>();//a list of selectable tiles 
+    public List<Tile> selectableTiles = new List<Tile>();//a list of selectable tiles, useful for clearing data on each tile when the selection is done with 
 
     //---------------------------------------------------
 
@@ -66,187 +66,224 @@ public class CharacterBase : MonoBehaviour {
     
     //---------------------------------------------------
 
-    public void FindMoveTiles()
+    public void FindMoveTiles()//player robot version
     {
 
         Tile currentTile = CSGameManager.gameManager.map[this.int_x, this.int_z];//this shouldn't really be neccessary as it's set outside of this, but this is just to be safe
     
         Queue<Tile> process = new Queue<Tile>();//processes all the tiles this can move to, runs till no possible tiles are left
         process.Enqueue(currentTile);//starts with the current tile this is on
-
+        //-----------
         while (process.Count > 0)
         {
             Tile tempTile = process.Dequeue(); //takes the tile out of the queue and processes it
+            //---------
             if (tempTile.bl_Is_Walkable)   //if the tile is walkable add it to the selectable process
             {
+                //----------
                 if (!tempTile.bl_Occupied_By_PC)//can't select a tile that has a player robot but can move through it
                 {
                     selectableTiles.Add(tempTile);
                     tempTile.bl_Walking_Selection = true;
                 }
-
+                //----------
                 if (tempTile.int_Distance_From_Start < int_Move_Range) // if it's within move range -1 check the neighbours
                 {
+                    //----------
                     foreach (Tile neighbourTile in tempTile.ls_Tile_Neighbours)//for every neihbour, check  
                     {
+                        //----------
                         if (neighbourTile != currentTile)//stops path getting stuck looping
                         {
-                            if(neighbourTile.tl_Start_Tile==null)//only do if there isn't already a start tile
+                            //----------
+                            if (neighbourTile.tl_Start_Tile==null)//only do if there isn't already a start tile for this tile, this should prevent infinite looping 
                                  neighbourTile.tl_Start_Tile = tempTile;
+                            //----------
                         }
-                        neighbourTile.int_Distance_From_Start = neighbourTile.int_Move_Cost + tempTile.int_Distance_From_Start;
+                        //----------
+                        neighbourTile.int_Distance_From_Start = neighbourTile.int_Move_Cost + tempTile.int_Distance_From_Start;//sets the neighbour tiles distance from the start point for move distance limits
+                        //----------
                         if (neighbourTile.int_Distance_From_Start <= int_Move_Range)//if the neighbours are within movement range add them to the process queue
                         {
-                            if (!neighbourTile.bl_Occupied_By_AI)
+                            //----------
+                            if (!neighbourTile.bl_Occupied_By_AI)//player robots can not walk through AI occupied spaces
                             {
-                                process.Enqueue(neighbourTile);
+                                process.Enqueue(neighbourTile);//add any walkable neighbours to the queue to process their neighbours
                             }
+                            //----------
                         }
+                        //----------
                     }
+                    //----------
                 }
+                //----------
             }
+            //----------
         }
-
+        //----------
     }
 
     //---------------------------------------------------
 
-    public void FindMoveTilesAI()
+    public void FindMoveTilesAI()//AI robot version, could've been in one method, but it would've made it very messy
     {
 
-        Tile currentTile = CSGameManager.gameManager.map[this.int_x, this.int_z];
-        Queue<Tile> process = new Queue<Tile>();
-        process.Enqueue(currentTile);
+        Tile currentTile = CSGameManager.gameManager.map[this.int_x, this.int_z];//this shouldn't really be neccessary as it's set outside of this, but this is just to be safe
 
+        Queue<Tile> process = new Queue<Tile>();//processes all the tiles this can move to, runs till no possible tiles are left
+        process.Enqueue(currentTile);//starts with the current tile this robot is on
+        //-----------
         while (process.Count > 0)
         {
             Tile tempTile = process.Dequeue(); //takes the tile out of the queue and processes it
+            //-----------
             if (tempTile.bl_Is_Walkable)   //if the tile is walkable add it to the selectable process
             {
-                if (!tempTile.bl_Occupied_By_AI)//this should mean it can't move to a square with another AI but it still does?????
+                //-----------
+                if (!tempTile.bl_Occupied_By_AI)//this should mean it can't move to a square with another AI but it still does????? I think this is fixed now
                 {
                     selectableTiles.Add(tempTile);
                     tempTile.bl_Walking_Selection = true;
                 }
-
+                //-----------
                 if (tempTile.int_Distance_From_Start < int_Move_Range) // if it's within move range -1 check the neighbours
                 {
+                    //-----------
                     foreach (Tile neighbourTile in tempTile.ls_Tile_Neighbours)
                     {
+                        //-----------
                         if (neighbourTile != currentTile)
                         {
-                            neighbourTile.tl_Start_Tile = tempTile;
+                            //-----------
+                            if (neighbourTile.tl_Start_Tile == null)//only do if there isn't already a start tile for this tile, this should prevent infinite looping 
+                                neighbourTile.tl_Start_Tile = tempTile;//this was working without the check, but it might have had trouble at some point, so put this in just in case
+                            //-----------
                         }
+                        //-----------
                         neighbourTile.int_Distance_From_Start = neighbourTile.int_Move_Cost + tempTile.int_Distance_From_Start;
+                        //-----------
                         if (neighbourTile.int_Distance_From_Start <= int_Move_Range)//if the neighbours are within movement range add them to the process queue
                         {
+                            //-----------
                             if (!neighbourTile.bl_Occupied_By_PC)
                             {
                                 process.Enqueue(neighbourTile);
                             }
+                            //-----------
                         }
+                        //-----------
                     }
+                    //-----------
                 }
+                //-----------
             }
+            //-----------
         }
-
+        //-----------
     }
 
     //---------------------------------------------------
 
-    public void Find_Attack_Tile_Range()
+    public void Find_Attack_Tile_Range()//very similar to find move range, but it's a little simpler as doesn't have to check for obsticals which it may need to do in future
     {
-        Tile currentTile = CSGameManager.gameManager.map[this.int_x, this.int_z];
-        Queue<Tile> process = new Queue<Tile>();
-        process.Enqueue(currentTile);
+        Tile currentTile = CSGameManager.gameManager.map[this.int_x, this.int_z];//starts from this robots position as always.
+
+        Queue<Tile> process = new Queue<Tile>();//processes all the tiles this possibly attack, runs till no possible tiles are left
+        process.Enqueue(currentTile);//starts with the current tile this robot is on
+        //-----------
         while (process.Count > 0)
         {
-            Tile tempTile = process.Dequeue();
+            Tile tempTile = process.Dequeue();//takes the tile out of the queue and processes it
 
-            selectableTiles.Add(tempTile);
-            tempTile.bl_Attack_Selection = true;
-            if (tempTile.int_Distance_From_Start < int_Attack_Range)
+            selectableTiles.Add(tempTile);//add to the selected tile list
+            tempTile.bl_Attack_Selection = true;//sets that this tile can be attacked
+            //-----------
+            if (tempTile.int_Distance_From_Start < int_Attack_Range)// if it's within attack range -1 check the neighbours as else a neighbour will be an extra square away
             {
-                foreach (Tile neighbourTile in tempTile.ls_Tile_Neighbours)
+                //-----------
+                foreach (Tile neighbourTile in tempTile.ls_Tile_Neighbours)//checks each of the current tiles neighbours 
                 {
-                    neighbourTile.int_Distance_From_Start = neighbourTile.int_Move_Cost + tempTile.int_Distance_From_Start;
-                    if (neighbourTile.int_Distance_From_Start <= int_Attack_Range)
+                    //-----------
+                    neighbourTile.int_Distance_From_Start = neighbourTile.int_Attack_Range_Cost + tempTile.int_Distance_From_Start; //attack range cost
+                    //-----------
+                    if (neighbourTile.int_Distance_From_Start <= int_Attack_Range)//if the neighbour tile is in attack range add it to the process queue
                     {
                         process.Enqueue(neighbourTile);
                     }
+                    //-----------
                 }
+                //-----------
             }
-
+            //-----------
         }
+        //-----------
     }
 
     //---------------------------------------------------
-    public void Clear_Selection()
+
+    public void Clear_Selection()//resets all of the variables for each tile in the map 
     {
-       // Debug.Log("clear");
-       foreach(Tile tl_Temp_Tile in CSGameManager.gameManager.map)
+        //-----------
+        foreach (Tile tl_Temp_Tile in CSGameManager.gameManager.map)//will be slower with begger maps, will have to test to see if this is a problem
         {
             tl_Temp_Tile.bl_Walking_Selection = false;
             tl_Temp_Tile.bl_Attack_Selection = false;
-            tl_Temp_Tile.int_Distance_From_Start = 0;
+            tl_Temp_Tile.int_Distance_From_Start = 0;//don't want extra movement/attack range cost when finding movement or attack range
             tl_Temp_Tile.tl_Start_Tile = null;
         }
-        //foreach (Tile tempTile in selectableTiles)
-        //{
-        //   // Debug.Log("clear " + tempTile.transform.position.x + " " + tempTile.transform.position.z);
-        //    tempTile.bl_Walking_Selection = false;
-        //    tempTile.bl_Attack_Selection = false;
-        //    tempTile.int_Distance_From_Start = 0;
-        //    tempTile.tl_Start_Tile = null;
-        //}
-        selectableTiles.Clear();
+        //-----------
+        selectableTiles.Clear();//empties out the selectable tiles list
     }
 
     //---------------------------------------------------
 
-    public void MoveToTarget()
+    public void MoveToTarget()//used for the visual representation of movement
     {
-        if(st_Path.Count > 0)
+        //-----------
+        if (st_Path.Count > 0)//as long as there is a tile left in the path
         {
-            Tile tl_temp = st_Path.Peek();
-            Vector3 v3_Target = tl_temp.transform.position;
-            v3_Target.y += 1; //so character doesn't move into the ground
-
-            if(Vector3.Distance(transform.position,v3_Target)>= 0.05f)
+            Tile tl_temp = st_Path.Peek();//looks at the path stack and takes a reference to the top of the stack
+            Vector3 v3_Target = tl_temp.transform.position;//sets the movement destination to that tile 
+            v3_Target.y += 1; //so character doesn't move into the ground, will need to be reworked if we decide to add elevation to the system
+            //-----------
+            if (Vector3.Distance(transform.position, v3_Target)>= 0.05f)//when it's not very close to the target position, has a margin for error for safety purposes
             {
-                CalculateHeading(v3_Target);
+                CalculateHeading(v3_Target);//work out which direction the robot is moving in
                 SetVelocity();
 
-                transform.right = v3_Heading;//faces the direction it's moving in
-                transform.position += v3_Velocity * Time.deltaTime;
+                transform.right = v3_Heading;//faces the direction the robot is moving in
+                transform.position += v3_Velocity * Time.deltaTime;//moves to the location over time, perhaps this could have been done simpler by lerping from tile to tile instead
             }
+            //-----------
             else
             {
-                transform.position = v3_Target;
-                st_Path.Pop();
+                transform.position = v3_Target;//sets robots position to the target to make sure it's in the right place
+                st_Path.Pop();//gets rid of the top tile in the stack
             }
+            //-----------
         }
+        //-----------
         else
         {
-            Clear_Selection();
-            bl_Moving = false;
+            Clear_Selection();//when at the destination the selection can be cleared
+            bl_Moving = false;//the robot is no longer moving
         }
-    
+        //-----------
     }
 
     //---------------------------------------------------
 
     void CalculateHeading(Vector3 v3_Temp_Target)
     {
-        v3_Heading = v3_Temp_Target - transform.position;
-        v3_Heading.Normalize();
+        v3_Heading = v3_Temp_Target - transform.position;//works out heading based on robots current position against target position
+        v3_Heading.Normalize();//normailizes v3heading to a (-1-0-1) value
     }
 
     //---------------------------------------------------
 
     void SetVelocity()
     {
-        v3_Velocity = v3_Heading * fl_Move_Speed;
+        v3_Velocity = v3_Heading * fl_Move_Speed; //velocity is set by heading (-1 to 1, -1 to 1, -1 to 1) mulitplied by movement speed
     }
 
     //---------------------------------------------------

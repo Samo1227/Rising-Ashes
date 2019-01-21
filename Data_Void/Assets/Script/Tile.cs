@@ -7,7 +7,8 @@ public class Tile : MonoBehaviour {
     public int int_X;
     public int int_Z;
     public int int_Distance_From_Start = 0;//for pathfinding
-    public int int_Move_Cost = 1;
+    public int int_Move_Cost = 1;//can be higher to represent difficult to move through terrain
+    public int int_Attack_Range_Cost = 1;//can be higher to represent shooting through a substance perhaps?
     public int int_Child = 0;//needed for destroying and recreating walls in the same space
     public List<Tile> ls_Tile_Neighbours = new List<Tile>();
     public bool bl_Is_Walkable = true;
