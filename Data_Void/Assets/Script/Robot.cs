@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Robot : MonoBehaviour {
+public class Robot : MonoBehaviour {//this is an unused prototype class
 
     public int int_x;
     public int int_z;

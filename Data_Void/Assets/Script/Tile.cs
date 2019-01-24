@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour {
     //--------------------------------------
+    #region Variables
     public int int_X;
     public int int_Z;
     public int int_Distance_From_Start = 0;//for pathfinding
@@ -24,11 +25,11 @@ public class Tile : MonoBehaviour {
     public float h = 0;
     //---------------------------------------
     public Renderer rend_Colour;
+    #endregion
     //---------------------------------------
-
-	void Start () {
-        //rend_Colour = gameObject.GetComponentInChildren<Renderer>();
-        rend_Colour = gameObject.transform.GetChild(int_Child).GetComponent<Renderer>();
+    #region Start & Update
+    void Start () {
+        rend_Colour = gameObject.transform.GetChild(int_Child).GetComponent<Renderer>();//allows changing of tiles colour and takes into account tiles being changed (destroyed/created)
     }
 
     //--------------------------------------------
@@ -49,9 +50,9 @@ public class Tile : MonoBehaviour {
             }
         
 	}
-
+    #endregion
     //--------------------------------------------
-
+    #region Neighbour Finder
     public void FindNeighbours(Tile startTile)//finds and stores this tiles neighbours for pathfinding purposes
     {
         ls_Tile_Neighbours.Clear();//clears the neighbours list before rebuilding it so it doesn't keep adding to it
@@ -78,9 +79,9 @@ public class Tile : MonoBehaviour {
             }
         }
     }
-
+    #endregion
     //--------------------------------------------
-
+    #region Clicking On Tile
     private void OnMouseUp()//could be on mouse down, this reduces the risk of clicking another tile right away though
     {
         if (bl_Walking_Selection) //if this tile is part of the current walking selection
@@ -154,6 +155,6 @@ public class Tile : MonoBehaviour {
         CSGameManager.gameManager.RefreshTile();//rechecks the neighbours as the map has now changed
 
     }
+    #endregion
     //--------------------------------------------
-
 }//=====================================================
