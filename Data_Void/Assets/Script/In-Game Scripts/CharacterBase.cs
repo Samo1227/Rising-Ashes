@@ -442,13 +442,13 @@ public class CharacterBase : MonoBehaviour {
     {
         ls_PRs_In_Range.Clear();//clear the lis of player robots in range (just to be safe)
         //-----------
-        foreach (PlayerRobot pr_Targets in CSGameManager.gameManager.ls_Player_Robots_In_Level)//checks
+        foreach (PlayerRobot pr_Targets in CSGameManager.gameManager.ls_Player_Robots_In_Level)//checks all of the player robots to find who is in range
         {
-            Tile tl_Temp = CSGameManager.gameManager.map[pr_Targets.int_x, pr_Targets.int_z].gameObject.GetComponent<Tile>();
+            Tile tl_Temp = CSGameManager.gameManager.map[pr_Targets.int_x, pr_Targets.int_z].gameObject.GetComponent<Tile>();//this checks if the player robot is within the selected AI's attack range 
             //-----------
-            if (tl_Temp.bl_Attack_Selection)
+            if (tl_Temp.bl_Attack_Selection)//if the tile under the player robot is in attack range
             {
-                ls_PRs_In_Range.Add(pr_Targets);
+                ls_PRs_In_Range.Add(pr_Targets);//adds PR to list of possible targets
             }
             //-----------
         }
@@ -472,7 +472,7 @@ public class CharacterBase : MonoBehaviour {
         PlayerRobot pr_Final_Attack_Target = null;
         for (int i=0; i < ls_PRs_In_Range.Count; i++)//looks at all player robots in range
         {
-            if (pr_Final_Attack_Target == null)
+            if (pr_Final_Attack_Target == null)//if there is no target yet, set the first player in range
             {
                 pr_Final_Attack_Target = ls_PRs_In_Range[i];
             }
@@ -480,20 +480,21 @@ public class CharacterBase : MonoBehaviour {
             {                                                                     //this step could be skipped and just taken from the initial target finder from start of turn
                 pr_Final_Attack_Target = ls_PRs_In_Range[i];                      //this just allows for more varience in targets.
             }
-            AttackTarget(this, pr_Final_Attack_Target);
+            AttackTarget(this, pr_Final_Attack_Target);//calls the function that applies damage
         }
     }
     #endregion
     //---------------------------------------------------
     #region Attacking a target
-    protected void AttackTarget(CharacterBase cb_Attacker, CharacterBase cb_Target)
+    protected void AttackTarget(CharacterBase cb_Attacker, CharacterBase cb_Target)//takes a reference to the attacker and the attackers target and applies damage
     {
-        if (cb_Target == null)
+        if (cb_Target == null)//if there is no target cancel this
         {
             return;
         }
-        cb_Target.int_Health -= cb_Attacker.int_damage;
-        print(cb_Target+ " damage taken "+ cb_Attacker.int_damage+" health remaining = "+ cb_Target.int_Health);
+        cb_Target.int_Health -= cb_Attacker.int_damage;//atm just reduces defenders health by attackers damage value, can be expanded upon at some point
+
+        //print(cb_Target+ " damage taken "+ cb_Attacker.int_damage+" health remaining = "+ cb_Target.int_Health);
 
         //cb_Target.go_health_bar.transform.localPosition = new Vector3(((float)int_Health - (float)int_Health_max) * (0.5f / int_Health_max), 0, 0);
         //cb_Target.go_health_bar.transform.localScale = new Vector3((1f / int_Health_max) * int_Health, 0.2f, 1);
@@ -508,7 +509,7 @@ public class CharacterBase : MonoBehaviour {
     #endregion
     //---------------------------------------------------
     #region AI TurnStarter
-    public void BeginAITurn()
+    public void BeginAITurn()//this sets up the start of the AI's turn so they take their turn properlly each turn
     {
         bl_Is_Active = true;
         bl_Turn_Just_Started = true;
