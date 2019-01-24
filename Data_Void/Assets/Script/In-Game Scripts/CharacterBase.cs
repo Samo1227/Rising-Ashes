@@ -58,12 +58,12 @@ public class CharacterBase : MonoBehaviour {
     public List<Tile> selectableTiles = new List<Tile>();//a list of selectable tiles, useful for clearing data on each tile when the selection is done with 
     #endregion
     //---------------------------------------------------
-
+    #region Start
     void Start()
     {
         int_Health = int_Health_max;//current health = max health at start
     }
-
+    #endregion
     //---------------------------------------------------
     #region FindMoveRange Player
     public void FindMoveTiles()//player robot version
@@ -430,12 +430,12 @@ public class CharacterBase : MonoBehaviour {
     }
     #endregion
     //---------------------------------------------------
-
+    #region SetAttackRange
     protected void SetAttackRange(int int_At_Range)//allows this to be changed by other functions
     {
         int_Attack_Range = int_At_Range;
     }
-
+    #endregion
     //---------------------------------------------------
     #region AI Attacking Target
     protected void FindPRsInRange()//AI finds the Player Robots in range

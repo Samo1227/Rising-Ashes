@@ -3,47 +3,55 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 public class CSGameManager : MonoBehaviour {
-    public Tile tile;
+    //---------------------------------------------------
+    #region Variables
+    public Tile tile;//publicly assigned objects
     public PlayerRobot pr_PC;
-    public AICharacter ai_Enemy_Test;
-    public Tile[,] map = new Tile[10, 10];
-    public PlayerRobot pr_currentRobot;
+    public AICharacter ai_Enemy_Test;//might need a more robust system for the actuall game
+    public Tile[,] map = new Tile[10, 10];//at the moment the map array is limited to this size, this needs changing
+    public PlayerRobot pr_currentRobot;//reference to the currently selected player robot
     public TextAsset txt_level;
     public string st_level;
     public string[] arr_at_level;
     int[,] map_layout = new int[10,10];
-    int int_Turn_Count = 0;
+    int int_Turn_Count = 0;//might be useful for timers, Spawning AIs at certain turns, Events, etc...
 
     public int int_map_x;
     public int int_map_z;
 
     public List<PlayerRobot> ls_Player_Robots_In_Level = new List<PlayerRobot>();//list of live player robots
     public List<AICharacter> ls_AI_Characters_In_Level = new List<AICharacter>();//list of living enemies (should perhaps be expanded for non hostile AI)
-    public bool bl_Player_Turn = true;
-    public List<PlayerRobot> ls_Player_Robots_With_Turns_Left = new List<PlayerRobot>();
+    public bool bl_Player_Turn = true;//if it is the players turn
+    public List<PlayerRobot> ls_Player_Robots_With_Turns_Left = new List<PlayerRobot>();//used to automatically go to AI turn when Player has moved all PRs
     public Queue<AICharacter> qu_AI_Turns = new Queue<AICharacter>(); //enemy turn queue
-
-
-
-    //============================================
-    public static CSGameManager gameManager;
+    #endregion
+    //---------------------------------------------------
+    #region Singleton
+    public static CSGameManager gameManager; //gamemanager singleton
+    #endregion
+    //---------------------------------------------------
+    #region Awake
     private void Awake()            // runs before start
     {
+        //-----------
         if (gameManager == null)            // has it been set up before?
         {
             gameManager= this;             // no, it's the first GM, so store our instance
             DontDestroyOnLoad(gameObject);// persists through sceen changes
         }
+        //-----------
         else if (gameManager != this) // if we get called again. desroy new version and keep old
         {
             Destroy(gameObject); // kill subsequent versions
         }
+        //-----------
 
         TextToMapInt();
 
     }
-    //============================================
-
+    #endregion
+    //---------------------------------------------------
+    #region Map Creator
     void TextToMapInt()
     {
         st_level = txt_level.text;
@@ -55,66 +63,83 @@ public class CSGameManager : MonoBehaviour {
 
         int_map_z = System.Convert.ToInt32(arr_at_level[temp_int]);
         temp_int++;
-
+        //-----------
         for (int j = 0; j < int_map_z; j++)
         {
+            //-----------
             for (int i = 0; i < int_map_x; i++)
             {
                 Debug.Log(arr_at_level[temp_int]);
                 map_layout[i, j] = System.Convert.ToInt32(arr_at_level[temp_int]);
                 temp_int++;
             }
+            //-----------
         }
-        
+        //-----------
+
         #region text test
         string str = "";
-
+        //-----------
         for (int j = 0; j < 10; j++)
         {
+            //-----------
             for (int i = 0; i < 10; i++)
             {
+                //-----------
                 if (i == 0)
                 {
                     str += "{" + map_layout[i, j];
                 }
+                //-----------
                 else if (i == 10 - 1)
                 {
                     str += ", " + map_layout[i, j] + "}, \n";
                 }
+                //-----------
                 else
                 {
                     str += ", " + map_layout[i, j];
                 }
+                //-----------
             }
+            //-----------
         }
+        //-----------
         Debug.Log(str);
         #endregion
         
     }
-
+    #endregion
+    //---------------------------------------------------
+    #region Start
     void Start() {
-        MakeMap();
+        MakeMap();//generates map
         RefreshTile();
 
         AddRobot(2, 4);
         AddRobot(4, 4);
 
     }
-
+    #endregion
+    //---------------------------------------------------
+    #region Refresh Tiles
     public void RefreshTile()
     {
+        //-----------
         foreach (Tile tile in map)
         {
             tile.FindNeighbours(tile);
-            //Debug.Log(tile);
         }
+        //-----------
     }
-
+    #endregion
+    //---------------------------------------------------
+    #region MakeMap
     void MakeMap()
     {
-        for(int z=0; z< int_map_z; z++)
+        for (int z = 0; z < int_map_z; z++)
         {
-            for(int x = 0; x < int_map_x; x++)
+            for (int x = 0; x < int_map_x; x++)
             {
                 Tile newTile = SetTile(x, z);
             }
@@ -124,14 +149,15 @@ public class CSGameManager : MonoBehaviour {
         {
             for (int x = 0; x < int_map_x; x++)
             {
-                if(map_layout[x, z] == 3)
+                if (map_layout[x, z] == 3)
                 {
                     AddEnemy(x, z);
                 }
             }
         }
     }
-
+    #endregion
+    //---------------------------------------------------
     Tile SetTile(int x, int z)
     {
         Tile newTile = null;
