@@ -137,27 +137,36 @@ public class CSGameManager : MonoBehaviour {
     #region MakeMap
     void MakeMap()
     {
+        //-----------
         for (int z = 0; z < int_map_z; z++)
         {
+            //-----------
             for (int x = 0; x < int_map_x; x++)
             {
-                Tile newTile = SetTile(x, z);
+                Tile newTile = SetTile(x, z);//makes a tile for every quare in the map
             }
+            //-----------
         }
-
+        //-----------
         for (int z = 0; z < int_map_z; z++)
         {
+            //-----------
             for (int x = 0; x < int_map_x; x++)
             {
+                //-----------
                 if (map_layout[x, z] == 3)
                 {
                     AddEnemy(x, z);
                 }
+                //-----------
             }
+            //-----------
         }
+        //-----------
     }
     #endregion
     //---------------------------------------------------
+    #region Set Tiles
     Tile SetTile(int x, int z)
     {
         Tile newTile = null;
@@ -167,33 +176,36 @@ public class CSGameManager : MonoBehaviour {
         newTile.int_Z = z;
         newTile.transform.position = new Vector3(x, transform.position.y, z);
         //Instantiate(Resources.Load<GameObject>("MapParts/MapElement_" + map_layout[x,z]),newTile.gameObject.transform);
-        if(map_layout[x, z] == 0)
+        //-----------
+        if (map_layout[x, z] == 0)
         {
             Instantiate(Resources.Load<GameObject>("MapParts/MapElement_" + 0), newTile.gameObject.transform);
         }
-
+        //-----------
         else if (map_layout[x, z] == 1)
         {
             newTile.bl_Is_Walkable = false;
             newTile.GetComponent<BoxCollider>().size = new Vector3(1, 3, 1);
             Instantiate(Resources.Load<GameObject>("MapParts/MapElement_" + 1), newTile.gameObject.transform);
-
         }
-        else if (map_layout[x,z] == 3)
+        //-----------
+        else if (map_layout[x, z] == 3)
         {
             Instantiate(Resources.Load<GameObject>("MapParts/MapElement_" + 0), newTile.gameObject.transform);
             //AddEnemy(x, z);
         }
+        //-----------
 
-
-        newTile.name=("Tile " + x + " " + z);
-        map[x,z] = newTile;
+        newTile.name = ("Tile " + x + " " + z);
+        map[x, z] = newTile;
         return newTile;
     }
-
+    #endregion
+    //---------------------------------------------------
+    #region Swap Tile
     public void SwapTile(int x, int z, int map_Element)
     {
-       Tile temp_Tile=  map[x, z];
+        Tile temp_Tile = map[x, z];
         Destroy(temp_Tile.gameObject);
         //SetTile(x, z);    
         Tile newTile = null;
@@ -202,10 +214,12 @@ public class CSGameManager : MonoBehaviour {
         newTile.int_X = x;
         newTile.int_Z = z;
         newTile.transform.position = new Vector3(x, transform.position.y, z);
-        Instantiate(Resources.Load<GameObject>("MapParts/MapElement_"+0), newTile.gameObject.transform);
+        Instantiate(Resources.Load<GameObject>("MapParts/MapElement_" + 0), newTile.gameObject.transform);
         newTile.bl_Is_Walkable = true;
     }
-
+    #endregion
+    //---------------------------------------------------
+    #region Add PR
     public void AddRobot(int cX, int cZ)
     {
         PlayerRobot tRo = null;
@@ -214,7 +228,9 @@ public class CSGameManager : MonoBehaviour {
         tRo.int_x = cX;
         tRo.int_z = cZ;
     }
-
+    #endregion
+    //---------------------------------------------------
+    #region Add AI
     public void AddEnemy(int cX, int cZ)
     {
         AICharacter temp_AI = null;
@@ -223,72 +239,88 @@ public class CSGameManager : MonoBehaviour {
         temp_AI.int_x = cX;
         temp_AI.int_z = cZ;
     }
-
+    #endregion
+    //---------------------------------------------------
+    #region Set Current PR
     public void SetCurrentRobot(PlayerRobot selectedRobot)
     {
         pr_currentRobot = null;
         pr_currentRobot = selectedRobot;
-    }
-
+    } 
+    #endregion
+    //---------------------------------------------------
     #region Turn Manager
     public void EndPlayerTurn(PlayerRobot pr_Turn_Ended)
     {
         ls_Player_Robots_With_Turns_Left.Remove(pr_Turn_Ended);
-        if(ls_Player_Robots_With_Turns_Left.Count <= 0)
+        //-----------
+        if (ls_Player_Robots_With_Turns_Left.Count <= 0)
         {
             bl_Player_Turn = false;
             PrepareAITurn();
         }
+        //-----------
     }
-
+    //---------------------------------------------------
     public void PrepareAITurn()
     {
-        foreach(AICharacter ai_Temp in ls_AI_Characters_In_Level)
+        //-----------
+        foreach (AICharacter ai_Temp in ls_AI_Characters_In_Level)
         {
             qu_AI_Turns.Enqueue(ai_Temp); //add all the living AIs to the turn queue
         }
+        //-----------
         StartAITurn();
     }
-
+    //---------------------------------------------------
     public void StartAITurn()
     {
         print(qu_AI_Turns.Count);
+        //-----------
         if (qu_AI_Turns.Count > 0)
         {
             qu_AI_Turns.Peek().BeginAITurn();
         }
+        //-----------
     }
-
+    //---------------------------------------------------
     public void EndAITurn()//this does not work OK
     {
        qu_AI_Turns.Dequeue();//removes AI from turn queue at end of their specific turn
       //  print(qu_AI_Turns.Count);
+      //-----------
         if (qu_AI_Turns.Count > 0)
         {
             StartAITurn(); //if there are AIs left to go, do the next one.
         }
+        //-----------
         else
         {
-
             print("Player turn");
             PreparePlayerTurn();
         }
+        //-----------
     }
-
+    //---------------------------------------------------
     public void PreparePlayerTurn()//this works OK
     {
         ls_Player_Robots_With_Turns_Left.Clear();
         int_Turn_Count++;
+        //-----------
         foreach (PlayerRobot pr_Temp in ls_Player_Robots_In_Level) //refresh turn
         {
+            //-----------
             if (pr_Temp != null)
             {
                 pr_Temp.RefreshPCs();
                 ls_Player_Robots_With_Turns_Left.Add(pr_Temp);
             }
+            //-----------
         }
+        //-----------
         bl_Player_Turn = true;
     }
-
+    //---------------------------------------------------
     #endregion
-}
+    //---------------------------------------------------
+}}//=======================================================================================
