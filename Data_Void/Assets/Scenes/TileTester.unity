@@ -2179,7 +2179,7 @@ MonoBehaviour:
   ai_Enemy_Test: {fileID: 114241835215912546, guid: 0b24be8f0bee2de4aa5ebc0b12bd2673,
     type: 3}
   pr_currentRobot: {fileID: 0}
-  txt_level: {fileID: 4900000, guid: 15ac8c379e225b843b3fc79c8bfb8ecf, type: 3}
+  txt_level: {fileID: 4900000, guid: bcb17e85c8505d243bafdd3312737cb8, type: 3}
   st_level: 
   arr_at_level: []
   int_map_x: 0

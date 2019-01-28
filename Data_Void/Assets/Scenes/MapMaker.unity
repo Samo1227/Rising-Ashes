@@ -1197,8 +1197,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   go_button: {fileID: 1466765064770644, guid: 1e7dfaa814b01ea4abcfe5bbeca23c31, type: 3}
-  map_x: 10
-  map_z: 10
+  map_x: 20
+  map_z: 25
   x_offset: 1
   z_offset: 1
   int_map_parts_max: 4

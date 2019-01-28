@@ -63,6 +63,10 @@ public class CSGameManager : MonoBehaviour {
 
         int_map_z = System.Convert.ToInt32(arr_at_level[temp_int]);
         temp_int++;
+
+        map = new Tile[int_map_x, int_map_z];
+        map_layout = new int[int_map_x, int_map_z];
+
         //-----------
         for (int j = 0; j < int_map_z; j++)
         {
@@ -323,4 +327,4 @@ public class CSGameManager : MonoBehaviour {
     //---------------------------------------------------
     #endregion
     //---------------------------------------------------
-}}//=======================================================================================
+}//=======================================================================================

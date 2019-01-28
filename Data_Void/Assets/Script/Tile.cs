@@ -70,7 +70,7 @@ public class Tile : MonoBehaviour {
     public void CheckTiles(int cX, int cZ)
     {
         Tile tT = null;
-        if (cX >= 0 && cX <= 9 && cZ >= 0 && cZ <= 9) //needs to be changed to work with any size of map
+        if (cX >= 0 && cX <= CSGameManager.gameManager.map.GetLength(0) && cZ >= 0 && cZ <= CSGameManager.gameManager.map.GetLength(1)) //works based on size of game managers map array
         {
             tT = CSGameManager.gameManager.map[cX, cZ];//sets the temporary tile to the tile in the possition of the map array
             if (tT!=null)//only add to neighbours if not null
