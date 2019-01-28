@@ -7,21 +7,24 @@ public class MapMakerElements : MonoBehaviour {
 
     //Collider cl_bo
 
+    //Tiles location in the array
     public int loc_x;
     public int loc_y;
-
+    //Tiles type of element
     public int int_type;
-
+    //script that this is being made by 
     public MapMaker mM_map;
-
+    //Map Element Game Obejcts from resources 
     public GameObject[] go_arr_map_element_prefab;
+    //Map Element Game Obejcts in this gameobject
     public GameObject[] go_arr_map_element;
 
+    //Sent from the map maker script that created this object
     public void GetMap(MapMaker mM)
     {
         mM_map = mM;
     }
-
+    //Set location in the map maker array of this obeject 
     public void SetLocation(int x, int y)
     {
         loc_x = x;

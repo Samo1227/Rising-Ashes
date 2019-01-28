@@ -266,6 +266,14 @@ public class CSGameManager : MonoBehaviour {
         //-----------
     }
     //---------------------------------------------------
+    public void EndTurnButton()
+    {
+        if (pr_currentRobot != null)
+        {
+            EndPlayerTurn(pr_currentRobot);
+        }
+    }
+    //---------------------------------------------------
     public void PrepareAITurn()
     {
         //-----------
@@ -327,4 +335,17 @@ public class CSGameManager : MonoBehaviour {
     //---------------------------------------------------
     #endregion
     //---------------------------------------------------
+    #region Win/Loss
+    public void CheckLossOrWin()
+    {
+        if (ls_Player_Robots_In_Level.Count <= 0)
+        {
+            Debug.Log("lose");
+        }
+        if (ls_AI_Characters_In_Level.Count <= 0)
+        {
+            Debug.Log("Win");
+        }
+    }
+    #endregion
 }//=======================================================================================

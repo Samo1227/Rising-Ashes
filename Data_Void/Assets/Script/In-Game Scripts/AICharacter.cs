@@ -20,9 +20,14 @@ public class AICharacter : CharacterBase {
     //--------------------------------
     void Update()
     {
+        if (CSGameManager.gameManager.ls_Player_Robots_In_Level.Count <= 0)
+        { 
+            return;
+        }
         if (int_Health <= 0)
         {
             CSGameManager.gameManager.ls_AI_Characters_In_Level.Remove(this);
+            CSGameManager.gameManager.CheckLossOrWin();
             tl_Current_Tile.bl_Occupied_By_AI = false;
             Destroy(this.gameObject);
         }
