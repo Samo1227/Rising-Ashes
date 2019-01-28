@@ -120,8 +120,8 @@ public class CSGameManager : MonoBehaviour {
         MakeMap();//generates map
         RefreshTile();
 
-        AddRobot(2, 4);
-        AddRobot(4, 4);
+        //AddRobot(2, 4);
+        //AddRobot(4, 4);
 
     }
     #endregion
@@ -224,10 +224,10 @@ public class CSGameManager : MonoBehaviour {
     #endregion
     //---------------------------------------------------
     #region Add PR
-    public void AddRobot(int cX, int cZ)
+    public void AddRobot(int cX, int cZ, PlayerRobot pr_made)
     {
         PlayerRobot tRo = null;
-        tRo = Instantiate(pr_PC);
+        tRo = Instantiate(pr_made);
         tRo.transform.position = new Vector3(cX, transform.position.y + 1f, cZ);
         tRo.int_x = cX;
         tRo.int_z = cZ;

@@ -13,6 +13,13 @@ public class PlayerRobot : CharacterBase {//extends characterbase for convienien
     public GameObject go_move_ui;//these are the two yellow rectangles that show if the PR has moved or acted
     public GameObject go_other_action;
     #endregion
+
+    #region BotSetUP
+    public int[] int_arr_parts;
+    public Transform[] tr_arr_body;
+    public string[] st_arr_resources;
+    #endregion
+
     //------------------------------------------
     #region Start & Update
     private void Start()
@@ -23,6 +30,12 @@ public class PlayerRobot : CharacterBase {//extends characterbase for convienien
         CSGameManager.gameManager.PreparePlayerTurn();//sets up the players to take their turn, will need to be reworked if there is an exception where enemies take first turn
         int_Health = int_Health_max;//sets current health to max health
         SetDamage(2); //sets up how much damage that PR can do, really only for testing purposes. Will have to be removed once damage is properly worked out
+
+        for (int i = 0; i < 4; i++)
+        {
+            Instantiate(Resources.Load<GameObject>(st_arr_resources[i] + int_arr_parts[i]), new Vector3(tr_arr_body[i].position.x, tr_arr_body[i].position.y, tr_arr_body[i].position.z), Quaternion.identity, tr_arr_body[i]);
+        }
+
     }
 
     //------------------------------------------
