@@ -23,6 +23,12 @@ public class PlayerRobot : CharacterBase {//extends characterbase for convienien
     #region Start & Update
     private void Start()
     {
+
+        for (int i = 0; i < 4; i++)
+        {
+            Instantiate(Resources.Load<GameObject>(st_arr_resources[i] + int_arr_parts[i]), new Vector3(tr_arr_body[i].position.x, tr_arr_body[i].position.y, tr_arr_body[i].position.z), Quaternion.identity, tr_arr_body[i]);
+        }
+
         CSGameManager.gameManager.ls_Player_Robots_In_Level.Add(this);//adds this PR to the game managers list of alive PRs in the level, this is used by the AIs
         tl_Current_Tile= CSGameManager.gameManager.map[int_x, int_z].gameObject.GetComponent<Tile>();//keeps a reference of the Tile the PR is on
         tl_Current_Tile.bl_Occupied_By_PC = true;//sets that Tile to be occupied
@@ -30,38 +36,10 @@ public class PlayerRobot : CharacterBase {//extends characterbase for convienien
         int_Health = int_Health_max;//sets current health to max health
         SetDamage(2); //sets up how much damage that PR can do, really only for testing purposes. Will have to be removed once damage is properly worked out
 
-        for (int i = 0; i < 4; i++)
-        {
-            Instantiate(Resources.Load<GameObject>(st_arr_resources[i] + int_arr_parts[i]), new Vector3(tr_arr_body[i].position.x, tr_arr_body[i].position.y, tr_arr_body[i].position.z), Quaternion.identity, tr_arr_body[i]);
-
-        }
 
     }
 
     //------------------------------------------
-    
-    void SetBotStats(int _int_body_type, int _int_body_part_type)
-    {
-        if(_int_body_type == 0)//Head
-        {
-
-        }
-        else if(_int_body_type == 1)//Body
-        {
-
-        }
-        else if(_int_body_type == 2)//Arms
-        {
-
-        }
-        else if(_int_body_type == 3)//Legs
-        {
-
-        }
-    }
-
-
-
 
     void Update()
     {
@@ -186,5 +164,6 @@ public class PlayerRobot : CharacterBase {//extends characterbase for convienien
         int_Robot_State = 0;//defaults to finding movement
     }
     #endregion
+    //------------------------------------------
     //------------------------------------------
 }//=======================================================================================

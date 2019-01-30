@@ -28,6 +28,8 @@ public class Bot_Modifier : MonoBehaviour
     public GameObject go_ingame_bot;
 
     public int int_bots_spawned;
+
+    public GameObject go_bot_maker_open_button;
     
     private void Start()
     {
@@ -237,5 +239,11 @@ public class Bot_Modifier : MonoBehaviour
 
         CSGameManager.gameManager.AddRobot(0,0, int_body_type);
     }
+
+    public void CloseBotBuilder()
+    {
+        go_bot_maker_open_button.SetActive(true);
+        gameObject.SetActive(false);
+    } 
 
 }

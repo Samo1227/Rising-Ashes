@@ -58,5 +58,6 @@ public class MoveCam : MonoBehaviour {
         fl_cam_zoom = Mathf.Clamp(fl_cam_zoom, 1f,10f);
 
         cam.orthographicSize = fl_cam_zoom;
+
     }
 }
