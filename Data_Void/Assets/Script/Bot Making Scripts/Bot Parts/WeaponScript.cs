@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class WeaponScript : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public int int_part_weight;
 
-    // Update is called once per frame
-    void Update()
+    void Awake()
     {
-        
+        if (GetComponentInParent<PlayerRobot>() != null)
+        {
+            PlayerRobot pr_player = GetComponentInParent<PlayerRobot>();
+
+            pr_player.int_Weight_Current += int_part_weight;
+        }
     }
 }
