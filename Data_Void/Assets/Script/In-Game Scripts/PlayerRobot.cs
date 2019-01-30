@@ -13,13 +13,12 @@ public class PlayerRobot : CharacterBase {//extends characterbase for convienien
     public GameObject go_move_ui;//these are the two yellow rectangles that show if the PR has moved or acted
     public GameObject go_other_action;
     #endregion
-
+    //------------------------------------------
     #region BotSetUP
     public int[] int_arr_parts;
     public Transform[] tr_arr_body;
     public string[] st_arr_resources;
     #endregion
-
     //------------------------------------------
     #region Start & Update
     private void Start()
@@ -34,11 +33,35 @@ public class PlayerRobot : CharacterBase {//extends characterbase for convienien
         for (int i = 0; i < 4; i++)
         {
             Instantiate(Resources.Load<GameObject>(st_arr_resources[i] + int_arr_parts[i]), new Vector3(tr_arr_body[i].position.x, tr_arr_body[i].position.y, tr_arr_body[i].position.z), Quaternion.identity, tr_arr_body[i]);
+
         }
 
     }
 
     //------------------------------------------
+    
+    void SetBotStats(int _int_body_type, int _int_body_part_type)
+    {
+        if(_int_body_type == 0)//Head
+        {
+
+        }
+        else if(_int_body_type == 1)//Body
+        {
+
+        }
+        else if(_int_body_type == 2)//Arms
+        {
+
+        }
+        else if(_int_body_type == 3)//Legs
+        {
+
+        }
+    }
+
+
+
 
     void Update()
     {

@@ -209,6 +209,8 @@ public class Bot_Modifier : MonoBehaviour
     //Makes the playable robot
     public void BotPrint()
     {
+        #region OldMethod
+        /*
         //temp gameobject
         GameObject go_temp = null;
         //temp player script
@@ -219,20 +221,21 @@ public class Bot_Modifier : MonoBehaviour
         //Creates robot and stores it in the temp gameobject
         Instantiate(pr_in_game);
 
-
-
         //changes the name of the robot
-        //go_temp.name = "Robot_" + int_bots_spawned;
+        go_temp.name = "Robot_" + int_bots_spawned;
         //gets script from robot
-        pr_in_game = go_temp.GetComponent<PlayerRobot>();
-
-        CSGameManager.gameManager.AddRobot(0, 0, pr_in_game);
-        //spawns the same type of parts on new robot that are on this script
+        pr_in_game = go_temp.GetComponent<PlayerRobot>();        
         for (int i = 0; i < int_part_array_max; i++)
         {
             pr_in_game.int_arr_parts[i] = int_body_type[i];
         }
-        CSGameManager.gameManager.AddRobot(0,0, pr_in_game);
+        */
+        #endregion
+
+        //spawns the same type of parts on new robot that are on this script
+
+
+        CSGameManager.gameManager.AddRobot(0,0, int_body_type);
     }
 
 }
