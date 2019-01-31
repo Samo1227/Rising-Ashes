@@ -221,15 +221,25 @@ public class Bot_Modifier : MonoBehaviour
 
         go_temp = Instantiate(go_ingame_bot,new Vector3(0,1,0),Quaternion.identity) as GameObject;
 
+
+
         //changes the name of the robot
-        go_temp.name = "Robot_" + int_bots_spawned;
+        //go_temp.name = "Robot_" + int_bots_spawned;
         //gets script from robot
         pb_in_game = go_temp.GetComponent<Playable_Bot>();
         //spawns the same type of parts on new robot that are on this script
         for(int i = 0; i < int_part_array_max; i++)
+        pr_in_game = go_temp.GetComponent<PlayerRobot>();
+
+        CSGameManager.gameManager.AddRobot(0, 0, pr_in_game);
+        //spawns the same type of parts on new robot that are on this script
+        for (int i = 0; i < int_part_array_max; i++)
+
         {
             pb_in_game.int_arr_parts[i] = int_body_type[i];
         }
+
+        CSGameManager.gameManager.AddRobot(0,0, pr_in_game);
 
     }
 
