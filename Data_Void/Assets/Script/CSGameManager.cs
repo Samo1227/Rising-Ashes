@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using UnityEngine.SceneManagement;
 public class CSGameManager : MonoBehaviour {
     //---------------------------------------------------
     #region Variables
@@ -341,10 +342,12 @@ public class CSGameManager : MonoBehaviour {
         if (ls_Player_Robots_In_Level.Count <= 0)
         {
             Debug.Log("lose");
+            SceneManager.LoadScene("LoseScreen");
         }
         if (ls_AI_Characters_In_Level.Count <= 0)
         {
             Debug.Log("Win");
+            SceneManager.LoadScene("WinScreen");
         }
     }
     #endregion
