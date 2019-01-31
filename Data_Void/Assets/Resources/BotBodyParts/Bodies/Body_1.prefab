@@ -57,7 +57,11 @@ MeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_Materials:
 <<<<<<< HEAD
+<<<<<<< HEAD
   - {fileID: 2100000, guid: c6eefec6e576c8b42aa46da2de57b48c, type: 2}
+=======
+  - {fileID: 0}
+>>>>>>> parent of 0624653... Basic Weight Function Added
 =======
   - {fileID: 0}
 >>>>>>> parent of 0624653... Basic Weight Function Added
@@ -96,4 +100,7 @@ MeshFilter:
   m_EditorClassIdentifier: 
   int_part_health: 2
   int_part_weight: 0
+<<<<<<< HEAD
+>>>>>>> parent of 0624653... Basic Weight Function Added
+=======
 >>>>>>> parent of 0624653... Basic Weight Function Added

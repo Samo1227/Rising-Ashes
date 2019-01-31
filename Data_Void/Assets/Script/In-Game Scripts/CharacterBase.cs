@@ -20,6 +20,9 @@ public class CharacterBase : MonoBehaviour {
 =======
     public int int_Veiw_Distance;
     public int int_Veiw_Type;
+<<<<<<< HEAD
+>>>>>>> parent of 0624653... Basic Weight Function Added
+=======
 >>>>>>> parent of 0624653... Basic Weight Function Added
     //Body Stats
     public int int_Health;

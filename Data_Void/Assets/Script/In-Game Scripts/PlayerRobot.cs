@@ -25,6 +25,9 @@ public class PlayerRobot : CharacterBase {//extends characterbase for convienien
             Instantiate(Resources.Load<GameObject>(st_arr_resources[i] + int_arr_parts[i]), new Vector3(tr_arr_body[i].position.x, tr_arr_body[i].position.y, tr_arr_body[i].position.z), Quaternion.identity, tr_arr_body[i]);
         }
 
+<<<<<<< HEAD
+>>>>>>> parent of 0624653... Basic Weight Function Added
+=======
 >>>>>>> parent of 0624653... Basic Weight Function Added
         CSGameManager.gameManager.ls_Player_Robots_In_Level.Add(this);//adds this PR to the game managers list of alive PRs in the level, this is used by the AIs
         tl_Current_Tile= CSGameManager.gameManager.map[int_x, int_z].gameObject.GetComponent<Tile>();//keeps a reference of the Tile the PR is on
@@ -35,6 +38,10 @@ public class PlayerRobot : CharacterBase {//extends characterbase for convienien
 <<<<<<< HEAD
 =======
 
+
+<<<<<<< HEAD
+>>>>>>> parent of 0624653... Basic Weight Function Added
+=======
 
 >>>>>>> parent of 0624653... Basic Weight Function Added
     }

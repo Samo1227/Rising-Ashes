@@ -92,4 +92,7 @@ MeshFilter:
   m_EditorClassIdentifier: 
   int_part_health: 1
   int_part_weight: 0
+<<<<<<< HEAD
+>>>>>>> parent of 0624653... Basic Weight Function Added
+=======
 >>>>>>> parent of 0624653... Basic Weight Function Added
