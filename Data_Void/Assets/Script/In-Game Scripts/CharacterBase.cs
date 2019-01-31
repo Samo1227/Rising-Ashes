@@ -23,6 +23,9 @@ public class CharacterBase : MonoBehaviour {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of 0624653... Basic Weight Function Added
+=======
 >>>>>>> parent of 0624653... Basic Weight Function Added
 =======
 >>>>>>> parent of 0624653... Basic Weight Function Added
