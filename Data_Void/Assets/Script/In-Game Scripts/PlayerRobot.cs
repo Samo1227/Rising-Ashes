@@ -14,29 +14,15 @@ public class PlayerRobot : CharacterBase {//extends characterbase for convienien
     public GameObject go_other_action;
     #endregion
     //------------------------------------------
-    #region BotSetUP
-    public int[] int_arr_parts;
-    public Transform[] tr_arr_body;
-    public string[] st_arr_resources;
-    #endregion
-    //------------------------------------------
     #region Start & Update
     private void Start()
     {
-
-        for (int i = 0; i < 4; i++)
-        {
-            Instantiate(Resources.Load<GameObject>(st_arr_resources[i] + int_arr_parts[i]), new Vector3(tr_arr_body[i].position.x, tr_arr_body[i].position.y, tr_arr_body[i].position.z), Quaternion.identity, tr_arr_body[i]);
-        }
-
         CSGameManager.gameManager.ls_Player_Robots_In_Level.Add(this);//adds this PR to the game managers list of alive PRs in the level, this is used by the AIs
         tl_Current_Tile= CSGameManager.gameManager.map[int_x, int_z].gameObject.GetComponent<Tile>();//keeps a reference of the Tile the PR is on
         tl_Current_Tile.bl_Occupied_By_PC = true;//sets that Tile to be occupied
         CSGameManager.gameManager.PreparePlayerTurn();//sets up the players to take their turn, will need to be reworked if there is an exception where enemies take first turn
         int_Health = int_Health_max;//sets current health to max health
         SetDamage(2); //sets up how much damage that PR can do, really only for testing purposes. Will have to be removed once damage is properly worked out
-
-
     }
 
     //------------------------------------------
@@ -51,7 +37,11 @@ public class PlayerRobot : CharacterBase {//extends characterbase for convienien
         //---------
         if (int_Health <= 0)
         {
-            PlayerRobotDeath();
+            CSGameManager.gameManager.ls_Player_Robots_In_Level.Remove(this);//is not an active PR anymore, otherwise AI will break
+            CSGameManager.gameManager.CheckLossOrWin();
+            tl_Current_Tile.bl_Occupied_By_PC = false;//Tile PR was on is now empty
+            //these two could probably be put in an OnDisable method...?
+            Destroy(this.gameObject);//PR is destroyed
         }
         //---------
         if (bl_Moving)
@@ -158,17 +148,6 @@ public class PlayerRobot : CharacterBase {//extends characterbase for convienien
         bl_Turn_Available = true;
         bl_Is_Active = false;
         int_Robot_State = 0;//defaults to finding movement
-    }
-    #endregion
-    //------------------------------------------
-    #region Destruction
-    public void PlayerRobotDeath()
-    {
-        CSGameManager.gameManager.ls_Player_Robots_In_Level.Remove(this);//is not an active PR anymore, otherwise AI will break
-        CSGameManager.gameManager.CheckLossOrWin();
-        tl_Current_Tile.bl_Occupied_By_PC = false;//Tile PR was on is now empty
-                                                  //these two could probably be put in an OnDisable method...?
-        Destroy(this.gameObject);//PR is destroyed
     }
     #endregion
     //------------------------------------------
