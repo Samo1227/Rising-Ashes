@@ -14,28 +14,29 @@ public class CharacterBase : MonoBehaviour {
     //the stats are not finalised, this is mainly just to get an idea for what is needed
 
     //Head Stats
-    int int_Veiw_Distance;
-    int int_Veiw_Type;
+    public int int_Veiw_Distance;
+    public int int_Veiw_Type;
+
     //Body Stats
     public int int_Health;
     public int int_Health_max;
     //gimmie gimmie gimmie a honk after midnight ♥
 
     //Equiptment Stats
-    int int_Attack_Range = 3;
-    int int_damage;
-    int int_heat_current;
-    int int_heat_total;
-    int int_heat_fail_chance;
-    int int_effect;
+    public int int_Attack_Range = 3;
+    public int int_damage;
+    public int int_heat_current;
+    public int int_heat_total;
+    public int int_heat_fail_chance;
+    public int int_effect;
 
 
     //Leg Stats
     public int int_Move_Range = 5;
-    int int_Move_Max;
-    int int_Move_Min;
-    int int_Weight_Current;
-    int int_Weight_Max;
+    public int int_Move_Max;
+    public int int_Move_Min;
+    public int int_Weight_Current;
+    public int int_Weight_Max;
 
     public GameObject go_health_bar;//used to display robots health
     public int int_Robot_State = 0;

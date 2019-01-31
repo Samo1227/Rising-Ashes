@@ -28,6 +28,8 @@ public class Bot_Modifier : MonoBehaviour
     public GameObject go_ingame_bot;
 
     public int int_bots_spawned;
+
+    public GameObject go_bot_maker_open_button;
     
     private void Start()
     {
@@ -209,24 +211,39 @@ public class Bot_Modifier : MonoBehaviour
     //Makes the playable robot
     public void BotPrint()
     {
+        #region OldMethod
+        /*
         //temp gameobject
         GameObject go_temp = null;
         //temp player script
-        Playable_Bot pb_in_game = null;
+        PlayerRobot pr_in_game = null;
+
         //adds to number of robots made
         int_bots_spawned++;
         //Creates robot and stores it in the temp gameobject
-        go_temp = Instantiate(go_ingame_bot,new Vector3(2,1,0),Quaternion.identity) as GameObject;
+        Instantiate(pr_in_game);
+
         //changes the name of the robot
         go_temp.name = "Robot_" + int_bots_spawned;
         //gets script from robot
-        pb_in_game = go_temp.GetComponent<Playable_Bot>();
-        //spawns the same type of parts on new robot that are on this script
-        for(int i = 0; i < int_part_array_max; i++)
+        pr_in_game = go_temp.GetComponent<PlayerRobot>();        
+        for (int i = 0; i < int_part_array_max; i++)
         {
-            pb_in_game.int_arr_parts[i] = int_body_type[i];
+            pr_in_game.int_arr_parts[i] = int_body_type[i];
         }
+        */
+        #endregion
 
+        //spawns the same type of parts on new robot that are on this script
+
+
+        CSGameManager.gameManager.AddRobot(0,0, int_body_type);
     }
+
+    public void CloseBotBuilder()
+    {
+        go_bot_maker_open_button.SetActive(true);
+        gameObject.SetActive(false);
+    } 
 
 }
