@@ -29,15 +29,6 @@ public class PlayerRobot : CharacterBase {//extends characterbase for convienien
             Instantiate(Resources.Load<GameObject>(st_arr_resources[i] + int_arr_parts[i]), new Vector3(tr_arr_body[i].position.x, tr_arr_body[i].position.y, tr_arr_body[i].position.z), Quaternion.identity, tr_arr_body[i]);
         }
 
-        if(int_Weight_Max > int_Weight_Current)
-        {
-            int_Move_Range = int_Move_Max;
-        }
-        else
-        {
-            int_Move_Range = int_Move_Min;
-        }
-
         CSGameManager.gameManager.ls_Player_Robots_In_Level.Add(this);//adds this PR to the game managers list of alive PRs in the level, this is used by the AIs
         tl_Current_Tile= CSGameManager.gameManager.map[int_x, int_z].gameObject.GetComponent<Tile>();//keeps a reference of the Tile the PR is on
         tl_Current_Tile.bl_Occupied_By_PC = true;//sets that Tile to be occupied
@@ -45,9 +36,11 @@ public class PlayerRobot : CharacterBase {//extends characterbase for convienien
         int_Health = int_Health_max;//sets current health to max health
         SetDamage(2); //sets up how much damage that PR can do, really only for testing purposes. Will have to be removed once damage is properly worked out
 
-        
+
     }
+
     //------------------------------------------
+
     void Update()
     {
         go_health_bar.transform.localPosition = new Vector3(((float)int_Health - (float)int_Health_max) * (0.5f / int_Health_max), 0,0);

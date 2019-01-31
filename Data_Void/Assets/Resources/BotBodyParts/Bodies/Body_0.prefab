@@ -91,4 +91,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   int_part_health: 1
-  int_part_weight: 1
+  int_part_weight: 0

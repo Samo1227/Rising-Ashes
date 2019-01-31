@@ -16,7 +16,6 @@ public class CharacterBase : MonoBehaviour {
     //Head Stats
     public int int_Veiw_Distance;
     public int int_Veiw_Type;
-
     //Body Stats
     public int int_Health;
     public int int_Health_max;
