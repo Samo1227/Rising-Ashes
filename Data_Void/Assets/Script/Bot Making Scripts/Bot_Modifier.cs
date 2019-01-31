@@ -216,7 +216,11 @@ public class Bot_Modifier : MonoBehaviour
         //adds to number of robots made
         int_bots_spawned++;
         //Creates robot and stores it in the temp gameobject
+
         go_temp = Instantiate(go_ingame_bot,new Vector3(2,1,0),Quaternion.identity) as GameObject;
+
+        go_temp = Instantiate(go_ingame_bot,new Vector3(0,1,0),Quaternion.identity) as GameObject;
+
         //changes the name of the robot
         go_temp.name = "Robot_" + int_bots_spawned;
         //gets script from robot
