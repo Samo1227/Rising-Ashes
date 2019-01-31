@@ -14,7 +14,10 @@ public class PlayerRobot : CharacterBase {//extends characterbase for convienien
     public GameObject go_other_action;
     #endregion
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of dad8b6b... Bot Builder and core game combined
 
     #region BotSetUP
     public int[] int_arr_parts;
@@ -22,6 +25,9 @@ public class PlayerRobot : CharacterBase {//extends characterbase for convienien
     public string[] st_arr_resources;
     #endregion
 
+<<<<<<< HEAD
+>>>>>>> parent of dad8b6b... Bot Builder and core game combined
+=======
 >>>>>>> parent of dad8b6b... Bot Builder and core game combined
     //------------------------------------------
     #region Start & Update
