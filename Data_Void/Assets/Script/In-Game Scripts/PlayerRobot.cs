@@ -58,11 +58,7 @@ public class PlayerRobot : CharacterBase {//extends characterbase for convienien
         //---------
         if (int_Health <= 0)
         {
-            CSGameManager.gameManager.ls_Player_Robots_In_Level.Remove(this);//is not an active PR anymore, otherwise AI will break
-            CSGameManager.gameManager.CheckLossOrWin();
-            tl_Current_Tile.bl_Occupied_By_PC = false;//Tile PR was on is now empty
-            //these two could probably be put in an OnDisable method...?
-            Destroy(this.gameObject);//PR is destroyed
+            PlayerRobotDeath();
         }
         //---------
         if (bl_Moving)
@@ -172,5 +168,15 @@ public class PlayerRobot : CharacterBase {//extends characterbase for convienien
     }
     #endregion
     //------------------------------------------
+    #region Destruction
+    public void PlayerRobotDeath()
+    {
+        CSGameManager.gameManager.ls_Player_Robots_In_Level.Remove(this);//is not an active PR anymore, otherwise AI will break
+        CSGameManager.gameManager.CheckLossOrWin();
+        tl_Current_Tile.bl_Occupied_By_PC = false;//Tile PR was on is now empty
+                                                  //these two could probably be put in an OnDisable method...?
+        Destroy(this.gameObject);//PR is destroyed
+    }
+    #endregion
     //------------------------------------------
 }//=======================================================================================

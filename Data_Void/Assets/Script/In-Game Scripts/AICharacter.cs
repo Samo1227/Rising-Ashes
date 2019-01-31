@@ -26,10 +26,7 @@ public class AICharacter : CharacterBase {
         }
         if (int_Health <= 0)
         {
-            CSGameManager.gameManager.ls_AI_Characters_In_Level.Remove(this);
-            CSGameManager.gameManager.CheckLossOrWin();
-            tl_Current_Tile.bl_Occupied_By_AI = false;
-            Destroy(this.gameObject);
+            AICharacterDestruction();
         }
 
         if (fl_Turn_Timer>= fl_Time_limit)
@@ -169,7 +166,14 @@ public class AICharacter : CharacterBase {
         {
             rnd_Rendereer.material.color = Color.red;
         }
-
-
     }
+
+    public void AICharacterDestruction()
+    {
+        CSGameManager.gameManager.ls_AI_Characters_In_Level.Remove(this);
+        CSGameManager.gameManager.CheckLossOrWin();
+        tl_Current_Tile.bl_Occupied_By_AI = false;
+        Destroy(this.gameObject);
+    }
+
 }

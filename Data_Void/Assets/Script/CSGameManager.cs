@@ -1,11 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 using System.IO;
 using UnityEngine.SceneManagement;
 public class CSGameManager : MonoBehaviour {
     //---------------------------------------------------
     #region Variables
+    public bool bl_IsMission = true; //not sure about this, this is to manage wether the scene is a battle or not but it might be better to have the level builder not be persistant 
+    //and instead have a seperate gamemanager
+
     public Tile tile;//publicly assigned objects
     public PlayerRobot pr_PC;
     public AICharacter ai_Enemy_Test;//might need a more robust system for the actuall game
@@ -46,9 +50,10 @@ public class CSGameManager : MonoBehaviour {
             Destroy(gameObject); // kill subsequent versions
         }
         //-----------
+        if (bl_IsMission == false)
+            return;
 
         TextToMapInt();
-
     }
     #endregion
     //---------------------------------------------------
@@ -118,6 +123,9 @@ public class CSGameManager : MonoBehaviour {
     //---------------------------------------------------
     #region Start
     void Start() {
+        if (bl_IsMission == false)
+            return;
+
         MakeMap();//generates map
         RefreshTile();
 
@@ -273,7 +281,12 @@ public class CSGameManager : MonoBehaviour {
     {
         if (pr_currentRobot != null)
         {
+            pr_currentRobot.bl_Is_Active = false;
+            pr_currentRobot.bl_Has_Acted = false;
+            pr_currentRobot.bl_Has_Moved = false;
+            pr_currentRobot.Clear_Selection();
             EndPlayerTurn(pr_currentRobot);
+            pr_currentRobot = null;
         }
     }
     //---------------------------------------------------
@@ -344,13 +357,33 @@ public class CSGameManager : MonoBehaviour {
         if (ls_Player_Robots_In_Level.Count <= 0)
         {
             Debug.Log("lose");
+            ClearMapData();
             SceneManager.LoadScene("LoseScreen");
         }
         if (ls_AI_Characters_In_Level.Count <= 0)
         {
             Debug.Log("Win");
+            ClearMapData();
             SceneManager.LoadScene("WinScreen");
         }
     }
     #endregion
+    //---------------------------------------------------
+    public void ClearMapData()
+    {
+        for (int x = 0; x < int_map_x; x++)
+        {
+            for (int z = 0; z < int_map_z; z++)
+            {
+                Tile _tile = map[x,z];
+                if (_tile != null)
+                {
+                    Destroy(_tile.gameObject);
+                }
+            }
+        }
+        Array.Clear(map, 0, map.Length);//clears the map array so we can reuse it for different levels
+        Array.Clear(map_layout, 0, map_layout.Length);
+        bl_IsMission = false;
+    }
 }//=======================================================================================
