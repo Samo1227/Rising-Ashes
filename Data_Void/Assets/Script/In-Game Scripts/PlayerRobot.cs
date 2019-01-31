@@ -15,7 +15,10 @@ public class PlayerRobot : CharacterBase {//extends characterbase for convienien
     #endregion
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of dad8b6b... Bot Builder and core game combined
 =======
 >>>>>>> parent of dad8b6b... Bot Builder and core game combined
 
@@ -26,6 +29,9 @@ public class PlayerRobot : CharacterBase {//extends characterbase for convienien
     #endregion
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of dad8b6b... Bot Builder and core game combined
+=======
 >>>>>>> parent of dad8b6b... Bot Builder and core game combined
 =======
 >>>>>>> parent of dad8b6b... Bot Builder and core game combined

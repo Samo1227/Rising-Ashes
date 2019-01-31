@@ -225,13 +225,18 @@ public class Bot_Modifier : MonoBehaviour
 
 
 
+
+
         //changes the name of the robot
         //go_temp.name = "Robot_" + int_bots_spawned;
         //gets script from robot
 <<<<<<< HEAD
+<<<<<<< HEAD
         pb_in_game = go_temp.GetComponent<Playable_Bot>();
         //spawns the same type of parts on new robot that are on this script
         for(int i = 0; i < int_part_array_max; i++)
+=======
+>>>>>>> parent of dad8b6b... Bot Builder and core game combined
 =======
 >>>>>>> parent of dad8b6b... Bot Builder and core game combined
         pr_in_game = go_temp.GetComponent<PlayerRobot>();
@@ -244,9 +249,13 @@ public class Bot_Modifier : MonoBehaviour
             pb_in_game.int_arr_parts[i] = int_body_type[i];
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
         CSGameManager.gameManager.AddRobot(0,0, pr_in_game);
 
+=======
+        CSGameManager.gameManager.AddRobot(0,0, pr_in_game);
+>>>>>>> parent of dad8b6b... Bot Builder and core game combined
 =======
         CSGameManager.gameManager.AddRobot(0,0, pr_in_game);
 >>>>>>> parent of dad8b6b... Bot Builder and core game combined
