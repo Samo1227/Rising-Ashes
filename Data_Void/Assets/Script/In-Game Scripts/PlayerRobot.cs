@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerRobot : CharacterBase {//extends characterbase for convienience, used to control player characters
+public class PlayerRobot : CharacterBase
+{//extends characterbase for convienience, used to control player characters
     //---PR = Player Robot---
     //------------------------------------------
     #region Variables
@@ -14,23 +15,44 @@ public class PlayerRobot : CharacterBase {//extends characterbase for convienien
     public GameObject go_other_action;
     #endregion
     //------------------------------------------
+    #region BotSetUP
+    public int[] int_arr_parts;
+    public Transform[] tr_arr_body;
+    public string[] st_arr_resources;
+    #endregion
+    //------------------------------------------
     #region Start & Update
     private void Start()
     {
+
+        for (int i = 0; i < 4; i++)
+        {
+            Instantiate(Resources.Load<GameObject>(st_arr_resources[i] + int_arr_parts[i]), new Vector3(tr_arr_body[i].position.x, tr_arr_body[i].position.y, tr_arr_body[i].position.z), Quaternion.identity, tr_arr_body[i]);
+        }
+
+        if (int_Weight_Max > int_Weight_Current)
+        {
+            int_Move_Range = int_Move_Max;
+        }
+        else
+        {
+            int_Move_Range = int_Move_Min;
+        }
+
         CSGameManager.gameManager.ls_Player_Robots_In_Level.Add(this);//adds this PR to the game managers list of alive PRs in the level, this is used by the AIs
-        tl_Current_Tile= CSGameManager.gameManager.map[int_x, int_z].gameObject.GetComponent<Tile>();//keeps a reference of the Tile the PR is on
+        tl_Current_Tile = CSGameManager.gameManager.map[int_x, int_z].gameObject.GetComponent<Tile>();//keeps a reference of the Tile the PR is on
         tl_Current_Tile.bl_Occupied_By_PC = true;//sets that Tile to be occupied
         CSGameManager.gameManager.PreparePlayerTurn();//sets up the players to take their turn, will need to be reworked if there is an exception where enemies take first turn
         int_Health = int_Health_max;//sets current health to max health
         SetDamage(2); //sets up how much damage that PR can do, really only for testing purposes. Will have to be removed once damage is properly worked out
+
+
     }
-
     //------------------------------------------
-
     void Update()
     {
-        go_health_bar.transform.localPosition = new Vector3(((float)int_Health - (float)int_Health_max) * (0.5f / int_Health_max), 0,0);
-        go_health_bar.transform.localScale = new Vector3((1f / int_Health_max) * int_Health,0.2f,1);
+        go_health_bar.transform.localPosition = new Vector3(((float)int_Health - (float)int_Health_max) * (0.5f / int_Health_max), 0, 0);
+        go_health_bar.transform.localScale = new Vector3((1f / int_Health_max) * int_Health, 0.2f, 1);
 
         go_move_ui.SetActive(!bl_Has_Moved);//turns yellow rectangles on and off
         go_other_action.SetActive(!bl_Has_Acted);
@@ -150,5 +172,6 @@ public class PlayerRobot : CharacterBase {//extends characterbase for convienien
         int_Robot_State = 0;//defaults to finding movement
     }
     #endregion
+    //------------------------------------------
     //------------------------------------------
 }//=======================================================================================

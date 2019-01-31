@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterBase : MonoBehaviour {
+public class CharacterBase : MonoBehaviour
+{
     //---------------------------------------------------
     #region Variables
     public int int_x;
@@ -14,33 +15,34 @@ public class CharacterBase : MonoBehaviour {
     //the stats are not finalised, this is mainly just to get an idea for what is needed
 
     //Head Stats
-    int int_Veiw_Distance;
-    int int_Veiw_Type;
+    public int int_Veiw_Distance;
+    public int int_Veiw_Type;
+
     //Body Stats
     public int int_Health;
     public int int_Health_max;
     //gimmie gimmie gimmie a honk after midnight ♥
 
     //Equiptment Stats
-    int int_Attack_Range = 3;
-    int int_damage;
-    int int_heat_current;
-    int int_heat_total;
-    int int_heat_fail_chance;
-    int int_effect;
+    public int int_Attack_Range = 3;
+    public int int_damage;
+    public int int_heat_current;
+    public int int_heat_total;
+    public int int_heat_fail_chance;
+    public int int_effect;
 
 
     //Leg Stats
     public int int_Move_Range = 5;
-    int int_Move_Max;
-    int int_Move_Min;
-    int int_Weight_Current;
-    int int_Weight_Max;
+    public int int_Move_Max;
+    public int int_Move_Min;
+    public int int_Weight_Current;
+    public int int_Weight_Max;
 
     public GameObject go_health_bar;//used to display robots health
     public int int_Robot_State = 0;
 
-    public bool bl_Is_Active = false; 
+    public bool bl_Is_Active = false;
     public bool bl_Moving = false;          //for moving to target pos
     public float fl_Move_Speed = 5f; //how quick it moves to target square
     Vector3 v3_Velocity = new Vector3();//used for visually moving to squares
@@ -70,7 +72,7 @@ public class CharacterBase : MonoBehaviour {
     {
 
         Tile currentTile = CSGameManager.gameManager.map[this.int_x, this.int_z];//this shouldn't really be neccessary as it's set outside of this, but this is just to be safe
-    
+
         Queue<Tile> process = new Queue<Tile>();//processes all the tiles this can move to, runs till no possible tiles are left
         process.Enqueue(currentTile);//starts with the current tile this is on
         //-----------
@@ -96,8 +98,8 @@ public class CharacterBase : MonoBehaviour {
                         if (neighbourTile != currentTile)//stops path getting stuck looping
                         {
                             //----------
-                            if (neighbourTile.tl_Start_Tile==null)//only do if there isn't already a start tile for this tile, this should prevent infinite looping 
-                                 neighbourTile.tl_Start_Tile = tempTile;
+                            if (neighbourTile.tl_Start_Tile == null)//only do if there isn't already a start tile for this tile, this should prevent infinite looping 
+                                neighbourTile.tl_Start_Tile = tempTile;
                             //----------
                         }
                         //----------
@@ -246,7 +248,7 @@ public class CharacterBase : MonoBehaviour {
             Vector3 v3_Target = tl_temp.transform.position;//sets the movement destination to that tile 
             v3_Target.y += 1; //so character doesn't move into the ground, will need to be reworked if we decide to add elevation to the system
             //-----------
-            if (Vector3.Distance(transform.position, v3_Target)>= 0.05f)//when it's not very close to the target position, has a margin for error for safety purposes
+            if (Vector3.Distance(transform.position, v3_Target) >= 0.05f)//when it's not very close to the target position, has a margin for error for safety purposes
             {
                 CalculateHeading(v3_Target);//work out which direction the robot is moving in
                 SetVelocity();
@@ -296,64 +298,64 @@ public class CharacterBase : MonoBehaviour {
         ls_Open_List.Add(current_Tile);
         //-----------
         if (Vector3.Distance(current_Tile.transform.position, target_Tile.transform.position) != 0) //if target is not this tile, so AI doesn't move onto the PC square
-            {
+        {
             current_Tile.h = (Vector3.Distance(current_Tile.transform.position, target_Tile.transform.position));//doing this through the array would be better probably
-                current_Tile.f = current_Tile.h;
+            current_Tile.f = current_Tile.h;
             //-----------
             while (ls_Open_List.Count > 0)
-                {
+            {
                 Tile tile_Check = FindTileWithLowestFCost(ls_Open_List);
-                    ls_Closed_List.Add(tile_Check);
+                ls_Closed_List.Add(tile_Check);
                 //-----------
                 if (tile_Check == target_Tile || tile_Check == null) //arrived at target tile or no path
-                    {
-                        tl_Target_Square = FindEndingTile(tile_Check);
+                {
+                    tl_Target_Square = FindEndingTile(tile_Check);
                     //-----------
                     if (tl_Target_Square.bl_Occupied_By_AI) //prevents AI from moving into an ocupied tile
-                        {
-                            tl_Target_Square = tl_Target_Square.tl_Start_Tile;
-                        }
+                    {
+                        tl_Target_Square = tl_Target_Square.tl_Start_Tile;
+                    }
                     //-----------
                     MoveToTargetSquare(tl_Target_Square);
-                        return;
-                    }
+                    return;
+                }
                 //-----------
                 foreach (Tile tl_Tile in tile_Check.ls_Tile_Neighbours) //for each neighboring tile
-                    {
+                {
                     //-----------
                     if (ls_Closed_List.Contains(tl_Tile))//already checked
-                        {
-                            //do nothing
-                        }
+                    {
+                        //do nothing
+                    }
                     //-----------
                     else if (ls_Open_List.Contains(tl_Tile))
-                        {
+                    {
                         float fl_Temp_G_Cost = tile_Check.g + Vector3.Distance(tl_Tile.transform.position, tile_Check.transform.position);
                         //-----------
                         if (fl_Temp_G_Cost < tl_Tile.g)//if the tile being checked's G cost is lower than the currently best tile tile_Check replaces it
-                            {
-                                tl_Tile.tl_Start_Tile = tile_Check;
-                                tl_Tile.g = fl_Temp_G_Cost;
-                                tl_Tile.f = tl_Tile.g + tl_Tile.h;
-                            }
+                        {
+                            tl_Tile.tl_Start_Tile = tile_Check;
+                            tl_Tile.g = fl_Temp_G_Cost;
+                            tl_Tile.f = tl_Tile.g + tl_Tile.h;
+                        }
                         //-----------
                     }
                     //-----------
                     else
                     {
                         tl_Tile.tl_Start_Tile = tile_Check;
-                            tl_Tile.g = tile_Check.g + Vector3.Distance(tl_Tile.transform.position, target_Tile.transform.position); //research how to check manhattan distance, as this is a messy way of doing this
-                            tl_Tile.h = Vector3.Distance(tl_Tile.transform.position, target_Tile.transform.position);
-                            tl_Tile.f = tl_Tile.h + tl_Tile.g;
+                        tl_Tile.g = tile_Check.g + Vector3.Distance(tl_Tile.transform.position, target_Tile.transform.position); //research how to check manhattan distance, as this is a messy way of doing this
+                        tl_Tile.h = Vector3.Distance(tl_Tile.transform.position, target_Tile.transform.position);
+                        tl_Tile.f = tl_Tile.h + tl_Tile.g;
                         //-----------
                         if (tl_Tile.bl_Is_Walkable)
+                        {
+                            //if (!tl_Tile.bl_Occupied_By_AI)//won't go into a space with a AI in it... also means it won't walk through AI though
                             {
-                                //if (!tl_Tile.bl_Occupied_By_AI)//won't go into a space with a AI in it... also means it won't walk through AI though
-                                {
-                                    ls_Open_List.Add(tl_Tile);
-                                }
+                                ls_Open_List.Add(tl_Tile);
                             }
                         }
+                    }
                     //-----------
                 }
                 //-----------
@@ -369,7 +371,7 @@ public class CharacterBase : MonoBehaviour {
     {
         Tile til_Lowest_F_Cost = list[0];
 
-        foreach(Tile t in list)
+        foreach (Tile t in list)
         {
             if (t.f < til_Lowest_F_Cost.f)
             {
@@ -387,20 +389,20 @@ public class CharacterBase : MonoBehaviour {
         Stack<Tile> st_Temp_Path = new Stack<Tile>();
         Tile next = tile.tl_Start_Tile;
 
-      
+
         while (next != null) //infinitely looping...or not?
         {
-            st_Temp_Path.Push(next);            
+            st_Temp_Path.Push(next);
             next = next.tl_Start_Tile;
         }
 
-        if(st_Temp_Path.Count <= int_Move_Range)
+        if (st_Temp_Path.Count <= int_Move_Range)
         {
             return tile.tl_Start_Tile;
         }
 
         Tile tl_End_Tile = null;
-        for(int i = 0; i <= int_Move_Range; i++)
+        for (int i = 0; i <= int_Move_Range; i++)
         {
             tl_End_Tile = st_Temp_Path.Pop();
         }
@@ -422,7 +424,7 @@ public class CharacterBase : MonoBehaviour {
         }
 
         Tile next = tl_Target;
-        while(next != null)
+        while (next != null)
         {
             st_Path.Push(next);
             next = next.tl_Start_Tile;
@@ -470,7 +472,7 @@ public class CharacterBase : MonoBehaviour {
     protected void FindAttackTarget() //can define different ways to prioritise targets here
     {
         PlayerRobot pr_Final_Attack_Target = null;
-        for (int i=0; i < ls_PRs_In_Range.Count; i++)//looks at all player robots in range
+        for (int i = 0; i < ls_PRs_In_Range.Count; i++)//looks at all player robots in range
         {
             if (pr_Final_Attack_Target == null)//if there is no target yet, set the first player in range
             {
