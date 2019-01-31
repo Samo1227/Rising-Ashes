@@ -225,22 +225,10 @@ public class CSGameManager : MonoBehaviour {
     #endregion
     //---------------------------------------------------
     #region Add PR
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
     public void AddRobot(int cX, int cZ)
-=======
-    public void AddRobot(int cX, int cZ, PlayerRobot pr_made)
->>>>>>> parent of dad8b6b... Bot Builder and core game combined
-=======
-    public void AddRobot(int cX, int cZ, PlayerRobot pr_made)
->>>>>>> parent of dad8b6b... Bot Builder and core game combined
-=======
-    public void AddRobot(int cX, int cZ, PlayerRobot pr_made)
->>>>>>> parent of dad8b6b... Bot Builder and core game combined
     {
         PlayerRobot tRo = null;
-        tRo = Instantiate(pr_made);
+        tRo = Instantiate(pr_PC);
         tRo.transform.position = new Vector3(cX, transform.position.y + 1f, cZ);
         tRo.int_x = cX;
         tRo.int_z = cZ;
