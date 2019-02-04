@@ -5,6 +5,7 @@ using UnityEngine;
 public class MoveCam : MonoBehaviour {
 
     public float fl_cam_move;
+    public float fl_cam_zoom = 5;
     public Camera cam;
 
 	// Use this for initialization
@@ -38,7 +39,7 @@ public class MoveCam : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            transform.rotation = Quaternion.Lerp(transform.rotation, new Quaternion(0,1,0,0.1f), Time.time * 1);
+            transform.Rotate(new Vector3(0, 90, 0));
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -47,11 +48,16 @@ public class MoveCam : MonoBehaviour {
 
         if (Input.GetAxis("Mouse ScrollWheel") < 0f) // forward
         {
-            cam.orthographicSize++;
+            fl_cam_zoom++;
         }
         else if (Input.GetAxis("Mouse ScrollWheel") > 0f) // forward
         {
-            cam.orthographicSize--;
+            fl_cam_zoom--;
         }
+
+        fl_cam_zoom = Mathf.Clamp(fl_cam_zoom, 1f,10f);
+
+        cam.orthographicSize = fl_cam_zoom;
+
     }
 }
