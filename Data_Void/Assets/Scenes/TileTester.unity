@@ -457,7 +457,7 @@ RectTransform:
   m_Children:
   - {fileID: 1177422964}
   m_Father: {fileID: 1376820294}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -787,7 +787,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 391852386}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1883875701}
+        m_MethodName: MoveButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &391852386
@@ -1225,7 +1236,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &804554993
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1360,7 +1371,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 822962039}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1883875701}
+        m_MethodName: AttackButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &822962039
@@ -1418,7 +1440,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &873869037
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1611,7 +1633,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1015667122
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1651,7 +1673,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1051434450
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2075,7 +2097,6 @@ RectTransform:
   m_Children:
   - {fileID: 1015667122}
   - {fileID: 1964534974}
-  - {fileID: 1668833231}
   - {fileID: 206174452}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -2229,17 +2250,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1668833230}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1790334387}
-  m_Father: {fileID: 1376820294}
-  m_RootOrder: 2
+  m_Father: {fileID: 1964534974}
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 317.9, y: -183.3}
+  m_AnchoredPosition: {x: 232, y: -211}
   m_SizeDelta: {x: 75.43, y: 59.66}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1668833232
@@ -2551,7 +2572,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.29999924, y: 1}
+  m_AnchoredPosition: {x: 0.29999924, y: -1}
   m_SizeDelta: {x: 24.84, y: 14.32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1790334388
@@ -2602,7 +2623,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: End Turn
+  m_Text: END
 --- !u!222 &1790334390
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2828,6 +2849,7 @@ RectTransform:
   - {fileID: 511434483}
   - {fileID: 1051434450}
   - {fileID: 535884571}
+  - {fileID: 1668833231}
   m_Father: {fileID: 1376820294}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2982,5 +3004,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6814600135189723976, guid: 71de9b392ed3c3a458f5138e6cf897a7,
+        type: 3}
+      propertyPath: ui_PR_UI
+      value: 
+      objectReference: {fileID: 1964534973}
+    - target: {fileID: 6814600135189723976, guid: 71de9b392ed3c3a458f5138e6cf897a7,
+        type: 3}
+      propertyPath: ui_MoveButton
+      value: 
+      objectReference: {fileID: 391852386}
+    - target: {fileID: 6814600135189723976, guid: 71de9b392ed3c3a458f5138e6cf897a7,
+        type: 3}
+      propertyPath: ui_AttackButton
+      value: 
+      objectReference: {fileID: 822962039}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71de9b392ed3c3a458f5138e6cf897a7, type: 3}
