@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class AICharacter : CharacterBase {
 
     public PlayerRobot pr_Target; //character the AI will move towards and attack
     public Renderer rnd_Rendereer;
+   // private IEnumerator coroutine;
     //--------------------------------
     void Start()
     {
@@ -16,6 +18,7 @@ public class AICharacter : CharacterBase {
         rnd_Rendereer = gameObject.transform.GetComponent<Renderer>();
         tl_Current_Tile = CSGameManager.gameManager.map[int_x, int_z].gameObject.GetComponent<Tile>();
         tl_Current_Tile.bl_Occupied_By_AI = true;
+       // coroutine = FireRay(2.0f);
     }
     //--------------------------------
     void Update()
@@ -141,6 +144,8 @@ public class AICharacter : CharacterBase {
 
             Debug.DrawRay(rob.transform.position, dir * fl_Ray_Range, Color.green, 0.1f);
 
+            
+
             if (Input.GetMouseButtonDown(0))
             {
                 if (Physics.Raycast(ray_cast, out hit, fl_Ray_Range))
@@ -153,6 +158,8 @@ public class AICharacter : CharacterBase {
                         rnd_Rendereer.material.color = Color.red;
                         rob.Clear_Selection();
                         hit.collider.gameObject.GetComponent<AICharacter>().AttackTarget(rob, this);
+                        StartCoroutine(FireRay(5f,rob));
+                        
                     }
 
                 }
@@ -174,5 +181,18 @@ public class AICharacter : CharacterBase {
         CSGameManager.gameManager.CheckLossOrWin();
         tl_Current_Tile.bl_Occupied_By_AI = false;
         Destroy(this.gameObject);
+    }
+
+    private IEnumerator FireRay(float waitTime, PlayerRobot Rob)
+    {
+      //  Gizmos.DrawLine(Rob.transform.position, this.transform.position);
+        GameObject _GO_Cylinder = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+        _GO_Cylinder.transform.position = Rob.transform.position ;
+        _GO_Cylinder.gameObject.transform.localScale = new Vector3(0.5f, Rob.int_Attack_Range, 0.5f);
+        _GO_Cylinder.transform.LookAt(this.transform.position, Rob.transform.position);
+        _GO_Cylinder.transform.Rotate(0, 90, 90);
+        _GO_Cylinder.transform.position += new Vector3(Rob.int_Attack_Range, 0, 0);
+        yield return new WaitForSeconds(waitTime);
+        Destroy(_GO_Cylinder.gameObject);
     }
 }
