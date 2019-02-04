@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.574817, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2640,6 +2640,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd1bf9f392eed6b4bb63d8e2f62530ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bl_IsMission: 0
   tile: {fileID: 114194114040457398, guid: 816c64b0ca862e248a91d9d975409b3d, type: 3}
   pr_PC: {fileID: 114191149532942768, guid: d8a4bb1aeb8583548be1005c57069612, type: 3}
   ai_Enemy_Test: {fileID: 114241835215912546, guid: 0b24be8f0bee2de4aa5ebc0b12bd2673,
@@ -2679,6 +2680,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CamController
       objectReference: {fileID: 0}
+    - target: {fileID: 3654011720624938381, guid: 84be5a0f827ecd84d9ef3a605abc1019,
+        type: 3}
+      propertyPath: go_bot_maker_open_button
+      value: 
+      objectReference: {fileID: 206174448}
     - target: {fileID: 4837553974245042, guid: 84be5a0f827ecd84d9ef3a605abc1019, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1
@@ -2723,11 +2729,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3654011720624938381, guid: 84be5a0f827ecd84d9ef3a605abc1019,
-        type: 3}
-      propertyPath: go_bot_maker_open_button
-      value: 
-      objectReference: {fileID: 206174448}
     - target: {fileID: 3654011720891814728, guid: 84be5a0f827ecd84d9ef3a605abc1019,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -2767,6 +2768,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 114259043978109286, guid: 84be5a0f827ecd84d9ef3a605abc1019,
+        type: 3}
+      propertyPath: fl_cam_Move_Speed
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 20140016415122982, guid: 84be5a0f827ecd84d9ef3a605abc1019,
+        type: 3}
+      propertyPath: orthographic
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84be5a0f827ecd84d9ef3a605abc1019, type: 3}
