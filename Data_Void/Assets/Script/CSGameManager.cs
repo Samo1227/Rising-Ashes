@@ -43,7 +43,7 @@ public class CSGameManager : MonoBehaviour
         if (gameManager == null)            // has it been set up before?
         {
             gameManager= this;             // no, it's the first GM, so store our instance
-            DontDestroyOnLoad(gameObject);// persists through sceen changes
+          //  DontDestroyOnLoad(gameObject);// persists through sceen changes
         }
         //-----------
         else if (gameManager != this) // if we get called again. desroy new version and keep old
@@ -394,8 +394,24 @@ public class CSGameManager : MonoBehaviour
         }
         Array.Clear(map, 0, map.Length);//clears the map array so we can reuse it for different levels
         Array.Clear(map_layout, 0, map_layout.Length);
+      //  ls_AI_Characters_In_Level.Clear();
+      //  ls_Player_Robots_In_Level.Clear();
         bl_IsMission = false;
     }
     #endregion
     //---------------------------------------------------
+    #region Unused
+    //public void BuildLevel()
+    //{
+    //    TextToMapInt();
+    //    MakeMap();//generates map
+    //    RefreshTile();
+    //}
+
+    //public void OnLevelWasLoaded(int level)
+    //{
+    //    if (SceneManager.GetActiveScene().name == "TileTester")
+    //        BuildLevel();
+    //}
+    #endregion
 }//=======================================================================================

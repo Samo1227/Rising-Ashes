@@ -19,6 +19,12 @@ public class MainMenu : MonoBehaviour
     public void LoadMainMap()
     {
         SceneManager.LoadScene("TileTester");
+        //CSGameManager _TempGM = CSGameManager.gameManager;
+        //if(_TempGM!= null)
+        //{
+        //    _TempGM.BuildLevel();
+        //}
+        //print("Doafterload");
     }
 
     public void QuitApplication()
