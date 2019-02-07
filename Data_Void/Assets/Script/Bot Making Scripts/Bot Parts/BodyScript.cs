@@ -9,7 +9,7 @@ public class BodyScript : MonoBehaviour
 
     void Awake()
     {
-        if(GetComponentInParent<PlayerRobot>() != null)
+        if (GetComponentInParent<PlayerRobot>() != null)
         {
             PlayerRobot pr_player = GetComponentInParent<PlayerRobot>();
 

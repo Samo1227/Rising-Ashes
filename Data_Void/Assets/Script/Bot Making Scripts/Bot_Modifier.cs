@@ -25,12 +25,10 @@ public class Bot_Modifier : MonoBehaviour
 
     public string[] st_arr_resources;
 
-    public GameObject go_ingame_bot;
-
     public int int_bots_spawned;
 
     public GameObject go_bot_maker_open_button;
-    
+
     private void Start()
     {
         //Makes all of the robot part arrays the same size
@@ -217,12 +215,10 @@ public class Bot_Modifier : MonoBehaviour
         GameObject go_temp = null;
         //temp player script
         PlayerRobot pr_in_game = null;
-
         //adds to number of robots made
         int_bots_spawned++;
         //Creates robot and stores it in the temp gameobject
         Instantiate(pr_in_game);
-
         //changes the name of the robot
         go_temp.name = "Robot_" + int_bots_spawned;
         //gets script from robot
@@ -237,13 +233,12 @@ public class Bot_Modifier : MonoBehaviour
         //spawns the same type of parts on new robot that are on this script
 
 
-        CSGameManager.gameManager.AddRobot(0,0, int_body_type);
+        CSGameManager.gameManager.AddRobot(0, 0, int_body_type);
     }
-
     public void CloseBotBuilder()
     {
         go_bot_maker_open_button.SetActive(true);
         gameObject.SetActive(false);
-    } 
+    }
 
 }

@@ -118,7 +118,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4223471039659698}
-  - component: {fileID: 114278293799175082}
   - component: {fileID: 65843387064500496}
   - component: {fileID: 114191149532942768}
   m_Layer: 0
@@ -147,29 +146,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114278293799175082
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1170745574126380}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0d1f9d964ba7bb4bb28f1f62594d6a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  int_arr_parts: 00000000000000000000000000000000
-  tr_arr_body:
-  - {fileID: 4570963332883844}
-  - {fileID: 4558949139129732}
-  - {fileID: 4635133021045992}
-  - {fileID: 4671032772832078}
-  st_arr_resources:
-  - BotBodyParts/Heads/Head_
-  - BotBodyParts/Bodies/Body_
-  - BotBodyParts/Arms/Arms_
-  - BotBodyParts/Legs/Legs_
 --- !u!65 &65843387064500496
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -199,9 +175,21 @@ MonoBehaviour:
   int_z: 0
   int_action_points: 0
   int_action_points_max: 0
+  int_Veiw_Distance: 0
+  int_Veiw_Type: 0
   int_Health: 0
   int_Health_max: 5
+  int_Attack_Range: 3
+  int_damage: 0
+  int_heat_current: 0
+  int_heat_total: 0
+  int_heat_fail_chance: 0
+  int_effect: 0
   int_Move_Range: 5
+  int_Move_Max: 0
+  int_Move_Min: 0
+  int_Weight_Current: 0
+  int_Weight_Max: 0
   go_health_bar: {fileID: 1895366079832376}
   int_Robot_State: 0
   bl_Is_Active: 0
@@ -228,6 +216,8 @@ MonoBehaviour:
   - BotBodyParts/Bodies/Body_
   - BotBodyParts/Arms/Arms_
   - BotBodyParts/Legs/Legs_
+  int_heat_range: 
+  bl_overheat: 0
 --- !u!1 &1233312917102204
 GameObject:
   m_ObjectHideFlags: 0
