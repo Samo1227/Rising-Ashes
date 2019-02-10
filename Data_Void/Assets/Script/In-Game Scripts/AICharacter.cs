@@ -19,7 +19,8 @@ public class AICharacter : CharacterBase {
     public AIStates ais_CurrentState;
 
     public int int_ChaseRange = 6;
-    public int int_TriggerRange = 2; 
+    public int int_TriggerRange = 2;
+    public int int_RetreatRange = 0;
     #endregion
     //---------------------------------------------------
     #region Start
@@ -135,7 +136,6 @@ public class AICharacter : CharacterBase {
     #region Chasing Behaviour
     void TakeChaseTurn()
     {
-        print("taking turn");
         //-----------
         if (bl_Turn_Just_Started)
         {
@@ -146,7 +146,10 @@ public class AICharacter : CharacterBase {
         if (!bl_Moving)//don't keep checking for a target when moving
         {
             tl_Current_Tile.bl_Occupied_By_AI = false;
-            FindNearestPlayerRobot();
+            if (pr_Target == null)
+            {
+                FindNearestPlayerRobot();
+            }
             CalculatePath();
             FindMoveTilesAI();//in theory should stop them from moving through players and stopping on other AI... 
             //-----------
@@ -241,6 +244,86 @@ public class AICharacter : CharacterBase {
         //-----------
     }
     #endregion
+    //---------------------------------------------------
+    void RetreatBehaviour()
+    {
+        //-----------
+        if (bl_Turn_Just_Started)
+        {
+            pr_Target = null; //rework out target at the start of each turn
+            bl_Turn_Just_Started = false;
+        }
+        //-----------
+        if (!bl_Moving)//don't keep checking for a target when moving
+        {
+            tl_Current_Tile.bl_Occupied_By_AI = false;
+            if (pr_Target == null)
+            {
+                FindNearestPlayerRobot();
+            }
+            FindMoveTilesAI();//in theory should stop them from moving through players and stopping on other AI... 
+            FindRetreatTargetTile();
+            //-----------
+            if (tl_Target_Square)//if it has a target square, start moving
+            {
+                bl_Moving = true;
+            }
+            //-----------
+            else
+            {   //this is what happens if there is no path to target square I guess...
+                //attack and end turn
+                {
+                    Clear_Selection();//putting this everywhere now :S
+                    Find_Attack_Tile_Range();
+                    FindPRsInRange();
+                    //-----------
+                    if (ls_Dest_Tiles_In_Range.Count != 0)//should only get called when there is no player in range, in theory
+                    {
+                        FindTileTarget(pr_Target);
+                    }
+                    //-----------
+                    int_x = (int)transform.position.x;
+                    int_z = (int)transform.position.z;
+                    tl_Current_Tile = CSGameManager.gameManager.map[int_x, int_z].gameObject.GetComponent<Tile>();
+                    tl_Current_Tile.bl_Occupied_By_AI = true;
+                    Find_Attack_Tile_Range();
+                    FindPRsInRange();
+                    Clear_Selection();
+                    bl_Is_Active = false;
+                    CSGameManager.gameManager.EndAITurn();
+                }
+            }
+            //-----------
+        }
+        //-----------
+        else
+        {
+            MoveToTarget();
+            //-----------
+            if (!bl_Moving)
+            {
+                Clear_Selection();//putting this everywhere now :S
+                int_x = (int)transform.position.x;
+                int_z = (int)transform.position.z;
+                tl_Current_Tile = CSGameManager.gameManager.map[int_x, int_z].gameObject.GetComponent<Tile>();
+                tl_Current_Tile.bl_Occupied_By_AI = true;
+                Find_Attack_Tile_Range();
+                FindPRsInRange();
+                //-----------
+                if (ls_Dest_Tiles_In_Range.Count != 0)//should only get called when there is no player in range, in theory
+                {
+                    FindTileTarget(pr_Target);
+                }
+                //-----------
+                Clear_Selection();
+                pr_Target = null;
+                bl_Is_Active = false;
+                CSGameManager.gameManager.EndAITurn();
+            }
+            //-----------
+        }
+        //-----------
+    }
     #endregion
     //---------------------------------------------------
     #region FindNearest PR
@@ -264,6 +347,20 @@ public class AICharacter : CharacterBase {
         }
         //-----------
         pr_Target = pr_Nearest; //once its looked at all PRs the closest one is target, long term needs to be different as there may be no path to closest target
+        float fl_TargetDistance = Vector3.Distance(pr_Target.transform.position, transform.position);
+        if (fl_TargetDistance <= int_RetreatRange)
+        {
+            SetState(AIStates.retreating);
+            RetreatBehaviour();
+            return;
+        }
+        else
+        {
+            SetState(AIStates.chasing);
+            TakeChaseTurn();
+            return;
+        }
+        
     }
     #endregion
     //---------------------------------------------------
@@ -275,6 +372,23 @@ public class AICharacter : CharacterBase {
         PathFinding(tl_Current_Tile, tl_Target_Tile);
     }
     #endregion
+    void FindRetreatTargetTile()
+    {
+        Tile tl_TargetTile = null;
+        Tile _TargetTile = null;
+        float fl_RetreatDistance = 0;
+        for (int i = 0; i < selectableTiles.Count; i++)
+        {
+            _TargetTile = selectableTiles[i];
+            float fl_DistFromTargetPR = Vector3.Distance(_TargetTile.transform.position, pr_Target.transform.position);
+            if(fl_DistFromTargetPR> fl_RetreatDistance && fl_RetreatDistance <= int_RetreatRange)
+            {
+                tl_TargetTile = _TargetTile;
+                fl_RetreatDistance = fl_DistFromTargetPR;
+            }
+        }
+        MoveToTargetSquare(tl_TargetTile);
+    }
     //---------------------------------------------------
     #region Mouse Interaction
     private void OnMouseOver()//this doesn't work for shooting enemies
@@ -384,7 +498,7 @@ public class AICharacter : CharacterBase {
                 TakeChaseTurn();
                 break;
             case AIStates.retreating:
-                //retreat and attack
+                RetreatBehaviour();
                 break;
             case AIStates.patrolling:
                 //move to a nearby square? or randome or something
