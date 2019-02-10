@@ -14,6 +14,9 @@ public class AICharacter : CharacterBase {
 
     public PlayerRobot pr_Target; //character the AI will move towards and attack
     public Renderer rnd_Rendereer;
+    public AIStates ais_CurrentState;
+
+    public int in_ChaseRange = 6;
     // private IEnumerator coroutine;
     //---------------------------------------------------
     #region Start
@@ -26,6 +29,7 @@ public class AICharacter : CharacterBase {
         rnd_Rendereer = gameObject.transform.GetComponent<Renderer>();
         tl_Current_Tile = CSGameManager.gameManager.map[int_x, int_z].gameObject.GetComponent<Tile>();
         tl_Current_Tile.bl_Occupied_By_AI = true;
+        SetState(AIStates.waiting);
        // coroutine = FireRay(2.0f);
     }
     #endregion
@@ -48,7 +52,7 @@ public class AICharacter : CharacterBase {
         }
         if (bl_Is_Active)
         {
-            TakeTurn();
+            DecideTurnAction();
         }
 
         go_health_bar.transform.localPosition = new Vector3(((float)int_Health - (float)int_Health_max) * (0.5f / int_Health_max), 0, 0);
@@ -58,8 +62,31 @@ public class AICharacter : CharacterBase {
     #endregion
     //---------------------------------------------------
     #region Turn Behaviour
-    void TakeTurn()
+    void Waiting()
     {
+        CheckPRisInPullRange();
+    }
+    void CheckPRisInPullRange()
+    {
+        int layerMask = 1 << 9;
+        Collider[] _hitColliders = Physics.OverlapSphere(transform.position, in_ChaseRange, layerMask);
+        if (_hitColliders.Length != 0)
+        {
+            print("I chase now");
+            SetState(AIStates.chasing);
+            TakeChaseTurn();
+        }
+        else
+        {
+            Clear_Selection();
+            pr_Target = null;
+            bl_Is_Active = false;
+            CSGameManager.gameManager.EndAITurn();
+        }
+    }
+    void TakeChaseTurn()
+    {
+        print("taking turn");
         if (bl_Turn_Just_Started)
         {
             pr_Target = null; //rework out target at the start of each turn
@@ -75,9 +102,10 @@ public class AICharacter : CharacterBase {
             {
                 bl_Moving = true;
             }
-            else//this doesn't get called for some reason... wait of course it won't! I'm an idiot
+            else
             {   //this is what happens if there is no path to target square I guess...
                 //attack and end turn
+                print("Is this called?");
                 Clear_Selection();//putting this everywhere now :S
                 int_x = (int)transform.position.x;
                 int_z = (int)transform.position.z;
@@ -214,7 +242,40 @@ public class AICharacter : CharacterBase {
         _GO_Cylinder.transform.position += new Vector3(Rob.int_Attack_Range, 0, 0);
         yield return new WaitForSeconds(waitTime);
         Destroy(_GO_Cylinder.gameObject);
-    } 
+    }
     #endregion
     //---------------------------------------------------
-}
+    #region Set/Get State
+    public void SetState(AIStates _state)
+    {
+        ais_CurrentState = _state;
+    }
+    //---------------------------------------------------
+    public AIStates GetState()
+    {
+        return ais_CurrentState;
+    }
+    #endregion
+    //---------------------------------------------------
+    public void DecideTurnAction()
+    {
+        switch (ais_CurrentState)
+        {
+            case AIStates.waiting:
+                Waiting();
+                break;
+            case AIStates.chasing:
+                TakeChaseTurn();
+                break;
+            case AIStates.retreating:
+                //retreat and attack
+                break;
+            case AIStates.patrolling:
+                //move to a nearby square? or randome or something
+                break;
+            default:
+                print("No state");
+                break;
+        }
+    }
+}//=======================================================================================

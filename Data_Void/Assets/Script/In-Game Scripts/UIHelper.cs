@@ -9,7 +9,7 @@ public class UIHelper : MonoBehaviour
     public Image ui_MoveButton;
     public Image ui_AttackButton;
 
-   
+    //---------------------------------------------------
     private void Update()
     {
         if (CSGameManager.gameManager.pr_currentRobot == null)
@@ -31,25 +31,24 @@ public class UIHelper : MonoBehaviour
         if (CSGameManager.gameManager.pr_currentRobot.bl_Has_Moved == false)
             ui_MoveButton.color = Color.white;
     }
-
+    //---------------------------------------------------
     public void MoveButton()
     {
-        print("what is");
         CSGameManager.gameManager.pr_currentRobot.int_Robot_State=0;
         CSGameManager.gameManager.pr_currentRobot.Clear_Selection();
         CSGameManager.gameManager.pr_currentRobot.FindMoveTiles();
     }
-
+    //---------------------------------------------------
     public void AttackButton()
     {
-        print("going on?");
         CSGameManager.gameManager.pr_currentRobot.int_Robot_State = 1;
         CSGameManager.gameManager.pr_currentRobot.Clear_Selection();
         CSGameManager.gameManager.pr_currentRobot.Find_Attack_Tile_Range();
     }
+    //---------------------------------------------------
     public void EndPRTurn()
     {
         CSGameManager.gameManager.EndTurnButton();
     }
-
-}
+    //---------------------------------------------------
+}//=======================================================================================
