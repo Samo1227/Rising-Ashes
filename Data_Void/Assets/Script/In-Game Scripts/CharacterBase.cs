@@ -53,6 +53,7 @@ public class CharacterBase : MonoBehaviour {
     protected float fl_Turn_Timer; //Timer
     public bool bl_Turn_Just_Started = false; //for the start of AI turn
     protected List<PlayerRobot> ls_PRs_In_Range = new List<PlayerRobot>(); //to store attack targets
+    protected List<Tile> ls_Dest_Tiles_In_Range = new List<Tile>(); //destructable tile targets
     //---------------
 
     public List<Tile> selectableTiles = new List<Tile>();//a list of selectable tiles, useful for clearing data on each tile when the selection is done with 
@@ -455,6 +456,19 @@ public class CharacterBase : MonoBehaviour {
         //-----------
         if (ls_PRs_In_Range.Count <= 0)
         {
+            //-----------
+            for (int i = 0; i < selectableTiles.Count; i++)
+            {
+                Tile _tile = selectableTiles[i];
+                //-----------
+                if (_tile.bl_Destroyable)
+                {
+                    ls_Dest_Tiles_In_Range.Add(_tile);
+                    //dothibng
+                }
+                //-----------
+            }
+            //-----------
             return; //prevents AIs from infinitly moving until they are in range to attack if there's no PCs in range
         }
         //-----------
@@ -470,19 +484,59 @@ public class CharacterBase : MonoBehaviour {
     protected void FindAttackTarget() //can define different ways to prioritise targets here
     {
         PlayerRobot pr_Final_Attack_Target = null;
+        //-----------
         for (int i=0; i < ls_PRs_In_Range.Count; i++)//looks at all player robots in range
         {
+            //-----------
             if (pr_Final_Attack_Target == null)//if there is no target yet, set the first player in range
             {
                 pr_Final_Attack_Target = ls_PRs_In_Range[i];
             }
+            //-----------
             if (pr_Final_Attack_Target.int_Health > ls_PRs_In_Range[i].int_Health)//targets the player in range with lowest health, can change in a number of ways
             {                                                                     //this step could be skipped and just taken from the initial target finder from start of turn
                 pr_Final_Attack_Target = ls_PRs_In_Range[i];                      //this just allows for more varience in targets.
             }
+            //-----------
             AttackTarget(this, pr_Final_Attack_Target);//calls the function that applies damage
         }
+        //-----------
     }
+    //---------------------------------------------------
+    #region Attack Tile
+    protected void FindTileTarget(PlayerRobot _Target)
+    {
+        Tile tl_TileToAttack = null;
+        Tile _Temp = null;
+        float fl_Distance_To_Current_Target = Mathf.Infinity;
+        //-----------
+        for (int i = 0; i < ls_Dest_Tiles_In_Range.Count; i++)
+        {
+            _Temp = ls_Dest_Tiles_In_Range[i];
+            float fl_Tiles_Distance_To_Target = Vector3.Distance(_Temp.transform.position, _Target.transform.position);
+            //-----------
+            if (fl_Tiles_Distance_To_Target < fl_Distance_To_Current_Target)
+            {
+                fl_Distance_To_Current_Target = fl_Tiles_Distance_To_Target;
+                tl_TileToAttack = _Temp;
+            }
+            //-----------
+        }
+        //-----------
+        AttackTile(tl_TileToAttack);
+    }
+    //---------------------------------------------------
+    protected void AttackTile(Tile _TileTarget)
+    {
+        _TileTarget.int_health -= int_damage;
+        //-----------
+        if (_TileTarget.int_health <= 0)
+        {
+            _TileTarget.RemoveTile();
+        }
+        //-----------
+    }
+    #endregion
     #endregion
     //---------------------------------------------------
     #region Attacking a target

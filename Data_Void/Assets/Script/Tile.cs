@@ -18,6 +18,7 @@ public class Tile : MonoBehaviour {
     public bool bl_Occupied_By_PC = false;
     public bool bl_Occupied_By_AI = false;
     public bool bl_Current_Tile = false;
+    public bool bl_Destroyable = false;
 
     public int int_health;
     public int int_health_max;
