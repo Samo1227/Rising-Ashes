@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Tile : MonoBehaviour {
     //--------------------------------------
@@ -126,6 +127,11 @@ public class Tile : MonoBehaviour {
     #region Clicking On Tile
     private void OnMouseUp()//could be on mouse down, this reduces the risk of clicking another tile right away though
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            print("Why do you click?");
+            return;
+        }
         if (bl_Walking_Selection) //if this tile is part of the current walking selection
         {
             if (!bl_Occupied_By_PC && !bl_Occupied_By_AI) //only able to move to unnocupied squares
@@ -155,6 +161,8 @@ public class Tile : MonoBehaviour {
 
     private void OnMouseOver()//this doesn't work for shooting enemies, this is when destructable tiles are shot
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
         if (bl_Attack_Selection)
         {
             PlayerRobot rob = CSGameManager.gameManager.pr_currentRobot;//gets a reference to the currently selected player robot

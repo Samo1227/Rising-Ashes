@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public enum AIStates          //an enum of AI states                            
 {
@@ -278,9 +279,10 @@ public class AICharacter : CharacterBase {
     #region Mouse Interaction
     private void OnMouseOver()//this doesn't work for shooting enemies
     {
-
-        //-----------
-        if (tl_Current_Tile.bl_Attack_Selection == true)
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
+            //-----------
+            if (tl_Current_Tile.bl_Attack_Selection == true)
         {
             PlayerRobot rob = CSGameManager.gameManager.pr_currentRobot;
             rnd_Rendereer.material.color = Color.yellow;
