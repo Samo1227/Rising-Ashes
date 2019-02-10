@@ -221,6 +221,7 @@ public class Tile : MonoBehaviour {
         Debug.Log("Fire!");
         Instantiate(Resources.Load<GameObject>("MapParts/MapElement_" + 0), gameObject.transform);//create the empty tile object, this can be changed for different tile types (hazards, walls, hidering, etc.)
         bl_Is_Walkable = true;
+        bl_Destroyable = false;
         gameObject.GetComponent<BoxCollider>().size = new Vector3(1, 1, 1);//add a box collider
         rend_Colour = gameObject.transform.GetChild(int_Child).GetComponent<Renderer>();//sets the renderer reference to the new object
         CSGameManager.gameManager.RefreshTile();//rechecks the neighbours as the map has now changed
@@ -238,6 +239,7 @@ public class Tile : MonoBehaviour {
         Debug.Log("Fire!");
         Instantiate(Resources.Load<GameObject>("MapParts/MapElement_" + "PlayerMade"), gameObject.transform);//create the empty tile object, this can be changed for different tile types (hazards, walls, hidering, etc.)
         bl_Is_Walkable = false;
+        bl_Destroyable = true;
         gameObject.GetComponent<BoxCollider>().size = new Vector3(1, 2, 1);//add a box collider
         rend_Colour = gameObject.transform.GetChild(int_Child).GetComponent<Renderer>();//sets the renderer reference to the new object
         CSGameManager.gameManager.RefreshTile();//rechecks the neighbours as the map has now changed

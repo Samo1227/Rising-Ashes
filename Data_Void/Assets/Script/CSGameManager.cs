@@ -207,6 +207,7 @@ public class CSGameManager : MonoBehaviour
         else if (map_layout[x, z] == 1)
         {
             newTile.bl_Is_Walkable = false;
+            newTile.bl_Destroyable = true;
             newTile.GetComponent<BoxCollider>().size = new Vector3(1, 3, 1);
             Instantiate(Resources.Load<GameObject>("MapParts/MapElement_" + 1), newTile.gameObject.transform);
         }
