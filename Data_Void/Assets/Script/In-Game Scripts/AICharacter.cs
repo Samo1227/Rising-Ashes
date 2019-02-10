@@ -2,13 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum AIStates          //an enum of AI states                            
+{
+    waiting,                  //do nothing but maybe make some checks state
+    patrolling,               //Wander around state
+    chasing,                  //close in and attack
+    retreating,               //make space and attack
+}
 
 public class AICharacter : CharacterBase {
 
     public PlayerRobot pr_Target; //character the AI will move towards and attack
     public Renderer rnd_Rendereer;
-   // private IEnumerator coroutine;
-    //--------------------------------
+    // private IEnumerator coroutine;
+    //---------------------------------------------------
+    #region Start
     void Start()
     {
         int_Health = int_Health_max;
@@ -20,11 +28,13 @@ public class AICharacter : CharacterBase {
         tl_Current_Tile.bl_Occupied_By_AI = true;
        // coroutine = FireRay(2.0f);
     }
-    //--------------------------------
+    #endregion
+    //---------------------------------------------------
+    #region Update
     void Update()
     {
         if (CSGameManager.gameManager.ls_Player_Robots_In_Level.Count <= 0)
-        { 
+        {
             return;
         }
         if (int_Health <= 0)
@@ -32,7 +42,7 @@ public class AICharacter : CharacterBase {
             AICharacterDestruction();
         }
 
-        if (fl_Turn_Timer>= fl_Time_limit)
+        if (fl_Turn_Timer >= fl_Time_limit)
         {
             CSGameManager.gameManager.EndAITurn();
         }
@@ -45,7 +55,9 @@ public class AICharacter : CharacterBase {
         go_health_bar.transform.localScale = new Vector3((1f / int_Health_max) * int_Health, 0.2f, 1);
 
     }
-
+    #endregion
+    //---------------------------------------------------
+    #region Turn Behaviour
     void TakeTurn()
     {
         if (bl_Turn_Just_Started)
@@ -99,17 +111,18 @@ public class AICharacter : CharacterBase {
         }
 
     }
-
-    //--------------------------------
+    #endregion
+    //---------------------------------------------------
+    #region FindNearest PR
     void FindNearestPlayerRobot()//this is a vary quick and simple way to find the nearest target, it's lacking in versatility and elegance
     {
         PlayerRobot pr_Nearest = null;
         float fl_Distance_To_Current_Target = Mathf.Infinity;
-        foreach(PlayerRobot tPR in CSGameManager.gameManager.ls_Player_Robots_In_Level)
+        foreach (PlayerRobot tPR in CSGameManager.gameManager.ls_Player_Robots_In_Level)
         {
             float fl_Distance_To_Target = Vector3.Distance(transform.position, tPR.transform.position); //inefficient way to check distance to all targets, also ignores obsticles
 
-            if(fl_Distance_To_Target < fl_Distance_To_Current_Target) //if distance to the target it's looking at is lower that distance(to current target) 
+            if (fl_Distance_To_Target < fl_Distance_To_Current_Target) //if distance to the target it's looking at is lower that distance(to current target) 
             {
                 fl_Distance_To_Current_Target = fl_Distance_To_Target;
                 pr_Nearest = tPR; //nearest Player Robot = what it's looking at
@@ -117,19 +130,21 @@ public class AICharacter : CharacterBase {
         }
         pr_Target = pr_Nearest; //once its looked at all PRs the closest one is target, long term needs to be different as there may be no path to closest target
     }
-
+    #endregion
+    //---------------------------------------------------
+    #region Calculate Path
     void CalculatePath()
     {
         Tile tl_Target_Tile = CSGameManager.gameManager.map[pr_Target.int_x, pr_Target.int_z].gameObject.GetComponent<Tile>();
         Tile tl_Current_Tile = CSGameManager.gameManager.map[int_x, int_z].gameObject.GetComponent<Tile>();
         PathFinding(tl_Current_Tile, tl_Target_Tile);
     }
-
-
-
+    #endregion
+    //---------------------------------------------------
+    #region Mouse Interaction
     private void OnMouseOver()//this doesn't work for shooting enemies
     {
-        if ( tl_Current_Tile.bl_Attack_Selection ==true)
+        if (tl_Current_Tile.bl_Attack_Selection == true)
         {
             PlayerRobot rob = CSGameManager.gameManager.pr_currentRobot;
             rnd_Rendereer.material.color = Color.yellow;
@@ -144,7 +159,7 @@ public class AICharacter : CharacterBase {
 
             Debug.DrawRay(rob.transform.position, dir * fl_Ray_Range, Color.green, 0.1f);
 
-            
+
 
             if (Input.GetMouseButtonDown(0))
             {
@@ -158,15 +173,16 @@ public class AICharacter : CharacterBase {
                         rnd_Rendereer.material.color = Color.red;
                         rob.Clear_Selection();
                         hit.collider.gameObject.GetComponent<AICharacter>().AttackTarget(rob, this);
-                        StartCoroutine(FireRay(5f,rob));
-                        
+                        StartCoroutine(FireRay(5f, rob));
+
                     }
 
                 }
             }
             //rob.Clear_Selection();
         }
-    }
+    } 
+    //---------------------------------------------------
     private void OnMouseExit()
     {
         if (tl_Current_Tile.bl_Attack_Selection == true)
@@ -174,7 +190,9 @@ public class AICharacter : CharacterBase {
             rnd_Rendereer.material.color = Color.red;
         }
     }
-
+    #endregion
+    //---------------------------------------------------
+    #region Death
     public void AICharacterDestruction()
     {
         CSGameManager.gameManager.ls_AI_Characters_In_Level.Remove(this);
@@ -182,17 +200,21 @@ public class AICharacter : CharacterBase {
         tl_Current_Tile.bl_Occupied_By_AI = false;
         Destroy(this.gameObject);
     }
-
+    #endregion
+    //---------------------------------------------------
+    #region Visual Cyllinder for attacks, not really working atm
     private IEnumerator FireRay(float waitTime, PlayerRobot Rob)
     {
-      //  Gizmos.DrawLine(Rob.transform.position, this.transform.position);
+        //  Gizmos.DrawLine(Rob.transform.position, this.transform.position);
         GameObject _GO_Cylinder = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
-        _GO_Cylinder.transform.position = Rob.transform.position ;
+        _GO_Cylinder.transform.position = Rob.transform.position;
         _GO_Cylinder.gameObject.transform.localScale = new Vector3(0.5f, Rob.int_Attack_Range, 0.5f);
         _GO_Cylinder.transform.LookAt(this.transform.position, Rob.transform.position);
         _GO_Cylinder.transform.Rotate(0, 90, 90);
         _GO_Cylinder.transform.position += new Vector3(Rob.int_Attack_Range, 0, 0);
         yield return new WaitForSeconds(waitTime);
         Destroy(_GO_Cylinder.gameObject);
-    }
+    } 
+    #endregion
+    //---------------------------------------------------
 }
