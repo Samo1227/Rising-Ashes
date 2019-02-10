@@ -72,7 +72,7 @@ public class MapMaker : MonoBehaviour {
             {
                 if (i == 0)
                 {
-                    str += "{" + int_map_data[i,j];
+
                 }
                 else if (i == map_z-1)
                 {

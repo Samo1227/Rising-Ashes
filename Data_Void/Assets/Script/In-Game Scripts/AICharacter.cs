@@ -5,20 +5,21 @@ using UnityEngine;
 public enum AIStates          //an enum of AI states                            
 {
     waiting,                  //do nothing but maybe make some checks state
-    patrolling,               //Wander around state
+    patrolling,               //Wander around state. not yet implemented
     chasing,                  //close in and attack
-    retreating,               //make space and attack
+    retreating,               //make space and attack. not yet implemented
 }
 
 public class AICharacter : CharacterBase {
-
+    //---------------------------------------------------
+    #region Variables
     public PlayerRobot pr_Target; //character the AI will move towards and attack
     public Renderer rnd_Rendereer;
     public AIStates ais_CurrentState;
 
     public int int_ChaseRange = 6;
-    public int int_TriggerRange = 2;
-    // private IEnumerator coroutine;
+    public int int_TriggerRange = 2; 
+    #endregion
     //---------------------------------------------------
     #region Start
     void Start()
@@ -156,31 +157,35 @@ public class AICharacter : CharacterBase {
             else
             {   //this is what happens if there is no path to target square I guess...
                 //attack and end turn
-                print("Is this called?");
                 FindAlternateRoute();
                 //-----------
                 if (tl_Target_Square != null)
                 {
-                    return;
+                    MoveToTargetSquare(tl_Target_Square);
+                   // bl_Moving = true;
                 }
                 //-----------
-                Clear_Selection();//putting this everywhere now :S
-                Find_Attack_Tile_Range();
-                FindPRsInRange();
-                //-----------
-                if (ls_Dest_Tiles_In_Range.Count != 0)//should only get called when there is no player in range, in theory
+                else
                 {
-                    FindTileTarget(pr_Target);
+                    Clear_Selection();//putting this everywhere now :S
+                    Find_Attack_Tile_Range();
+                    FindPRsInRange();
+                    //-----------
+                    if (ls_Dest_Tiles_In_Range.Count != 0)//should only get called when there is no player in range, in theory
+                    {
+                        FindTileTarget(pr_Target);
+                    }
+                    //-----------
+                    int_x = (int)transform.position.x;
+                    int_z = (int)transform.position.z;
+                    tl_Current_Tile = CSGameManager.gameManager.map[int_x, int_z].gameObject.GetComponent<Tile>();
+                    tl_Current_Tile.bl_Occupied_By_AI = true;
+                    Find_Attack_Tile_Range();
+                    FindPRsInRange();
+                    Clear_Selection();
+                    bl_Is_Active = false;
+                    CSGameManager.gameManager.EndAITurn();
                 }
-                int_x = (int)transform.position.x;
-                int_z = (int)transform.position.z;
-                tl_Current_Tile = CSGameManager.gameManager.map[int_x, int_z].gameObject.GetComponent<Tile>();
-                tl_Current_Tile.bl_Occupied_By_AI = true;
-                Find_Attack_Tile_Range();
-                FindPRsInRange();
-                Clear_Selection();
-                bl_Is_Active = false;
-                CSGameManager.gameManager.EndAITurn();
             }
             //-----------
         }
