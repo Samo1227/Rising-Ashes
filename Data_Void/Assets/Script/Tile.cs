@@ -144,6 +144,7 @@ public class Tile : MonoBehaviour {
                 rob.tl_Current_Tile = CSGameManager.gameManager.map[rob.int_x, rob.int_z].gameObject.GetComponent<Tile>(); //robots reference tile is set to new position
                 rob.tl_Current_Tile.bl_Occupied_By_PC = true;//new tile is now occupied
                 rob.bl_Has_Moved = true;//robot can no longer move
+                rob.int_Actions--;
                 rob.Clear_Selection();//clear tile highlighting
             }
         }
@@ -177,6 +178,7 @@ public class Tile : MonoBehaviour {
                     if(hit.collider.gameObject.GetComponent<Tile>())//the collider hit is a tile
                     {
                         rob.bl_Has_Acted = true;//robot has done it's action
+                        rob.int_Actions--;
                         rob.Clear_Selection();//clear tile highlighting 
 
                         if (rob.int_effect == 0)

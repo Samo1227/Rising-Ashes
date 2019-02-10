@@ -10,7 +10,7 @@ public class PlayerRobot : CharacterBase
     public bool bl_Turn_Available = true;//PR can move
     public bool bl_Has_Moved = false;
     public bool bl_Has_Acted = false;
-
+    public int int_Actions = 2;
     public GameObject go_move_ui;//these are the two yellow rectangles that show if the PR has moved or acted
     public GameObject go_other_action;
     #endregion
@@ -65,8 +65,9 @@ public class PlayerRobot : CharacterBase
         else
             tl_Current_Tile.bl_Current_Tile = false;
 
-        go_move_ui.SetActive(!bl_Has_Moved);//turns yellow rectangles on and off
-        go_other_action.SetActive(!bl_Has_Acted);
+       // go_move_ui.SetActive(!bl_Has_Moved);//turns yellow rectangles on and off
+       // go_other_action.SetActive(!bl_Has_Acted);
+     
         //---------
         if (int_Health <= 0)
         {
@@ -78,22 +79,12 @@ public class PlayerRobot : CharacterBase
             MoveToTarget();//makes PR move
         }
         //---------
-        if (bl_Has_Acted && bl_Has_Moved)
-        {
-            bl_Turn_Available = false;//ends turn
-            //---------
-            if (CSGameManager.gameManager.bl_Player_Turn)
-            {
-                CSGameManager.gameManager.EndPlayerTurn(this);//updates the GameManager
-            }
-            //---------
-        }
-        //---------
         if (bl_Turn_Available)
         {
             BehaviourHandle();//whilst this PR has a turn available it can be controlled
         }
         //---------
+        ActionSwitch();
         OverheatCheck();
     }
     #endregion
@@ -174,6 +165,7 @@ public class PlayerRobot : CharacterBase
     #region Referesh PR
     public void RefreshPCs()//makes it so PR can take it's turn again
     {
+        int_Actions = 2;
         bl_Has_Acted = false;
         bl_Has_Moved = false;
         bl_Turn_Available = true;
@@ -233,4 +225,29 @@ public class PlayerRobot : CharacterBase
     }
     #endregion
     //------------------------------------------
+    #region ActionPointSwitch
+    public void ActionSwitch()
+    {
+        switch (int_Actions)
+        {
+            case 2:
+                go_move_ui.SetActive(true);
+                go_other_action.SetActive(true);
+                break;
+            case 1:
+                go_other_action.SetActive(false);
+                break;
+            case 0:
+                go_move_ui.SetActive(false);
+                bl_Turn_Available = false;//ends turn
+                //---------
+                if (CSGameManager.gameManager.bl_Player_Turn)
+                {
+                    CSGameManager.gameManager.EndPlayerTurn(this);//updates the GameManager
+                }
+                //---------
+                break;
+        }
+    } 
+    #endregion
 }//=======================================================================================

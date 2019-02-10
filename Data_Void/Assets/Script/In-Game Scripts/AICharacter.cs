@@ -305,7 +305,7 @@ public class AICharacter : CharacterBase {
                     if (hit.collider.gameObject.GetComponent<AICharacter>())
                     {
                         rob.bl_Has_Acted = true;
-
+                        rob.int_Actions--;
                         rnd_Rendereer.material.color = Color.red;
                         rob.Clear_Selection();
                         hit.collider.gameObject.GetComponent<AICharacter>().AttackTarget(rob, this);
