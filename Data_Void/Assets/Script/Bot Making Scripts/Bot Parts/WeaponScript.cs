@@ -6,6 +6,8 @@ public class WeaponScript : MonoBehaviour
 {
     public int int_part_weight;
     public int int_part_damage;
+    public int[] int_part_damage_bracket;
+    public int[] int_part_overheat_damage_bracket;
     public int int_part_effect;
     public int int_part_range;
     public int[] int_part_heat_range;
@@ -23,6 +25,10 @@ public class WeaponScript : MonoBehaviour
             pr_player.int_Attack_Range = int_part_range;
             pr_player.int_heat_range = int_part_heat_range;
             pr_player.int_heat_total = int_part_heat_max;
+            pr_player.int_damage_bracket = int_part_damage_bracket;
+            pr_player.int_overheat_damage_bracket = int_part_overheat_damage_bracket;
+
+
         }
     }
 }

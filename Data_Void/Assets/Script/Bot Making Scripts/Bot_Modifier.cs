@@ -23,6 +23,9 @@ public class Bot_Modifier : MonoBehaviour
     //holds the location of the differnt body parts
     public Transform[] tr_arr_parts;
 
+    public bool[,] bl_part;
+
+
     public string[] st_arr_resources;
 
     public int int_bots_spawned;
@@ -45,6 +48,8 @@ public class Bot_Modifier : MonoBehaviour
         go_arr_bodies = new GameObject[int_part_array_max];
         go_arr_heads = new GameObject[int_part_array_max];
         go_arr_legs= new GameObject[int_part_array_max];
+
+        bl_part = new bool[int_part_array_max, int_part_array_max];
 
         #endregion
         //Gets robot part Prefabs from Resources
@@ -110,8 +115,9 @@ public class Bot_Modifier : MonoBehaviour
     {
         //Adds to head int array
         int_body_type[0]++;
+
         //sets the head back to 0
-        if(int_body_type[0] >= int_part_array_max)
+        if (int_body_type[0] >= int_part_array_max)
         {
             int_body_type[0] = 0;
         }
@@ -231,9 +237,13 @@ public class Bot_Modifier : MonoBehaviour
         #endregion
 
         //spawns the same type of parts on new robot that are on this script
-
-
         CSGameManager.gameManager.AddRobot(0, 0, int_body_type);
+
+        for (int i = 0; i < int_part_array_max; i++)
+        {
+            bl_part[i,int_body_type[i]] = true;
+        }
+
     }
     public void CloseBotBuilder()
     {

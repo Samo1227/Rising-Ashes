@@ -132,7 +132,7 @@ public class Tile : MonoBehaviour {
             print("Why do you click?");
             return;
         }
-        if (bl_Walking_Selection) //if this tile is part of the current walking selection
+       if (bl_Walking_Selection) //if this tile is part of the current walking selection
         {
             if (!bl_Occupied_By_PC && !bl_Occupied_By_AI) //only able to move to unnocupied squares
             {
@@ -167,57 +167,111 @@ public class Tile : MonoBehaviour {
         {
             PlayerRobot rob = CSGameManager.gameManager.pr_currentRobot;//gets a reference to the currently selected player robot
 
-            RaycastHit hit; 
+            RaycastHit[] hits = new RaycastHit[2];
 
             Vector3 dir = new Vector3(transform.position.x, 1, transform.position.z) - rob.transform.position;
             dir = dir.normalized;
-            float fl_Ray_Range = Vector3.Distance(new Vector3(transform.position.x, 1, transform.position.z), rob.transform.position);
+            float fl_Ray_Range;
+            Ray ray_cast;
 
-            Ray ray_cast = new Ray(rob.transform.position, dir * fl_Ray_Range);//draws a ray between target and selected robot
+            if (rob.int_effect == 0)
+            {
+                fl_Ray_Range = 1000;
 
-            Debug.DrawRay(rob.transform.position, dir * fl_Ray_Range, Color.green, 0.1f);//visual representation of ray for editor
+                ray_cast = new Ray(rob.transform.position, dir * fl_Ray_Range);//draws a ray between target and selected robot
 
-            if(Input.GetMouseButtonUp(0))//when left mouse button is clicked
+                Debug.DrawRay(rob.transform.position, dir * fl_Ray_Range, Color.green, 0.1f);//visual representation of ray for editor
+            }
+            else
+            {
+                fl_Ray_Range = Vector3.Distance(new Vector3(transform.position.x, 1, transform.position.z), rob.transform.position);
+
+                ray_cast = new Ray(rob.transform.position, dir * fl_Ray_Range);//draws a ray between target and selected robot
+
+                Debug.DrawRay(rob.transform.position, dir * fl_Ray_Range, Color.green, 0.1f);//visual representation of ray for editor
+            }
+
+            if (Input.GetMouseButtonUp(0))//when left mouse button is clicked
             {
 
-                if (Physics.Raycast(ray_cast, out hit, fl_Ray_Range))//if the raycast has hit something
+                if (Physics.RaycastNonAlloc(ray_cast, hits, fl_Ray_Range) > 0)//if the raycast has hit something
                 {
 
-                    if(hit.collider.gameObject.GetComponent<Tile>())//the collider hit is a tile
+                    if (hits[0].collider.gameObject.GetComponent<Tile>())//the collider hit is a tile
                     {
+                        rob.RandomDamage();
                         rob.bl_Has_Acted = true;//robot has done it's action
                         rob.int_Actions--;
                         rob.Clear_Selection();//clear tile highlighting 
 
                         if (rob.int_effect == 0)
                         {
-                            hit.collider.gameObject.GetComponent<Tile>().int_health -= rob.int_damage;
-                            rob.int_heat_current += 1;
-                            Overshot(ray_cast);
+                            rob.lr_laser.SetPosition(0, rob.transform.position);
+                            rob.lr_laser.SetPosition(1, hits[0].point);
+
+                            if (rob.bl_overheat == false)
+                            {
+                                hits[0].collider.gameObject.GetComponent<Tile>().int_health -= rob.int_damage;
+                                rob.int_heat_current += 1;
+                                if (hits[0].collider.gameObject.GetComponent<Tile>().int_health < 0)
+                                {
+                                    if (hits[1].collider.gameObject.GetComponent<Tile>())
+                                    {
+                                        hits[1].collider.gameObject.GetComponent<Tile>().int_health += hits[0].collider.gameObject.GetComponent<Tile>().int_health;
+                                    }
+                                    else if (hits[1].collider.gameObject.GetComponent<CharacterBase>())
+                                    {
+                                        hits[1].collider.gameObject.GetComponent<CharacterBase>().int_Health += hits[0].collider.gameObject.GetComponent<Tile>().int_health;
+                                    }
+                                    hits[0].collider.gameObject.GetComponent<Tile>().int_health = 0;
+                                }
+                            }
+                            else
+                            {
+                                if (hits[1].collider.gameObject.GetComponent<Tile>())
+                                {
+                                    hits[1].collider.gameObject.GetComponent<Tile>().int_health -= rob.int_damage;
+                                    rob.int_heat_current += 1;
+                                }
+                                else if (hits[1].collider.gameObject.GetComponent<CharacterBase>())
+                                {
+                                    hits[1].collider.gameObject.GetComponent<CharacterBase>().int_Health -= rob.int_damage;
+                                    rob.int_heat_current += 1;
+                                }
+
+
+                            }
+
+
                         }
 
                         if (rob.int_effect == 1)
                         {
-                            hit.collider.gameObject.GetComponent<Tile>().int_health -= rob.int_damage * 2;
+                            hits[0].collider.gameObject.GetComponent<Tile>().int_health -= rob.int_damage * 2;
                             rob.int_heat_current += 1;
                         }
 
-                        if (hit.collider.gameObject.GetComponent<Tile>().int_health <= 0)
+                        if (hits[0].collider.gameObject.GetComponent<Tile>().int_health <= 0)
                         {
-                            hit.collider.gameObject.GetComponent<Tile>().RemoveTile();//destroy the tile
+                            hits[0].collider.gameObject.GetComponent<Tile>().RemoveTile();//destroy the tile
                         }
-
+                        else if (hits[1].collider.gameObject.GetComponent<Tile>() && hits[1].collider.gameObject.GetComponent<Tile>().int_health <= 0)
+                        {
+                            hits[1].collider.gameObject.GetComponent<Tile>().RemoveTile();//destroy the tile
+                        }
                     }
 
                 }
-                else if(rob.int_effect == 2)
+                else if (rob.int_effect == 2)
                 {
                     rob.bl_Has_Acted = true;
+                    rob.int_Actions--;
                     rob.Clear_Selection();
                     CreatePlayerTile();
+                    int_health_max = rob.int_damage;
                     rob.int_heat_current += 1;
                     bl_explosive = rob.bl_overheat;
-
+                    rob.RandomDamage();
                 }
             }
         }
@@ -283,14 +337,6 @@ public class Tile : MonoBehaviour {
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, fl_ExplodeRaduis);
-    }
-
-    void Overshot(Ray oldray)
-    {
-        if (int_health < 0)
-        {
-            Debug.Log("pew");
-        }
     }
     #endregion
     //--------------------------------------------

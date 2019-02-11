@@ -23,7 +23,11 @@ public class PlayerRobot : CharacterBase
 
     public int[] int_heat_range;
     public bool bl_overheat;
+    public GameObject go_heat_bar;
+    public int[] int_damage_bracket;
+    public int[] int_overheat_damage_bracket;
 
+    public LineRenderer lr_laser;
     //------------------------------------------
     #region Start & Update
     private void Start()
@@ -248,6 +252,18 @@ public class PlayerRobot : CharacterBase
                 //---------
                 break;
         }
-    } 
+    }
     #endregion
+    //------------------------------------------
+    public void RandomDamage()
+    {
+        if (bl_overheat == false)
+        {
+            int_damage = Random.Range(int_damage_bracket[0] - 1, int_damage_bracket[1]);
+        }
+        else
+        {
+            int_damage = Random.Range(int_overheat_damage_bracket[0] - 1, int_overheat_damage_bracket[1]);
+        }
+    }
 }//=======================================================================================
