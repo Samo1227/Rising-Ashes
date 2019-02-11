@@ -92,7 +92,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   int_part_weight: 1
   int_part_damage: 2
+  int_part_damage_bracket: 0200000004000000
+  int_part_overheat_damage_bracket: 0100000006000000
   int_part_effect: 1
   int_part_range: 1
-  int_part_heat_range: 
-  int_part_heat_max: 0
+  int_part_heat_range: 0300000006000000
+  int_part_heat_max: 8

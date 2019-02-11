@@ -386,36 +386,103 @@ public class AICharacter : CharacterBase {
             return;
             //-----------
             if (tl_Current_Tile.bl_Attack_Selection == true)
-        {
-            PlayerRobot rob = CSGameManager.gameManager.pr_currentRobot;
+            {
+            PlayerRobot rob = CSGameManager.gameManager.pr_currentRobot;//gets a reference to the currently selected player robot
             rnd_Rendereer.material.color = Color.yellow;
-
-            RaycastHit hit;
+            RaycastHit[] hits = new RaycastHit[2];
 
             Vector3 dir = new Vector3(transform.position.x, 1, transform.position.z) - rob.transform.position;
             dir = dir.normalized;
-            float fl_Ray_Range = Vector3.Distance(new Vector3(transform.position.x, 1, transform.position.z), rob.transform.position);
+            float fl_Ray_Range;
+            Ray ray_cast;
 
-            Ray ray_cast = new Ray(rob.transform.position, dir * fl_Ray_Range);
+            if (rob.int_effect == 0)
+            {
+                fl_Ray_Range = 1000;
 
-            Debug.DrawRay(rob.transform.position, dir * fl_Ray_Range, Color.green, 0.1f);
-            
+                ray_cast = new Ray(rob.transform.position, dir * fl_Ray_Range);//draws a ray between target and selected robot
+
+                Debug.DrawRay(rob.transform.position, dir * fl_Ray_Range, Color.green, 0.1f);//visual representation of ray for editor
+            }
+            else
+            {
+                fl_Ray_Range = Vector3.Distance(new Vector3(transform.position.x, 1, transform.position.z), rob.transform.position);
+
+                ray_cast = new Ray(rob.transform.position, dir * fl_Ray_Range);//draws a ray between target and selected robot
+
+                Debug.DrawRay(rob.transform.position, dir * fl_Ray_Range, Color.green, 0.1f);//visual representation of ray for editor
+            }
+
             //-----------
             if (Input.GetMouseButtonDown(0))
             {
                 //-----------
-                if (Physics.Raycast(ray_cast, out hit, fl_Ray_Range))
+                if (Physics.RaycastNonAlloc(ray_cast, hits, fl_Ray_Range) > 0)
                 {
                     //-----------
-                    if (hit.collider.gameObject.GetComponent<AICharacter>())
+                    if (hits[0].collider.gameObject.GetComponent<CharacterBase>())//the collider hit is a tile
                     {
-                        rob.bl_Has_Acted = true;
+                        rob.RandomDamage();
+                        rob.bl_Has_Acted = true;//robot has done it's action
                         rob.int_Actions--;
-                        rnd_Rendereer.material.color = Color.red;
-                        rob.Clear_Selection();
-                        hit.collider.gameObject.GetComponent<AICharacter>().AttackTarget(rob, this);
-                        StartCoroutine(FireRay(5f, rob));
+                        rob.Clear_Selection();//clear tile highlighting 
+                        if (rob.int_effect == 0)
+                        {
+                            rob.lr_laser.startWidth = rob.int_damage * 0.05f;
+                            rob.lr_laser.endWidth = rob.int_damage * 0.05f;
+                            rob.lr_laser.SetPosition(0, rob.transform.position);
+                            rob.lr_laser.SetPosition(1, hits[0].point);
 
+                            if (rob.bl_overheat == false)
+                            {
+                                hits[0].collider.gameObject.GetComponent<CharacterBase>().int_Health -= rob.int_damage;
+                                rob.int_heat_current += 1;
+                                if (hits[0].collider.gameObject.GetComponent<CharacterBase>().int_Health < 0)
+                                {
+                                    rob.lr_laser.SetPosition(1, hits[1].point);
+
+                                    if (hits[1].collider.gameObject.GetComponent<Tile>())
+                                    {
+                                        hits[1].collider.gameObject.GetComponent<Tile>().int_health += hits[0].collider.gameObject.GetComponent<CharacterBase>().int_Health;
+                                    }
+                                    else if (hits[1].collider.gameObject.GetComponent<CharacterBase>())
+                                    {
+                                        hits[1].collider.gameObject.GetComponent<CharacterBase>().int_Health += hits[0].collider.gameObject.GetComponent<CharacterBase>().int_Health;
+                                    }
+                                    else if (hits[1].collider.gameObject == null)
+                                    {
+                                        return;
+                                    }
+                                }
+                            }
+                            else
+                            {
+
+                                rob.lr_laser.SetPosition(0, rob.transform.position);
+                                rob.lr_laser.SetPosition(1, hits[1].point);
+
+                                if (hits[1].collider.gameObject.GetComponent<Tile>())
+                                {
+                                    hits[1].collider.gameObject.GetComponent<Tile>().int_health -= rob.int_damage;
+                                    rob.int_heat_current += 1;
+                                }
+                                else if (hits[1].collider.gameObject.GetComponent<CharacterBase>())
+                                {
+                                    hits[1].collider.gameObject.GetComponent<CharacterBase>().int_Health -= rob.int_damage;
+                                    rob.int_heat_current += 1;
+                                }
+
+                            }
+                        }
+                        if (rob.int_effect == 1)
+                        {
+                            rob.RandomDamage();
+                            rob.bl_Has_Acted = true;//robot has done it's action
+                            rob.int_Actions--;
+                            rob.Clear_Selection();//clear tile highlighting 
+                            hits[0].collider.gameObject.GetComponent<CharacterBase>().int_Health -= rob.int_damage;
+
+                        }
                     }
                     //-----------
                 }
@@ -449,6 +516,7 @@ public class AICharacter : CharacterBase {
     #endregion
     //---------------------------------------------------
     #region Visual Cyllinder for attacks, not really working atm
+    /*
     private IEnumerator FireRay(float waitTime, PlayerRobot Rob)
     {
         //  Gizmos.DrawLine(Rob.transform.position, this.transform.position);
@@ -461,6 +529,7 @@ public class AICharacter : CharacterBase {
         yield return new WaitForSeconds(waitTime);
         Destroy(_GO_Cylinder.gameObject);
     }
+    */
     #endregion
     //---------------------------------------------------
     #region Set/Get State

@@ -237,7 +237,7 @@ public class Bot_Modifier : MonoBehaviour
         #endregion
 
         //spawns the same type of parts on new robot that are on this script
-        CSGameManager.gameManager.AddRobot(0, 0, int_body_type);
+        CSGameManager.gameManager.AddRobot(1, 1, int_body_type);
 
         for (int i = 0; i < int_part_array_max; i++)
         {

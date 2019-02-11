@@ -26,6 +26,7 @@ public class PlayerRobot : CharacterBase
     public GameObject go_heat_bar;
     public int[] int_damage_bracket;
     public int[] int_overheat_damage_bracket;
+    public bool bl_Has_Cooldown;
 
     public LineRenderer lr_laser;
     //------------------------------------------
@@ -61,6 +62,9 @@ public class PlayerRobot : CharacterBase
     {
         go_health_bar.transform.localPosition = new Vector3(((float)int_Health - (float)int_Health_max) * (0.5f / int_Health_max), 0, 0);
         go_health_bar.transform.localScale = new Vector3((1f / int_Health_max) * int_Health, 0.2f, 1);
+        
+        
+
 
         if (CSGameManager.gameManager.pr_currentRobot == this)
         {
@@ -88,6 +92,11 @@ public class PlayerRobot : CharacterBase
             BehaviourHandle();//whilst this PR has a turn available it can be controlled
         }
         //---------
+        if(bl_Has_Acted)
+        {
+            StartCoroutine(LaserOff());
+        }
+
         ActionSwitch();
         OverheatCheck();
     }
@@ -172,6 +181,7 @@ public class PlayerRobot : CharacterBase
         int_Actions = 2;
         bl_Has_Acted = false;
         bl_Has_Moved = false;
+        bl_Has_Cooldown = false;
         bl_Turn_Available = true;
         bl_Is_Active = false;
         int_Robot_State = 0;//defaults to finding movement
@@ -182,7 +192,7 @@ public class PlayerRobot : CharacterBase
     void OverheatCheck()
     {
         //---------
-        if (int_heat_current > int_heat_range[0])
+        if (int_heat_current < int_heat_range[0])
         {
             bl_overheat = false;
         }
@@ -221,6 +231,7 @@ public class PlayerRobot : CharacterBase
     #region Destruction
     public void PlayerRobotDeath()
     {
+        CSGameManager.gameManager.ls_Player_Robots_With_Turns_Left.Remove(this);
         CSGameManager.gameManager.ls_Player_Robots_In_Level.Remove(this);//is not an active PR anymore, otherwise AI will break
         CSGameManager.gameManager.CheckLossOrWin();
         tl_Current_Tile.bl_Occupied_By_PC = false;//Tile PR was on is now empty
@@ -259,11 +270,21 @@ public class PlayerRobot : CharacterBase
     {
         if (bl_overheat == false)
         {
-            int_damage = Random.Range(int_damage_bracket[0] - 1, int_damage_bracket[1]);
+            int_damage = Random.Range(int_damage_bracket[0], int_damage_bracket[1]);
         }
         else
         {
-            int_damage = Random.Range(int_overheat_damage_bracket[0] - 1, int_overheat_damage_bracket[1]);
+            int_damage = Random.Range(int_overheat_damage_bracket[0], int_overheat_damage_bracket[1]);
         }
+    }
+    public IEnumerator LaserOff ()
+    {
+        for (int i = 0; i < int_damage+1; i++)
+        {
+            yield return new WaitForSeconds(0.01f);
+            lr_laser.startWidth = (int_damage - i)* 0.05f;
+            lr_laser.endWidth = (int_damage - i) * 0.05f;
+        }
+        yield return null;
     }
 }//=======================================================================================

@@ -202,6 +202,7 @@ public class CSGameManager : MonoBehaviour
         if (map_layout[x, z] == 0)
         {
             Instantiate(Resources.Load<GameObject>("MapParts/MapElement_" + 0), newTile.gameObject.transform);
+            newTile.int_health = 0;
         }
         //-----------
         else if (map_layout[x, z] == 1)
@@ -210,11 +211,13 @@ public class CSGameManager : MonoBehaviour
             newTile.bl_Destroyable = true;
             newTile.GetComponent<BoxCollider>().size = new Vector3(1, 3, 1);
             Instantiate(Resources.Load<GameObject>("MapParts/MapElement_" + 1), newTile.gameObject.transform);
+            newTile.int_health = 5;
         }
         //-----------
         else if (map_layout[x, z] == 3)
         {
             Instantiate(Resources.Load<GameObject>("MapParts/MapElement_" + 0), newTile.gameObject.transform);
+            newTile.int_health = 0;
             //AddEnemy(x, z);
         }
         //-----------

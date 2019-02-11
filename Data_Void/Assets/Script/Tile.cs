@@ -90,7 +90,10 @@ public class Tile : MonoBehaviour {
         {
             rend_Colour.material.color = Color.white;
         }
-
+        if(bl_Is_Walkable == false && int_health <= 0)
+        {
+            RemoveTile();
+        }
 
     }
     #endregion
@@ -206,6 +209,9 @@ public class Tile : MonoBehaviour {
 
                         if (rob.int_effect == 0)
                         {
+                            rob.lr_laser.startWidth = rob.int_damage * 0.05f;
+                            rob.lr_laser.endWidth = rob.int_damage * 0.05f;
+                            StartCoroutine(rob.LaserOff());
                             rob.lr_laser.SetPosition(0, rob.transform.position);
                             rob.lr_laser.SetPosition(1, hits[0].point);
 
@@ -215,6 +221,8 @@ public class Tile : MonoBehaviour {
                                 rob.int_heat_current += 1;
                                 if (hits[0].collider.gameObject.GetComponent<Tile>().int_health < 0)
                                 {
+                                    rob.lr_laser.SetPosition(1, hits[1].point);
+
                                     if (hits[1].collider.gameObject.GetComponent<Tile>())
                                     {
                                         hits[1].collider.gameObject.GetComponent<Tile>().int_health += hits[0].collider.gameObject.GetComponent<Tile>().int_health;
@@ -228,6 +236,10 @@ public class Tile : MonoBehaviour {
                             }
                             else
                             {
+
+                                rob.lr_laser.SetPosition(0, rob.transform.position);
+                                rob.lr_laser.SetPosition(1, hits[1].point);
+
                                 if (hits[1].collider.gameObject.GetComponent<Tile>())
                                 {
                                     hits[1].collider.gameObject.GetComponent<Tile>().int_health -= rob.int_damage;
@@ -239,25 +251,85 @@ public class Tile : MonoBehaviour {
                                     rob.int_heat_current += 1;
                                 }
 
-
                             }
 
 
                         }
-
-                        if (rob.int_effect == 1)
+                        if (rob.int_effect == 1)//drill
                         {
-                            hits[0].collider.gameObject.GetComponent<Tile>().int_health -= rob.int_damage * 2;
-                            rob.int_heat_current += 1;
-                        }
 
+                            hits[0].collider.gameObject.GetComponent<Tile>().int_health -= rob.int_damage * 2;
+
+                        }
+                        /*
                         if (hits[0].collider.gameObject.GetComponent<Tile>().int_health <= 0)
                         {
                             hits[0].collider.gameObject.GetComponent<Tile>().RemoveTile();//destroy the tile
                         }
-                        else if (hits[1].collider.gameObject.GetComponent<Tile>() && hits[1].collider.gameObject.GetComponent<Tile>().int_health <= 0)
+                        else if (hits[1].collider.gameObject.GetComponent<Tile>())
                         {
-                            hits[1].collider.gameObject.GetComponent<Tile>().RemoveTile();//destroy the tile
+                            if(hits[1].collider.gameObject.GetComponent<Tile>().int_health <= 0)
+                            {
+                                hits[1].collider.gameObject.GetComponent<Tile>().RemoveTile();//destroy the tile
+                            }
+                        }
+                        */
+                    }
+                    if (hits[0].collider.gameObject.GetComponent<CharacterBase>())//the collider hit is a tile
+                    {
+                        rob.RandomDamage();
+                        rob.bl_Has_Acted = true;//robot has done it's action
+                        rob.int_Actions--;
+                        rob.Clear_Selection();//clear tile highlighting 
+
+                        if (rob.int_effect == 0)
+                        {
+                            rob.lr_laser.startWidth = rob.int_damage * 0.05f;
+                            rob.lr_laser.endWidth = rob.int_damage * 0.05f;
+                            StartCoroutine(rob.LaserOff());
+                            rob.lr_laser.SetPosition(0, rob.transform.position);
+                            rob.lr_laser.SetPosition(1, hits[0].point);
+
+                            if (rob.bl_overheat == false)
+                            {
+                                hits[0].collider.gameObject.GetComponent<CharacterBase>().int_Health -= rob.int_damage;
+                                rob.int_heat_current += 1;
+                                if (hits[0].collider.gameObject.GetComponent<CharacterBase>().int_Health < 0)
+                                {
+                                    rob.lr_laser.SetPosition(1, hits[1].point);
+
+                                    if (hits[1].collider.gameObject.GetComponent<Tile>())
+                                    {
+                                        hits[1].collider.gameObject.GetComponent<Tile>().int_health += hits[0].collider.gameObject.GetComponent<CharacterBase>().int_Health;
+                                    }
+                                    else if (hits[1].collider.gameObject.GetComponent<CharacterBase>())
+                                    {
+                                        hits[1].collider.gameObject.GetComponent<CharacterBase>().int_Health += hits[0].collider.gameObject.GetComponent<CharacterBase>().int_Health;
+                                    }
+                                    else if (hits[1].collider.gameObject == null)
+                                    {
+                                        return;
+                                    }
+                                }
+                            }
+                            else
+                            {
+
+                                rob.lr_laser.SetPosition(0, rob.transform.position);
+                                rob.lr_laser.SetPosition(1, hits[1].point);
+
+                                if (hits[1].collider.gameObject.GetComponent<Tile>())
+                                {
+                                    hits[1].collider.gameObject.GetComponent<Tile>().int_health -= rob.int_damage;
+                                    rob.int_heat_current += 1;
+                                }
+                                else if (hits[1].collider.gameObject.GetComponent<CharacterBase>())
+                                {
+                                    hits[1].collider.gameObject.GetComponent<CharacterBase>().int_Health -= rob.int_damage;
+                                    rob.int_heat_current += 1;
+                                }
+
+                            }
                         }
                     }
 
@@ -268,10 +340,11 @@ public class Tile : MonoBehaviour {
                     rob.int_Actions--;
                     rob.Clear_Selection();
                     CreatePlayerTile();
+                    rob.RandomDamage();
                     int_health_max = rob.int_damage;
                     rob.int_heat_current += 1;
                     bl_explosive = rob.bl_overheat;
-                    rob.RandomDamage();
+
                 }
             }
         }
@@ -304,10 +377,9 @@ public class Tile : MonoBehaviour {
         Instantiate(Resources.Load<GameObject>("MapParts/MapElement_" + "PlayerMade"), gameObject.transform);//create the empty tile object, this can be changed for different tile types (hazards, walls, hidering, etc.)
         bl_Is_Walkable = false;
         bl_Destroyable = true;
-        gameObject.GetComponent<BoxCollider>().size = new Vector3(1, 2, 1);//add a box collider
+        gameObject.GetComponent<BoxCollider>().size = new Vector3(1, 3, 1);//add a box collider
         rend_Colour = gameObject.transform.GetChild(int_Child).GetComponent<Renderer>();//sets the renderer reference to the new object
         CSGameManager.gameManager.RefreshTile();//rechecks the neighbours as the map has now changed
-        int_health_max = Random.Range(3,6);
         int_health = int_health_max;
         int_Child--;
 
@@ -324,11 +396,11 @@ public class Tile : MonoBehaviour {
 
             if (hit.transform.gameObject.GetComponent<Tile>())
             {
-                hit.transform.gameObject.GetComponent<Tile>().int_health -= 2;
+                hit.transform.gameObject.GetComponent<Tile>().int_health -= int_health_max;
             }
             else if(hit.transform.gameObject.GetComponent<CharacterBase>())
             {
-                hit.transform.gameObject.GetComponent<CharacterBase>().int_Health -= 2;
+                hit.transform.gameObject.GetComponent<CharacterBase>().int_Health -= int_health_max;
             }
         }
 
