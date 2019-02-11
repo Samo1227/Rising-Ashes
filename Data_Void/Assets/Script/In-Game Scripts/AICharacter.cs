@@ -476,10 +476,6 @@ public class AICharacter : CharacterBase {
                         }
                         if (rob.int_effect == 1)
                         {
-                            rob.RandomDamage();
-                            rob.bl_Has_Acted = true;//robot has done it's action
-                            rob.int_Actions--;
-                            rob.Clear_Selection();//clear tile highlighting 
                             hits[0].collider.gameObject.GetComponent<CharacterBase>().int_Health -= rob.int_damage;
 
                         }
