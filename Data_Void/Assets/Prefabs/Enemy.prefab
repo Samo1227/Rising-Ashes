@@ -297,7 +297,7 @@ MonoBehaviour:
   ais_CurrentState: 0
   int_ChaseRange: 6
   int_TriggerRange: 2
-  int_RetreatRange: 3
+  int_RetreatRange: 0
 --- !u!1 &1824880594358502
 GameObject:
   m_ObjectHideFlags: 0

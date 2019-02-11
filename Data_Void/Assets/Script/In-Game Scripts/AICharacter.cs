@@ -59,6 +59,12 @@ public class AICharacter : CharacterBase {
         //-----------
         if (bl_Is_Active)
         {
+            //-----------
+            if (bl_Turn_Just_Started)
+            {
+                pr_Target = null; //rework out target at the start of each turn
+                bl_Turn_Just_Started = false;
+            }
             DecideTurnAction();
         }
         //-----------
@@ -86,6 +92,7 @@ public class AICharacter : CharacterBase {
             print("I chase now");
             //    SetState(AIStates.chasing);
             TriggerNearbyAI();//this actually triggers itself... 
+            FindNearestPlayerRobot();
             TakeChaseTurn();
         }
         //-----------
@@ -136,20 +143,11 @@ public class AICharacter : CharacterBase {
     #region Chasing Behaviour
     void TakeChaseTurn()
     {
-        //-----------
-        if (bl_Turn_Just_Started)
-        {
-            pr_Target = null; //rework out target at the start of each turn
-            bl_Turn_Just_Started = false;
-        }
+       
         //-----------
         if (!bl_Moving)//don't keep checking for a target when moving
         {
             tl_Current_Tile.bl_Occupied_By_AI = false;
-            if (pr_Target == null)
-            {
-                FindNearestPlayerRobot();
-            }
             CalculatePath();
             FindMoveTilesAI();//in theory should stop them from moving through players and stopping on other AI... 
             //-----------
@@ -247,20 +245,11 @@ public class AICharacter : CharacterBase {
     //---------------------------------------------------
     void RetreatBehaviour()
     {
-        //-----------
-        if (bl_Turn_Just_Started)
-        {
-            pr_Target = null; //rework out target at the start of each turn
-            bl_Turn_Just_Started = false;
-        }
+       
         //-----------
         if (!bl_Moving)//don't keep checking for a target when moving
         {
             tl_Current_Tile.bl_Occupied_By_AI = false;
-            if (pr_Target == null)
-            {
-                FindNearestPlayerRobot();
-            }
             FindMoveTilesAI();//in theory should stop them from moving through players and stopping on other AI... 
             FindRetreatTargetTile();
             //-----------
@@ -352,13 +341,13 @@ public class AICharacter : CharacterBase {
         {
             SetState(AIStates.retreating);
             RetreatBehaviour();
-            return;
+           // return;
         }
         else
         {
             SetState(AIStates.chasing);
             TakeChaseTurn();
-            return;
+           // return;
         }
         
     }
@@ -495,10 +484,12 @@ public class AICharacter : CharacterBase {
                 Waiting();
                 break;
             case AIStates.chasing:
-                TakeChaseTurn();
+                FindNearestPlayerRobot();
+              //  TakeChaseTurn();
                 break;
             case AIStates.retreating:
-                RetreatBehaviour();
+                FindNearestPlayerRobot();
+              //  RetreatBehaviour();
                 break;
             case AIStates.patrolling:
                 //move to a nearby square? or randome or something
