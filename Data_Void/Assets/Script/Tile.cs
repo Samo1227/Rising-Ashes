@@ -227,9 +227,13 @@ public class Tile : MonoBehaviour {
                                     {
                                         hits[1].collider.gameObject.GetComponent<Tile>().int_health += hits[0].collider.gameObject.GetComponent<Tile>().int_health;
                                     }
-                                    else if (hits[1].collider.gameObject.GetComponent<CharacterBase>())
+                                    if (hits[1].collider.gameObject.GetComponent<CharacterBase>() && hits[1].collider.gameObject.GetComponent<CharacterBase>().bl_Shield == false)
                                     {
                                         hits[1].collider.gameObject.GetComponent<CharacterBase>().int_Health += hits[0].collider.gameObject.GetComponent<Tile>().int_health;
+                                    }
+                                    else if(hits[1].collider.gameObject.GetComponent<CharacterBase>() && hits[1].collider.gameObject.GetComponent<CharacterBase>().bl_Shield == true)
+                                    {
+                                        hits[1].collider.gameObject.GetComponent<CharacterBase>().bl_Shield = false;
                                     }
                                     hits[0].collider.gameObject.GetComponent<Tile>().int_health = 0;
                                 }
@@ -257,23 +261,9 @@ public class Tile : MonoBehaviour {
                         }
                         if (rob.int_effect == 1)//drill
                         {
-
                             hits[0].collider.gameObject.GetComponent<Tile>().int_health -= rob.int_damage * 2;
+                        }
 
-                        }
-                        /*
-                        if (hits[0].collider.gameObject.GetComponent<Tile>().int_health <= 0)
-                        {
-                            hits[0].collider.gameObject.GetComponent<Tile>().RemoveTile();//destroy the tile
-                        }
-                        else if (hits[1].collider.gameObject.GetComponent<Tile>())
-                        {
-                            if(hits[1].collider.gameObject.GetComponent<Tile>().int_health <= 0)
-                            {
-                                hits[1].collider.gameObject.GetComponent<Tile>().RemoveTile();//destroy the tile
-                            }
-                        }
-                        */
                     }
                     if (hits[0].collider.gameObject.GetComponent<CharacterBase>())//the collider hit is a tile
                     {
@@ -398,9 +388,13 @@ public class Tile : MonoBehaviour {
             {
                 hit.transform.gameObject.GetComponent<Tile>().int_health -= int_health_max;
             }
-            else if(hit.transform.gameObject.GetComponent<CharacterBase>())
+            if(hit.transform.gameObject.GetComponent<CharacterBase>() && hit.transform.gameObject.GetComponent<CharacterBase>().bl_Shield == false)
             {
                 hit.transform.gameObject.GetComponent<CharacterBase>().int_Health -= int_health_max;
+            }
+            else if(hit.transform.gameObject.GetComponent<CharacterBase>().bl_Shield == true)
+            {
+                hit.transform.gameObject.GetComponent<CharacterBase>().bl_Shield = false;
             }
         }
 

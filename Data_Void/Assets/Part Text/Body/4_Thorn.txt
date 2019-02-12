@@ -1,0 +1,1 @@
+Thorn,Deals damage back to melee attacking enemy

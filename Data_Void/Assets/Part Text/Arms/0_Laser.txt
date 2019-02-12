@@ -1,0 +1,1 @@
+Laser,The remaining damage after a target is destroyed is sent through to behind them.,All of the damage will be sent behind the first hit object.

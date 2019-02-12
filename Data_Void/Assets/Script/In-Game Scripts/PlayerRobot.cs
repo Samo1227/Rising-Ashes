@@ -28,6 +28,11 @@ public class PlayerRobot : CharacterBase
     public int[] int_overheat_damage_bracket;
     public bool bl_Has_Cooldown;
 
+    public int int_head_effect;
+    public int int_body_effect;
+    public int int_leg_effect;
+    public int int_cooldown;
+
     public LineRenderer lr_laser;
     //------------------------------------------
     #region Start & Update
@@ -46,6 +51,15 @@ public class PlayerRobot : CharacterBase
         else
         {
             int_Move_Range = int_Move_Min;
+        }
+
+        if(int_body_effect == 2)//freezer
+        {
+            int_cooldown += 2;
+        }
+        if (int_body_effect == 3)
+        {
+            bl_Shield = true;
         }
 
         CSGameManager.gameManager.ls_Player_Robots_In_Level.Add(this);//adds this PR to the game managers list of alive PRs in the level, this is used by the AIs
@@ -185,6 +199,10 @@ public class PlayerRobot : CharacterBase
         bl_Turn_Available = true;
         bl_Is_Active = false;
         int_Robot_State = 0;//defaults to finding movement
+        if (int_body_effect == 3)
+        {
+            bl_Shield = true;
+        }
     }
     #endregion
     //------------------------------------------
@@ -224,6 +242,10 @@ public class PlayerRobot : CharacterBase
             int_heat_current = int_heat_total;
         }
         //---------
+        if(int_heat_current < 0)
+        {
+            int_heat_current = 0;
+        }
 
     }
     #endregion

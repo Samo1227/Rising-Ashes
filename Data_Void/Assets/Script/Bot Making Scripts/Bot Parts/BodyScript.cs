@@ -7,6 +7,10 @@ public class BodyScript : MonoBehaviour
     public int int_part_health;
     public int int_part_weight;
 
+    public int int_part_effect;
+
+    public TextAsset txt_info;
+
     void Awake()
     {
         if (GetComponentInParent<PlayerRobot>() != null)
@@ -15,6 +19,11 @@ public class BodyScript : MonoBehaviour
 
             pr_player.int_Health_max = int_part_health;
             pr_player.int_Weight_Current += int_part_weight;
+            pr_player.int_body_effect = int_part_effect;
+        }
+        if (GetComponentInParent<Bot_Modifier>() != null)
+        {
+
         }
     }
 }

@@ -97,7 +97,7 @@ public class UIHelper : MonoBehaviour
             return;
         if(CSGameManager.gameManager.pr_currentRobot.int_heat_current > 0)
         {
-            CSGameManager.gameManager.pr_currentRobot.int_heat_current--;
+            CSGameManager.gameManager.pr_currentRobot.int_heat_current -= CSGameManager.gameManager.pr_currentRobot.int_cooldown;
             CSGameManager.gameManager.pr_currentRobot.bl_Has_Cooldown = true;
             CSGameManager.gameManager.pr_currentRobot.int_Actions--;
         }

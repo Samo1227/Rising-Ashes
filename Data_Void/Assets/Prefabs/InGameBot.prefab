@@ -223,6 +223,11 @@ MonoBehaviour:
   go_heat_bar: {fileID: 0}
   int_damage_bracket: 
   int_overheat_damage_bracket: 
+  bl_Has_Cooldown: 0
+  int_head_effect: 0
+  int_body_effect: 0
+  int_leg_effect: 0
+  int_cooldown: 2
   lr_laser: {fileID: 3539013778851571317}
 --- !u!120 &3539013778851571317
 LineRenderer:

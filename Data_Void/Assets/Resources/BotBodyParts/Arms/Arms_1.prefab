@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b3111a8112997c48941db818321832d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  int_part_weight: 1
+  int_part_weight: 3
   int_part_damage: 2
   int_part_damage_bracket: 0200000004000000
   int_part_overheat_damage_bracket: 0100000006000000
@@ -98,3 +98,4 @@ MonoBehaviour:
   int_part_range: 1
   int_part_heat_range: 0300000006000000
   int_part_heat_max: 8
+  txt_info: {fileID: 4900000, guid: 0d418dc01dc8c9e4185757eb4e7628a0, type: 3}

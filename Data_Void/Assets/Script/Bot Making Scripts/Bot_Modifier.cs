@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Bot_Modifier : MonoBehaviour
 {
@@ -23,14 +24,16 @@ public class Bot_Modifier : MonoBehaviour
     //holds the location of the differnt body parts
     public Transform[] tr_arr_parts;
 
-    public bool[,] bl_part;
-
+    public bool[] bl_arms;
+    public bool[] bl_bodies;
+    public bool[] bl_heads;
+    public bool[] bl_legs;
 
     public string[] st_arr_resources;
-
     public int int_bots_spawned;
-
     public GameObject go_bot_maker_open_button;
+
+    public Text[] ui_txt_text;
 
     private void Start()
     {
@@ -49,7 +52,12 @@ public class Bot_Modifier : MonoBehaviour
         go_arr_heads = new GameObject[int_part_array_max];
         go_arr_legs= new GameObject[int_part_array_max];
 
-        bl_part = new bool[int_part_array_max, int_part_array_max];
+        bl_arms = new bool[int_part_array_max];
+        bl_bodies = new bool[int_part_array_max];
+        bl_heads = new bool[int_part_array_max];
+        bl_legs = new bool[int_part_array_max];
+
+
 
         #endregion
         //Gets robot part Prefabs from Resources
@@ -107,20 +115,69 @@ public class Bot_Modifier : MonoBehaviour
         }
         #endregion
 
+        string[] temp_text;
+
+        temp_text = go_arr_heads[int_body_type[0]].GetComponent<HeadScript>().txt_info.text.Split(new string[] { "," }, System.StringSplitOptions.None);
+
+        ui_txt_text[0].text =
+        "Head : " + temp_text[0] + "\n" +
+        "Veiw Distance : " + go_arr_heads[int_body_type[0]].GetComponent<HeadScript>().int_part_veiw_distance + "\n" +
+        "Effect : " + "\n" + temp_text[1] + "\n" + "\n" +
+        "Weight : " + go_arr_heads[int_body_type[0]].GetComponent<HeadScript>().int_part_weight
+        ;
+        //-------------------------------------------------------
+        temp_text = go_arr_bodies[int_body_type[1]].GetComponent<BodyScript>().txt_info.text.Split(new string[] { "," }, System.StringSplitOptions.None);
+
+        ui_txt_text[1].text =
+        "Body : " + temp_text[0] + "\n" +
+        "Health : " + go_arr_bodies[int_body_type[1]].GetComponent<BodyScript>().int_part_health + "\n"+
+        "Effect : " + "\n" + temp_text[1] + "\n" + "\n" +
+        "Weight : " + go_arr_bodies[int_body_type[1]].GetComponent<BodyScript>().int_part_weight
+        ;
+        //-------------------------------------------------------
+        temp_text = go_arr_arms[int_body_type[2]].GetComponent<WeaponScript>().txt_info.text.Split(new string[] { "," }, System.StringSplitOptions.None);
+
+        ui_txt_text[2].text =
+        "Weapon : " + temp_text[0] + "\n" +
+        "Range : " + go_arr_arms[int_body_type[2]].GetComponent<WeaponScript>().int_part_range + "\n" +
+        "Base Damage : " + go_arr_arms[int_body_type[2]].GetComponent<WeaponScript>().int_part_damage_bracket[0] + "-" + go_arr_arms[int_body_type[2]].GetComponent<WeaponScript>().int_part_damage_bracket[1] + "\n" +
+        "Base Effect : " + "\n" + temp_text[1] + "\n" + "\n" +
+        "Overheat Damage : " + go_arr_arms[int_body_type[2]].GetComponent<WeaponScript>().int_part_overheat_damage_bracket[0] + "-" + go_arr_arms[int_body_type[2]].GetComponent<WeaponScript>().int_part_overheat_damage_bracket[1] + "\n" +
+        "Overheat Effect : " + "\n" + temp_text[2] + "\n" + "\n" +
+        "Weight : " + go_arr_arms[int_body_type[2]].GetComponent<WeaponScript>().int_part_weight
+        ;
+        //-------------------------------------------------------
+        temp_text = go_arr_legs[int_body_type[3]].GetComponent<LegScript>().txt_info.text.Split(new string[] { "," }, System.StringSplitOptions.None);
+
+        ui_txt_text[3].text =
+        "Legs : " + temp_text[0] + "\n" +
+        "Weight Limit : " + go_arr_legs[int_body_type[3]].GetComponent<LegScript>().int_part_weight_limit + "\n" +
+        "Max Move : " + go_arr_legs[int_body_type[3]].GetComponent<LegScript>().int_part_max_move + " Min Move : " + go_arr_legs[int_body_type[3]].GetComponent<LegScript>().int_part_min_move + "\n" +
+        "Effect : " + "\n" + temp_text[1] + "\n"
+        ;
     }
 
     #region Part Changes
     //On button press change head
     public void HeadChange()
     {
+        string[] temp_text;
         //Adds to head int array
         int_body_type[0]++;
-
         //sets the head back to 0
         if (int_body_type[0] >= int_part_array_max)
         {
             int_body_type[0] = 0;
         }
+
+        temp_text = go_arr_heads[int_body_type[0]].GetComponent<HeadScript>().txt_info.text.Split(new string[] { "," }, System.StringSplitOptions.None);
+
+        ui_txt_text[0].text =
+        "Head : " + temp_text[0] + "\n" +
+        "Veiw Distance : " + go_arr_heads[int_body_type[0]].GetComponent<HeadScript>().int_part_veiw_distance + "\n" +
+        "Effect : " + "\n" + temp_text[1] + "\n" + "\n" +
+        "Weight : " + go_arr_heads[int_body_type[0]].GetComponent<HeadScript>().int_part_weight;
+
         //sets what type of head is active
         for(int i = 0; i < int_part_array_max; i++)
         {
@@ -139,6 +196,7 @@ public class Bot_Modifier : MonoBehaviour
     //On button press change body
     public void BodyChange()
     {
+        string[] temp_text;
         //Adds to body int array
         int_body_type[1]++;
         //sets the body back to 0
@@ -146,6 +204,15 @@ public class Bot_Modifier : MonoBehaviour
         {
             int_body_type[1] = 0;
         }
+
+        temp_text = go_arr_bodies[int_body_type[1]].GetComponent<BodyScript>().txt_info.text.Split(new string[] { "," }, System.StringSplitOptions.None);
+
+        ui_txt_text[1].text =
+        "Body : " + temp_text[0] + "\n" +
+        "Health : " + go_arr_bodies[int_body_type[1]].GetComponent<BodyScript>().int_part_health + "\n" +
+        "Effect : " + "\n" + temp_text[1] + "\n" + "\n" +
+        "Weight : " + go_arr_bodies[int_body_type[1]].GetComponent<BodyScript>().int_part_weight;
+
         //sets what type of body is active
         for (int i = 0; i < int_part_array_max; i++)
         {
@@ -164,13 +231,29 @@ public class Bot_Modifier : MonoBehaviour
     //On button press change arms
     public void ArmChange()
     {
+        string[] temp_text;
         //Adds to arms int array
         int_body_type[2]++;
+        //temp_text = go_arr_arms[int_body_type[2]].GetComponent<WeaponScript>().txt_info.text;
+
         //sets the arms back to 0
         if (int_body_type[2] >= int_part_array_max)
         {
             int_body_type[2] = 0;
         }
+
+        temp_text = go_arr_arms[int_body_type[2]].GetComponent<WeaponScript>().txt_info.text.Split(new string[] { "," }, System.StringSplitOptions.None);
+
+        ui_txt_text[2].text =
+        "Weapon : " + temp_text[0] + "\n" +
+        "Range : " + go_arr_arms[int_body_type[2]].GetComponent<WeaponScript>().int_part_range + "\n" +
+        "Base Damage : " + go_arr_arms[int_body_type[2]].GetComponent<WeaponScript>().int_part_damage_bracket[0] + "-" + go_arr_arms[int_body_type[2]].GetComponent<WeaponScript>().int_part_damage_bracket[1] + "\n" +
+        "Base Effect : " + "\n" + temp_text[1] + "\n" + "\n" +
+        "Overheat Damage : " + go_arr_arms[int_body_type[2]].GetComponent<WeaponScript>().int_part_overheat_damage_bracket[0] + "-" + go_arr_arms[int_body_type[2]].GetComponent<WeaponScript>().int_part_overheat_damage_bracket[1] + "\n" +
+        "Overheat Effect : " + "\n" + temp_text[2] + "\n" + "\n" +
+        "Weight : " + go_arr_arms[int_body_type[2]].GetComponent<WeaponScript>().int_part_weight
+
+        ;
         //sets what type of arm is active
         for (int i = 0; i < int_part_array_max; i++)
         {
@@ -189,13 +272,24 @@ public class Bot_Modifier : MonoBehaviour
     //On button press change legs
     public void LegChange()
     {
+        string[] temp_text;
         //Adds to legs int array
         int_body_type[3]++;
+
         //sets the legs back to 0
         if (int_body_type[3] >= int_part_array_max)
         {
             int_body_type[3] = 0;
         }
+
+        temp_text = go_arr_legs[int_body_type[3]].GetComponent<LegScript>().txt_info.text.Split(new string[] { "," }, System.StringSplitOptions.None);
+
+        ui_txt_text[3].text =
+        "Legs : " + temp_text[0] + "\n" +
+        "Weight Limit : " + go_arr_legs[int_body_type[3]].GetComponent<LegScript>().int_part_weight_limit + "\n" +
+        "Max Move : " + go_arr_legs[int_body_type[3]].GetComponent<LegScript>().int_part_max_move + " Min Move : " + go_arr_legs[int_body_type[3]].GetComponent<LegScript>().int_part_min_move + "\n" +
+        "Effect : " + "\n" + temp_text[1] + "\n"
+        ;
         //sets what type of leg is active
         for (int i = 0; i < int_part_array_max; i++)
         {
@@ -235,15 +329,16 @@ public class Bot_Modifier : MonoBehaviour
         }
         */
         #endregion
-
+        if (bl_heads[int_body_type[0]] == true || bl_bodies[int_body_type[1]] == true || bl_arms[int_body_type[2]] == true || bl_legs[int_body_type[3]] == true)
+            return;
         //spawns the same type of parts on new robot that are on this script
         CSGameManager.gameManager.AddRobot(1, 1, int_body_type);
 
-        for (int i = 0; i < int_part_array_max; i++)
-        {
-            bl_part[i,int_body_type[i]] = true;
-        }
-
+        bl_heads[int_body_type[0]] = true;
+        bl_bodies[int_body_type[1]] = true;
+        bl_arms[int_body_type[2]] = true;
+        bl_legs[int_body_type[3]] = true;
+        
     }
     public void CloseBotBuilder()
     {

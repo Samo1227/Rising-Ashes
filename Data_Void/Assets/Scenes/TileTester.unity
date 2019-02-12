@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.574817, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2494,61 +2494,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2597357987166125200, guid: 84be5a0f827ecd84d9ef3a605abc1019,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3363432778158818935, guid: 84be5a0f827ecd84d9ef3a605abc1019,
-        type: 3}
-      propertyPath: st_arr_resources.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3363432778158818935, guid: 84be5a0f827ecd84d9ef3a605abc1019,
-        type: 3}
-      propertyPath: st_arr_resources.Array.data[0]
-      value: BotBodyParts/Heads/Head_
-      objectReference: {fileID: 0}
-    - target: {fileID: 3363432778158818935, guid: 84be5a0f827ecd84d9ef3a605abc1019,
-        type: 3}
-      propertyPath: st_arr_resources.Array.data[1]
-      value: BotBodyParts/Bodies/Body_
-      objectReference: {fileID: 0}
-    - target: {fileID: 3363432778158818935, guid: 84be5a0f827ecd84d9ef3a605abc1019,
-        type: 3}
-      propertyPath: st_arr_resources.Array.data[2]
-      value: BotBodyParts/Arms/Arms_
-      objectReference: {fileID: 0}
-    - target: {fileID: 3363432778158818935, guid: 84be5a0f827ecd84d9ef3a605abc1019,
-        type: 3}
-      propertyPath: st_arr_resources.Array.data[3]
-      value: BotBodyParts/Legs/Legs_
-      objectReference: {fileID: 0}
     - target: {fileID: 3363432778158818935, guid: 84be5a0f827ecd84d9ef3a605abc1019,
         type: 3}
       propertyPath: go_bot_maker_open_button
       value: 
       objectReference: {fileID: 301627582}
-    - target: {fileID: 3363432778158818935, guid: 84be5a0f827ecd84d9ef3a605abc1019,
-        type: 3}
-      propertyPath: int_part_array_max
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 114259043978109286, guid: 84be5a0f827ecd84d9ef3a605abc1019,
-        type: 3}
-      propertyPath: fl_cam_Move_Speed
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 9081956521593003331, guid: 84be5a0f827ecd84d9ef3a605abc1019,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -17.099976
-      objectReference: {fileID: 0}
-    - target: {fileID: 9081956521593003331, guid: 84be5a0f827ecd84d9ef3a605abc1019,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -16.830017
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84be5a0f827ecd84d9ef3a605abc1019, type: 3}
 --- !u!1 &1964534973

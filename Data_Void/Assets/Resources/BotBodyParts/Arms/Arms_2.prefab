@@ -98,3 +98,4 @@ MonoBehaviour:
   int_part_range: 4
   int_part_heat_range: 0300000006000000
   int_part_heat_max: 8
+  txt_info: {fileID: 4900000, guid: 233731c5d84ff2c4d8b44043ec49a2b8, type: 3}
