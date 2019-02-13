@@ -321,6 +321,8 @@ MonoBehaviour:
   bl_Attack_Selection: 0
   bl_Occupied_By_PC: 0
   bl_Occupied_By_AI: 0
+  bl_Current_Tile: 0
+  bl_Destroyable: 0
   int_health: 5
   int_health_max: 5
   go_health_bar: {fileID: 480635306}
@@ -330,3 +332,7 @@ MonoBehaviour:
   g: 0
   h: 0
   rend_Colour: {fileID: 0}
+  bl_explosive: 0
+  fl_ExplodeRaduis: 0
+  fl_height: 0
+  bl_spawnable_zone: 0

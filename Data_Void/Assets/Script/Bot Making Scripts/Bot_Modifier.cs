@@ -377,7 +377,7 @@ public class Bot_Modifier : MonoBehaviour
         if (bl_heads[int_body_type[0]] == true || bl_bodies[int_body_type[1]] == true || bl_arms[int_body_type[2]] == true || bl_legs[int_body_type[3]] == true)
             return;
         //spawns the same type of parts on new robot that are on this script
-        CSGameManager.gameManager.AddRobot(1, 1, int_body_type);
+        CSGameManager.gameManager.StorePlayer(int_body_type);
 
         bl_heads[int_body_type[0]] = true;
         bl_bodies[int_body_type[1]] = true;
@@ -386,12 +386,7 @@ public class Bot_Modifier : MonoBehaviour
 
         WeightCalc();
 
-        /*
-        int_body_type[0]++;
-        int_body_type[1]++;
-        int_body_type[2]++;
-        int_body_type[3]++;
-        */
+
 
 
     }

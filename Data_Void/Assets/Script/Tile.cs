@@ -38,7 +38,7 @@ public class Tile : MonoBehaviour {
     public float fl_ExplodeRaduis;
     public float fl_height;
 
-    
+    public bool bl_spawnable_zone;
 
 
 
@@ -94,7 +94,14 @@ public class Tile : MonoBehaviour {
         {
             RemoveTile();
         }
-
+        if (bl_spawnable_zone == true && CSGameManager.gameManager.bl_storing_robot == true)
+        {
+            rend_Colour.material.color = Color.green;
+        }
+        else
+        {
+            rend_Colour.material.color = Color.white;
+        }
     }
     #endregion
     //--------------------------------------------
@@ -130,20 +137,21 @@ public class Tile : MonoBehaviour {
     #region Clicking On Tile
     private void OnMouseUp()//could be on mouse down, this reduces the risk of clicking another tile right away though
     {
+
         if (EventSystem.current.IsPointerOverGameObject())
         {
             print("Why do you click?");
             return;
         }
-       if (bl_Walking_Selection) //if this tile is part of the current walking selection
+        if (bl_Walking_Selection) //if this tile is part of the current walking selection
         {
             if (!bl_Occupied_By_PC && !bl_Occupied_By_AI) //only able to move to unnocupied squares
             {
                 PlayerRobot rob = CSGameManager.gameManager.pr_currentRobot;//gets a reference to the currently selected player robot
-               // rob.transform.position = new Vector3(int_X, rob.transform.position.y, int_Z);//atm teleports robot to selected square
+                // rob.transform.position = new Vector3(int_X, rob.transform.position.y, int_Z);//atm teleports robot to selected square
 
-                 rob.MoveToTargetSquare(this);
-                 rob.bl_Moving = true;                
+                    rob.MoveToTargetSquare(this);
+                    rob.bl_Moving = true;                
 
                 //updates and resets the robots position references
                 rob.tl_Current_Tile.bl_Occupied_By_PC = false; //start position tile is no longer occupied
@@ -157,6 +165,8 @@ public class Tile : MonoBehaviour {
                 rob.Clear_Selection();//clear tile highlighting
             }
         }
+
+
 
     }
 
@@ -335,6 +345,17 @@ public class Tile : MonoBehaviour {
                     rob.int_heat_current += 1;
                     bl_explosive = rob.bl_overheat;
 
+                }
+
+            }
+        }
+        if (bl_spawnable_zone == true)
+        {
+            if (CSGameManager.gameManager.bl_storing_robot == true)
+            {
+                if(Input.GetMouseButtonUp(0))
+                {
+                    CSGameManager.gameManager.AddRobot(int_X, int_Z);
                 }
             }
         }

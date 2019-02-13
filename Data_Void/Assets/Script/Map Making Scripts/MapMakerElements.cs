@@ -25,10 +25,12 @@ public class MapMakerElements : MonoBehaviour {
         mM_map = mM;
     }
     //Set location in the map maker array of this obeject 
-    public void SetLocation(int x, int y)
+    public void SetLocation(int x, int y, int type)
     {
         loc_x = x;
         loc_y = y;
+        int_type = type;
+
     }
 
     // Use this for initialization
@@ -55,14 +57,22 @@ public class MapMakerElements : MonoBehaviour {
             }
 
         }
+        mM_map.ChangeMap(loc_x, loc_y, int_type);
 
-
-    }
-
-    void OnDrawGizmos()
-    {
-        Gizmos.color = new Color(1, 0, 0, 0.5f);
-        Gizmos.DrawWireCube(new Vector3(transform.position.x, 0.5f, transform.position.z), new Vector3(1, 0, 1));
+        //sets what type of head is active
+        for (int i = 0; i < mM_map.int_map_parts_max; i++)
+        {
+            //Turns off everything that is not the current head int
+            if (i != int_type)
+            {
+                go_arr_map_element[i].SetActive(false);
+            }
+            //Turns on the current head int
+            else
+            {
+                go_arr_map_element[i].SetActive(true);
+            }
+        }
     }
 
     private void OnMouseOver()
@@ -70,13 +80,9 @@ public class MapMakerElements : MonoBehaviour {
         if(Input.GetMouseButton(0))
         {
             Debug.Log("yee");
-            //TypeChangeCycle();
             MapChange();
         }
     }
-
-
-
 
     public void TypeChangeCycle()
     {

@@ -2573,7 +2573,7 @@ MonoBehaviour:
   ai_Enemy_Test: {fileID: 114241835215912546, guid: 0b24be8f0bee2de4aa5ebc0b12bd2673,
     type: 3}
   pr_currentRobot: {fileID: 0}
-  txt_level: {fileID: 4900000, guid: d5c829dee02e3174b8b7fdb8a389772d, type: 3}
+  txt_level: {fileID: 4900000, guid: 196f8152bff89244fb4e2e8e08f5197f, type: 3}
   st_level: 
   arr_at_level: []
   int_map_x: 0
@@ -2582,6 +2582,8 @@ MonoBehaviour:
   ls_AI_Characters_In_Level: []
   bl_Player_Turn: 1
   ls_Player_Robots_With_Turns_Left: []
+  int_temp_robot_data: 
+  bl_storing_robot: 0
 --- !u!4 &1857506038
 Transform:
   m_ObjectHideFlags: 0

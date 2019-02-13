@@ -30,6 +30,8 @@ public class CSGameManager : MonoBehaviour
     public bool bl_Player_Turn = true;//if it is the players turn
     public List<PlayerRobot> ls_Player_Robots_With_Turns_Left = new List<PlayerRobot>();//used to automatically go to AI turn when Player has moved all PRs
     public Queue<AICharacter> qu_AI_Turns = new Queue<AICharacter>(); //enemy turn queue
+    public int[] int_temp_robot_data;
+    public bool bl_storing_robot;
     #endregion
     //---------------------------------------------------
     #region Singleton
@@ -214,6 +216,14 @@ public class CSGameManager : MonoBehaviour
             newTile.int_health = 5;
         }
         //-----------
+        else if (map_layout[x, z] == 2)
+        {
+            Instantiate(Resources.Load<GameObject>("MapParts/MapElement_" + 0), newTile.gameObject.transform);
+            newTile.int_health = 0;
+            newTile.bl_spawnable_zone = true;
+            //AddEnemy(x, z);
+        }
+        //-----------
         else if (map_layout[x, z] == 3)
         {
             Instantiate(Resources.Load<GameObject>("MapParts/MapElement_" + 0), newTile.gameObject.transform);
@@ -246,14 +256,23 @@ public class CSGameManager : MonoBehaviour
     #endregion
     //---------------------------------------------------
     #region Add PR
-    public void AddRobot(int cX, int cZ, int[] int_parts)
+
+    public void StorePlayer(int[] int_parts)
     {
+        int_temp_robot_data = int_parts;
+        bl_storing_robot = true;
+    }
+
+    public void AddRobot(int cX, int cZ)
+    {
+
         PlayerRobot tRo = null;
         tRo = Instantiate(pr_PC);
         tRo.transform.position = new Vector3(cX, transform.position.y + 1f, cZ);
         tRo.int_x = cX;
         tRo.int_z = cZ;
-        tRo.int_arr_parts = int_parts;
+        tRo.int_arr_parts = int_temp_robot_data;
+        bl_storing_robot = false;
 
     }
     #endregion
