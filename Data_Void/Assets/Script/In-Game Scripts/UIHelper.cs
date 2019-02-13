@@ -28,7 +28,7 @@ public class UIHelper : MonoBehaviour
             
             ui_PR_UI.SetActive(true);
 
-            go_heat_bar.transform.localScale = new Vector3((1f / CSGameManager.gameManager.pr_currentRobot.int_heat_total) * CSGameManager.gameManager.pr_currentRobot.int_heat_current, 0.2f, 1);
+            go_heat_bar.transform.localScale = new Vector3((2f / CSGameManager.gameManager.pr_currentRobot.int_heat_total) * CSGameManager.gameManager.pr_currentRobot.int_heat_current, 0.2f, 1);
 
             if(CSGameManager.gameManager.pr_currentRobot.int_heat_current < CSGameManager.gameManager.pr_currentRobot.int_heat_range[0])
             {
