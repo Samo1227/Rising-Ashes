@@ -86,6 +86,10 @@ public class Tile : MonoBehaviour {
         {
             rend_Colour.material.color = Color.red;
         }
+        else if (bl_spawnable_zone == true && CSGameManager.gameManager.bl_storing_robot == true)
+        {
+            rend_Colour.material.color = Color.green;
+        }
         else//normal  colour
         {
             rend_Colour.material.color = Color.white;
@@ -94,14 +98,8 @@ public class Tile : MonoBehaviour {
         {
             RemoveTile();
         }
-        if (bl_spawnable_zone == true && CSGameManager.gameManager.bl_storing_robot == true)
-        {
-            rend_Colour.material.color = Color.green;
-        }
-        else
-        {
-            rend_Colour.material.color = Color.white;
-        }
+
+
     }
     #endregion
     //--------------------------------------------
@@ -344,6 +342,22 @@ public class Tile : MonoBehaviour {
                     int_health_max = rob.int_damage;
                     rob.int_heat_current += 1;
                     bl_explosive = rob.bl_overheat;
+
+                }
+                else if (rob.int_effect == 3)
+                {
+                    Collider[] hits_ = Physics.OverlapSphere(transform.position, fl_ExplodeRaduis);
+
+                    foreach (Collider hit in hits_)
+                    {
+                        //hit.transform.gameObject.SetActive(false);
+
+                        if (hit.transform.gameObject.GetComponent<Tile>())
+                        {
+                            Destroy(hit.transform.gameObject);
+                        }
+
+                    }
 
                 }
 

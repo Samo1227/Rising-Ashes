@@ -221,14 +221,13 @@ public class CSGameManager : MonoBehaviour
             Instantiate(Resources.Load<GameObject>("MapParts/MapElement_" + 0), newTile.gameObject.transform);
             newTile.int_health = 0;
             newTile.bl_spawnable_zone = true;
-            //AddEnemy(x, z);
+            
         }
         //-----------
         else if (map_layout[x, z] == 3)
         {
             Instantiate(Resources.Load<GameObject>("MapParts/MapElement_" + 0), newTile.gameObject.transform);
             newTile.int_health = 0;
-            //AddEnemy(x, z);
         }
         //-----------
 

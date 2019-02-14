@@ -95,7 +95,7 @@ MonoBehaviour:
   int_part_damage_bracket: 0100000002000000
   int_part_overheat_damage_bracket: 0100000002000000
   int_part_effect: 3
-  int_part_range: 1
+  int_part_range: 5
   int_part_heat_range: 0300000006000000
   int_part_heat_max: 8
   txt_info: {fileID: 4900000, guid: b6c2e09e44d2cb04bb210212a0d5d9a9, type: 3}
