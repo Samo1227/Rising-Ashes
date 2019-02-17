@@ -573,4 +573,14 @@ public class CharacterBase : MonoBehaviour {
     }
     #endregion
     //---------------------------------------------------
+    #region Hazard
+    public void CheckHazard()
+    {
+        HazardTile _HT = CSGameManager.gameManager.map[int_x, int_z].gameObject.GetComponent<HazardTile>();
+        if (_HT != null)
+        {
+            _HT.ApplyHazard(this);
+        }
+    } 
+    #endregion
 }//=======================================================================================

@@ -280,6 +280,7 @@ public class PlayerRobot : CharacterBase
                 //---------
                 if (CSGameManager.gameManager.bl_Player_Turn)
                 {
+                    CheckHazard();
                     CSGameManager.gameManager.EndPlayerTurn(this);//updates the GameManager
                 }
                 //---------

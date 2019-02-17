@@ -243,9 +243,10 @@ public class AICharacter : CharacterBase {
     }
     #endregion
     //---------------------------------------------------
+    #region RetreatBehaviour
     void RetreatBehaviour()
     {
-       
+
         //-----------
         if (!bl_Moving)//don't keep checking for a target when moving
         {
@@ -312,7 +313,8 @@ public class AICharacter : CharacterBase {
             //-----------
         }
         //-----------
-    }
+    } 
+    #endregion
     #endregion
     //---------------------------------------------------
     #region FindNearest PR

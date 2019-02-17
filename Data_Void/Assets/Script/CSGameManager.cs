@@ -345,9 +345,10 @@ public class CSGameManager : MonoBehaviour
     //---------------------------------------------------
     public void EndAITurn()//this does not work OK
     {
-       qu_AI_Turns.Dequeue();//removes AI from turn queue at end of their specific turn
-      //  print(qu_AI_Turns.Count);
-      //-----------
+        qu_AI_Turns.Peek().CheckHazard();
+        qu_AI_Turns.Dequeue();//removes AI from turn queue at end of their specific turn
+        //  print(qu_AI_Turns.Count);
+        //-----------
         if (qu_AI_Turns.Count > 0)
         {
             StartAITurn(); //if there are AIs left to go, do the next one.
