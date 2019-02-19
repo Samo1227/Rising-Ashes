@@ -270,6 +270,7 @@ public class Tile : MonoBehaviour {
                         if (rob.int_effect == 1)//drill
                         {
                             hits[0].collider.gameObject.GetComponent<Tile>().int_health -= rob.int_damage * 2;
+                            rob.int_heat_current += 1;
                         }
 
                     }
@@ -347,6 +348,7 @@ public class Tile : MonoBehaviour {
                 else if (rob.int_effect == 3)
                 {
                     Collider[] hits_ = Physics.OverlapSphere(transform.position, fl_ExplodeRaduis);
+                    rob.int_heat_current += 1;
 
                     foreach (Collider hit in hits_)
                     {

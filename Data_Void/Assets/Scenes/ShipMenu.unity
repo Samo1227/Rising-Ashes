@@ -210,7 +210,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 33627454}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.3199997, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1244980437}
@@ -1453,8 +1453,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: 2
   go_CamCont: {fileID: 33627454}
-  fl_Min_MaxPos: 20
-  fl_CamMoveSpeed: 5
+  fl_Min_MaxPos: 10
+  fl_CamMoveSpeed: 8
 --- !u!64 &767597438
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2763,8 +2763,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: 3
   go_CamCont: {fileID: 33627454}
-  fl_Min_MaxPos: 20
-  fl_CamMoveSpeed: 5
+  fl_Min_MaxPos: 10
+  fl_CamMoveSpeed: 8
 --- !u!64 &1106083256
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2906,8 +2906,8 @@ Camera:
   m_GameObject: {fileID: 1244980434}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.007843138, g: 0, b: 0.03137255, a: 0}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
@@ -3852,7 +3852,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1644404361}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.32, y: 0, z: 0}
+  m_LocalPosition: {x: -1.6, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 83245742}
@@ -3907,8 +3907,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: 1
   go_CamCont: {fileID: 33627454}
-  fl_Min_MaxPos: 20
-  fl_CamMoveSpeed: 5
+  fl_Min_MaxPos: 10
+  fl_CamMoveSpeed: 8
 --- !u!64 &1757277970
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4376,8 +4376,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: 0
   go_CamCont: {fileID: 33627454}
-  fl_Min_MaxPos: 20
-  fl_CamMoveSpeed: 5
+  fl_Min_MaxPos: 10
+  fl_CamMoveSpeed: 8
 --- !u!64 &1925987308
 MeshCollider:
   m_ObjectHideFlags: 0
