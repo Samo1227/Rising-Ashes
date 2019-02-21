@@ -28,8 +28,8 @@ public class AICharacter : CharacterBase {
     void Start()
     {
         int_Health = int_Health_max;
-        SetAttackRange(1);
-        SetDamage(1);
+      //  SetAttackRange(1);
+      //  SetDamage(1);
         CSGameManager.gameManager.ls_AI_Characters_In_Level.Add(this);
         rnd_Rendereer = gameObject.transform.GetComponent<Renderer>();
         tl_Current_Tile = CSGameManager.gameManager.map[int_x, int_z].gameObject.GetComponent<Tile>();

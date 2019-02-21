@@ -33,6 +33,11 @@ public class HazardTile : Tile
     }
     #endregion
     //---------------------------------------------------
+    public void SetHazardType(HazardTileType _hazardType)
+    {
+        hazardType = _hazardType;
+    }
+    //---------------------------------------------------
     #region HazardSwitch
     public void ApplyHazard(CharacterBase _character)
     {

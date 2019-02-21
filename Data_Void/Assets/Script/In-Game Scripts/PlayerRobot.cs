@@ -35,8 +35,7 @@ public class PlayerRobot : CharacterBase
     public int int_cooldown;
 
     public PlayerRobot Held_robot;
-
-    public LineRenderer lr_laser;
+    
     //------------------------------------------
     #region Start & Update
     private void Start()
@@ -352,14 +351,5 @@ public class PlayerRobot : CharacterBase
             int_damage = Random.Range(int_overheat_damage_bracket[0], int_overheat_damage_bracket[1]);
         }
     }
-    public IEnumerator LaserOff ()
-    {
-        for (int i = 0; i < int_damage+1; i++)
-        {
-            yield return new WaitForSeconds(0.01f);
-            lr_laser.startWidth = (int_damage - i)* 0.05f;
-            lr_laser.endWidth = (int_damage - i) * 0.05f;
-        }
-        yield return null;
-    }
+ 
 }//=======================================================================================

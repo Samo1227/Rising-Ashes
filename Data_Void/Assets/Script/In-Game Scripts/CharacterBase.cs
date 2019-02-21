@@ -59,12 +59,17 @@ public class CharacterBase : MonoBehaviour {
     public List<Tile> selectableTiles = new List<Tile>();//a list of selectable tiles, useful for clearing data on each tile when the selection is done with 
     public bool bl_Shield;
 
+    public LineRenderer lr_laser;
     #endregion
     //---------------------------------------------------
     #region Start
     void Start()
     {
         int_Health = int_Health_max;//current health = max health at start
+        if (gameObject.GetComponent<LineRenderer>() != null)
+        {
+            lr_laser = gameObject.GetComponent<LineRenderer>();
+        }
     }
     #endregion
     //---------------------------------------------------
@@ -497,7 +502,25 @@ public class CharacterBase : MonoBehaviour {
             //-----------
             if (pr_Final_Attack_Target.int_Health > ls_PRs_In_Range[i].int_Health)//targets the player in range with lowest health, can change in a number of ways
             {                                                                     //this step could be skipped and just taken from the initial target finder from start of turn
-                pr_Final_Attack_Target = ls_PRs_In_Range[i];                      //this just allows for more varience in targets.
+                //-----------
+                if (int_Attack_Range > 1)                                         //this prevents Ranged AI from shooting closer players that are behind walls if there is a further player that is not behind a wall
+                {
+                    RaycastHit hit;
+                    //-----------
+                    if (Physics.Raycast(transform.position, ls_PRs_In_Range[i].transform.position, out hit))
+                    {
+                        //-----------
+                        if (hit.collider.GetComponent<PlayerRobot>() == ls_PRs_In_Range[i])
+                        {
+                            pr_Final_Attack_Target = ls_PRs_In_Range[i];
+                        }
+                        //-----------
+                    }
+                    //-----------
+                }
+                //-----------
+                else
+                    pr_Final_Attack_Target = ls_PRs_In_Range[i];                         //this just allows for more varience in targets.
             }
             //-----------
             AttackTarget(this, pr_Final_Attack_Target);//calls the function that applies damage
@@ -544,10 +567,44 @@ public class CharacterBase : MonoBehaviour {
     #region Attacking a target
     protected void AttackTarget(CharacterBase cb_Attacker, CharacterBase cb_Target)//takes a reference to the attacker and the attackers target and applies damage
     {
+        //-----------
         if (cb_Target == null)//if there is no target cancel this
         {
             return;
         }
+        //-----------
+        if (cb_Attacker.gameObject.GetComponent<AICharacter>() != null)
+        {
+            //-----------
+            if (cb_Attacker.gameObject.GetComponent<AICharacter>().int_Attack_Range > 1)
+            {
+                RaycastHit hit;
+                //-----------
+                if (Physics.Raycast(transform.position, cb_Target.transform.position, out hit))
+                {
+
+                    lr_laser.SetPosition(0, transform.position);
+                    lr_laser.SetPosition(1, hit.point);
+                    StartCoroutine(LaserOff());
+                    //-----------
+                    if (hit.collider.gameObject.GetComponent<Tile>())//if a Tile is in the way hit that
+                    {
+                        AttackTile(hit.collider.gameObject.GetComponent<Tile>());
+                    }
+                    //-----------
+                    else if (hit.collider.gameObject.GetComponent<CharacterBase>())//hit first player otherwise
+                    {
+                        cb_Target = hit.collider.gameObject.GetComponent<CharacterBase>();
+                        cb_Target.int_Health -= cb_Attacker.int_damage;
+                    }
+                    //-----------
+                    return;
+                }
+                //-----------
+            }
+            //-----------
+        }
+        //-----------
         cb_Target.int_Health -= cb_Attacker.int_damage;//atm just reduces defenders health by attackers damage value, can be expanded upon at some point
 
         //print(cb_Target+ " damage taken "+ cb_Attacker.int_damage+" health remaining = "+ cb_Target.int_Health);
@@ -584,4 +641,15 @@ public class CharacterBase : MonoBehaviour {
         }
     }
     #endregion
+    //---------------------------------------------------
+    public IEnumerator LaserOff()
+    {
+        for (int i = 0; i < int_damage + 1; i++)
+        {
+            yield return new WaitForSeconds(0.01f);
+            lr_laser.startWidth = (int_damage - i) * 0.05f;
+            lr_laser.endWidth = (int_damage - i) * 0.05f;
+        }
+        yield return null;
+    }
 }//=======================================================================================
