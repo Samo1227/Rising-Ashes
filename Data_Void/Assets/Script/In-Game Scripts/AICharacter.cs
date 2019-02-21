@@ -54,9 +54,12 @@ public class AICharacter : CharacterBase {
             AICharacterDestruction();
         }
         //-----------
-        if(int_Health< int_Health_max)
+        if (ais_CurrentState == AIStates.waiting)
         {
-            SetState(AIStates.chasing);
+            if (int_Health < int_Health_max)
+            {
+                SetState(AIStates.chasing);
+            }
         }
         //-----------
         if (fl_Turn_Timer >= fl_Time_limit)
