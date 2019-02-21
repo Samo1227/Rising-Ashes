@@ -36,7 +36,7 @@ public class Bot_Modifier : MonoBehaviour
     public Text[] ui_txt_text;
     public GameObject go_leg_weight_limit_bar;
 
-    private void Start()
+    private void Awake()
     {
         //Makes all of the robot part arrays the same size
         #region SetArraySize
@@ -379,14 +379,10 @@ public class Bot_Modifier : MonoBehaviour
         //spawns the same type of parts on new robot that are on this script
         CSGameManager.gameManager.StorePlayer(int_body_type);
 
-        bl_heads[int_body_type[0]] = true;
-        bl_bodies[int_body_type[1]] = true;
-        bl_arms[int_body_type[2]] = true;
-        bl_legs[int_body_type[3]] = true;
-
         WeightCalc();
 
-
+        go_bot_maker_open_button.SetActive(true);
+        gameObject.SetActive(false);
 
 
     }

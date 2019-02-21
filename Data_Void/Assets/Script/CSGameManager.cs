@@ -32,6 +32,7 @@ public class CSGameManager : MonoBehaviour
     public Queue<AICharacter> qu_AI_Turns = new Queue<AICharacter>(); //enemy turn queue
     public int[] int_temp_robot_data;
     public bool bl_storing_robot;
+    public Bot_Modifier robot_mod;
     #endregion
     //---------------------------------------------------
     #region Singleton
@@ -258,8 +259,12 @@ public class CSGameManager : MonoBehaviour
 
     public void StorePlayer(int[] int_parts)
     {
-        int_temp_robot_data = int_parts;
-        bl_storing_robot = true;
+        if (bl_storing_robot == false)
+        {
+
+            int_temp_robot_data = int_parts;
+            bl_storing_robot = true;
+        }
     }
 
     public void AddRobot(int cX, int cZ)
@@ -272,6 +277,11 @@ public class CSGameManager : MonoBehaviour
         tRo.int_z = cZ;
         tRo.int_arr_parts = int_temp_robot_data;
         bl_storing_robot = false;
+
+        robot_mod.bl_heads[robot_mod.int_body_type[0]] = true;
+        robot_mod.bl_bodies[robot_mod.int_body_type[1]] = true;
+        robot_mod.bl_arms[robot_mod.int_body_type[2]] = true;
+        robot_mod.bl_legs[robot_mod.int_body_type[3]] = true;
 
     }
     #endregion
@@ -298,6 +308,7 @@ public class CSGameManager : MonoBehaviour
     #region Turn Manager
     public void EndPlayerTurn(PlayerRobot pr_Turn_Ended)
     {
+        pr_Turn_Ended.CheckHazard();
         ls_Player_Robots_With_Turns_Left.Remove(pr_Turn_Ended);
         //-----------
         if (ls_Player_Robots_With_Turns_Left.Count <= 0)
@@ -347,8 +358,8 @@ public class CSGameManager : MonoBehaviour
     {
         qu_AI_Turns.Peek().CheckHazard();
         qu_AI_Turns.Dequeue();//removes AI from turn queue at end of their specific turn
-        //  print(qu_AI_Turns.Count);
-        //-----------
+      //  print(qu_AI_Turns.Count);
+      //-----------
         if (qu_AI_Turns.Count > 0)
         {
             StartAITurn(); //if there are AIs left to go, do the next one.

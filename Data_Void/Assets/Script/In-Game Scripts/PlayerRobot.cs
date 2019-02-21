@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerRobot : CharacterBase
 {//extends characterbase for convienience, used to control player characters
@@ -32,6 +33,8 @@ public class PlayerRobot : CharacterBase
     public int int_body_effect;
     public int int_leg_effect;
     public int int_cooldown;
+
+    public PlayerRobot Held_robot;
 
     public LineRenderer lr_laser;
     //------------------------------------------
@@ -76,9 +79,6 @@ public class PlayerRobot : CharacterBase
     {
         go_health_bar.transform.localPosition = new Vector3(((float)int_Health - (float)int_Health_max) * (0.5f / int_Health_max), 0, 0);
         go_health_bar.transform.localScale = new Vector3((1f / int_Health_max) * int_Health, 0.2f, 1);
-        
-        
-
 
         if (CSGameManager.gameManager.pr_currentRobot == this)
         {
@@ -113,6 +113,11 @@ public class PlayerRobot : CharacterBase
 
         ActionSwitch();
         OverheatCheck();
+        if (Held_robot != null)
+        {
+            Held_robot.int_Actions = 0;
+        }
+
     }
     #endregion
     //------------------------------------------
@@ -149,43 +154,91 @@ public class PlayerRobot : CharacterBase
     private void OnMouseUp()
     {
         //---------
-        if (bl_Turn_Available)//if PR has a turn
+        if (bl_Turn_Available )//if PR has a turn
         {
-            //---------
-            if (!bl_Moving)//when it's not moving it can be clicked on
+            if(CSGameManager.gameManager.pr_currentRobot == null|| CSGameManager.gameManager.pr_currentRobot.int_effect != 4)
             {
                 //---------
-                if (int_Robot_State == 0)//movement state
+                if (!bl_Moving)//when it's not moving it can be clicked on
                 {
                     //---------
-                    if (CSGameManager.gameManager.pr_currentRobot != null)//the clear is needed but will always be null the first time a PR is clicked on, thus this is neccessary
+                    if (int_Robot_State == 0)//movement state
                     {
-                        CSGameManager.gameManager.pr_currentRobot.Clear_Selection();//clears the selection of the previously selected robot
+                        //---------
+                        if (CSGameManager.gameManager.pr_currentRobot != null)//the clear is needed but will always be null the first time a PR is clicked on, thus this is neccessary
+                        {
+                            CSGameManager.gameManager.pr_currentRobot.Clear_Selection();//clears the selection of the previously selected robot
+                        }
+                        //---------
+                        Clear_Selection();//clears this PR's selection just to be safe
+                        tl_Current_Tile.bl_Current_Tile = false;
+                        CSGameManager.gameManager.SetCurrentRobot(this);//set the gamemanagers reference of currently selected PR to this
+                        FindMoveTiles();//works out PR's movement bounds
                     }
                     //---------
-                    Clear_Selection();//clears this PR's selection just to be safe
-                    tl_Current_Tile.bl_Current_Tile = false;
-                    CSGameManager.gameManager.SetCurrentRobot(this);//set the gamemanagers reference of currently selected PR to this
-                    FindMoveTiles();//works out PR's movement bounds
-                }
-                //---------
-                if (int_Robot_State == 1)//action state
-                {
-                    //---------
-                    if (CSGameManager.gameManager.pr_currentRobot != null)//the clear is needed but will always be null the first time a PR is clicked on, thus this is neccessary
+                    if (int_Robot_State == 1)//action state
                     {
-                        CSGameManager.gameManager.pr_currentRobot.Clear_Selection();//clears the selection of the previously selected robot
+                        //---------
+                        if (CSGameManager.gameManager.pr_currentRobot != null)//the clear is needed but will always be null the first time a PR is clicked on, thus this is neccessary
+                        {
+                            CSGameManager.gameManager.pr_currentRobot.Clear_Selection();//clears the selection of the previously selected robot
+                        }
+                        //---------
+                        Clear_Selection();//clears this PR's selection just to be safe
+                        CSGameManager.gameManager.SetCurrentRobot(this);//set the gamemanagers reference of currently selected PR to this
+                        Find_Attack_Tile_Range();//works out PR's movement bounds
                     }
                     //---------
-                    Clear_Selection();//clears this PR's selection just to be safe
-                    CSGameManager.gameManager.SetCurrentRobot(this);//set the gamemanagers reference of currently selected PR to this
-                    Find_Attack_Tile_Range();//works out PR's movement bounds
                 }
-                //---------
             }
             //---------
         }
         //---------
+    }
+
+    private void OnMouseOver()
+    {
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
+        if (CSGameManager.gameManager.pr_currentRobot != null && CSGameManager.gameManager.pr_currentRobot.int_effect == 4 && Held_robot == null)
+        {
+            PlayerRobot rob = CSGameManager.gameManager.pr_currentRobot;//gets a reference to the currently selected player robot
+
+            RaycastHit[] hits = new RaycastHit[2];
+
+            Vector3 dir = new Vector3(transform.position.x, 1, transform.position.z) - rob.transform.position;
+            dir = dir.normalized;
+            float fl_Ray_Range;
+            Ray ray_cast;
+
+            fl_Ray_Range = 1;
+            ray_cast = new Ray(rob.transform.position, dir * fl_Ray_Range);//draws a ray between target and selected robot
+            Debug.DrawRay(rob.transform.position, dir * fl_Ray_Range, Color.green, 0.1f);//visual representation of ray for editor
+
+            if (Input.GetMouseButtonUp(0))//when left mouse button is clicked
+            {
+                if (Physics.RaycastNonAlloc(ray_cast, hits, fl_Ray_Range) > 0)//if the raycast has hit something
+                {
+                    if (hits[0].collider.gameObject.GetComponent<PlayerRobot>())//the collider hit is a tile
+                    {
+                        if (rob.int_effect == 4)
+                        {
+                            rob.Held_robot = hits[0].collider.gameObject.GetComponent<PlayerRobot>();
+                            rob.RandomDamage();
+                            rob.bl_Has_Acted = true;//robot has done it's action
+                            rob.int_Actions--;
+                            rob.int_heat_current += 1;
+                            int_Actions = 0;
+                            rob.Clear_Selection();//clear tile highlighting 
+                            hits[0].collider.gameObject.transform.parent = rob.transform;
+                            tl_Current_Tile.bl_Occupied_By_PC = false;
+                            GetComponent<Collider>().enabled = false;
+                            transform.position = new Vector3(transform.position.x,1.5f,transform.position.z);
+                        }
+                    }
+                }
+            }
+        }
     }
     #endregion
     //------------------------------------------
@@ -280,7 +333,6 @@ public class PlayerRobot : CharacterBase
                 //---------
                 if (CSGameManager.gameManager.bl_Player_Turn)
                 {
-                    CheckHazard();
                     CSGameManager.gameManager.EndPlayerTurn(this);//updates the GameManager
                 }
                 //---------

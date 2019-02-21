@@ -86,7 +86,7 @@ public class Tile : MonoBehaviour {
         {
             rend_Colour.material.color = Color.red;
         }
-        else if (bl_spawnable_zone == true && CSGameManager.gameManager.bl_storing_robot == true)
+        else if (bl_spawnable_zone == true && CSGameManager.gameManager.bl_storing_robot == true && bl_Is_Walkable && bl_Occupied_By_PC == false && bl_Occupied_By_AI == false)
         {
             rend_Colour.material.color = Color.green;
         }
@@ -204,6 +204,16 @@ public class Tile : MonoBehaviour {
 
             if (Input.GetMouseButtonUp(0))//when left mouse button is clicked
             {
+                Vector3 v3_aim_direction;
+                Vector3 v3_aim;
+                float fl_angle;
+
+                v3_aim_direction = new Vector3(int_X,0,int_Z);
+                v3_aim.x = rob.int_x - v3_aim_direction.x;
+                v3_aim.z = rob.int_z - v3_aim_direction.z;
+                fl_angle = Mathf.Atan2(v3_aim.x, v3_aim.z) * Mathf.Rad2Deg;
+                rob.transform.rotation = Quaternion.Euler(new Vector3(0, fl_angle + 90, 0));
+
 
                 if (Physics.RaycastNonAlloc(ray_cast, hits, fl_Ray_Range) > 0)//if the raycast has hit something
                 {
@@ -239,7 +249,7 @@ public class Tile : MonoBehaviour {
                                     {
                                         hits[1].collider.gameObject.GetComponent<CharacterBase>().int_Health += hits[0].collider.gameObject.GetComponent<Tile>().int_health;
                                     }
-                                    else if(hits[1].collider.gameObject.GetComponent<CharacterBase>() && hits[1].collider.gameObject.GetComponent<CharacterBase>().bl_Shield == true)
+                                    else if (hits[1].collider.gameObject.GetComponent<CharacterBase>() && hits[1].collider.gameObject.GetComponent<CharacterBase>().bl_Shield == true)
                                     {
                                         hits[1].collider.gameObject.GetComponent<CharacterBase>().bl_Shield = false;
                                     }
@@ -270,7 +280,6 @@ public class Tile : MonoBehaviour {
                         if (rob.int_effect == 1)//drill
                         {
                             hits[0].collider.gameObject.GetComponent<Tile>().int_health -= rob.int_damage * 2;
-                            rob.int_heat_current += 1;
                         }
 
                     }
@@ -332,6 +341,7 @@ public class Tile : MonoBehaviour {
                         }
                     }
 
+
                 }
                 else if (rob.int_effect == 2)
                 {
@@ -348,12 +358,9 @@ public class Tile : MonoBehaviour {
                 else if (rob.int_effect == 3)
                 {
                     Collider[] hits_ = Physics.OverlapSphere(transform.position, fl_ExplodeRaduis);
-                    rob.int_heat_current += 1;
 
                     foreach (Collider hit in hits_)
                     {
-                        //hit.transform.gameObject.SetActive(false);
-
                         if (hit.transform.gameObject.GetComponent<Tile>())
                         {
                             Destroy(hit.transform.gameObject);
@@ -362,17 +369,42 @@ public class Tile : MonoBehaviour {
                     }
 
                 }
+                else if (rob.int_effect == 4)
+                {
+                    PlayerRobot rob_held = rob.Held_robot;
+                    Debug.Log("place");
+
+                    if (!bl_Occupied_By_PC && !bl_Occupied_By_AI && rob_held != null) //only able to move to unnocupied squares
+                    {
+                        Debug.Log("place2");
+                        rob_held.gameObject.transform.parent = null;
+                        //rob_held.MoveToTargetSquare(this);
+                        //rob_held.bl_Moving = true;
+
+                        //updates and resets the robots position references
+                        
+                        rob_held.int_x = int_X;
+                        rob_held.int_z = int_Z;//robots current position storage is updated to match
+                        rob_held.tl_Current_Tile = CSGameManager.gameManager.map[int_X, int_Z].gameObject.GetComponent<Tile>(); //robots reference tile is set to new position
+                        rob_held.tl_Current_Tile.bl_Occupied_By_PC = true;//new tile is now occupied
+                        rob_held.GetComponent<Collider>().enabled = true;
+                        rob_held.transform.position = new Vector3(rob_held.transform.position.x, 1f, rob_held.transform.position.z);
+                        rob.int_Actions--;
+                        rob.bl_Has_Acted = true;
+                        rob.Clear_Selection();//clear tile highlighting
+                        rob.Held_robot = null;
+
+                    }
+                }
 
             }
         }
-        if (bl_spawnable_zone == true)
+        if ((bl_spawnable_zone == true && CSGameManager.gameManager.bl_storing_robot == true && bl_Is_Walkable && bl_Occupied_By_PC == false && bl_Occupied_By_AI == false))
         {
-            if (CSGameManager.gameManager.bl_storing_robot == true)
+
+            if(Input.GetMouseButtonUp(0))
             {
-                if(Input.GetMouseButtonUp(0))
-                {
-                    CSGameManager.gameManager.AddRobot(int_X, int_Z);
-                }
+                CSGameManager.gameManager.AddRobot(int_X, int_Z);
             }
         }
     }
