@@ -21,6 +21,8 @@ public class PlayerRobot : CharacterBase
     public Transform[] tr_arr_body;
     public string[] st_arr_resources;
     #endregion
+    //------------------------------------------
+    #region Variables II
 
     public int[] int_heat_range;
     public bool bl_overheat;
@@ -35,7 +37,8 @@ public class PlayerRobot : CharacterBase
     public int int_cooldown;
 
     public PlayerRobot Held_robot;
-    
+
+    #endregion
     //------------------------------------------
     #region Start & Update
     private void Start()
@@ -340,6 +343,7 @@ public class PlayerRobot : CharacterBase
     }
     #endregion
     //------------------------------------------
+    #region DamageRandomiser
     public void RandomDamage()
     {
         if (bl_overheat == false)
@@ -351,5 +355,6 @@ public class PlayerRobot : CharacterBase
             int_damage = Random.Range(int_overheat_damage_bracket[0], int_overheat_damage_bracket[1]);
         }
     }
- 
+    #endregion
+    //------------------------------------------
 }//=======================================================================================

@@ -384,6 +384,7 @@ public class AICharacter : CharacterBase {
     #region Mouse Interaction
     private void OnMouseOver()//this doesn't work for shooting enemies
     {
+        //-----------
         if (EventSystem.current.IsPointerOverGameObject())
             return;
             //-----------
@@ -397,7 +398,7 @@ public class AICharacter : CharacterBase {
             dir = dir.normalized;
             float fl_Ray_Range;
             Ray ray_cast;
-
+            //-----------
             if (rob.int_effect == 0)
             {
                 fl_Ray_Range = 1000;
@@ -406,6 +407,7 @@ public class AICharacter : CharacterBase {
 
                 Debug.DrawRay(rob.transform.position, dir * fl_Ray_Range, Color.green, 0.1f);//visual representation of ray for editor
             }
+            //-----------
             else
             {
                 fl_Ray_Range = Vector3.Distance(new Vector3(transform.position.x, 1, transform.position.z), rob.transform.position);
@@ -414,7 +416,6 @@ public class AICharacter : CharacterBase {
 
                 Debug.DrawRay(rob.transform.position, dir * fl_Ray_Range, Color.green, 0.1f);//visual representation of ray for editor
             }
-
             //-----------
             if (Input.GetMouseButtonDown(0))
             {
@@ -428,59 +429,70 @@ public class AICharacter : CharacterBase {
                         rob.bl_Has_Acted = true;//robot has done it's action
                         rob.int_Actions--;
                         rob.Clear_Selection();//clear tile highlighting 
+                        //-----------
                         if (rob.int_effect == 0)
                         {
                             rob.lr_laser.startWidth = rob.int_damage * 0.05f;
                             rob.lr_laser.endWidth = rob.int_damage * 0.05f;
                             rob.lr_laser.SetPosition(0, rob.transform.position);
                             rob.lr_laser.SetPosition(1, hits[0].point);
-
+                            //-----------
                             if (rob.bl_overheat == false)
                             {
                                 hits[0].collider.gameObject.GetComponent<CharacterBase>().int_Health -= rob.int_damage;
                                 rob.int_heat_current += 1;
+                                //-----------
                                 if (hits[0].collider.gameObject.GetComponent<CharacterBase>().int_Health < 0)
                                 {
                                     rob.lr_laser.SetPosition(1, hits[1].point);
-
+                                    //-----------
                                     if (hits[1].collider.gameObject.GetComponent<Tile>())
                                     {
                                         hits[1].collider.gameObject.GetComponent<Tile>().int_health += hits[0].collider.gameObject.GetComponent<CharacterBase>().int_Health;
                                     }
+                                    //-----------
                                     else if (hits[1].collider.gameObject.GetComponent<CharacterBase>())
                                     {
                                         hits[1].collider.gameObject.GetComponent<CharacterBase>().int_Health += hits[0].collider.gameObject.GetComponent<CharacterBase>().int_Health;
                                     }
+                                    //-----------
                                     else if (hits[1].collider.gameObject == null)
                                     {
                                         return;
                                     }
+                                    //-----------
                                 }
+                                //-----------
                             }
+                            //-----------
                             else
                             {
 
                                 rob.lr_laser.SetPosition(0, rob.transform.position);
                                 rob.lr_laser.SetPosition(1, hits[1].point);
-
+                                //-----------
                                 if (hits[1].collider.gameObject.GetComponent<Tile>())
                                 {
                                     hits[1].collider.gameObject.GetComponent<Tile>().int_health -= rob.int_damage;
                                     rob.int_heat_current += 1;
                                 }
+                                //-----------
                                 else if (hits[1].collider.gameObject.GetComponent<CharacterBase>())
                                 {
                                     hits[1].collider.gameObject.GetComponent<CharacterBase>().int_Health -= rob.int_damage;
                                     rob.int_heat_current += 1;
                                 }
-
+                                //-----------
                             }
+                            //-----------
                         }
+                        //-----------
                         if (rob.int_effect == 1)
                         {
                             hits[0].collider.gameObject.GetComponent<CharacterBase>().int_Health -= rob.int_damage;
 
                         }
+                        //-----------
                     }
                     //-----------
                 }
@@ -523,7 +535,7 @@ public class AICharacter : CharacterBase {
     }
     #endregion
     //---------------------------------------------------
-    #region Visual Cyllinder for attacks, not really working atm
+    #region Visual Cyllinder for attacks. UNUSED
     /*
     private IEnumerator FireRay(float waitTime, PlayerRobot Rob)
     {
@@ -560,23 +572,29 @@ public class AICharacter : CharacterBase {
             case AIStates.waiting:
                 Waiting();
                 break;
+            //-----------
             case AIStates.chasing:
                 FindNearestPlayerRobot();
               //  TakeChaseTurn();
                 break;
+            //-----------
             case AIStates.retreating:
                 FindNearestPlayerRobot();
               //  RetreatBehaviour();
                 break;
+            //-----------
             case AIStates.patrolling:
                 //move to a nearby square? or randome or something
                 break;
-            case AIStates.inactive:
+            //-----------
+            case AIStates.inactive: //use this to keep AI inactive until some kind of event trigger
                 EndTurn();
                 break;
+            //-----------
             default:
                 print("No state");
                 break;
+                //-----------
         }
     }
     #endregion

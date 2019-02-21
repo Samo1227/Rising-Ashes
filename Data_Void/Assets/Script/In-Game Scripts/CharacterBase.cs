@@ -66,10 +66,12 @@ public class CharacterBase : MonoBehaviour {
     void Start()
     {
         int_Health = int_Health_max;//current health = max health at start
+        //-----------
         if (gameObject.GetComponent<LineRenderer>() != null)
         {
             lr_laser = gameObject.GetComponent<LineRenderer>();
         }
+        //-----------
     }
     #endregion
     //---------------------------------------------------
@@ -635,21 +637,27 @@ public class CharacterBase : MonoBehaviour {
     public void CheckHazard()
     {
         HazardTile _HT = CSGameManager.gameManager.map[int_x, int_z].gameObject.GetComponent<HazardTile>();
+        //-----------
         if (_HT != null)
         {
             _HT.ApplyHazard(this);
         }
+        //-----------
     }
     #endregion
     //---------------------------------------------------
+    #region Laser Shrink
     public IEnumerator LaserOff()
     {
+        //-----------
         for (int i = 0; i < int_damage + 1; i++)
         {
             yield return new WaitForSeconds(0.01f);
             lr_laser.startWidth = (int_damage - i) * 0.05f;
             lr_laser.endWidth = (int_damage - i) * 0.05f;
         }
+        //-----------
         yield return null;
-    }
+    } 
+    #endregion
 }//=======================================================================================

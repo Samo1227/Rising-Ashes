@@ -2369,6 +2369,82 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1668833230}
   m_CullTransparentMesh: 0
+--- !u!1 &1708337143
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1708337145}
+  - component: {fileID: 1708337144}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1708337144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1708337143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 452d07df5885e024e9b5bd1fdc070b9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  int_X: 0
+  int_Z: 0
+  int_Distance_From_Start: 0
+  int_Move_Cost: 1
+  int_Attack_Range_Cost: 1
+  int_Child: 1
+  ls_Tile_Neighbours: []
+  bl_Is_Walkable: 1
+  bl_Walking_Selection: 0
+  bl_Attack_Selection: 0
+  bl_Occupied_By_PC: 0
+  bl_Occupied_By_AI: 0
+  bl_Current_Tile: 0
+  bl_Destroyable: 0
+  int_health: 0
+  int_health_max: 0
+  go_health_bar: {fileID: 0}
+  go_health_bar_back: {fileID: 0}
+  tl_Start_Tile: {fileID: 0}
+  f: 0
+  g: 0
+  h: 0
+  rend_Colour: {fileID: 0}
+  bl_explosive: 0
+  fl_ExplodeRaduis: 0
+  fl_height: 0
+  bl_spawnable_zone: 0
+  hazardType: 0
+  int_Heat: 0
+  int_Damage: 0
+  int_Cold: 0
+  int_MoveDifficulty: 2
+  int_WeightLimit: 0
+--- !u!4 &1708337145
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1708337143}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -19.614317, y: -10.710228, z: 4.0007277}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1774249573
 GameObject:
   m_ObjectHideFlags: 0
