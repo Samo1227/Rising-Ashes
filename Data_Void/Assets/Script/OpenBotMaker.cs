@@ -9,6 +9,11 @@ public class OpenBotMaker : MonoBehaviour
     public void OpenBotmMaker()
     {
         go_bot_maker.SetActive(true);
+        if (CSGameManager.gameManager.pr_currentRobot != null)
+        {
+            CSGameManager.gameManager.pr_currentRobot.Clear_Selection();
+            CSGameManager.gameManager.pr_currentRobot = null;
+        }
         gameObject.SetActive(false);
         if (go_bot_maker.GetComponent<Bot_Modifier>().bl_heads[go_bot_maker.GetComponent<Bot_Modifier>().int_body_type[0]] == true 
          || go_bot_maker.GetComponent<Bot_Modifier>().bl_bodies[go_bot_maker.GetComponent<Bot_Modifier>().int_body_type[1]] == true 
