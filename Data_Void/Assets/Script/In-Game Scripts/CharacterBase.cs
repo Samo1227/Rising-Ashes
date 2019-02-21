@@ -58,6 +58,8 @@ public class CharacterBase : MonoBehaviour {
 
     public List<Tile> selectableTiles = new List<Tile>();//a list of selectable tiles, useful for clearing data on each tile when the selection is done with 
     public bool bl_Shield;
+
+    public bool bl_Stunned = false;
     #endregion
     //---------------------------------------------------
     #region Start

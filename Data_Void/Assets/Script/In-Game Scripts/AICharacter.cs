@@ -8,7 +8,8 @@ public enum AIStates          //an enum of AI states
     waiting,                  //do nothing but maybe make some checks state
     patrolling,               //Wander around state. not yet implemented
     chasing,                  //close in and attack
-    retreating,               //make space and attack. not yet implemented
+    retreating,               //make space and attack. 
+    inactive,                 //Await for some kind of event trigger perhaps?
 }
 
 public class AICharacter : CharacterBase {
@@ -33,8 +34,9 @@ public class AICharacter : CharacterBase {
         rnd_Rendereer = gameObject.transform.GetComponent<Renderer>();
         tl_Current_Tile = CSGameManager.gameManager.map[int_x, int_z].gameObject.GetComponent<Tile>();
         tl_Current_Tile.bl_Occupied_By_AI = true;
+        if (ais_CurrentState == AIStates.inactive)
+            return;
         SetState(AIStates.waiting);
-       // coroutine = FireRay(2.0f);
     }
     #endregion
     //---------------------------------------------------
@@ -50,6 +52,11 @@ public class AICharacter : CharacterBase {
         if (int_Health <= 0)
         {
             AICharacterDestruction();
+        }
+        //-----------
+        if(int_Health< int_Health_max)
+        {
+            SetState(AIStates.chasing);
         }
         //-----------
         if (fl_Turn_Timer >= fl_Time_limit)
@@ -98,10 +105,7 @@ public class AICharacter : CharacterBase {
         //-----------
         else
         {
-            Clear_Selection();
-            pr_Target = null;
-            bl_Is_Active = false;
-            CSGameManager.gameManager.EndAITurn();
+            EndTurn();
         }
         //-----------
     }
@@ -184,9 +188,7 @@ public class AICharacter : CharacterBase {
                     tl_Current_Tile.bl_Occupied_By_AI = true;
                     Find_Attack_Tile_Range();
                     FindPRsInRange();
-                    Clear_Selection();
-                    bl_Is_Active = false;
-                    CSGameManager.gameManager.EndAITurn();
+                    EndTurn();
                 }
             }
             //-----------
@@ -211,10 +213,7 @@ public class AICharacter : CharacterBase {
                     FindTileTarget(pr_Target);
                 }
                 //-----------
-                Clear_Selection();
-                pr_Target = null;
-                bl_Is_Active = false;
-                CSGameManager.gameManager.EndAITurn();
+                EndTurn();
             }
             //-----------
         }
@@ -278,9 +277,7 @@ public class AICharacter : CharacterBase {
                     tl_Current_Tile.bl_Occupied_By_AI = true;
                     Find_Attack_Tile_Range();
                     FindPRsInRange();
-                    Clear_Selection();
-                    bl_Is_Active = false;
-                    CSGameManager.gameManager.EndAITurn();
+                    EndTurn();
                 }
             }
             //-----------
@@ -305,10 +302,7 @@ public class AICharacter : CharacterBase {
                     FindTileTarget(pr_Target);
                 }
                 //-----------
-                Clear_Selection();
-                pr_Target = null;
-                bl_Is_Active = false;
-                CSGameManager.gameManager.EndAITurn();
+                EndTurn();
             }
             //-----------
         }
@@ -363,6 +357,8 @@ public class AICharacter : CharacterBase {
         PathFinding(tl_Current_Tile, tl_Target_Tile);
     }
     #endregion
+    //---------------------------------------------------
+    #region RetreatTarget
     void FindRetreatTargetTile()
     {
         Tile tl_TargetTile = null;
@@ -372,14 +368,15 @@ public class AICharacter : CharacterBase {
         {
             _TargetTile = selectableTiles[i];
             float fl_DistFromTargetPR = Vector3.Distance(_TargetTile.transform.position, pr_Target.transform.position);
-            if(fl_DistFromTargetPR> fl_RetreatDistance && fl_RetreatDistance <= int_RetreatRange)
+            if (fl_DistFromTargetPR > fl_RetreatDistance && fl_RetreatDistance <= int_RetreatRange)
             {
                 tl_TargetTile = _TargetTile;
                 fl_RetreatDistance = fl_DistFromTargetPR;
             }
         }
         MoveToTargetSquare(tl_TargetTile);
-    }
+    } 
+    #endregion
     //---------------------------------------------------
     #region Mouse Interaction
     private void OnMouseOver()//this doesn't work for shooting enemies
@@ -503,6 +500,16 @@ public class AICharacter : CharacterBase {
     }
     #endregion
     //---------------------------------------------------
+    #region EndTurn
+    public void EndTurn()
+    {
+        Clear_Selection();
+        pr_Target = null;
+        bl_Is_Active = false;
+        CSGameManager.gameManager.EndAITurn();
+    } 
+    #endregion
+    //---------------------------------------------------
     #region Death
     public void AICharacterDestruction()
     {
@@ -560,6 +567,9 @@ public class AICharacter : CharacterBase {
                 break;
             case AIStates.patrolling:
                 //move to a nearby square? or randome or something
+                break;
+            case AIStates.inactive:
+                EndTurn();
                 break;
             default:
                 print("No state");
