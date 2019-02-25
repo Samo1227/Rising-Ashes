@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: efb588fdaabdd3040a7f7da9254b21a9
   - enabled: 1
+    path: Assets/Scenes/ShipMenu.unity
+    guid: 15e99a7d735f59248bbfc29e8ffa024c
+  - enabled: 1
     path: Assets/Scenes/TileTester.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
@@ -17,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LoseScreen.unity
     guid: 1b1ed82c09747cb498c419d24a1d8606
+  - enabled: 1
+    path: Assets/Scenes/IntroScene.unity
+    guid: e7b4115aa9f17934dba4e86ccd943a89
   m_configObjects: {}

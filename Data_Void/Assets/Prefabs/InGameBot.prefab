@@ -136,7 +136,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1170745574126380}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.799134, y: 1.1800442, z: 2.21097}
+  m_LocalPosition: {x: 0.33333334, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4570963332883844}
@@ -180,7 +180,7 @@ MonoBehaviour:
   int_Veiw_Type: 0
   int_Health: 0
   int_Health_max: 5
-  int_Attack_Range: 3
+  int_Attack_Range: 1
   int_damage: 0
   int_heat_current: 0
   int_heat_total: 0
@@ -201,6 +201,8 @@ MonoBehaviour:
   fl_Time_limit: 5
   bl_Turn_Just_Started: 0
   selectableTiles: []
+  bl_Shield: 0
+  lr_laser: {fileID: 3539013778851571317}
   bl_Turn_Available: 1
   bl_Has_Moved: 0
   bl_Has_Acted: 0
@@ -228,7 +230,7 @@ MonoBehaviour:
   int_body_effect: 0
   int_leg_effect: 0
   int_cooldown: 2
-  lr_laser: {fileID: 3539013778851571317}
+  Held_robot: {fileID: 0}
 --- !u!120 &3539013778851571317
 LineRenderer:
   m_ObjectHideFlags: 0

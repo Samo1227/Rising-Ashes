@@ -13,6 +13,7 @@ public class CSGameManager : MonoBehaviour
 
     public Tile tile;//publicly assigned objects
     public PlayerRobot pr_PC;
+    public IntroPlayerBot ipb_PC; //for intro scene
     public AICharacter ai_Enemy_Test;//might need a more robust system for the actuall game
     public Tile[,] map = new Tile[10, 10];//at the moment the map array is limited to this size, this needs changing
     public PlayerRobot pr_currentRobot;//reference to the currently selected player robot
@@ -54,15 +55,15 @@ public class CSGameManager : MonoBehaviour
             Destroy(gameObject); // kill subsequent versions
         }
         //-----------
-        if (SceneManager.GetActiveScene().name == "TileTester")//intended to allow the gameManager to create a battle when on a battle scene but seems to be missing something
-        {
-            print("mission");
-            bl_IsMission = true;
-          //  TextToMapInt();
-          //  Start();
-        }
-        if (bl_IsMission == false)
-            return;
+        //if (SceneManager.GetActiveScene().name == "TileTester")//intended to allow the gameManager to create a battle when on a battle scene but seems to be missing something
+        //{
+        //    print("mission");
+        //    bl_IsMission = true;
+        //  //  TextToMapInt();
+        //  //  Start();
+        //}
+        //if (bl_IsMission == false)
+        //    return;
 
         TextToMapInt();
 
@@ -135,12 +136,15 @@ public class CSGameManager : MonoBehaviour
     //---------------------------------------------------
     #region Start
     void Start() {
-        if (bl_IsMission == false)
-            return;
+        //if (bl_IsMission == false)
+        //    return;
 
         MakeMap();//generates map
         RefreshTile();
-
+        if(SceneManager.GetActiveScene().name== "IntroScene")
+        {
+            AddIntroBot(4, 4);
+        }
         //AddRobot(2, 4);
         //AddRobot(4, 4);
 
@@ -275,14 +279,29 @@ public class CSGameManager : MonoBehaviour
         tRo.transform.position = new Vector3(cX, transform.position.y + 1f, cZ);
         tRo.int_x = cX;
         tRo.int_z = cZ;
+
+        if (SceneManager.GetActiveScene().name == "IntroScene")
+        {
+            tRo.tl_Current_Tile = map[cX, cZ];
+            return;
+        }
         tRo.int_arr_parts = int_temp_robot_data;
         bl_storing_robot = false;
-
+       
         robot_mod.bl_heads[robot_mod.int_body_type[0]] = true;
         robot_mod.bl_bodies[robot_mod.int_body_type[1]] = true;
         robot_mod.bl_arms[robot_mod.int_body_type[2]] = true;
         robot_mod.bl_legs[robot_mod.int_body_type[3]] = true;
 
+    }
+
+    public void AddIntroBot(int cX, int cZ)
+    {
+        IntroPlayerBot tIPB = null;
+        tIPB = Instantiate(ipb_PC);
+        tIPB.transform.position = new Vector3(cX, transform.position.y + 1f, cZ);
+        tIPB.int_x = cX;
+        tIPB.int_z = cZ;
     }
     #endregion
     //---------------------------------------------------
@@ -430,7 +449,7 @@ public class CSGameManager : MonoBehaviour
         Array.Clear(map_layout, 0, map_layout.Length);
       //  ls_AI_Characters_In_Level.Clear();
       //  ls_Player_Robots_In_Level.Clear();
-        bl_IsMission = false;
+      //  bl_IsMission = false;
     }
     #endregion
     //---------------------------------------------------

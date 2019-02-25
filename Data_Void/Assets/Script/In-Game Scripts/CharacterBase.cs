@@ -66,11 +66,11 @@ public class CharacterBase : MonoBehaviour {
     void Start()
     {
         int_Health = int_Health_max;//current health = max health at start
-        //-----------
-        if (gameObject.GetComponent<LineRenderer>() != null)
-        {
-            lr_laser = gameObject.GetComponent<LineRenderer>();
-        }
+                                    //-----------
+
+        print("Why no call?");
+        lr_laser = gameObject.GetComponent<LineRenderer>();
+        
         //-----------
     }
     #endregion
@@ -570,49 +570,51 @@ public class CharacterBase : MonoBehaviour {
     protected void AttackTarget(CharacterBase cb_Attacker, CharacterBase cb_Target)//takes a reference to the attacker and the attackers target and applies damage
     {
         //-----------
-        if (cb_Target == null)//if there is no target cancel this
+        if (cb_Target != null)//if there is no target cancel this
         {
-            return;
-        }
-        //-----------
-        if (cb_Attacker.gameObject.GetComponent<AICharacter>() != null)
-        {
-            //-----------
-            if (cb_Attacker.gameObject.GetComponent<AICharacter>().int_Attack_Range > 1)
-            {
-                RaycastHit hit;
-                //-----------
-                if (Physics.Raycast(transform.position, cb_Target.transform.position, out hit))
-                {
+            // return;
 
-                    lr_laser.SetPosition(0, transform.position);
-                    lr_laser.SetPosition(1, hit.point);
-                    StartCoroutine(LaserOff());
+            //-----------
+            if (cb_Attacker.gameObject.GetComponent<AICharacter>() != null)
+            {
+                //-----------
+                if (cb_Attacker.gameObject.GetComponent<AICharacter>().int_Attack_Range > 1)
+                {
+                    RaycastHit hit;
                     //-----------
-                    if (hit.collider.gameObject.GetComponent<Tile>())//if a Tile is in the way hit that
+                    if (Physics.Raycast(transform.position, cb_Target.transform.position, out hit))
                     {
-                        AttackTile(hit.collider.gameObject.GetComponent<Tile>());
+
+                        lr_laser.SetPosition(0, transform.position);
+                        lr_laser.SetPosition(1, hit.point);
+                        StartCoroutine(LaserOff());
+                        //-----------
+                        if (hit.collider.gameObject.GetComponent<Tile>())//if a Tile is in the way hit that
+                        {
+                            AttackTile(hit.collider.gameObject.GetComponent<Tile>());
+                        }
+                        //-----------
+                        else if (hit.collider.gameObject.GetComponent<CharacterBase>())//hit first player otherwise
+                        {
+                            cb_Target = hit.collider.gameObject.GetComponent<CharacterBase>();
+                            cb_Target.int_Health -= cb_Attacker.int_damage;
+                        }
+                        //-----------
+                        // return;
                     }
                     //-----------
-                    else if (hit.collider.gameObject.GetComponent<CharacterBase>())//hit first player otherwise
-                    {
-                        cb_Target = hit.collider.gameObject.GetComponent<CharacterBase>();
-                        cb_Target.int_Health -= cb_Attacker.int_damage;
-                    }
-                    //-----------
-                    return;
                 }
                 //-----------
             }
             //-----------
+            else
+                cb_Target.int_Health -= cb_Attacker.int_damage;//atm just reduces defenders health by attackers damage value, can be expanded upon at some point
+
+            //print(cb_Target+ " damage taken "+ cb_Attacker.int_damage+" health remaining = "+ cb_Target.int_Health);
+
+            //cb_Target.go_health_bar.transform.localPosition = new Vector3(((float)int_Health - (float)int_Health_max) * (0.5f / int_Health_max), 0, 0);
+            //cb_Target.go_health_bar.transform.localScale = new Vector3((1f / int_Health_max) * int_Health, 0.2f, 1);
         }
-        //-----------
-        cb_Target.int_Health -= cb_Attacker.int_damage;//atm just reduces defenders health by attackers damage value, can be expanded upon at some point
-
-        //print(cb_Target+ " damage taken "+ cb_Attacker.int_damage+" health remaining = "+ cb_Target.int_Health);
-
-        //cb_Target.go_health_bar.transform.localPosition = new Vector3(((float)int_Health - (float)int_Health_max) * (0.5f / int_Health_max), 0, 0);
-        //cb_Target.go_health_bar.transform.localScale = new Vector3((1f / int_Health_max) * int_Health, 0.2f, 1);
     }
 
     //---------------------------------------------------
