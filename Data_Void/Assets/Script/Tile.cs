@@ -40,7 +40,12 @@ public class Tile : MonoBehaviour {
 
     public bool bl_spawnable_zone;
 
-
+    public bool bl_in_view_zone;
+    public bool bl_opaque;
+    public Renderer go_fog;
+    //public int int_view_state;
+    public bool bl_radar;
+    public bool bl_tag;
 
     #endregion
     //---------------------------------------
@@ -48,6 +53,13 @@ public class Tile : MonoBehaviour {
     void Start () {
         rend_Colour = gameObject.transform.GetChild(int_Child).GetComponent<Renderer>();//allows changing of tiles colour and takes into account tiles being changed (destroyed/created)
         fl_ExplodeRaduis = 1;
+
+        if(bl_opaque == false)
+        {
+            GameObject temp = gameObject.transform.GetChild(int_Child).gameObject;
+            go_fog = temp.transform.GetChild(0).GetComponent<Renderer>();
+        }
+
     }
 
     //--------------------------------------------
@@ -99,7 +111,6 @@ public class Tile : MonoBehaviour {
             RemoveTile();
         }
 
-
     }
     #endregion
     //--------------------------------------------
@@ -138,7 +149,7 @@ public class Tile : MonoBehaviour {
 
         if (EventSystem.current.IsPointerOverGameObject())
         {
-           // print("Why do you click?");
+            print("Why do you click?");
             return;
         }
         if (bl_Walking_Selection) //if this tile is part of the current walking selection
@@ -161,6 +172,11 @@ public class Tile : MonoBehaviour {
                 rob.bl_Has_Moved = true;//robot can no longer move
                 rob.int_Actions--;
                 rob.Clear_Selection();//clear tile highlighting
+                StartCoroutine(rob.Clear_View());
+                foreach (PlayerRobot pr in CSGameManager.gameManager.ls_Player_Robots_In_Level)
+                {
+                    StartCoroutine(pr.FindVeiwableTiles());
+                }
             }
         }
 
@@ -221,9 +237,6 @@ public class Tile : MonoBehaviour {
                     if (hits[0].collider.gameObject.GetComponent<Tile>())//the collider hit is a tile
                     {
                         rob.RandomDamage();
-                        rob.bl_Has_Acted = true;//robot has done it's action
-                        rob.int_Actions--;
-                        rob.Clear_Selection();//clear tile highlighting 
 
                         if (rob.int_effect == 0)
                         {
@@ -274,21 +287,33 @@ public class Tile : MonoBehaviour {
                                 }
 
                             }
-
+                            rob.bl_Has_Acted = true;//robot has done it's action
+                            rob.int_Actions--;
+                            rob.Clear_Selection();//clear tile highlighting 
 
                         }
                         if (rob.int_effect == 1)//drill
                         {
                             hits[0].collider.gameObject.GetComponent<Tile>().int_health -= rob.int_damage * 2;
+                            rob.int_heat_current += 1;
+                            if (rob.bl_overheat == true)
+                            {
+                                StartCoroutine(rob.DrillOverheat(int_X, int_Z));
+                            
+                            }
+                            else
+                            {
+                                rob.bl_Has_Acted = true;//robot has done it's action
+                                rob.int_Actions--;
+                                rob.Clear_Selection();//clear tile highlighting 
+                            }
+                            
                         }
 
                     }
                     if (hits[0].collider.gameObject.GetComponent<CharacterBase>())//the collider hit is a tile
                     {
                         rob.RandomDamage();
-                        rob.bl_Has_Acted = true;//robot has done it's action
-                        rob.int_Actions--;
-                        rob.Clear_Selection();//clear tile highlighting 
 
                         if (rob.int_effect == 0)
                         {
@@ -319,6 +344,9 @@ public class Tile : MonoBehaviour {
                                         return;
                                     }
                                 }
+                                rob.bl_Has_Acted = true;//robot has done it's action
+                                rob.int_Actions--;
+                                rob.Clear_Selection();//clear tile highlighting 
                             }
                             else
                             {
@@ -336,6 +364,9 @@ public class Tile : MonoBehaviour {
                                     hits[1].collider.gameObject.GetComponent<CharacterBase>().int_Health -= rob.int_damage;
                                     rob.int_heat_current += 1;
                                 }
+                                rob.bl_Has_Acted = true;//robot has done it's action
+                                rob.int_Actions--;
+                                rob.Clear_Selection();//clear tile highlighting 
 
                             }
                         }
@@ -367,6 +398,9 @@ public class Tile : MonoBehaviour {
                         }
 
                     }
+                    rob.bl_Has_Acted = true;//robot has done it's action
+                    rob.int_Actions--;
+                    rob.Clear_Selection();//clear tile highlighting 
 
                 }
                 else if (rob.int_effect == 4)
@@ -412,12 +446,16 @@ public class Tile : MonoBehaviour {
     //--------------------------------------------
     public void RemoveTile()//replaces tile with a plain walkable tile, may want to make alternate versions for different left over tile types
     {
+
         Destroy(gameObject.transform.GetChild(int_Child).gameObject);//destroys the childed wall
         int_Child++;//increments child index for creating/destroying other objects
         Debug.Log("Fire!");
         Instantiate(Resources.Load<GameObject>("MapParts/MapElement_" + 0), gameObject.transform);//create the empty tile object, this can be changed for different tile types (hazards, walls, hidering, etc.)
+        GameObject temp = gameObject.transform.GetChild(int_Child).gameObject;
+        go_fog = temp.transform.GetChild(0).GetComponent<Renderer>();
         bl_Is_Walkable = true;
         bl_Destroyable = false;
+        bl_opaque = false;
         gameObject.GetComponent<BoxCollider>().size = new Vector3(1, 1, 1);//add a box collider
         rend_Colour = gameObject.transform.GetChild(int_Child).GetComponent<Renderer>();//sets the renderer reference to the new object
         CSGameManager.gameManager.RefreshTile();//rechecks the neighbours as the map has now changed
@@ -432,16 +470,17 @@ public class Tile : MonoBehaviour {
     {
         Destroy(gameObject.transform.GetChild(int_Child).gameObject);//destroys the childed wall
         int_Child++;//increments child index for creating/destroying other objects
+        go_fog = null;
         Debug.Log("Fire!");
         Instantiate(Resources.Load<GameObject>("MapParts/MapElement_" + "PlayerMade"), gameObject.transform);//create the empty tile object, this can be changed for different tile types (hazards, walls, hidering, etc.)
         bl_Is_Walkable = false;
         bl_Destroyable = true;
+        bl_opaque = true;
         gameObject.GetComponent<BoxCollider>().size = new Vector3(1, 3, 1);//add a box collider
         rend_Colour = gameObject.transform.GetChild(int_Child).GetComponent<Renderer>();//sets the renderer reference to the new object
         CSGameManager.gameManager.RefreshTile();//rechecks the neighbours as the map has now changed
         int_health = int_health_max;
         int_Child--;
-
 
     }
 
@@ -451,7 +490,6 @@ public class Tile : MonoBehaviour {
 
         foreach(Collider hit in hits)
         {
-            //hit.transform.gameObject.SetActive(false);
 
             if (hit.transform.gameObject.GetComponent<Tile>())
             {
@@ -468,11 +506,31 @@ public class Tile : MonoBehaviour {
         }
 
     }
+    /*
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, fl_ExplodeRaduis);
     }
+    */
     #endregion
+
+    public IEnumerator VisibleTile()
+    {
+
+        Debug.Log("go fog");
+        if (go_fog != null)
+        {
+            go_fog.enabled = !bl_in_view_zone;
+        }
+        /*
+        if(bl_in_view_zone)
+        {
+            int_view_state = view_rob.int_head_effect;
+            
+        }
+        */
+        yield return null;
+    }
     //--------------------------------------------
 }//=====================================================

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class MapMakerElements : MonoBehaviour {
 
@@ -77,7 +78,12 @@ public class MapMakerElements : MonoBehaviour {
 
     private void OnMouseOver()
     {
-        if(Input.GetMouseButton(0))
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            print("Why do you click?");
+            return;
+        }
+        if (Input.GetMouseButton(0))
         {
             Debug.Log("yee");
             MapChange();

@@ -92,5 +92,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   int_part_veiw_distance: 1
   int_part_weight: 3
-  int_part_effect: 0
+  int_part_effect: 4
   txt_info: {fileID: 4900000, guid: c0f735381e674464da0cc26741304806, type: 3}

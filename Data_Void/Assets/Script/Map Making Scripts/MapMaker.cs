@@ -34,23 +34,6 @@ public class MapMaker : MonoBehaviour {
     {
         int_map_data = new int[map_x, map_z];
 
-        /*
-        for (int j = 0; j < map_z; j++)
-        {
-            for (int i = 0; i < map_x; i++)
-            {
-                
-                GameObject button = Instantiate(go_button, new Vector3((float)i * x_offset,0, (float)j * z_offset), Quaternion.identity, gameObject.transform) as GameObject;
-
-                MapMakerElements ui_button = button.GetComponent<MapMakerElements>();
-
-                ui_button.SetLocation(i, j);
-
-                ui_button.GetMap(mM_self);
-                
-            }
-        }
-        */
         if (txt_level == null)
         {
             MakeMap();

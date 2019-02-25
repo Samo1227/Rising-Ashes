@@ -22,6 +22,9 @@ public class AICharacter : CharacterBase {
     public int int_ChaseRange = 6;
     public int int_TriggerRange = 2;
     public int int_RetreatRange = 0;
+
+    public bool bl_is_invisible;
+    public bool bl_is_tagged;
     #endregion
     //---------------------------------------------------
     #region Start
@@ -598,4 +601,38 @@ public class AICharacter : CharacterBase {
         }
     }
     #endregion
+
+    public void VisibleEnemy ()
+    {
+        if (tl_Current_Tile.bl_in_view_zone)
+        {
+            if (bl_is_invisible && tl_Current_Tile.bl_radar != true)
+            {
+                GetComponent<Renderer>().enabled = false;
+                transform.GetChild(0).gameObject.SetActive(false);
+            }
+            else
+            {
+                GetComponent<Renderer>().enabled = true;
+                gameObject.transform.GetChild(0).gameObject.SetActive(true);
+            }
+            if (tl_Current_Tile.bl_tag)
+            {
+                bl_is_tagged = true;
+            }
+        }
+        else
+        {
+            if (bl_is_tagged)
+            {
+                GetComponent<Renderer>().enabled = true;
+                transform.GetChild(0).gameObject.SetActive(true);
+            }
+            else
+            {
+                GetComponent<Renderer>().enabled = false;
+                transform.GetChild(0).gameObject.SetActive(false);
+            }
+        }
+    }
 }//=======================================================================================

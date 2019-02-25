@@ -171,7 +171,7 @@ GameObject:
   - component: {fileID: 23060344260083516}
   - component: {fileID: 65684873167796720}
   - component: {fileID: 114241835215912546}
-  - component: {fileID: 7489721726539228404}
+  - component: {fileID: 2921135020467819521}
   m_Layer: 10
   m_Name: Enemy
   m_TagString: Untagged
@@ -272,13 +272,13 @@ MonoBehaviour:
   int_Veiw_Type: 0
   int_Health: 0
   int_Health_max: 5
-  int_Attack_Range: 1
-  int_damage: 1
+  int_Attack_Range: 3
+  int_damage: 0
   int_heat_current: 0
   int_heat_total: 0
   int_heat_fail_chance: 0
   int_effect: 0
-  int_Move_Range: 6
+  int_Move_Range: 5
   int_Move_Max: 0
   int_Move_Min: 0
   int_Weight_Current: 0
@@ -294,14 +294,14 @@ MonoBehaviour:
   bl_Turn_Just_Started: 0
   selectableTiles: []
   bl_Shield: 0
-  lr_laser: {fileID: 0}
+  lr_laser: {fileID: 2921135020467819521}
   pr_Target: {fileID: 0}
   rnd_Rendereer: {fileID: 0}
   ais_CurrentState: 0
-  int_ChaseRange: 8
+  int_ChaseRange: 6
   int_TriggerRange: 2
   int_RetreatRange: 0
---- !u!120 &7489721726539228404
+--- !u!120 &2921135020467819521
 LineRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -343,13 +343,13 @@ LineRenderer:
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0
+    widthMultiplier: 1
     widthCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.04673004
-        value: 0
+        time: 0
+        value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0

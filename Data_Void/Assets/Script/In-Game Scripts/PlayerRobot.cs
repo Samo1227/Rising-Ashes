@@ -73,8 +73,10 @@ public class PlayerRobot : CharacterBase
         CSGameManager.gameManager.PreparePlayerTurn();//sets up the players to take their turn, will need to be reworked if there is an exception where enemies take first turn
         int_Health = int_Health_max;//sets current health to max health
         SetDamage(int_damage); //sets up how much damage that PR can do, really only for testing purposes. Will have to be removed once damage is properly worked out
-
-
+        foreach (PlayerRobot pr in CSGameManager.gameManager.ls_Player_Robots_In_Level)
+        {
+            StartCoroutine(pr.FindVeiwableTiles());
+        }
     }
     //------------------------------------------
     void Update()
@@ -119,7 +121,7 @@ public class PlayerRobot : CharacterBase
         {
             Held_robot.int_Actions = 0;
         }
-
+        //FindVeiwableTiles();
     }
     #endregion
     //------------------------------------------
@@ -189,6 +191,7 @@ public class PlayerRobot : CharacterBase
                         Clear_Selection();//clears this PR's selection just to be safe
                         CSGameManager.gameManager.SetCurrentRobot(this);//set the gamemanagers reference of currently selected PR to this
                         Find_Attack_Tile_Range();//works out PR's movement bounds
+
                     }
                     //---------
                 }
@@ -356,5 +359,257 @@ public class PlayerRobot : CharacterBase
         }
     }
     #endregion
+
+    public IEnumerator DrillOverheat(int int_tile_X, int int_tile_Z)
+    {
+        yield return new WaitForSeconds(0.01f);
+        bool bl_stop = false;
+        bool bl_has_hit = true;
+        int move_direction_x = int_tile_X - int_x;
+        int move_direction_z = int_tile_Z - int_z;
+
+        while (bl_stop == false)
+        {
+            yield return new WaitForSeconds(0.5f);
+            RaycastHit[] hits = new RaycastHit[2];
+
+            Vector3 dir = new Vector3(move_direction_x, 0, move_direction_z);
+            dir = dir.normalized;
+            float fl_Ray_Range;
+            Ray ray_cast;
+
+            fl_Ray_Range = Vector3.Distance(new Vector3(int_x + move_direction_x, 1, int_z + move_direction_z), transform.position);
+            ray_cast = new Ray(transform.position, dir * fl_Ray_Range);//draws a ray between target and selected robot
+            Debug.DrawRay(transform.position, dir * fl_Ray_Range, Color.green, 0.1f);//visual representation of ray for editor
+
+            Debug.Log("Drill");
+            Debug.Log(move_direction_x + "," + move_direction_z);
+
+
+            if (Physics.RaycastNonAlloc(ray_cast, hits, fl_Ray_Range) == 0)
+            {
+                Debug.Log("ray");
+
+                //updates and resets the robots position references
+                tl_Current_Tile.bl_Occupied_By_PC = false; //start position tile is no longer occupied
+                tl_Current_Tile.bl_Current_Tile = false;
+                int_x = int_x + move_direction_x;
+                int_z = int_z + move_direction_z;//robots current position storage is updated to match
+                tl_Current_Tile = CSGameManager.gameManager.map[int_x, int_z].gameObject.GetComponent<Tile>(); //robots reference tile is set to new position
+                tl_Current_Tile.bl_Occupied_By_PC = true;//new tile is now occupied
+                Clear_Selection();//clear tile highlighting
+
+                MoveToTargetSquare(CSGameManager.gameManager.map[int_x, int_z].gameObject.GetComponent<Tile>());
+                bl_Moving = true;
+                bl_has_hit = false;
+
+            }
+            else if(Physics.RaycastNonAlloc(ray_cast, hits, fl_Ray_Range) > 0 && bl_has_hit == false)
+            {
+                RandomDamage();
+                if (hits[0].collider.gameObject.GetComponent<Tile>())//the collider hit is a tile
+                {
+                    hits[0].collider.gameObject.GetComponent<Tile>().int_health -= int_damage * 2;
+                    bl_has_hit = true;
+                }
+                else if (hits[0].collider.gameObject.GetComponent<CharacterBase>())
+                {
+                    hits[0].collider.gameObject.GetComponent<Tile>().int_health -= int_damage;
+                    bl_has_hit = true;
+                }
+            }
+            else if (Physics.RaycastNonAlloc(ray_cast, hits, fl_Ray_Range) > 0 && bl_has_hit == true)
+            {
+                bl_stop = true;
+            }
+        }
+        bl_Has_Acted = true;//robot has done it's action
+        int_Actions--;
+        Clear_Selection();//clear tile highlighting 
+        StartCoroutine(Clear_View());
+        foreach (PlayerRobot pr in CSGameManager.gameManager.ls_Player_Robots_In_Level)
+        {
+            StartCoroutine(pr.FindVeiwableTiles());
+        }
+        //FindVeiwableTiles();
+        yield return null;
+    }
+
+
+
+    public IEnumerator FindVeiwableTiles()//player robot version
+    {
+
+        Tile currentTile = CSGameManager.gameManager.map[this.int_x, this.int_z];//this shouldn't really be neccessary as it's set outside of this, but this is just to be safe
+
+        Queue<Tile> process = new Queue<Tile>();//processes all the tiles this can move to, runs till no possible tiles are left
+        process.Enqueue(currentTile);//starts with the current tile this is on
+        //-----------
+        
+        if(int_head_effect == 2)
+        {
+            while (process.Count > 0)
+            {
+                Tile tempTile = process.Dequeue(); //takes the tile out of the queue and processes it
+                                                   //---------                         
+                selectableTiles.Add(tempTile);
+                tempTile.bl_in_view_zone = true;
+                tempTile.bl_radar = true;
+                if (tempTile.go_fog != null)
+                {
+                    tempTile.go_fog.enabled = !tempTile.bl_in_view_zone;
+                }
+                //----------
+                if (tempTile.int_Distance_From_Start < int_Veiw_Distance) // if it's within move range -1 check the neighbours
+                {
+                    //----------
+                    foreach (Tile neighbourTile in tempTile.ls_Tile_Neighbours)//for every neihbour, check  
+                    {
+                        //----------
+                        if (neighbourTile != currentTile)//stops path getting stuck looping
+                        {
+                            //----------
+                            if (neighbourTile.tl_Start_Tile == null)//only do if there isn't already a start tile for this tile, this should prevent infinite looping 
+                                neighbourTile.tl_Start_Tile = tempTile;
+                            //----------
+                        }
+                        //----------
+                        neighbourTile.int_Distance_From_Start = neighbourTile.int_Move_Cost + tempTile.int_Distance_From_Start;//sets the neighbour tiles distance from the start point for move distance limits
+                                                                                                                               //----------
+                        if (neighbourTile.int_Distance_From_Start <= int_Veiw_Distance)//if the neighbours are within movement range add them to the process queue
+                        {
+
+                            process.Enqueue(neighbourTile);//add any walkable neighbours to the queue to process their neighbours
+                        }
+                    }
+                    //----------
+                }
+                //----------
+
+            }
+        }
+        else if (int_head_effect == 5)
+        {
+            while (process.Count > 0)
+            {
+                Tile tempTile = process.Dequeue(); //takes the tile out of the queue and processes it
+                                                   //---------                         
+                selectableTiles.Add(tempTile);
+                tempTile.bl_in_view_zone = true;
+                if (tempTile.go_fog != null)
+                {
+                    tempTile.go_fog.enabled = !tempTile.bl_in_view_zone;
+                }
+                //----------
+                if (tempTile.int_Distance_From_Start < int_Veiw_Distance) // if it's within move range -1 check the neighbours
+                {
+                    //----------
+                    foreach (Tile neighbourTile in tempTile.ls_Tile_Neighbours)//for every neihbour, check  
+                    {
+                        //----------
+                        if (neighbourTile != currentTile)//stops path getting stuck looping
+                        {
+                            //----------
+                            if (neighbourTile.tl_Start_Tile == null)//only do if there isn't already a start tile for this tile, this should prevent infinite looping 
+                                neighbourTile.tl_Start_Tile = tempTile;
+                            //----------
+                        }
+                        //----------
+                        neighbourTile.int_Distance_From_Start = neighbourTile.int_Move_Cost + tempTile.int_Distance_From_Start;//sets the neighbour tiles distance from the start point for move distance limits
+                                                                                                                               //----------
+                        if (neighbourTile.int_Distance_From_Start <= int_Veiw_Distance)//if the neighbours are within movement range add them to the process queue
+                        {
+
+                            process.Enqueue(neighbourTile);//add any walkable neighbours to the queue to process their neighbours
+                        }
+                    }
+                    //----------
+                }
+                //----------
+
+            }
+        }
+        else
+        {
+            while (process.Count > 0)
+            {
+                Tile tempTile = process.Dequeue(); //takes the tile out of the queue and processes it
+                                                   //---------
+                if (tempTile.bl_opaque == false)   //if the tile is walkable add it to the selectable process
+                {
+
+                    selectableTiles.Add(tempTile);
+                    tempTile.bl_in_view_zone = true;
+
+                    if (tempTile.go_fog != null)
+                    {
+                        tempTile.go_fog.enabled = !tempTile.bl_in_view_zone;
+                    }
+                    
+                    if(int_Veiw_Type == 3)
+                    {
+                        tempTile.bl_tag = true;
+                    }
+
+                    //----------
+                    if (tempTile.int_Distance_From_Start < int_Veiw_Distance) // if it's within move range -1 check the neighbours
+                    {
+                        //----------
+                        foreach (Tile neighbourTile in tempTile.ls_Tile_Neighbours)//for every neihbour, check  
+                        {
+                            //----------
+                            if (neighbourTile != currentTile)//stops path getting stuck looping
+                            {
+                                //----------
+                                if (neighbourTile.tl_Start_Tile == null)//only do if there isn't already a start tile for this tile, this should prevent infinite looping 
+                                    neighbourTile.tl_Start_Tile = tempTile;
+                                //----------
+                            }
+                            //----------
+                            neighbourTile.int_Distance_From_Start = neighbourTile.int_Move_Cost + tempTile.int_Distance_From_Start;//sets the neighbour tiles distance from the start point for move distance limits
+                                                                                                                                   //----------
+                            if (neighbourTile.int_Distance_From_Start <= int_Veiw_Distance)//if the neighbours are within movement range add them to the process queue
+                            {
+
+                                process.Enqueue(neighbourTile);//add any walkable neighbours to the queue to process their neighbours
+                            }
+                        }
+                        //----------
+                    }
+                    //----------
+                }
+                //----------
+            }
+        }
+        //----------
+        foreach (AICharacter tl_Temp_ai in CSGameManager.gameManager.ls_AI_Characters_In_Level)//will be slower with begger maps, will have to test to see if this is a problem
+        {
+            tl_Temp_ai.VisibleEnemy();
+        }
+        yield return null;
+    }
+
+    public IEnumerator Clear_View()
+    {
+        
+        foreach (Tile tl_Temp_Tile in CSGameManager.gameManager.map)//will be slower with begger maps, will have to test to see if this is a problem
+        {
+            if (tl_Temp_Tile.bl_in_view_zone == true && tl_Temp_Tile.bl_opaque == false)
+            {
+                tl_Temp_Tile.bl_in_view_zone = false;
+                //StartCoroutine(tl_Temp_Tile.VisibleTile());
+                if (tl_Temp_Tile.go_fog != null)
+                {
+                    tl_Temp_Tile.go_fog.enabled = !tl_Temp_Tile.bl_in_view_zone;
+                }
+                tl_Temp_Tile.bl_tag = false;
+                tl_Temp_Tile.bl_radar = false;
+            }
+        }
+        
+        yield return null;
+    }
+
+
     //------------------------------------------
 }//=======================================================================================

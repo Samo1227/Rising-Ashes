@@ -12,6 +12,7 @@ public class CSGameManager : MonoBehaviour
     //and instead have a seperate gamemanager
 
     public Tile tile;//publicly assigned objects
+    public HazardTile haz;
     public PlayerRobot pr_PC;
     public IntroPlayerBot ipb_PC; //for intro scene
     public AICharacter ai_Enemy_Test;//might need a more robust system for the actuall game
@@ -172,7 +173,16 @@ public class CSGameManager : MonoBehaviour
             //-----------
             for (int x = 0; x < int_map_x; x++)
             {
-                Tile newTile = SetTile(x, z);//makes a tile for every quare in the map
+                if(map_layout[x, z] == 2 || map_layout[x, z] == 3 || map_layout[x, z] == 4 || map_layout[x, z] == 5 || map_layout[x, z] == 6 || map_layout[x, z] == 7)
+                {
+                    HazardTile newHaz = SetHazard(x, z);//makes a tile for every quare in the map
+
+                }
+                else
+                {
+                    Tile newTile = SetTile(x, z);//makes a tile for every quare in the map
+                }
+
             }
             //-----------
         }
@@ -183,7 +193,7 @@ public class CSGameManager : MonoBehaviour
             for (int x = 0; x < int_map_x; x++)
             {
                 //-----------
-                if (map_layout[x, z] == 3)
+                if (map_layout[x, z] == 11)
                 {
                     AddEnemy(x, z);
                 }
@@ -204,41 +214,117 @@ public class CSGameManager : MonoBehaviour
         newTile.int_X = x;
         newTile.int_Z = z;
         newTile.transform.position = new Vector3(x, transform.position.y, z);
-        //Instantiate(Resources.Load<GameObject>("MapParts/MapElement_" + map_layout[x,z]),newTile.gameObject.transform);
         //-----------
         if (map_layout[x, z] == 0)
         {
             Instantiate(Resources.Load<GameObject>("MapParts/MapElement_" + 0), newTile.gameObject.transform);
             newTile.int_health = 0;
+            newTile.bl_opaque = false;
+
         }
         //-----------
         else if (map_layout[x, z] == 1)
         {
             newTile.bl_Is_Walkable = false;
             newTile.bl_Destroyable = true;
+            newTile.bl_opaque = true;
             newTile.GetComponent<BoxCollider>().size = new Vector3(1, 3, 1);
             Instantiate(Resources.Load<GameObject>("MapParts/MapElement_" + 1), newTile.gameObject.transform);
             newTile.int_health = 5;
+
+        }
+        else if (map_layout[x, z] == 9)
+        {
+            newTile.bl_Is_Walkable = false;
+            newTile.bl_Destroyable = true;
+            newTile.bl_opaque = false;
+            newTile.GetComponent<BoxCollider>().size = new Vector3(1, 3, 1);
+            Instantiate(Resources.Load<GameObject>("MapParts/MapElement_" + 1), newTile.gameObject.transform);
+            newTile.int_health = 5;
+
         }
         //-----------
-        else if (map_layout[x, z] == 2)
+        else if (map_layout[x, z] == 17)
         {
             Instantiate(Resources.Load<GameObject>("MapParts/MapElement_" + 0), newTile.gameObject.transform);
             newTile.int_health = 0;
             newTile.bl_spawnable_zone = true;
-            
+            newTile.bl_opaque = false;
+
         }
-        //-----------
-        else if (map_layout[x, z] == 3)
+        else
         {
             Instantiate(Resources.Load<GameObject>("MapParts/MapElement_" + 0), newTile.gameObject.transform);
             newTile.int_health = 0;
+            newTile.bl_opaque = false;
         }
-        //-----------
-
         newTile.name = ("Tile " + x + " " + z);
         map[x, z] = newTile;
         return newTile;
+    }
+
+    HazardTile SetHazard(int x, int z)
+    {
+        HazardTile newHaz = null;
+        newHaz = Instantiate(haz);
+        newHaz.transform.SetParent(gameObject.transform);
+        newHaz.int_X = x;
+        newHaz.int_Z = z;
+        newHaz.transform.position = new Vector3(x, transform.position.y, z);
+
+        if (map_layout[x, z] == 2)
+        {
+            Instantiate(Resources.Load<GameObject>("MapParts/MapElement_" + 2), newHaz.gameObject.transform);
+            newHaz.int_health = 0;
+            newHaz.bl_opaque = true;
+            newHaz.SetHazardType(HazardTileType.heat);
+            newHaz.int_Heat = 1;
+        }
+        if (map_layout[x, z] == 3)
+        {
+            Instantiate(Resources.Load<GameObject>("MapParts/MapElement_" + 3), newHaz.gameObject.transform);
+            newHaz.int_health = 0;
+            newHaz.bl_opaque = true;
+            newHaz.SetHazardType(HazardTileType.damagingHeat);
+            newHaz.int_Heat = 1;
+            newHaz.int_Damage = 1;
+        }
+        if (map_layout[x, z] == 4)
+        {
+            Instantiate(Resources.Load<GameObject>("MapParts/MapElement_" + 4), newHaz.gameObject.transform);
+            newHaz.int_health = 0;
+            newHaz.bl_opaque = true;
+            newHaz.SetHazardType(HazardTileType.cold);
+            newHaz.int_Cold = 1;
+        }
+        if (map_layout[x, z] == 5)
+        {
+            Instantiate(Resources.Load<GameObject>("MapParts/MapElement_" + 5), newHaz.gameObject.transform);
+            newHaz.int_health = 0;
+            newHaz.bl_opaque = true;
+            newHaz.SetHazardType(HazardTileType.damagingCold);
+            newHaz.int_Cold = 1;
+            newHaz.int_Damage = 1;
+
+        }
+        if (map_layout[x, z] == 6)
+        {
+            Instantiate(Resources.Load<GameObject>("MapParts/MapElement_" + 6), newHaz.gameObject.transform);
+            newHaz.int_health = 0;
+            newHaz.bl_opaque = true;
+            newHaz.SetHazardType(HazardTileType.collapsingTile);
+            newHaz.int_WeightLimit = 1;
+        }
+        if (map_layout[x, z] == 7)
+        {
+            Instantiate(Resources.Load<GameObject>("MapParts/MapElement_" + 7), newHaz.gameObject.transform);
+            newHaz.int_health = 0;
+            newHaz.bl_opaque = false;
+            newHaz.SetHazardType(HazardTileType.difficultTerrain);
+        }
+        newHaz.name = ("Tile " + x + " " + z);
+        map[x, z] = newHaz;
+        return newHaz;
     }
     #endregion
     //---------------------------------------------------

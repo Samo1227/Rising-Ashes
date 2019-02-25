@@ -30,8 +30,66 @@ public class HazardTile : Tile
         {
             int_Move_Cost = int_MoveDifficulty;
         }
+        rend_Colour = gameObject.transform.GetChild(int_Child).GetComponent<Renderer>();//allows changing of tiles colour and takes into account tiles being changed (destroyed/created)
+        fl_ExplodeRaduis = 1;
+
+        if (bl_opaque == false)
+        {
+            GameObject temp = gameObject.transform.GetChild(int_Child).gameObject;
+            //go_fog = temp.transform.GetChild(0).GetComponent<Renderer>();
+        }
+
     }
     #endregion
+    void Update()
+    { //can make the colours a public selection so can set it ip in inspecto
+
+        //go_health_bar.transform.localPosition = new Vector3(((float)int_health - (float)int_health_max) * (0.5f / int_health_max), 0, 0);
+        //go_health_bar.transform.localScale = new Vector3((1f / int_health_max) * int_health, 0.2f, 1);
+
+        if (int_health < int_health_max && int_health > 0)
+        {
+            go_health_bar.SetActive(true);
+            go_health_bar_back.SetActive(true);
+
+        }
+        else if (int_health <= 0)
+        {
+            go_health_bar.SetActive(false);
+            go_health_bar_back.SetActive(false);
+        }
+        else
+        {
+            go_health_bar.SetActive(false);
+            go_health_bar_back.SetActive(false);
+        }
+
+        if (bl_Current_Tile)
+        {
+            rend_Colour.material.color = Color.green;
+        }
+        else if (bl_Walking_Selection)//if this tile is in walking range
+        {
+            rend_Colour.material.color = Color.blue;
+        }
+        else if (bl_Attack_Selection)//if this tile is in attack range
+        {
+            rend_Colour.material.color = Color.red;
+        }
+        else if (bl_spawnable_zone == true && CSGameManager.gameManager.bl_storing_robot == true && bl_Is_Walkable && bl_Occupied_By_PC == false && bl_Occupied_By_AI == false)
+        {
+            rend_Colour.material.color = Color.green;
+        }
+        else//normal  colour
+        {
+            rend_Colour.material.color = Color.white;
+        }
+        if (bl_Is_Walkable == false && int_health <= 0)
+        {
+            RemoveTile();
+        }
+
+    }
     //---------------------------------------------------
     public void SetHazardType(HazardTileType _hazardType)
     {

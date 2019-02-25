@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.574817, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1131,12 +1131,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bl_IsMission: 1
   tile: {fileID: 114194114040457398, guid: 816c64b0ca862e248a91d9d975409b3d, type: 3}
+  haz: {fileID: 8301552720717593882, guid: 49c2e419d359d564b9cc1deead957f8a, type: 3}
   pr_PC: {fileID: 114191149532942768, guid: d8a4bb1aeb8583548be1005c57069612, type: 3}
   ipb_PC: {fileID: 0}
   ai_Enemy_Test: {fileID: 114241835215912546, guid: 0b24be8f0bee2de4aa5ebc0b12bd2673,
     type: 3}
   pr_currentRobot: {fileID: 0}
-  txt_level: {fileID: 4900000, guid: 196f8152bff89244fb4e2e8e08f5197f, type: 3}
+  txt_level: {fileID: 4900000, guid: 45188cf1fce0d4e4a8967d32b9708775, type: 3}
   st_level: 
   arr_at_level: []
   int_map_x: 0
