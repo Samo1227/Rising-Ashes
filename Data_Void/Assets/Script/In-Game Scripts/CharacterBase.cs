@@ -60,6 +60,8 @@ public class CharacterBase : MonoBehaviour {
     public bool bl_Shield;
 
     public LineRenderer lr_laser;
+
+    public bool ice_fire_select;
     #endregion
     //---------------------------------------------------
     #region Start

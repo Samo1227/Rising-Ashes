@@ -201,6 +201,8 @@ MonoBehaviour:
   fl_Time_limit: 5
   bl_Turn_Just_Started: 0
   selectableTiles: []
+  bl_Shield: 0
+  lr_laser: {fileID: 3539013778851571317}
   bl_Turn_Available: 1
   bl_Has_Moved: 0
   bl_Has_Acted: 0
@@ -228,7 +230,7 @@ MonoBehaviour:
   int_body_effect: 0
   int_leg_effect: 0
   int_cooldown: 2
-  lr_laser: {fileID: 3539013778851571317}
+  Held_robot: {fileID: 0}
 --- !u!120 &3539013778851571317
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -268,6 +270,9 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 1}
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 3
