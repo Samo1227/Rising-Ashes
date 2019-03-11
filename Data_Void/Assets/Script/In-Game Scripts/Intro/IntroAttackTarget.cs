@@ -20,6 +20,10 @@ public class IntroAttackTarget : MonoBehaviour
 
     void Update()
     {
+        if (rn_Rend == null)
+        {
+            return;
+        }
         float f = (Mathf.Sin(fl_FadeSpeed * Time.time) + 1) / 2;
         //   print(f);
         c.a = f;
@@ -32,7 +36,8 @@ public class IntroAttackTarget : MonoBehaviour
         _tempTile.int_health = 0;
         ipb_PR.Clear_Selection();
         ipb_PR.bl_isFinished = true;
-        StartCoroutine(GoToShipMenu());
+        // StartCoroutine(GoToShipMenu());
+        ipb_PR.FinalFungusScene();
         Destroy(rn_Rend);
         Destroy(gameObject.GetComponent<AudioSource>());
         //fungus scene

@@ -17,7 +17,7 @@ public class MainMenu : MonoBehaviour
     
     public void LoadMainMap()
     {
-        SceneManager.LoadScene("IntroScene");
+        SceneManager.LoadScene("FungusIntro");
     }
 
     public void QuitApplication()

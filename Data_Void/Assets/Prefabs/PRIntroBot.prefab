@@ -338,7 +338,7 @@ MonoBehaviour:
   int_z: 0
   int_action_points: 0
   int_action_points_max: 0
-  int_Veiw_Distance: 0
+  int_Veiw_Distance: 10
   int_Veiw_Type: 0
   int_Health: 0
   int_Health_max: 0
@@ -365,12 +365,15 @@ MonoBehaviour:
   selectableTiles: []
   bl_Shield: 0
   lr_laser: {fileID: 0}
+  ice_fire_select: 0
   go_Targetmove: {fileID: 8558371875127885078, guid: 32327fc292702b3459406db263876a51,
     type: 3}
   go_TargetAttack: {fileID: 8068698309542656914, guid: 841efa8fe46323b46be224fb60c0397f,
     type: 3}
+  bl_isFinished: 0
   bl_canMove: 0
   stepSpeed: 5
+  flowchart: {fileID: 0}
 --- !u!65 &186189278760158145
 BoxCollider:
   m_ObjectHideFlags: 0
