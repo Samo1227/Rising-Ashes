@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.574817, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -203,7 +203,7 @@ MonoBehaviour:
   nameColor: {r: 0, g: 0.735849, b: 0.4566207, a: 1}
   soundEffect: {fileID: 0}
   portraits:
-  - {fileID: 21300000, guid: 9e10e464d51d1494daed0816bd232479, type: 3}
+  - {fileID: 21300000, guid: 5edc41609455ce44ca82902a50d08eb8, type: 3}
   portraitsFace: 0
   setSayDialog: {fileID: 0}
   description: 
@@ -914,7 +914,7 @@ MonoBehaviour:
   selectedBlocks:
   - {fileID: 1973012325}
   selectedCommands:
-  - {fileID: 1973012327}
+  - {fileID: 1973012331}
   variables: []
   description: 
   stepPause: 0
@@ -943,7 +943,7 @@ MonoBehaviour:
   storyText: You get everyone out of here, Peter, I'll try and fend them off!
   description: 
   character: {fileID: 625452277}
-  portrait: {fileID: 21300000, guid: 9e10e464d51d1494daed0816bd232479, type: 3}
+  portrait: {fileID: 21300000, guid: 5edc41609455ce44ca82902a50d08eb8, type: 3}
   voiceOverClip: {fileID: 0}
   showAlways: 1
   showCount: 1
@@ -1008,7 +1008,7 @@ MonoBehaviour:
   fadeTexture: {fileID: 0}
 --- !u!114 &1973012327
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -1042,7 +1042,7 @@ MonoBehaviour:
   storyText: Yes boss!
   description: 
   character: {fileID: 625452277}
-  portrait: {fileID: 21300000, guid: 9e10e464d51d1494daed0816bd232479, type: 3}
+  portrait: {fileID: 21300000, guid: 5edc41609455ce44ca82902a50d08eb8, type: 3}
   voiceOverClip: {fileID: 0}
   showAlways: 1
   showCount: 1
@@ -1069,7 +1069,7 @@ MonoBehaviour:
   storyText: Once you are able to, come out of here and find us!
   description: 
   character: {fileID: 2144117851}
-  portrait: {fileID: 21300000, guid: 356c742c65db7034784969044b0b90e4, type: 3}
+  portrait: {fileID: 21300000, guid: abb0bc4c0a9b22748bbcfe6ab747a8be, type: 3}
   voiceOverClip: {fileID: 0}
   showAlways: 1
   showCount: 1
@@ -1096,7 +1096,7 @@ MonoBehaviour:
   storyText: Well, I suppose you are good at destroying things...
   description: 
   character: {fileID: 2144117851}
-  portrait: {fileID: 21300000, guid: 356c742c65db7034784969044b0b90e4, type: 3}
+  portrait: {fileID: 21300000, guid: abb0bc4c0a9b22748bbcfe6ab747a8be, type: 3}
   voiceOverClip: {fileID: 0}
   showAlways: 1
   showCount: 1
@@ -1123,7 +1123,7 @@ MonoBehaviour:
   storyText: We're being invaded!!
   description: 
   character: {fileID: 625452277}
-  portrait: {fileID: 21300000, guid: 9e10e464d51d1494daed0816bd232479, type: 3}
+  portrait: {fileID: 21300000, guid: 5edc41609455ce44ca82902a50d08eb8, type: 3}
   voiceOverClip: {fileID: 0}
   showAlways: 1
   showCount: 1
@@ -1150,7 +1150,7 @@ MonoBehaviour:
   storyText: Everyone get out! We need to evacuate the control center immediately!
   description: 
   character: {fileID: 2144117851}
-  portrait: {fileID: 21300000, guid: 356c742c65db7034784969044b0b90e4, type: 3}
+  portrait: {fileID: 21300000, guid: abb0bc4c0a9b22748bbcfe6ab747a8be, type: 3}
   voiceOverClip: {fileID: 0}
   showAlways: 1
   showCount: 1
@@ -1177,7 +1177,7 @@ MonoBehaviour:
   storyText: Oh no!!
   description: 
   character: {fileID: 2144117851}
-  portrait: {fileID: 21300000, guid: 356c742c65db7034784969044b0b90e4, type: 3}
+  portrait: {fileID: 21300000, guid: abb0bc4c0a9b22748bbcfe6ab747a8be, type: 3}
   voiceOverClip: {fileID: 0}
   showAlways: 1
   showCount: 1
@@ -1366,7 +1366,7 @@ MonoBehaviour:
   nameColor: {r: 0.31045115, g: 0.17915626, b: 0.6226415, a: 1}
   soundEffect: {fileID: 0}
   portraits:
-  - {fileID: 21300000, guid: 356c742c65db7034784969044b0b90e4, type: 3}
+  - {fileID: 21300000, guid: abb0bc4c0a9b22748bbcfe6ab747a8be, type: 3}
   portraitsFace: 0
   setSayDialog: {fileID: 0}
   description: 

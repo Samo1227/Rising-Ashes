@@ -186,7 +186,7 @@ public class AICharacter : CharacterBase {
                     if (ls_Dest_Tiles_In_Range.Count != 0)//should only get called when there is no player in range, in theory
                     {
                         FindTileTarget(pr_Target);
-                    }
+                    } 
                     //-----------
                     int_x = (int)transform.position.x;
                     int_z = (int)transform.position.z;

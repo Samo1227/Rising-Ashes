@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.574817, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -410,7 +410,7 @@ MonoBehaviour:
   nameColor: {r: 0.31045115, g: 0.17915626, b: 0.6226415, a: 1}
   soundEffect: {fileID: 0}
   portraits:
-  - {fileID: 21300000, guid: 356c742c65db7034784969044b0b90e4, type: 3}
+  - {fileID: 21300000, guid: abb0bc4c0a9b22748bbcfe6ab747a8be, type: 3}
   portraitsFace: 0
   setSayDialog: {fileID: 0}
   description: 
@@ -804,7 +804,7 @@ MonoBehaviour:
   nameColor: {r: 0, g: 0.735849, b: 0.4566207, a: 1}
   soundEffect: {fileID: 0}
   portraits:
-  - {fileID: 21300000, guid: 9e10e464d51d1494daed0816bd232479, type: 3}
+  - {fileID: 21300000, guid: 5edc41609455ce44ca82902a50d08eb8, type: 3}
   portraitsFace: 0
   setSayDialog: {fileID: 0}
   description: 
@@ -952,7 +952,7 @@ MonoBehaviour:
   selectedBlocks:
   - {fileID: 1353696552}
   selectedCommands:
-  - {fileID: 1353696563}
+  - {fileID: 1353696555}
   variables: []
   description: 
   stepPause: 0
@@ -1052,7 +1052,7 @@ MonoBehaviour:
   storyText: Okay now slowly lift up the-
   description: 
   character: {fileID: 335078919}
-  portrait: {fileID: 21300000, guid: 356c742c65db7034784969044b0b90e4, type: 3}
+  portrait: {fileID: 21300000, guid: abb0bc4c0a9b22748bbcfe6ab747a8be, type: 3}
   voiceOverClip: {fileID: 0}
   showAlways: 1
   showCount: 1
@@ -1097,7 +1097,7 @@ MonoBehaviour:
   storyText: No!! You blew a hole in the wall!
   description: 
   character: {fileID: 335078919}
-  portrait: {fileID: 21300000, guid: 356c742c65db7034784969044b0b90e4, type: 3}
+  portrait: {fileID: 21300000, guid: abb0bc4c0a9b22748bbcfe6ab747a8be, type: 3}
   voiceOverClip: {fileID: 0}
   showAlways: 1
   showCount: 1
@@ -1124,7 +1124,7 @@ MonoBehaviour:
   storyText: Sorry Boss.
   description: 
   character: {fileID: 780720566}
-  portrait: {fileID: 21300000, guid: 9e10e464d51d1494daed0816bd232479, type: 3}
+  portrait: {fileID: 21300000, guid: 5edc41609455ce44ca82902a50d08eb8, type: 3}
   voiceOverClip: {fileID: 0}
   showAlways: 1
   showCount: 1
@@ -1151,7 +1151,7 @@ MonoBehaviour:
   storyText: Okay now, Mason. Slowly move the robot forwards by 1cm.
   description: 
   character: {fileID: 335078919}
-  portrait: {fileID: 21300000, guid: 356c742c65db7034784969044b0b90e4, type: 3}
+  portrait: {fileID: 21300000, guid: abb0bc4c0a9b22748bbcfe6ab747a8be, type: 3}
   voiceOverClip: {fileID: 0}
   showAlways: 1
   showCount: 1

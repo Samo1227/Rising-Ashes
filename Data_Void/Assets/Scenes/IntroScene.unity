@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.574817, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -451,7 +451,7 @@ MonoBehaviour:
   nameColor: {r: 0, g: 0.735849, b: 0.4566207, a: 1}
   soundEffect: {fileID: 0}
   portraits:
-  - {fileID: 21300000, guid: 9e10e464d51d1494daed0816bd232479, type: 3}
+  - {fileID: 21300000, guid: 5edc41609455ce44ca82902a50d08eb8, type: 3}
   portraitsFace: 0
   setSayDialog: {fileID: 0}
   description: 
@@ -604,7 +604,7 @@ MonoBehaviour:
   storyText: '''K boss, the Rob is ready'
   description: 
   character: {fileID: 622119586}
-  portrait: {fileID: 21300000, guid: 9e10e464d51d1494daed0816bd232479, type: 3}
+  portrait: {fileID: 21300000, guid: 5edc41609455ce44ca82902a50d08eb8, type: 3}
   voiceOverClip: {fileID: 0}
   showAlways: 1
   showCount: 1
@@ -631,7 +631,7 @@ MonoBehaviour:
   storyText: Okay Mason, like ususal there is your Constructo-Rob...
   description: 
   character: {fileID: 1024461674}
-  portrait: {fileID: 21300000, guid: 356c742c65db7034784969044b0b90e4, type: 3}
+  portrait: {fileID: 21300000, guid: abb0bc4c0a9b22748bbcfe6ab747a8be, type: 3}
   voiceOverClip: {fileID: 0}
   showAlways: 1
   showCount: 1
@@ -707,9 +707,9 @@ MonoBehaviour:
     width: 1114
     height: 859
   selectedBlocks:
-  - {fileID: 888987418}
+  - {fileID: 888987429}
   selectedCommands:
-  - {fileID: 888987416}
+  - {fileID: 888987436}
   variables:
   - {fileID: 888987421}
   description: 
@@ -753,7 +753,7 @@ MonoBehaviour:
   storyText: Thanks boss! I got this!
   description: 
   character: {fileID: 622119586}
-  portrait: {fileID: 21300000, guid: 9e10e464d51d1494daed0816bd232479, type: 3}
+  portrait: {fileID: 21300000, guid: 5edc41609455ce44ca82902a50d08eb8, type: 3}
   voiceOverClip: {fileID: 0}
   showAlways: 1
   showCount: 1
@@ -781,7 +781,7 @@ MonoBehaviour:
     have to move it to. '
   description: 
   character: {fileID: 1024461674}
-  portrait: {fileID: 21300000, guid: 356c742c65db7034784969044b0b90e4, type: 3}
+  portrait: {fileID: 21300000, guid: abb0bc4c0a9b22748bbcfe6ab747a8be, type: 3}
   voiceOverClip: {fileID: 0}
   showAlways: 1
   showCount: 1
@@ -808,7 +808,7 @@ MonoBehaviour:
   storyText: 'Good you''ve selected your Rob. '
   description: 
   character: {fileID: 1024461674}
-  portrait: {fileID: 21300000, guid: 356c742c65db7034784969044b0b90e4, type: 3}
+  portrait: {fileID: 21300000, guid: abb0bc4c0a9b22748bbcfe6ab747a8be, type: 3}
   voiceOverClip: {fileID: 0}
   showAlways: 1
   showCount: 1
@@ -865,7 +865,7 @@ MonoBehaviour:
   storyText: Select it so you can give it orders.
   description: 
   character: {fileID: 1024461674}
-  portrait: {fileID: 21300000, guid: 356c742c65db7034784969044b0b90e4, type: 3}
+  portrait: {fileID: 21300000, guid: abb0bc4c0a9b22748bbcfe6ab747a8be, type: 3}
   voiceOverClip: {fileID: 0}
   showAlways: 1
   showCount: 1
@@ -972,7 +972,7 @@ MonoBehaviour:
     a grove in that wall.
   description: 
   character: {fileID: 1024461674}
-  portrait: {fileID: 21300000, guid: 356c742c65db7034784969044b0b90e4, type: 3}
+  portrait: {fileID: 21300000, guid: abb0bc4c0a9b22748bbcfe6ab747a8be, type: 3}
   voiceOverClip: {fileID: 0}
   showAlways: 1
   showCount: 1
@@ -999,7 +999,7 @@ MonoBehaviour:
   storyText: (This could be it! He might actually pass this time)
   description: 
   character: {fileID: 1024461674}
-  portrait: {fileID: 21300000, guid: 356c742c65db7034784969044b0b90e4, type: 3}
+  portrait: {fileID: 21300000, guid: abb0bc4c0a9b22748bbcfe6ab747a8be, type: 3}
   voiceOverClip: {fileID: 0}
   showAlways: 1
   showCount: 1
@@ -1026,7 +1026,7 @@ MonoBehaviour:
   storyText: Woah! You didn't even scratch the wall this time!
   description: 
   character: {fileID: 1024461674}
-  portrait: {fileID: 21300000, guid: 356c742c65db7034784969044b0b90e4, type: 3}
+  portrait: {fileID: 21300000, guid: abb0bc4c0a9b22748bbcfe6ab747a8be, type: 3}
   voiceOverClip: {fileID: 0}
   showAlways: 1
   showCount: 1
@@ -1053,7 +1053,7 @@ MonoBehaviour:
   storyText: '...Phew made it.'
   description: 
   character: {fileID: 622119586}
-  portrait: {fileID: 21300000, guid: 9e10e464d51d1494daed0816bd232479, type: 3}
+  portrait: {fileID: 21300000, guid: 5edc41609455ce44ca82902a50d08eb8, type: 3}
   voiceOverClip: {fileID: 0}
   showAlways: 1
   showCount: 1
@@ -1094,7 +1094,7 @@ MonoBehaviour:
   - {fileID: 888987422}
 --- !u!114 &888987427
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -1109,7 +1109,7 @@ MonoBehaviour:
   storyText: '...Err... Whoops.'
   description: 
   character: {fileID: 622119586}
-  portrait: {fileID: 21300000, guid: 9e10e464d51d1494daed0816bd232479, type: 3}
+  portrait: {fileID: 21300000, guid: 5edc41609455ce44ca82902a50d08eb8, type: 3}
   voiceOverClip: {fileID: 0}
   showAlways: 1
   showCount: 1
@@ -1121,7 +1121,7 @@ MonoBehaviour:
   setSayDialog: {fileID: 0}
 --- !u!114 &888987428
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -1138,7 +1138,7 @@ MonoBehaviour:
   waitUntilFinished: 1
 --- !u!114 &888987429
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -1172,7 +1172,7 @@ MonoBehaviour:
   - {fileID: 888987435}
 --- !u!114 &888987430
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -1187,7 +1187,7 @@ MonoBehaviour:
   storyText: What you have done if that was part of the outer hull huh?
   description: 
   character: {fileID: 1024461674}
-  portrait: {fileID: 21300000, guid: 356c742c65db7034784969044b0b90e4, type: 3}
+  portrait: {fileID: 21300000, guid: abb0bc4c0a9b22748bbcfe6ab747a8be, type: 3}
   voiceOverClip: {fileID: 0}
   showAlways: 1
   showCount: 1
@@ -1199,7 +1199,7 @@ MonoBehaviour:
   setSayDialog: {fileID: 0}
 --- !u!114 &888987431
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -1214,7 +1214,7 @@ MonoBehaviour:
   storyText: Sorry boss... It was an accident?
   description: 
   character: {fileID: 622119586}
-  portrait: {fileID: 21300000, guid: 9e10e464d51d1494daed0816bd232479, type: 3}
+  portrait: {fileID: 21300000, guid: 5edc41609455ce44ca82902a50d08eb8, type: 3}
   voiceOverClip: {fileID: 0}
   showAlways: 1
   showCount: 1
@@ -1226,7 +1226,7 @@ MonoBehaviour:
   setSayDialog: {fileID: 0}
 --- !u!114 &888987432
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -1241,7 +1241,7 @@ MonoBehaviour:
   storyText: Not blow up the whole bloody wall!
   description: 
   character: {fileID: 1024461674}
-  portrait: {fileID: 21300000, guid: 356c742c65db7034784969044b0b90e4, type: 3}
+  portrait: {fileID: 21300000, guid: abb0bc4c0a9b22748bbcfe6ab747a8be, type: 3}
   voiceOverClip: {fileID: 0}
   showAlways: 1
   showCount: 1
@@ -1253,7 +1253,7 @@ MonoBehaviour:
   setSayDialog: {fileID: 0}
 --- !u!114 &888987433
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -1268,7 +1268,7 @@ MonoBehaviour:
   storyText: 'Are you an idiot?? You were supposed to carefully carve a neat grove! '
   description: 
   character: {fileID: 1024461674}
-  portrait: {fileID: 21300000, guid: 356c742c65db7034784969044b0b90e4, type: 3}
+  portrait: {fileID: 21300000, guid: abb0bc4c0a9b22748bbcfe6ab747a8be, type: 3}
   voiceOverClip: {fileID: 0}
   showAlways: 1
   showCount: 1
@@ -1280,7 +1280,7 @@ MonoBehaviour:
   setSayDialog: {fileID: 0}
 --- !u!114 &888987434
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -1295,7 +1295,7 @@ MonoBehaviour:
   storyText: WHOOPS!?
   description: 
   character: {fileID: 1024461674}
-  portrait: {fileID: 21300000, guid: 356c742c65db7034784969044b0b90e4, type: 3}
+  portrait: {fileID: 21300000, guid: abb0bc4c0a9b22748bbcfe6ab747a8be, type: 3}
   voiceOverClip: {fileID: 0}
   showAlways: 1
   showCount: 1
@@ -1307,7 +1307,7 @@ MonoBehaviour:
   setSayDialog: {fileID: 0}
 --- !u!114 &888987435
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -1326,7 +1326,7 @@ MonoBehaviour:
   sceneNameOLD: 
 --- !u!114 &888987436
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -1341,7 +1341,7 @@ MonoBehaviour:
   storyText: Gah... never mind just continue.
   description: 
   character: {fileID: 1024461674}
-  portrait: {fileID: 21300000, guid: 356c742c65db7034784969044b0b90e4, type: 3}
+  portrait: {fileID: 21300000, guid: abb0bc4c0a9b22748bbcfe6ab747a8be, type: 3}
   voiceOverClip: {fileID: 0}
   showAlways: 1
   showCount: 1
@@ -1474,7 +1474,7 @@ MonoBehaviour:
   nameColor: {r: 0.31045115, g: 0.17915626, b: 0.6226415, a: 1}
   soundEffect: {fileID: 0}
   portraits:
-  - {fileID: 21300000, guid: 356c742c65db7034784969044b0b90e4, type: 3}
+  - {fileID: 21300000, guid: abb0bc4c0a9b22748bbcfe6ab747a8be, type: 3}
   portraitsFace: 0
   setSayDialog: {fileID: 0}
   description: 
