@@ -580,6 +580,8 @@ GameObject:
   - component: {fileID: 888987430}
   - component: {fileID: 888987436}
   - component: {fileID: 888987435}
+  - component: {fileID: 888987437}
+  - component: {fileID: 888987438}
   m_Layer: 0
   m_Name: IntroSceneFlowChart
   m_TagString: Untagged
@@ -628,7 +630,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 1
   indentLevel: 0
-  storyText: Okay Mason, like ususal there is your Constructo-Rob...
+  storyText: Okay Mason, like ususal there's ya Constructo-Rob...
   description: 
   character: {fileID: 1024461674}
   portrait: {fileID: 21300000, guid: abb0bc4c0a9b22748bbcfe6ab747a8be, type: 3}
@@ -709,7 +711,7 @@ MonoBehaviour:
   selectedBlocks:
   - {fileID: 888987429}
   selectedCommands:
-  - {fileID: 888987436}
+  - {fileID: 888987438}
   variables:
   - {fileID: 888987421}
   description: 
@@ -777,8 +779,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 5
   indentLevel: 0
-  storyText: 'Now Move the Rob over to the wall, I''ve even highlighted the area you
-    have to move it to. '
+  storyText: 'Now Move the Rob over to the wall, I''ve even highlighted the area ya
+    have to move it to so there is no way even you''ll mess this up! '
   description: 
   character: {fileID: 1024461674}
   portrait: {fileID: 21300000, guid: abb0bc4c0a9b22748bbcfe6ab747a8be, type: 3}
@@ -805,7 +807,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 4
   indentLevel: 0
-  storyText: 'Good you''ve selected your Rob. '
+  storyText: 'Good you''ve selected ya Rob. '
   description: 
   character: {fileID: 1024461674}
   portrait: {fileID: 21300000, guid: abb0bc4c0a9b22748bbcfe6ab747a8be, type: 3}
@@ -862,7 +864,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 2
   indentLevel: 0
-  storyText: Select it so you can give it orders.
+  storyText: '...select it so ya can give it orders!'
   description: 
   character: {fileID: 1024461674}
   portrait: {fileID: 21300000, guid: abb0bc4c0a9b22748bbcfe6ab747a8be, type: 3}
@@ -968,8 +970,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 13
   indentLevel: 0
-  storyText: OK Mason, you're doing great! Now carefully use the Rob's laser to cut
-    a grove in that wall.
+  storyText: OK Mason, ya doing great! Now carefully use the Rob's laser to cut a
+    grove in that wall.
   description: 
   character: {fileID: 1024461674}
   portrait: {fileID: 21300000, guid: abb0bc4c0a9b22748bbcfe6ab747a8be, type: 3}
@@ -996,7 +998,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 12
   indentLevel: 0
-  storyText: (This could be it! He might actually pass this time)
+  storyText: "T\u0336h\u0336i\u0336s\u0336 \u0336c\u0336o\u0336u\u0336l\u0336d\u0336
+    \u0336b\u0336e\u0336 \u0336i\u0336t\u0336!\u0336 \u0336H\u0336e\u0336 \u0336m\u0336i\u0336g\u0336h\u0336t\u0336
+    \u0336a\u0336c\u0336t\u0336u\u0336a\u0336l\u0336l\u0336y\u0336 \u0336p\u0336a\u0336s\u0336s\u0336
+    \u0336t\u0336h\u0336i\u0336s\u0336 \u0336t\u0336i\u0336m\u0336e\u0336"
   description: 
   character: {fileID: 1024461674}
   portrait: {fileID: 21300000, guid: abb0bc4c0a9b22748bbcfe6ab747a8be, type: 3}
@@ -1023,7 +1028,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 11
   indentLevel: 0
-  storyText: Woah! You didn't even scratch the wall this time!
+  storyText: Woah! Ya didn't even scratch the wall this time! Nice work pal! Colour
+    me impressed!
   description: 
   character: {fileID: 1024461674}
   portrait: {fileID: 21300000, guid: abb0bc4c0a9b22748bbcfe6ab747a8be, type: 3}
@@ -1135,7 +1141,7 @@ MonoBehaviour:
   indentLevel: 0
   soundClip: {fileID: 8300000, guid: 8f847184fc80d2f448fcab978287dcad, type: 3}
   volume: 1
-  waitUntilFinished: 1
+  waitUntilFinished: 0
 --- !u!114 &888987429
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -1162,13 +1168,15 @@ MonoBehaviour:
   eventHandler: {fileID: 0}
   commandList:
   - {fileID: 888987428}
+  - {fileID: 888987438}
   - {fileID: 888987427}
   - {fileID: 888987434}
   - {fileID: 888987433}
   - {fileID: 888987432}
-  - {fileID: 888987431}
+  - {fileID: 888987437}
   - {fileID: 888987430}
   - {fileID: 888987436}
+  - {fileID: 888987431}
   - {fileID: 888987435}
 --- !u!114 &888987430
 MonoBehaviour:
@@ -1184,7 +1192,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 21
   indentLevel: 0
-  storyText: What you have done if that was part of the outer hull huh?
+  storyText: What would ya have done if that was part of the outer hull, huh?
   description: 
   character: {fileID: 1024461674}
   portrait: {fileID: 21300000, guid: abb0bc4c0a9b22748bbcfe6ab747a8be, type: 3}
@@ -1211,7 +1219,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 20
   indentLevel: 0
-  storyText: Sorry boss... It was an accident?
+  storyText: Chill boss, geez!
   description: 
   character: {fileID: 622119586}
   portrait: {fileID: 21300000, guid: 5edc41609455ce44ca82902a50d08eb8, type: 3}
@@ -1238,7 +1246,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 19
   indentLevel: 0
-  storyText: Not blow up the whole bloody wall!
+  storyText: Not blow up the whole goddamn wall!
   description: 
   character: {fileID: 1024461674}
   portrait: {fileID: 21300000, guid: abb0bc4c0a9b22748bbcfe6ab747a8be, type: 3}
@@ -1265,7 +1273,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 18
   indentLevel: 0
-  storyText: 'Are you an idiot?? You were supposed to carefully carve a neat grove! '
+  storyText: 'You absolute madman! You were supposed to carefully carve a grove! '
   description: 
   character: {fileID: 1024461674}
   portrait: {fileID: 21300000, guid: abb0bc4c0a9b22748bbcfe6ab747a8be, type: 3}
@@ -1351,6 +1359,51 @@ MonoBehaviour:
   stopVoiceover: 1
   waitForVO: 0
   setSayDialog: {fileID: 0}
+--- !u!114 &888987437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 888987408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec422cd568a9c4a31ad7c36d0572b9da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 24
+  indentLevel: 0
+  storyText: Sorry boss... It was an accident?
+  description: 
+  character: {fileID: 622119586}
+  portrait: {fileID: 21300000, guid: 5edc41609455ce44ca82902a50d08eb8, type: 3}
+  voiceOverClip: {fileID: 0}
+  showAlways: 1
+  showCount: 1
+  extendPrevious: 0
+  fadeWhenDone: 1
+  waitForClick: 1
+  stopVoiceover: 1
+  waitForVO: 0
+  setSayDialog: {fileID: 0}
+--- !u!114 &888987438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 888987408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3315ad2ebb85443909a1203d56d9344e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 25
+  indentLevel: 0
+  _duration:
+    floatRef: {fileID: 0}
+    floatVal: 1
+  durationOLD: 0
 --- !u!1001 &918610910
 PrefabInstance:
   m_ObjectHideFlags: 0

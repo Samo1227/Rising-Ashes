@@ -489,15 +489,15 @@ RectTransform:
   m_GameObject: {fileID: 423993756}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 25, y: 25, z: 1}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 1827382458}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -11, y: 13}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 0.059647, y: 41.3}
+  m_SizeDelta: {x: 192, y: 134.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &423993758
 MonoBehaviour:
@@ -519,7 +519,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 45d22c64f2c61f84f8342170843d3f6d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f70302e5e8f147949bd117feb39072be, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -630,6 +630,8 @@ GameObject:
   - component: {fileID: 482834757}
   - component: {fileID: 482834767}
   - component: {fileID: 482834768}
+  - component: {fileID: 482834769}
+  - component: {fileID: 482834770}
   m_Layer: 0
   m_Name: Flowchart
   m_TagString: Untagged
@@ -654,7 +656,7 @@ MonoBehaviour:
   storyText: 59th actually...
   description: 
   character: {fileID: 1659551647}
-  portrait: {fileID: 21300000, guid: 5edc41609455ce44ca82902a50d08eb8, type: 3}
+  portrait: {fileID: 0}
   voiceOverClip: {fileID: 0}
   showAlways: 1
   showCount: 1
@@ -681,7 +683,7 @@ MonoBehaviour:
   storyText: Nothing to worry about boss, I'm sure I'll pass this time.
   description: 
   character: {fileID: 1659551647}
-  portrait: {fileID: 21300000, guid: 5edc41609455ce44ca82902a50d08eb8, type: 3}
+  portrait: {fileID: 0}
   voiceOverClip: {fileID: 0}
   showAlways: 1
   showCount: 1
@@ -705,11 +707,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 5
   indentLevel: 0
-  storyText: Today you will be retaking your Construction Robot Control Exam, this
-    is your 60th try yes?
+  storyText: Today you'll be retaking your Construction Robot Control Exam, this is
+    your 60th try yes?
   description: 
   character: {fileID: 37240354}
-  portrait: {fileID: 21300000, guid: abb0bc4c0a9b22748bbcfe6ab747a8be, type: 3}
+  portrait: {fileID: 0}
   voiceOverClip: {fileID: 0}
   showAlways: 1
   showCount: 1
@@ -736,7 +738,7 @@ MonoBehaviour:
   storyText: Morning Boss!
   description: 
   character: {fileID: 1659551647}
-  portrait: {fileID: 21300000, guid: 5edc41609455ce44ca82902a50d08eb8, type: 3}
+  portrait: {fileID: 0}
   voiceOverClip: {fileID: 0}
   showAlways: 1
   showCount: 1
@@ -763,7 +765,7 @@ MonoBehaviour:
   storyText: Ah, Mason! You're finally here!
   description: 
   character: {fileID: 37240354}
-  portrait: {fileID: 21300000, guid: abb0bc4c0a9b22748bbcfe6ab747a8be, type: 3}
+  portrait: {fileID: 0}
   voiceOverClip: {fileID: 0}
   showAlways: 1
   showCount: 1
@@ -787,13 +789,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 2
   indentLevel: 0
-  storyText: "Oh and if you see that Elizabeth lady, don't take her advice...we don't
+  storyText: "Oh and if ya see that Elizabeth lady, don't take her advice...we don't
     need anymore weird happenings around here I\u0336 \u0336s\u0336w\u0336e\u0336a\u0336r\u0336
     \u0336t\u0336h\u0336a\u0336t\u0336 \u0336w\u0336o\u0336m\u0336a\u0336n\u0336 \u0336i\u0336s\u0336
     \u0336c\u0336r\u0336a\u0336z\u0336y\u0336.\u0336.\u0336.\u0336"
   description: 
   character: {fileID: 37240354}
-  portrait: {fileID: 21300000, guid: abb0bc4c0a9b22748bbcfe6ab747a8be, type: 3}
+  portrait: {fileID: 0}
   voiceOverClip: {fileID: 0}
   showAlways: 1
   showCount: 1
@@ -817,11 +819,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 1
   indentLevel: 0
-  storyText: If you stick to the exam and don't try and over-tinker with the robots
-    you will pass with flying colours, do not worry.
+  storyText: If ya stick to the exam and don't try and over-tinker with the robots
+    you'll pass with flying colours, don't worry.
   description: 
   character: {fileID: 37240354}
-  portrait: {fileID: 21300000, guid: abb0bc4c0a9b22748bbcfe6ab747a8be, type: 3}
+  portrait: {fileID: 0}
   voiceOverClip: {fileID: 0}
   showAlways: 1
   showCount: 1
@@ -856,7 +858,9 @@ MonoBehaviour:
   description: 
   eventHandler: {fileID: 482834767}
   commandList:
+  - {fileID: 482834769}
   - {fileID: 482834761}
+  - {fileID: 482834770}
   - {fileID: 482834760}
   - {fileID: 482834759}
   - {fileID: 482834757}
@@ -891,7 +895,7 @@ MonoBehaviour:
   selectedBlocks:
   - {fileID: 482834764}
   selectedCommands:
-  - {fileID: 482834758}
+  - {fileID: 482834763}
   variables: []
   description: 
   stepPause: 0
@@ -950,6 +954,66 @@ MonoBehaviour:
     stringVal: IntroScene
   loadingImage: {fileID: 0}
   sceneNameOLD: 
+--- !u!114 &482834769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 482834756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ac5ce55bc698fa4290939ef6e426501, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 9
+  indentLevel: 0
+  display: 1
+  stage: {fileID: 0}
+  character: {fileID: 37240354}
+  replacedCharacter: {fileID: 0}
+  portrait: {fileID: 21300000, guid: abb0bc4c0a9b22748bbcfe6ab747a8be, type: 3}
+  offset: 0
+  fromPosition: {fileID: 0}
+  toPosition: {fileID: 1185602623}
+  facing: 0
+  useDefaultSettings: 1
+  fadeDuration: 0.5
+  moveDuration: 1
+  shiftOffset: {x: 0, y: 0}
+  move: 0
+  shiftIntoPlace: 0
+  waitUntilFinished: 0
+--- !u!114 &482834770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 482834756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ac5ce55bc698fa4290939ef6e426501, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 10
+  indentLevel: 0
+  display: 1
+  stage: {fileID: 0}
+  character: {fileID: 1659551647}
+  replacedCharacter: {fileID: 0}
+  portrait: {fileID: 21300000, guid: 5edc41609455ce44ca82902a50d08eb8, type: 3}
+  offset: 0
+  fromPosition: {fileID: 0}
+  toPosition: {fileID: 266768880}
+  facing: 0
+  useDefaultSettings: 1
+  fadeDuration: 0.5
+  moveDuration: 1
+  shiftOffset: {x: 0, y: 0}
+  move: 0
+  shiftIntoPlace: 0
+  waitUntilFinished: 0
 --- !u!1 &704024043
 GameObject:
   m_ObjectHideFlags: 1

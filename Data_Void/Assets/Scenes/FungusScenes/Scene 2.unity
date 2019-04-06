@@ -918,6 +918,12 @@ GameObject:
   - component: {fileID: 1353696556}
   - component: {fileID: 1353696551}
   - component: {fileID: 1353696553}
+  - component: {fileID: 1353696566}
+  - component: {fileID: 1353696565}
+  - component: {fileID: 1353696554}
+  - component: {fileID: 1353696569}
+  - component: {fileID: 1353696568}
+  - component: {fileID: 1353696567}
   m_Layer: 0
   m_Name: Flowchart
   m_TagString: Untagged
@@ -952,7 +958,7 @@ MonoBehaviour:
   selectedBlocks:
   - {fileID: 1353696552}
   selectedCommands:
-  - {fileID: 1353696555}
+  - {fileID: 1353696567}
   variables: []
   description: 
   stepPause: 0
@@ -980,7 +986,7 @@ MonoBehaviour:
   indentLevel: 0
   soundClip: {fileID: 8300000, guid: 8f847184fc80d2f448fcab978287dcad, type: 3}
   volume: 1
-  waitUntilFinished: 1
+  waitUntilFinished: 0
 --- !u!114 &1353696552
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -1006,13 +1012,19 @@ MonoBehaviour:
   description: 
   eventHandler: {fileID: 1353696560}
   commandList:
+  - {fileID: 1353696566}
+  - {fileID: 1353696565}
   - {fileID: 1353696559}
   - {fileID: 1353696551}
+  - {fileID: 1353696554}
   - {fileID: 1353696557}
   - {fileID: 1353696558}
   - {fileID: 1353696555}
-  - {fileID: 1353696562}
   - {fileID: 1353696564}
+  - {fileID: 1353696562}
+  - {fileID: 1353696569}
+  - {fileID: 1353696568}
+  - {fileID: 1353696567}
   - {fileID: 1353696556}
   - {fileID: 1353696563}
   - {fileID: 1353696553}
@@ -1035,6 +1047,24 @@ MonoBehaviour:
     stringVal: Scene 3
   loadingImage: {fileID: 0}
   sceneNameOLD: 
+--- !u!114 &1353696554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1353696549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3315ad2ebb85443909a1203d56d9344e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 17
+  indentLevel: 0
+  _duration:
+    floatRef: {fileID: 0}
+    floatVal: 1
+  durationOLD: 0
 --- !u!114 &1353696555
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -1052,7 +1082,7 @@ MonoBehaviour:
   storyText: Okay now slowly lift up the-
   description: 
   character: {fileID: 335078919}
-  portrait: {fileID: 21300000, guid: abb0bc4c0a9b22748bbcfe6ab747a8be, type: 3}
+  portrait: {fileID: 0}
   voiceOverClip: {fileID: 0}
   showAlways: 1
   showCount: 1
@@ -1097,7 +1127,7 @@ MonoBehaviour:
   storyText: No!! You blew a hole in the wall!
   description: 
   character: {fileID: 335078919}
-  portrait: {fileID: 21300000, guid: abb0bc4c0a9b22748bbcfe6ab747a8be, type: 3}
+  portrait: {fileID: 0}
   voiceOverClip: {fileID: 0}
   showAlways: 1
   showCount: 1
@@ -1124,7 +1154,7 @@ MonoBehaviour:
   storyText: Sorry Boss.
   description: 
   character: {fileID: 780720566}
-  portrait: {fileID: 21300000, guid: 5edc41609455ce44ca82902a50d08eb8, type: 3}
+  portrait: {fileID: 0}
   voiceOverClip: {fileID: 0}
   showAlways: 1
   showCount: 1
@@ -1151,7 +1181,7 @@ MonoBehaviour:
   storyText: Okay now, Mason. Slowly move the robot forwards by 1cm.
   description: 
   character: {fileID: 335078919}
-  portrait: {fileID: 21300000, guid: abb0bc4c0a9b22748bbcfe6ab747a8be, type: 3}
+  portrait: {fileID: 0}
   voiceOverClip: {fileID: 0}
   showAlways: 1
   showCount: 1
@@ -1241,7 +1271,139 @@ MonoBehaviour:
   indentLevel: 0
   soundClip: {fileID: 8300000, guid: 16fb8c7848900a24fbd7be9f35089ce6, type: 3}
   volume: 1
-  waitUntilFinished: 1
+  waitUntilFinished: 0
+--- !u!114 &1353696565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1353696549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ac5ce55bc698fa4290939ef6e426501, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 16
+  indentLevel: 0
+  display: 1
+  stage: {fileID: 0}
+  character: {fileID: 780720566}
+  replacedCharacter: {fileID: 0}
+  portrait: {fileID: 21300000, guid: 5edc41609455ce44ca82902a50d08eb8, type: 3}
+  offset: 0
+  fromPosition: {fileID: 0}
+  toPosition: {fileID: 575161250}
+  facing: 0
+  useDefaultSettings: 1
+  fadeDuration: 0.5
+  moveDuration: 1
+  shiftOffset: {x: 0, y: 0}
+  move: 0
+  shiftIntoPlace: 0
+  waitUntilFinished: 0
+--- !u!114 &1353696566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1353696549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ac5ce55bc698fa4290939ef6e426501, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 15
+  indentLevel: 0
+  display: 1
+  stage: {fileID: 0}
+  character: {fileID: 335078919}
+  replacedCharacter: {fileID: 0}
+  portrait: {fileID: 21300000, guid: abb0bc4c0a9b22748bbcfe6ab747a8be, type: 3}
+  offset: 0
+  fromPosition: {fileID: 0}
+  toPosition: {fileID: 172004911}
+  facing: 0
+  useDefaultSettings: 1
+  fadeDuration: 0.5
+  moveDuration: 1
+  shiftOffset: {x: 0, y: 0}
+  move: 0
+  shiftIntoPlace: 0
+  waitUntilFinished: 0
+--- !u!114 &1353696567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1353696549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec422cd568a9c4a31ad7c36d0572b9da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 20
+  indentLevel: 0
+  storyText: I didn't do anything this time!
+  description: 
+  character: {fileID: 780720566}
+  portrait: {fileID: 0}
+  voiceOverClip: {fileID: 0}
+  showAlways: 1
+  showCount: 1
+  extendPrevious: 0
+  fadeWhenDone: 1
+  waitForClick: 1
+  stopVoiceover: 1
+  waitForVO: 0
+  setSayDialog: {fileID: 0}
+--- !u!114 &1353696568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1353696549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec422cd568a9c4a31ad7c36d0572b9da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 19
+  indentLevel: 0
+  storyText: '...What the hell did ya do this time?!'
+  description: 
+  character: {fileID: 335078919}
+  portrait: {fileID: 0}
+  voiceOverClip: {fileID: 0}
+  showAlways: 1
+  showCount: 1
+  extendPrevious: 0
+  fadeWhenDone: 1
+  waitForClick: 1
+  stopVoiceover: 1
+  waitForVO: 0
+  setSayDialog: {fileID: 0}
+--- !u!114 &1353696569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1353696549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3315ad2ebb85443909a1203d56d9344e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 18
+  indentLevel: 0
+  _duration:
+    floatRef: {fileID: 0}
+    floatVal: 2
+  durationOLD: 0
 --- !u!1 &2100595776
 GameObject:
   m_ObjectHideFlags: 0
