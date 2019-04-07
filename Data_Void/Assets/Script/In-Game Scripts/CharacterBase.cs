@@ -464,9 +464,14 @@ public class CharacterBase : MonoBehaviour {
             }
             //-----------
         }
+        for (int i = 0; i < ls_PRs_In_Range.Count; i++)
+        {
+            print(i + " " + ls_PRs_In_Range[i]);
+        }
         //-----------
         if (ls_PRs_In_Range.Count <= 0)
         {
+            print("NO TARGET");
             //-----------
             for (int i = 0; i < selectableTiles.Count; i++)
             {
@@ -480,7 +485,7 @@ public class CharacterBase : MonoBehaviour {
                 //-----------
             }
             //-----------
-            return; //prevents AIs from infinitly moving until they are in range to attack if there's no PCs in range
+           // return; //prevents AIs from infinitly moving until they are in range to attack if there's no PCs in range
         }
         //-----------
         else
@@ -509,14 +514,19 @@ public class CharacterBase : MonoBehaviour {
                 //-----------
                 if (int_Attack_Range > 1)                                         //this prevents Ranged AI from shooting closer players that are behind walls if there is a further player that is not behind a wall
                 {
+                    int layerMask = 1 << 10;
+                    layerMask = ~layerMask;
                     RaycastHit hit;
+                    Vector3 direction = (ls_PRs_In_Range[i].transform.position-this.gameObject.transform.position).normalized;
                     //-----------
-                    if (Physics.Raycast(transform.position, ls_PRs_In_Range[i].transform.position, out hit))
+                  //  if (Physics.Raycast(this.transform.position, /*ls_PRs_In_Range[i].transform.position*/ new Vector3(ls_PRs_In_Range[i].int_x,1, ls_PRs_In_Range[i].int_z), out hit))
+                    if (Physics.Raycast(this.gameObject.transform.position, /*ls_PRs_In_Range[i].transform.position*/ direction, out hit,int_Attack_Range,layerMask))
                     {
                         //-----------
                         if (hit.collider.GetComponent<PlayerRobot>() == ls_PRs_In_Range[i])
                         {
                             pr_Final_Attack_Target = ls_PRs_In_Range[i];
+                            print(pr_Final_Attack_Target.name);
                         }
                         //-----------
                     }
@@ -527,6 +537,7 @@ public class CharacterBase : MonoBehaviour {
                     pr_Final_Attack_Target = ls_PRs_In_Range[i];                         //this just allows for more varience in targets.
             }
             //-----------
+            print(pr_Final_Attack_Target);
             AttackTarget(this, pr_Final_Attack_Target);//calls the function that applies damage
         }
         //-----------
@@ -579,27 +590,35 @@ public class CharacterBase : MonoBehaviour {
             //-----------
             if (cb_Attacker.gameObject.GetComponent<AICharacter>() != null)
             {
+                print(cb_Attacker);
                 //-----------
                 if (cb_Attacker.gameObject.GetComponent<AICharacter>().int_Attack_Range > 1)
                 {
+
+                    int layerMask = 1 << 10;
+                    layerMask = ~layerMask;
                     RaycastHit hit;
+                    Vector3 direction = (cb_Target.transform.position-this.gameObject.transform.position ).normalized;
                     //-----------
-                    if (Physics.Raycast(transform.position, cb_Target.transform.position, out hit))
+                    // if (Physics.Raycast(this.transform.position, /*cb_Target.transform.position*/new Vector3(cb_Target.int_x,1,cb_Target.int_z), out hit,int_Attack_Range, layerMask))
+                    if (Physics.Raycast(this.gameObject.transform.position, /*cb_Target.transform.position*/direction, out hit,int_Attack_Range, layerMask))
                     {
 
-                        lr_laser.SetPosition(0, transform.position);
+                        lr_laser.SetPosition(0, this.gameObject.transform.position);
                         lr_laser.SetPosition(1, hit.point);
                         StartCoroutine(LaserOff());
                         //-----------
                         if (hit.collider.gameObject.GetComponent<Tile>())//if a Tile is in the way hit that
                         {
                             AttackTile(hit.collider.gameObject.GetComponent<Tile>());
+                            print("Hit Tile");
                         }
                         //-----------
                         else if (hit.collider.gameObject.GetComponent<CharacterBase>())//hit first player otherwise
                         {
                             cb_Target = hit.collider.gameObject.GetComponent<CharacterBase>();
                             cb_Target.int_Health -= cb_Attacker.int_damage;
+                            print("Hit " + cb_Target);
                         }
                         //-----------
                         // return;

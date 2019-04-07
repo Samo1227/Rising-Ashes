@@ -150,7 +150,7 @@ public class Tile : MonoBehaviour {
 
         if (EventSystem.current.IsPointerOverGameObject())
         {
-            print("Why do you click?");
+           // print("Why do you click?");
             return;
         }
         if (bl_Walking_Selection) //if this tile is part of the current walking selection

@@ -273,7 +273,7 @@ MonoBehaviour:
   int_Health: 0
   int_Health_max: 5
   int_Attack_Range: 3
-  int_damage: 0
+  int_damage: 1
   int_heat_current: 0
   int_heat_total: 0
   int_heat_fail_chance: 0
@@ -295,12 +295,15 @@ MonoBehaviour:
   selectableTiles: []
   bl_Shield: 0
   lr_laser: {fileID: 2921135020467819521}
+  ice_fire_select: 0
   pr_Target: {fileID: 0}
   rnd_Rendereer: {fileID: 0}
   ais_CurrentState: 0
   int_ChaseRange: 6
   int_TriggerRange: 2
   int_RetreatRange: 0
+  bl_is_invisible: 0
+  bl_is_tagged: 0
 --- !u!120 &2921135020467819521
 LineRenderer:
   m_ObjectHideFlags: 0

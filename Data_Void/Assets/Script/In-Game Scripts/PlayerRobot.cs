@@ -77,6 +77,7 @@ public class PlayerRobot : CharacterBase
         {
             StartCoroutine(pr.FindVeiwableTiles());
         }
+        this.gameObject.name = "PR " + CSGameManager.gameManager.ls_Player_Robots_In_Level.IndexOf(this);
     }
     //------------------------------------------
     void Update()

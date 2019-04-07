@@ -450,7 +450,7 @@ public class CSGameManager : MonoBehaviour
     //---------------------------------------------------
     public void StartAITurn()
     {
-        print(qu_AI_Turns.Count);
+     //   print(qu_AI_Turns.Count);
         //-----------
         if (qu_AI_Turns.Count > 0)
         {
@@ -472,7 +472,7 @@ public class CSGameManager : MonoBehaviour
         //-----------
         else
         {
-            print("Player turn");
+            //print("Player turn");
             PreparePlayerTurn();
         }
         //-----------

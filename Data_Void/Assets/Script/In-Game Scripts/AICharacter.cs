@@ -40,6 +40,7 @@ public class AICharacter : CharacterBase {
         if (ais_CurrentState == AIStates.inactive)
             return;
         SetState(AIStates.waiting);
+        gameObject.name ="Enemy " +CSGameManager.gameManager.ls_AI_Characters_In_Level.IndexOf(this);
     }
     #endregion
     //---------------------------------------------------
@@ -180,20 +181,21 @@ public class AICharacter : CharacterBase {
                 else
                 {
                     Clear_Selection();//putting this everywhere now :S
-                    Find_Attack_Tile_Range();
-                    FindPRsInRange();
-                    //-----------
-                    if (ls_Dest_Tiles_In_Range.Count != 0)//should only get called when there is no player in range, in theory
-                    {
-                        FindTileTarget(pr_Target);
-                    } 
-                    //-----------
+                    //Find_Attack_Tile_Range();
+                    //FindPRsInRange();
+                   
                     int_x = (int)transform.position.x;
                     int_z = (int)transform.position.z;
                     tl_Current_Tile = CSGameManager.gameManager.map[int_x, int_z].gameObject.GetComponent<Tile>();
                     tl_Current_Tile.bl_Occupied_By_AI = true;
                     Find_Attack_Tile_Range();
                     FindPRsInRange();
+                    //-----------
+                    if (ls_Dest_Tiles_In_Range.Count != 0)//should only get called when there is no player in range, in theory
+                    {
+                        FindTileTarget(pr_Target);
+                    }
+                    //-----------
                     EndTurn();
                 }
             }
