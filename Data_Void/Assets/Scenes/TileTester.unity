@@ -44,7 +44,7 @@ RenderSettings:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 11
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -88,7 +88,8 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: c930370321484804c9b512a6d7787b95,
+    type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
@@ -636,7 +637,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1075715540}
   - component: {fileID: 1075715539}
-  - component: {fileID: 1075715538}
   m_Layer: 0
   m_Name: BotMakerCam
   m_TagString: Untagged
@@ -644,14 +644,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1075715538
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1075715537}
-  m_Enabled: 1
 --- !u!20 &1075715539
 Camera:
   m_ObjectHideFlags: 0
@@ -1262,6 +1254,9 @@ MonoBehaviour:
   int_temp_robot_data: 
   bl_storing_robot: 0
   robot_mod: {fileID: 1194313115}
+  auSource: {fileID: 0}
+  acCalm: {fileID: 8300000, guid: 7b5485dc2d4513a4693e58f92a78576d, type: 3}
+  acIntense: {fileID: 8300000, guid: 7519197f74398f440943bcfc054d0ee4, type: 3}
 --- !u!4 &1857506038
 Transform:
   m_ObjectHideFlags: 0

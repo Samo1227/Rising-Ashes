@@ -296,6 +296,7 @@ MonoBehaviour:
   bl_Shield: 0
   lr_laser: {fileID: 2921135020467819521}
   ice_fire_select: 0
+  audioList: {fileID: 11400000, guid: 6fa00f13a1d4c46449381bfef7479a09, type: 2}
   pr_Target: {fileID: 0}
   rnd_Rendereer: {fileID: 0}
   ais_CurrentState: 0

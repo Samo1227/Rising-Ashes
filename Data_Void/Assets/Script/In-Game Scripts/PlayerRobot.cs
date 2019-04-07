@@ -77,6 +77,7 @@ public class PlayerRobot : CharacterBase
         {
             StartCoroutine(pr.FindVeiwableTiles());
         }
+        AudioSetup();
         this.gameObject.name = "PR " + CSGameManager.gameManager.ls_Player_Robots_In_Level.IndexOf(this);
     }
     //------------------------------------------
@@ -587,6 +588,7 @@ public class PlayerRobot : CharacterBase
         {
             tl_Temp_ai.VisibleEnemy();
         }
+        CSGameManager.gameManager.CheckSetAudio();
         yield return null;
     }
 

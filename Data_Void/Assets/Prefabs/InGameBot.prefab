@@ -203,6 +203,8 @@ MonoBehaviour:
   selectableTiles: []
   bl_Shield: 0
   lr_laser: {fileID: 3539013778851571317}
+  ice_fire_select: 0
+  audioList: {fileID: 11400000, guid: 6fa00f13a1d4c46449381bfef7479a09, type: 2}
   bl_Turn_Available: 1
   bl_Has_Moved: 0
   bl_Has_Acted: 0

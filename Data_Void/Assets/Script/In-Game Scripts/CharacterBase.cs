@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class CharacterBase : MonoBehaviour {
     //---------------------------------------------------
@@ -62,6 +63,8 @@ public class CharacterBase : MonoBehaviour {
     public LineRenderer lr_laser;
 
     public bool ice_fire_select;
+    public AudioHolder audioList;
+    AudioSource aSource;
     #endregion
     //---------------------------------------------------
     #region Start
@@ -69,11 +72,13 @@ public class CharacterBase : MonoBehaviour {
     {
         int_Health = int_Health_max;//current health = max health at start
                                     //-----------
-
-        print("Why no call?");
+                                    
         lr_laser = gameObject.GetComponent<LineRenderer>();
-        
         //-----------
+    }
+    protected void AudioSetup()
+    {
+        aSource = gameObject.AddComponent<AudioSource>();
     }
     #endregion
     //---------------------------------------------------

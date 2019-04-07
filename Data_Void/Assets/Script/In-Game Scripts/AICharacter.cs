@@ -25,6 +25,7 @@ public class AICharacter : CharacterBase {
 
     public bool bl_is_invisible;
     public bool bl_is_tagged;
+    public bool bl_Seen = false;
     #endregion
     //---------------------------------------------------
     #region Start
@@ -41,6 +42,7 @@ public class AICharacter : CharacterBase {
             return;
         SetState(AIStates.waiting);
         gameObject.name ="Enemy " +CSGameManager.gameManager.ls_AI_Characters_In_Level.IndexOf(this);
+        AudioSetup();
     }
     #endregion
     //---------------------------------------------------
@@ -205,9 +207,31 @@ public class AICharacter : CharacterBase {
         else
         {
             MoveToTarget();
+            if (CSGameManager.gameManager.map[Mathf.RoundToInt(gameObject.transform.position.x), Mathf.RoundToInt(gameObject.transform.position.z)].bl_in_view_zone)
+            {
+                if (bl_Seen == false)
+                {
+                    GetComponent<Renderer>().enabled = true;
+                    gameObject.transform.GetChild(0).gameObject.SetActive(true);
+                    bl_Seen = true;
+                    CSGameManager.gameManager.AddOrRemoveFromSeenList(true, this);
+                }
+            }
+            else
+            {
+                if (bl_Seen == true)
+                {
+                    GetComponent<Renderer>().enabled = false;
+                    gameObject.transform.GetChild(0).gameObject.SetActive(false);
+                    bl_Seen = false;
+                    CSGameManager.gameManager.AddOrRemoveFromSeenList(false, this);
+                }
+            }
+            CSGameManager.gameManager.CheckSetAudio();
             //-----------
             if (!bl_Moving)
             {
+                
                 Clear_Selection();//putting this everywhere now :S
                 int_x = (int)transform.position.x;
                 int_z = (int)transform.position.z;
@@ -612,11 +636,15 @@ public class AICharacter : CharacterBase {
             {
                 GetComponent<Renderer>().enabled = false;
                 transform.GetChild(0).gameObject.SetActive(false);
+                bl_Seen = false;
+                CSGameManager.gameManager.AddOrRemoveFromSeenList(false, this);
             }
             else
             {
                 GetComponent<Renderer>().enabled = true;
                 gameObject.transform.GetChild(0).gameObject.SetActive(true);
+                bl_Seen = true;
+                CSGameManager.gameManager.AddOrRemoveFromSeenList(true, this);
             }
             if (tl_Current_Tile.bl_tag)
             {
@@ -629,11 +657,15 @@ public class AICharacter : CharacterBase {
             {
                 GetComponent<Renderer>().enabled = true;
                 transform.GetChild(0).gameObject.SetActive(true);
+                bl_Seen = true;
+                CSGameManager.gameManager.AddOrRemoveFromSeenList(true, this);
             }
             else
             {
                 GetComponent<Renderer>().enabled = false;
                 transform.GetChild(0).gameObject.SetActive(false);
+                bl_Seen = false;
+                CSGameManager.gameManager.AddOrRemoveFromSeenList(false, this);
             }
         }
     }

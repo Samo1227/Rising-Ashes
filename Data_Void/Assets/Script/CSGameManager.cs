@@ -31,10 +31,16 @@ public class CSGameManager : MonoBehaviour
     public List<AICharacter> ls_AI_Characters_In_Level = new List<AICharacter>();//list of living enemies (should perhaps be expanded for non hostile AI)
     public bool bl_Player_Turn = true;//if it is the players turn
     public List<PlayerRobot> ls_Player_Robots_With_Turns_Left = new List<PlayerRobot>();//used to automatically go to AI turn when Player has moved all PRs
+    public List<AICharacter> ls_SeenAIs = new List<AICharacter>();
     public Queue<AICharacter> qu_AI_Turns = new Queue<AICharacter>(); //enemy turn queue
     public int[] int_temp_robot_data;
     public bool bl_storing_robot;
     public Bot_Modifier robot_mod;
+
+    public AudioSource auSource;
+    public AudioClip acCalm;
+    public AudioClip acIntense;
+    public bool bl_CalmMusic = true;
     #endregion
     //---------------------------------------------------
     #region Singleton
@@ -148,7 +154,10 @@ public class CSGameManager : MonoBehaviour
         }
         //AddRobot(2, 4);
         //AddRobot(4, 4);
-
+        auSource = gameObject.AddComponent<AudioSource>();
+        auSource.clip = acCalm;
+        auSource.loop = true;
+        auSource.Play();
     }
     #endregion
     //---------------------------------------------------
@@ -538,6 +547,62 @@ public class CSGameManager : MonoBehaviour
       //  bl_IsMission = false;
     }
     #endregion
+    //---------------------------------------------------
+    public void CheckSetAudio()
+    {
+        if (ls_SeenAIs.Count > 0)
+        {
+            if (bl_CalmMusic == true)
+            {
+                auSource.clip = acIntense;
+                auSource.Play();
+                bl_CalmMusic = false;
+            }
+        }
+        if (ls_SeenAIs.Count == 0)
+        {
+            if (bl_CalmMusic == false)
+            {
+                auSource.clip = acCalm;
+                auSource.Play();
+                bl_CalmMusic = true;
+            }
+        }
+        //foreach(AICharacter ai in ls_AI_Characters_In_Level)
+        //{
+        //    if (ai.bl_Seen == true)
+        //    {
+        //        if (bl_CalmMusic == true)
+        //        {
+        //            auSource.clip = acIntense;
+        //            auSource.Play();
+        //            bl_CalmMusic = false;
+        //        }
+        //        break;
+        //    }
+        //    else
+        //    {
+        //        if (bl_CalmMusic == false)
+        //        {
+        //            auSource.clip = acCalm;
+        //            auSource.Play();
+        //            bl_CalmMusic = true;
+        //        }
+        //    }
+
+        //}
+    }
+    public void AddOrRemoveFromSeenList(bool seen, AICharacter _AI)
+    {
+        if (seen == true)
+        {
+            ls_SeenAIs.Add(_AI);
+        }
+        if(seen == false)
+        {
+            ls_SeenAIs.Remove(_AI);
+        }
+    } 
     //---------------------------------------------------
     #region Unused
     //public void BuildLevel()
