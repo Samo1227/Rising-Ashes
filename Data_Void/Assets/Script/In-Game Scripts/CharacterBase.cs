@@ -64,7 +64,7 @@ public class CharacterBase : MonoBehaviour {
 
     public bool ice_fire_select;
     public AudioHolder audioList;
-    AudioSource aSource;
+    protected AudioSource aSource;
     #endregion
     //---------------------------------------------------
     #region Start

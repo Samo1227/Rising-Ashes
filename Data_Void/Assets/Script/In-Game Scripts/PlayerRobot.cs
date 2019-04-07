@@ -79,6 +79,8 @@ public class PlayerRobot : CharacterBase
         }
         AudioSetup();
         this.gameObject.name = "PR " + CSGameManager.gameManager.ls_Player_Robots_In_Level.IndexOf(this);
+        aSource.clip = audioList.prStart;
+        aSource.Play();
     }
     //------------------------------------------
     void Update()
@@ -313,12 +315,15 @@ public class PlayerRobot : CharacterBase
     #region Destruction
     public void PlayerRobotDeath()
     {
+        aSource.clip = audioList.prDeath;
+        aSource.Play();
+        gameObject.transform.rotation = new Quaternion(0, 0, 90,0);
         CSGameManager.gameManager.ls_Player_Robots_With_Turns_Left.Remove(this);
         CSGameManager.gameManager.ls_Player_Robots_In_Level.Remove(this);//is not an active PR anymore, otherwise AI will break
         CSGameManager.gameManager.CheckLossOrWin();
         tl_Current_Tile.bl_Occupied_By_PC = false;//Tile PR was on is now empty
                                                   //these two could probably be put in an OnDisable method...?
-        Destroy(this.gameObject);//PR is destroyed
+        Destroy(this.gameObject,0.7f);//PR is destroyed
     }
     #endregion
     //------------------------------------------
@@ -572,7 +577,6 @@ public class PlayerRobot : CharacterBase
                                                                                                                                    //----------
                             if (neighbourTile.int_Distance_From_Start <= int_Veiw_Distance)//if the neighbours are within movement range add them to the process queue
                             {
-
                                 process.Enqueue(neighbourTile);//add any walkable neighbours to the queue to process their neighbours
                             }
                         }

@@ -207,6 +207,11 @@ public class AICharacter : CharacterBase {
         else
         {
             MoveToTarget();
+            aSource.clip = audioList.enemyMove;
+            if (!aSource.isPlaying)
+            {
+                aSource.Play();
+            }
             if (CSGameManager.gameManager.map[Mathf.RoundToInt(gameObject.transform.position.x), Mathf.RoundToInt(gameObject.transform.position.z)].bl_in_view_zone)
             {
                 if (bl_Seen == false)
@@ -239,10 +244,17 @@ public class AICharacter : CharacterBase {
                 tl_Current_Tile.bl_Occupied_By_AI = true;
                 Find_Attack_Tile_Range();
                 FindPRsInRange();
+                if (ls_PRs_In_Range.Count>0)
+                {
+                    aSource.clip = audioList.enemyShooting;
+                    aSource.Play();
+                }
                 //-----------
                 if (ls_Dest_Tiles_In_Range.Count != 0)//should only get called when there is no player in range, in theory
                 {
                     FindTileTarget(pr_Target);
+                    aSource.clip = audioList.enemyShooting;
+                    aSource.Play();
                 }
                 //-----------
                 EndTurn();
@@ -557,10 +569,16 @@ public class AICharacter : CharacterBase {
     #region Death
     public void AICharacterDestruction()
     {
+        int_Health = 0;
+        gameObject.transform.localScale = new Vector3(1, 0.5f, 1);
+        aSource.clip = audioList.enemyRobDeath;
+        aSource.Play();
         CSGameManager.gameManager.ls_AI_Characters_In_Level.Remove(this);
         CSGameManager.gameManager.CheckLossOrWin();
         tl_Current_Tile.bl_Occupied_By_AI = false;
-        Destroy(this.gameObject);
+        CSGameManager.gameManager.AddOrRemoveFromSeenList(false, this);
+        Destroy(this.gameObject,1);
+
     }
     #endregion
     //---------------------------------------------------

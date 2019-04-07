@@ -10,7 +10,8 @@ public class UIHelper : MonoBehaviour
     public GameObject go_heat_bar;
     public Image ui_MoveButton;
     public Image ui_AttackButton;
-
+    public AudioHolder audioList;
+    public AudioSource aSource;
     #endregion
     //---------------------------------------------------
     #region Update
@@ -113,6 +114,8 @@ public class UIHelper : MonoBehaviour
     {
         CSGameManager.gameManager.pr_currentRobot.int_Actions = 0;
         CSGameManager.gameManager.EndTurnButton();
+        aSource.clip = audioList.endTurn;
+        aSource.Play();
     } 
     #endregion
     //---------------------------------------------------
