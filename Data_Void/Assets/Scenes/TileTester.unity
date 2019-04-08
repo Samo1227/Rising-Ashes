@@ -331,6 +331,108 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   go_bot_maker: {fileID: 1194313114}
+--- !u!1 &357360954 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6814600135189723977, guid: 71de9b392ed3c3a458f5138e6cf897a7,
+    type: 3}
+  m_PrefabInstance: {fileID: 939435191}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &357360956
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 357360954}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &391852386 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3942366975018233204, guid: 73f893e0a6fe47447b0b43dfd3049b74,
@@ -485,6 +587,17 @@ PrefabInstance:
       propertyPath: go_heat_bar
       value: 
       objectReference: {fileID: 55383527}
+    - target: {fileID: 6814600135189723976, guid: 71de9b392ed3c3a458f5138e6cf897a7,
+        type: 3}
+      propertyPath: audioList
+      value: 
+      objectReference: {fileID: 11400000, guid: 6fa00f13a1d4c46449381bfef7479a09,
+        type: 2}
+    - target: {fileID: 6814600135189723976, guid: 71de9b392ed3c3a458f5138e6cf897a7,
+        type: 3}
+      propertyPath: aSource
+      value: 
+      objectReference: {fileID: 357360956}
     - target: {fileID: 6814600135189723979, guid: 71de9b392ed3c3a458f5138e6cf897a7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1251,12 +1364,14 @@ MonoBehaviour:
   ls_AI_Characters_In_Level: []
   bl_Player_Turn: 1
   ls_Player_Robots_With_Turns_Left: []
+  ls_SeenAIs: []
   int_temp_robot_data: 
   bl_storing_robot: 0
   robot_mod: {fileID: 1194313115}
   auSource: {fileID: 0}
   acCalm: {fileID: 8300000, guid: 7b5485dc2d4513a4693e58f92a78576d, type: 3}
   acIntense: {fileID: 8300000, guid: 7519197f74398f440943bcfc054d0ee4, type: 3}
+  bl_CalmMusic: 1
 --- !u!4 &1857506038
 Transform:
   m_ObjectHideFlags: 0
@@ -1277,7 +1392,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 939435191}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 357360954}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6cf96adc4779f5b4e84554922ff5d5a3, type: 3}

@@ -216,8 +216,9 @@ public class AICharacter : CharacterBase {
             {
                 if (bl_Seen == false)
                 {
-                    GetComponent<Renderer>().enabled = true;
+                    //GetComponent<Renderer>().enabled = true;
                     gameObject.transform.GetChild(0).gameObject.SetActive(true);
+                    transform.GetChild(1).gameObject.SetActive(true);
                     bl_Seen = true;
                     CSGameManager.gameManager.AddOrRemoveFromSeenList(true, this);
                 }
@@ -226,8 +227,9 @@ public class AICharacter : CharacterBase {
             {
                 if (bl_Seen == true)
                 {
-                    GetComponent<Renderer>().enabled = false;
+                    //GetComponent<Renderer>().enabled = false;
                     gameObject.transform.GetChild(0).gameObject.SetActive(false);
+                    transform.GetChild(1).gameObject.SetActive(false);
                     bl_Seen = false;
                     CSGameManager.gameManager.AddOrRemoveFromSeenList(false, this);
                 }
@@ -652,15 +654,17 @@ public class AICharacter : CharacterBase {
         {
             if (bl_is_invisible && tl_Current_Tile.bl_radar != true)
             {
-                GetComponent<Renderer>().enabled = false;
+                //GetComponent<Renderer>().enabled = false;
                 transform.GetChild(0).gameObject.SetActive(false);
+                transform.GetChild(1).gameObject.SetActive(false);
                 bl_Seen = false;
                 CSGameManager.gameManager.AddOrRemoveFromSeenList(false, this);
             }
             else
             {
-                GetComponent<Renderer>().enabled = true;
+                //GetComponent<Renderer>().enabled = true;
                 gameObject.transform.GetChild(0).gameObject.SetActive(true);
+                transform.GetChild(1).gameObject.SetActive(true);
                 bl_Seen = true;
                 CSGameManager.gameManager.AddOrRemoveFromSeenList(true, this);
             }
@@ -673,15 +677,17 @@ public class AICharacter : CharacterBase {
         {
             if (bl_is_tagged)
             {
-                GetComponent<Renderer>().enabled = true;
+               // GetComponent<Renderer>().enabled = true;
                 transform.GetChild(0).gameObject.SetActive(true);
+                transform.GetChild(1).gameObject.SetActive(true);
                 bl_Seen = true;
                 CSGameManager.gameManager.AddOrRemoveFromSeenList(true, this);
             }
             else
             {
-                GetComponent<Renderer>().enabled = false;
+                //GetComponent<Renderer>().enabled = false;
                 transform.GetChild(0).gameObject.SetActive(false);
+                transform.GetChild(1).gameObject.SetActive(false);
                 bl_Seen = false;
                 CSGameManager.gameManager.AddOrRemoveFromSeenList(false, this);
             }
