@@ -32,4 +32,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FungusScenes/Scene 3.unity
     guid: c318e7bc0880e504b9871d864a07e647
+  - enabled: 1
+    path: Assets/Scenes/FungusScenes/Enemies Cleared.unity
+    guid: b945c15bc2ad53f419b1b15e8e602b38
+  - enabled: 1
+    path: Assets/Scenes/FungusScenes/Phone Scene.unity
+    guid: 0603d3c2c775c3b47a25c355f880046a
+  - enabled: 1
+    path: Assets/Scenes/FungusScenes/Pre-Intro.unity
+    guid: a7c81d27011ff8a4eb52450eef882f0e
   m_configObjects: {}
