@@ -1,1 +1,1 @@
-Wall,xxxxxxxxx,xxxxxxxxx
+Wall Builder,Creates a temporary wall Wall,The wall becomes explosive

@@ -258,7 +258,8 @@ public class Tile : MonoBehaviour {
                 }
                 for (int i = 0; i < int_rays + 1; i++)
                 {
-                    
+
+
                     Vector3 dir = new Vector3 (ray_direction_x[i] - transform.position.x, 0,ray_direction_z[i] - transform.position.z);
                     dir = dir.normalized;
 
@@ -279,8 +280,10 @@ public class Tile : MonoBehaviour {
 
                 ray_cast = new Ray[int_rays + 1];
 
-                fl_Ray_Range[0] = Vector3.Distance(new Vector3(transform.position.x, 1, transform.position.z), rob.transform.position);
+                fl_Ray_Range = new float[int_rays + 1];
 
+                fl_Ray_Range[0] = Vector3.Distance(new Vector3(transform.position.x, 1, transform.position.z), rob.transform.position);
+   
                 ray_cast[int_rays] = new Ray(rob.transform.position, dir * fl_Ray_Range[0]);//draws a ray between target and selected robot
 
                 Debug.DrawRay(rob.transform.position, dir * fl_Ray_Range[0], Color.green, 0.1f);//visual representation of ray for editor
@@ -389,6 +392,8 @@ public class Tile : MonoBehaviour {
                     }
                     rob.int_heat_current += 1;
                     ls_flame_ice_hit.Clear();
+                    rob.flame_effect.SetActive(true);
+                    StartCoroutine(rob.Flame());
                     Debug.Log("( ͡° ͜ʖ ͡°)");
                     rob.bl_Has_Acted = true;//robot has done it's action
                     rob.int_Actions--;
@@ -438,6 +443,12 @@ public class Tile : MonoBehaviour {
                                 StartCoroutine(rob.LaserOff());
                                 rob.lr_laser.SetPosition(0, rob.transform.position);
                                 rob.lr_laser.SetPosition(1, hits[0].point);
+                                rob.lr_laser.SetPosition(2, rob.transform.position);
+                                rob.lr_laser.SetPosition(3, rob.transform.position);
+                                rob.lr_laser.SetPosition(4, rob.transform.position);
+
+                                Debug.Log(hits[0].point);
+
 
                                 if (rob.bl_overheat == false)
                                 {

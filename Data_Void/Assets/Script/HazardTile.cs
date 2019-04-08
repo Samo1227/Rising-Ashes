@@ -127,7 +127,7 @@ public class HazardTile : Tile
     public void ApplyHeat(CharacterBase _character)
     {
         PlayerRobot _TempPR = _character.GetComponent<PlayerRobot>();
-        if (_TempPR != null)
+        if (_TempPR != null && _TempPR.int_arr_parts[3] != 3)
         {
             _TempPR.int_heat_current += int_Heat;
         }
@@ -138,7 +138,7 @@ public class HazardTile : Tile
     public void ApplyHeatAndDamage(CharacterBase _character)
     {
         PlayerRobot _TempPR = _character.GetComponent<PlayerRobot>();
-        if (_TempPR != null)
+        if (_TempPR != null && _TempPR.int_arr_parts[3] != 3)
         {
             _TempPR.int_heat_current += int_Heat;
         }
@@ -150,7 +150,7 @@ public class HazardTile : Tile
     public void ReduceHeat(CharacterBase _character)
     {
         PlayerRobot _TempPR = _character.GetComponent<PlayerRobot>();
-        if (_TempPR != null)
+        if (_TempPR != null && _TempPR.int_arr_parts[3] != 3)
         {
             _TempPR.int_heat_current -= int_Cold;
         }
@@ -161,7 +161,7 @@ public class HazardTile : Tile
     public void ReduceHeatDealDamage(CharacterBase _character)
     {
         PlayerRobot _TempPR = _character.GetComponent<PlayerRobot>();
-        if (_TempPR != null)
+        if (_TempPR != null && _TempPR.int_arr_parts[3] != 3)
         {
             _TempPR.int_heat_current -= int_Cold;
         }
@@ -172,6 +172,7 @@ public class HazardTile : Tile
     #region Collapse
     public void Collapse(CharacterBase _character)
     {
+        PlayerRobot _TempPR = _character.GetComponent<PlayerRobot>();
         if (_character.int_Weight_Current >= int_WeightLimit)
         {
             print("Collapse");

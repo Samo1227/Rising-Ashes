@@ -521,7 +521,15 @@ public class CSGameManager : MonoBehaviour
         {
             ClearMapData();
             Debug.Log("Win");
-            SceneManager.LoadScene("WinScreen");
+            if (SceneManager.GetActiveScene().name == "TileTester")
+            {
+                ProgressTracker.pt_ProgressTracker.LevelComplete(0);
+                SceneManager.LoadScene("Enemies Cleared");
+            }
+            else
+            {
+                SceneManager.LoadScene("WinScreen");
+            }
         }
     }
     #endregion

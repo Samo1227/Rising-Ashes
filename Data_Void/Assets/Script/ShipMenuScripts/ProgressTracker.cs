@@ -16,7 +16,8 @@ public class ProgressTracker : MonoBehaviour
         if (pt_ProgressTracker == null)            // has it been set up before?
         {
             pt_ProgressTracker = this;             // no, it's the first GM, so store our instance
-                                                   //  DontDestroyOnLoad(gameObject);// persists through sceen changes
+                                                   //  
+            DontDestroyOnLoad(gameObject);// persists through sceen changes
         }
         //-----------
         else if (pt_ProgressTracker != this) // if we get called again. desroy new version and keep old

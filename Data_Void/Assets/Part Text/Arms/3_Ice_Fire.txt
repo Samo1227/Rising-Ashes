@@ -1,1 +1,1 @@
-Ice-Fire,xxxxxxxxx,xxxxxxxxx
+Ice/Fire,Freezes enemies and cools down Allies that are overheating, Shoots fire leaving environmental hazards in its wake

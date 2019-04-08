@@ -1,1 +1,1 @@
-Drill,xxxxxxxxx,xxxxxxxxx
+Drill,Does increased damage to Environment Tiles.,Continues to attack in the direction it was fired until reaching an empty space

@@ -38,6 +38,8 @@ public class PlayerRobot : CharacterBase
 
     public PlayerRobot Held_robot;
 
+    public GameObject flame_effect;
+
     #endregion
     //------------------------------------------
     #region Start & Update
@@ -81,6 +83,8 @@ public class PlayerRobot : CharacterBase
         this.gameObject.name = "PR " + CSGameManager.gameManager.ls_Player_Robots_In_Level.IndexOf(this);
         aSource.clip = audioList.prStart;
         aSource.Play();
+
+        flame_effect.SetActive(false);
     }
     //------------------------------------------
     void Update()
@@ -617,6 +621,10 @@ public class PlayerRobot : CharacterBase
         yield return null;
     }
 
-
-    //------------------------------------------
+    public IEnumerator Flame()
+    {
+        yield return new WaitForSeconds(0.5f);
+        flame_effect.SetActive(false);
+    }
+        //------------------------------------------
 }//=======================================================================================

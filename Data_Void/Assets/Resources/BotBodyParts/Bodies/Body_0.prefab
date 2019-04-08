@@ -92,7 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14267e86393d46e45b84c7b5d422783e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  int_part_health: 3
+  int_part_health: 6
   int_part_weight: 1
   int_part_effect: 0
   txt_info: {fileID: 4900000, guid: 5620f6f66c6cf4c4082baab3cf20f67b, type: 3}
@@ -103,11 +103,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4633125445782710}
     m_Modifications:
-    - target: {fileID: 660717064094786051, guid: 9769fdd84c6384f48b8ef600abf41197,
-        type: 3}
-      propertyPath: m_Name
-      value: LeftArm
-      objectReference: {fileID: 0}
     - target: {fileID: 660717064095219299, guid: 9769fdd84c6384f48b8ef600abf41197,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -163,6 +158,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 660717064094786051, guid: 9769fdd84c6384f48b8ef600abf41197,
+        type: 3}
+      propertyPath: m_Name
+      value: LeftArm
+      objectReference: {fileID: 0}
     - target: {fileID: 660717064092793927, guid: 9769fdd84c6384f48b8ef600abf41197,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -203,11 +203,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4633125445782710}
     m_Modifications:
-    - target: {fileID: 515271177136595939, guid: f4553fefa8dc17e41889edbd4f909c25,
-        type: 3}
-      propertyPath: m_Name
-      value: LightTorso
-      objectReference: {fileID: 0}
     - target: {fileID: 515271177136963523, guid: f4553fefa8dc17e41889edbd4f909c25,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -262,6 +257,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 515271177136595939, guid: f4553fefa8dc17e41889edbd4f909c25,
+        type: 3}
+      propertyPath: m_Name
+      value: LightTorso
       objectReference: {fileID: 0}
     - target: {fileID: 515271177134668969, guid: f4553fefa8dc17e41889edbd4f909c25,
         type: 3}

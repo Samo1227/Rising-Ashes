@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class LevelSelect : MonoBehaviour
 {
     public GameObject go_UIText;//ref to ui where info is displayed
+    [TextArea]
     public string st_AreaDescription;//info on the level
     public string st_TakeToLevel;//name of scene this links to
     public bool bl_Completed = false;
