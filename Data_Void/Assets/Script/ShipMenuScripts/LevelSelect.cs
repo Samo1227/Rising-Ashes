@@ -20,11 +20,28 @@ public class LevelSelect : MonoBehaviour
     private void Start()
     {
         r_Render = gameObject.GetComponent<Renderer>();
-        for (int i = 0; i < ls_linkedLevels.Length; i++)
+        if (bl_Completed == false)
         {
-            if (ls_linkedLevels[i].bl_Completed == true)
+            for (int i = 0; i < ls_linkedLevels.Length; i++)
             {
-                bl_Accessable = true;
+                if (ls_linkedLevels[i].bl_Completed == true)
+                {
+                    bl_Accessable = true;
+                }
+            }
+        }
+    }
+
+    public void CheckAccess()
+    {
+        if (bl_Completed == false)
+        {
+            for (int i = 0; i < ls_linkedLevels.Length; i++)
+            {
+                if (ls_linkedLevels[i].bl_Completed == true)
+                {
+                    bl_Accessable = true;
+                }
             }
         }
     }
