@@ -1,0 +1,276 @@
+fileFormatVersion: 2
+guid: c76fecef017224c459632d043febe3ba
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Box001
+    100002: Box002
+    100004: Box004
+    100006: Box006
+    100008: Box009
+    100010: Circle003
+    100012: Construction Helmet
+    100014: Cylinder001
+    100016: Cylinder002
+    100018: Cylinder003
+    100020: //RootNode
+    100022: Fingers
+    100024: Head
+    100026: head
+    100028: LArmLow
+    100030: Laser
+    100032: Laser1
+    100034: Laser2
+    100036: LeftArmSHolder
+    100038: LFoot
+    100040: LFoot 1
+    100042: LFoot001
+    100044: LFoot002
+    100046: LKnee
+    100048: LKnee001
+    100050: LLegDown
+    100052: LLegDown001
+    100054: LLegUp
+    100056: LLegUp001
+    100058: Mech
+    100060: MechCollarboneBone0
+    100062: MechCollarboneBone0 1
+    100064: MechLArm1
+    100066: MechLArm2
+    100068: MechLArmCollarbone
+    100070: MechLLeg1
+    100072: MechLLeg2
+    100074: MechLLegDigit01
+    100076: MechLLegDigit02
+    100078: MechLLegDigit11
+    100080: MechLLegDigit12
+    100082: MechLLegDigit21
+    100084: MechLLegDigit22
+    100086: MechLLegPalm
+    100088: MechLLegPlatform
+    100090: MechPelvis
+    100092: MechRArm1
+    100094: MechRArm2
+    100096: MechRArmCollarbone
+    100098: MechRibcage
+    100100: MechRLeg1
+    100102: MechRLeg2
+    100104: MechRLegDigit01
+    100106: MechRLegDigit02
+    100108: MechRLegDigit11
+    100110: MechRLegDigit12
+    100112: MechRLegDigit21
+    100114: MechRLegDigit22
+    100116: MechRLegPalm
+    100118: MechRLegPlatform
+    100120: MechSpine
+    100122: Pelvis
+    100124: Torso
+    400000: Box001
+    400002: Box002
+    400004: Box004
+    400006: Box006
+    400008: Box009
+    400010: Circle003
+    400012: Construction Helmet
+    400014: Cylinder001
+    400016: Cylinder002
+    400018: Cylinder003
+    400020: //RootNode
+    400022: Fingers
+    400024: Head
+    400026: head
+    400028: LArmLow
+    400030: Laser
+    400032: Laser1
+    400034: Laser2
+    400036: LeftArmSHolder
+    400038: LFoot
+    400040: LFoot 1
+    400042: LFoot001
+    400044: LFoot002
+    400046: LKnee
+    400048: LKnee001
+    400050: LLegDown
+    400052: LLegDown001
+    400054: LLegUp
+    400056: LLegUp001
+    400058: Mech
+    400060: MechCollarboneBone0
+    400062: MechCollarboneBone0 1
+    400064: MechLArm1
+    400066: MechLArm2
+    400068: MechLArmCollarbone
+    400070: MechLLeg1
+    400072: MechLLeg2
+    400074: MechLLegDigit01
+    400076: MechLLegDigit02
+    400078: MechLLegDigit11
+    400080: MechLLegDigit12
+    400082: MechLLegDigit21
+    400084: MechLLegDigit22
+    400086: MechLLegPalm
+    400088: MechLLegPlatform
+    400090: MechPelvis
+    400092: MechRArm1
+    400094: MechRArm2
+    400096: MechRArmCollarbone
+    400098: MechRibcage
+    400100: MechRLeg1
+    400102: MechRLeg2
+    400104: MechRLegDigit01
+    400106: MechRLegDigit02
+    400108: MechRLegDigit11
+    400110: MechRLegDigit12
+    400112: MechRLegDigit21
+    400114: MechRLegDigit22
+    400116: MechRLegPalm
+    400118: MechRLegPlatform
+    400120: MechSpine
+    400122: Pelvis
+    400124: Torso
+    2100000: No Name
+    2300000: Box001
+    3300000: Box001
+    4300000: Box001
+    4300002: Box006
+    4300004: Box004
+    4300006: Laser2
+    4300008: Circle003
+    4300010: Laser1
+    4300012: Construction Helmet
+    4300014: Head
+    4300016: LeftArmSHolder
+    4300018: LArmLow
+    4300020: Cylinder003
+    4300022: Box009
+    4300024: Fingers
+    4300026: Pelvis
+    4300028: LLegUp
+    4300030: LLegDown
+    4300032: LKnee
+    4300034: LFoot
+    4300036: LFoot
+    4300038: Cylinder002
+    4300040: Cylinder001
+    4300042: Box002
+    4300044: LFoot001
+    4300046: LFoot002
+    4300048: LLegDown001
+    4300050: LKnee001
+    4300052: LLegUp001
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: Box002
+    13700002: Box004
+    13700004: Box006
+    13700006: Box009
+    13700008: Circle003
+    13700010: Construction Helmet
+    13700012: Cylinder001
+    13700014: Cylinder002
+    13700016: Cylinder003
+    13700018: Fingers
+    13700020: Head
+    13700022: LArmLow
+    13700024: Laser1
+    13700026: Laser2
+    13700028: LeftArmSHolder
+    13700030: LFoot
+    13700032: LFoot 1
+    13700034: LFoot001
+    13700036: LFoot002
+    13700038: LKnee
+    13700040: LKnee001
+    13700042: LLegDown
+    13700044: LLegDown001
+    13700046: LLegUp
+    13700048: LLegUp001
+    13700050: Pelvis
+    2186277476908879412: ImportLogs
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

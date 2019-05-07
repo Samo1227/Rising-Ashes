@@ -14,6 +14,8 @@ public class PlayerRobot : CharacterBase
     public int int_Actions = 2;
     public GameObject go_move_ui;//these are the two yellow rectangles that show if the PR has moved or acted
     public GameObject go_other_action;
+    //-------Animation
+    private Animator[] an_Parts; // array of animators 
     #endregion
     //------------------------------------------
     #region BotSetUP
@@ -49,6 +51,7 @@ public class PlayerRobot : CharacterBase
         for (int i = 0; i < 4; i++)
         {
             Instantiate(Resources.Load<GameObject>(st_arr_resources[i] + int_arr_parts[i]), new Vector3(tr_arr_body[i].position.x, tr_arr_body[i].position.y, tr_arr_body[i].position.z), Quaternion.identity, tr_arr_body[i]);
+          //  an_Parts[i] = Resources.Load<GameObject>(st_arr_resources[i] + int_arr_parts[i]).GetComponent<Animator>();
         }
 
         if (int_Weight_Max > int_Weight_Current)
