@@ -650,6 +650,7 @@ public class AICharacter : CharacterBase {
 
     public void VisibleEnemy ()
     {
+        /*
         if (tl_Current_Tile.bl_in_view_zone)
         {
             if (bl_is_invisible && tl_Current_Tile.bl_radar != true)
@@ -692,5 +693,6 @@ public class AICharacter : CharacterBase {
                 CSGameManager.gameManager.AddOrRemoveFromSeenList(false, this);
             }
         }
+        */
     }
 }//=======================================================================================

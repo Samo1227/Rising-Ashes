@@ -308,7 +308,7 @@ public class Tile : MonoBehaviour {
                 fl_angle = Mathf.Atan2(v3_aim.x, v3_aim.z) * Mathf.Rad2Deg;
                 rob.transform.rotation = Quaternion.Euler(new Vector3(0, fl_angle + 90, 0));
 
-                
+
                 if (rob.int_effect == 2)
                 {
                     rob.bl_Has_Acted = true;
@@ -320,6 +320,30 @@ public class Tile : MonoBehaviour {
                     rob.int_heat_current += 1;
                     bl_explosive = rob.bl_overheat;
 
+                }
+                else if (rob.int_effect == 5)
+                {
+                    if (Physics.RaycastNonAlloc(ray_cast[0], hits, fl_Ray_Range[0]) > 0)//if the raycast has hit something
+                    {
+
+                        if (hits[0].collider.gameObject.GetComponent<CharacterBase>())//the collider hit is a tile
+                        {
+                            rob.RandomDamage();
+
+                            if(rob.bl_overheat)
+                            {
+                                hits[0].collider.gameObject.GetComponent<CharacterBase>().int_Health -= rob.int_damage;
+                                rob.int_Health += rob.int_damage;
+                            }
+                            else
+                            {
+                                hits[0].collider.gameObject.GetComponent<CharacterBase>().int_Health += rob.int_damage;
+                            }
+                            rob.bl_Has_Acted = true;
+                            rob.int_Actions--;
+                            rob.Clear_Selection();
+                        }
+                    }
                 }
                 else if (rob.int_effect == 3)
                 {
@@ -339,7 +363,7 @@ public class Tile : MonoBehaviour {
                                     if (hit.collider.gameObject.GetComponent<CharacterBase>())
                                     {
                                         Debug.Log("Get");
-                                        if(hit.collider.gameObject.GetComponent<CharacterBase>().ice_fire_select == false)
+                                        if (hit.collider.gameObject.GetComponent<CharacterBase>().ice_fire_select == false)
                                         {
                                             ls_flame_ice_hit.Add(hit.collider.gameObject.GetComponent<CharacterBase>());
                                             hit.collider.gameObject.GetComponent<CharacterBase>().ice_fire_select = true;
@@ -348,7 +372,7 @@ public class Tile : MonoBehaviour {
                                     }
                                     else if (hit.collider.gameObject.GetComponent<Tile>())
                                     {
-                                        goto OUTERLOOP; 
+                                        goto OUTERLOOP;
                                     }
 
                                     Debug.Log("hit");
@@ -372,7 +396,7 @@ public class Tile : MonoBehaviour {
                             }
                             else//ice
                             {
-                                CB_item.gameObject.GetComponent<PlayerRobot>().int_heat_current =+ 2;
+                                CB_item.gameObject.GetComponent<PlayerRobot>().int_heat_current = +2;
                             }
                         }
                         else if (CB_item.gameObject.GetComponent<AICharacter>())
@@ -413,7 +437,7 @@ public class Tile : MonoBehaviour {
                         //rob_held.bl_Moving = true;
 
                         //updates and resets the robots position references
-                        
+
                         rob_held.int_x = int_X;
                         rob_held.int_z = int_Z;//robots current position storage is updated to match
                         rob_held.tl_Current_Tile = CSGameManager.gameManager.map[int_X, int_Z].gameObject.GetComponent<Tile>(); //robots reference tile is set to new position
