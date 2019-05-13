@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.574817, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -852,7 +852,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   go_UIText: {fileID: 509645453}
   st_AreaDescription: Second level
-  st_TakeToLevel: Level2
+  st_TakeToLevel: Level3
   bl_Completed: 0
   bl_Accessable: 0
   ls_linkedLevels:
@@ -1584,7 +1584,7 @@ MonoBehaviour:
   st_AreaDescription: The Utility tunnels are a trade secret, only known about by
     officials and neccessary construction personel. It can be used to get through
     certain ship quadrants.
-  st_TakeToLevel: Level3
+  st_TakeToLevel: LV3Intro
   bl_Completed: 0
   bl_Accessable: 0
   ls_linkedLevels:
@@ -2016,7 +2016,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   go_UIText: {fileID: 509645453}
   st_AreaDescription: 'This is the residential district where we live etc... '
-  st_TakeToLevel: TileTester
+  st_TakeToLevel: Level2
   bl_Completed: 0
   bl_Accessable: 0
   ls_linkedLevels: []
@@ -2954,6 +2954,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 927607333}
   m_CullTransparentMesh: 0
+--- !u!1 &959880152
+GameObject:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 959880154}
+  - component: {fileID: 959880153}
+  m_Layer: 0
+  m_Name: _FungusState
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &959880153
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 959880152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61dddfdc5e0e44ca298d8f46f7f5a915, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedFlowchart: {fileID: 0}
+--- !u!4 &959880154
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 959880152}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1018534724
 GameObject:
   m_ObjectHideFlags: 0
@@ -3524,7 +3568,7 @@ MonoBehaviour:
   go_UIText: {fileID: 509645453}
   st_AreaDescription: The front quadrant homes the colony ships commanding personel.
     one must pass through here to get to the ships bridge and command center.
-  st_TakeToLevel: Level4
+  st_TakeToLevel: Level5
   bl_Completed: 0
   bl_Accessable: 0
   ls_linkedLevels:
@@ -5640,7 +5684,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   go_UIText: {fileID: 509645453}
   st_AreaDescription: This is the bridge... the control center of the entire ship.
-  st_TakeToLevel: Bridge
+  st_TakeToLevel: FIntro
   bl_Completed: 0
   bl_Accessable: 0
   ls_linkedLevels:

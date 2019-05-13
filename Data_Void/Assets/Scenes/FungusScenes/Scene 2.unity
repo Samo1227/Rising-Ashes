@@ -407,7 +407,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameText: Peter
-  nameColor: {r: 0.31045115, g: 0.17915626, b: 0.6226415, a: 1}
+  nameColor: {r: 0.14751692, g: 0.23616, b: 0.8018868, a: 1}
   soundEffect: {fileID: 0}
   portraits:
   - {fileID: 21300000, guid: abb0bc4c0a9b22748bbcfe6ab747a8be, type: 3}
@@ -959,8 +959,7 @@ MonoBehaviour:
     height: 859
   selectedBlocks:
   - {fileID: 1353696552}
-  selectedCommands:
-  - {fileID: 1353696570}
+  selectedCommands: []
   variables: []
   description: 
   stepPause: 0
@@ -1410,7 +1409,7 @@ MonoBehaviour:
   durationOLD: 0
 --- !u!114 &1353696570
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -1428,7 +1427,7 @@ MonoBehaviour:
   durationOLD: 0
 --- !u!114 &1353696571
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}

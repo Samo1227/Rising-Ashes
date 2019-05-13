@@ -571,10 +571,25 @@ public class CSGameManager : MonoBehaviour
         {
             ClearMapData();
             Debug.Log("Win");
-            if (SceneManager.GetActiveScene().name == "TileTester")
+            if (SceneManager.GetActiveScene().name == "Level2")
             {
                 ProgressTracker.pt_ProgressTracker.LevelComplete(0);
                 SceneManager.LoadScene("Enemies Cleared");
+            }
+            if (SceneManager.GetActiveScene().name == "Level3")
+            {
+                ProgressTracker.pt_ProgressTracker.LevelComplete(1);
+                SceneManager.LoadScene("ShipMenu");
+            }
+            if (SceneManager.GetActiveScene().name == "Level4")
+            {
+                ProgressTracker.pt_ProgressTracker.LevelComplete(2);
+                SceneManager.LoadScene("LV3Outro");
+            }
+            if (SceneManager.GetActiveScene().name == "Level5")
+            {
+                ProgressTracker.pt_ProgressTracker.LevelComplete(3);
+                SceneManager.LoadScene("ShipMenu");
             }
             else
             {
@@ -585,8 +600,16 @@ public class CSGameManager : MonoBehaviour
     //---------------------------------------------------
     public void GoalReached()
     {
-        Debug.Log("Goals");
-        SceneManager.LoadScene("WinScreen");
+        if (SceneManager.GetActiveScene().name == "Level4")
+        {
+            ProgressTracker.pt_ProgressTracker.LevelComplete(2);
+            SceneManager.LoadScene("LV3Outro");
+        }
+        if (SceneManager.GetActiveScene().name == "Level6")
+        {
+            ProgressTracker.pt_ProgressTracker.LevelComplete(4);
+            SceneManager.LoadScene("FFinal");
+        }
     }
     #endregion
     //---------------------------------------------------
