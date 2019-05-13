@@ -1368,7 +1368,7 @@ MonoBehaviour:
   ai_Enemy_Test_boss: {fileID: 5446988761863295822, guid: 463d83da45c22c749834679c601d3495,
     type: 3}
   pr_currentRobot: {fileID: 0}
-  txt_level: {fileID: 4900000, guid: 36622e11b41c2784489a86c26409106c, type: 3}
+  txt_level: {fileID: 4900000, guid: e34603619d3c18740a310483b295085b, type: 3}
   st_level: 
   arr_at_level: []
   int_map_x: 0

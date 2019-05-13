@@ -17,6 +17,9 @@ public class CSGameManager : MonoBehaviour
     public int int_PRNumber = 0;
     public IntroPlayerBot ipb_PC; //for intro scene
     public AICharacter ai_Enemy_Test;//might need a more robust system for the actuall game
+    public AICharacter ai_Enemy_Test_range;//might need a more robust system for the actuall game
+    public AICharacter ai_Enemy_Test_boss;//might need a more robust system for the actuall game
+
     public Tile[,] map = new Tile[10, 10];//at the moment the map array is limited to this size, this needs changing
     public PlayerRobot pr_currentRobot;//reference to the currently selected player robot
     public TextAsset txt_level;
@@ -208,7 +211,17 @@ public class CSGameManager : MonoBehaviour
                 //-----------
                 if (map_layout[x, z] == 11)
                 {
-                    AddEnemy(x, z);
+                    AddEnemy(x, z, 11);
+                }
+
+                if (map_layout[x, z] == 12)
+                {
+                    AddEnemy(x, z, 12);
+                }
+
+                if (map_layout[x, z] == 13)
+                {
+                    AddEnemy(x, z, 13);
                 }
                 //-----------
             }
@@ -405,13 +418,39 @@ public class CSGameManager : MonoBehaviour
     #endregion
     //---------------------------------------------------
     #region Add AI
-    public void AddEnemy(int cX, int cZ)
+    public void AddEnemy(int cX, int cZ,int type)
     {
-        AICharacter temp_AI = null;
-        temp_AI = Instantiate(ai_Enemy_Test);
-        temp_AI.transform.position = new Vector3(cX, transform.position.y + 1f, cZ);
-        temp_AI.int_x = cX;
-        temp_AI.int_z = cZ;
+
+        if(type == 11)
+        {
+
+            AICharacter temp_AI = null;
+            temp_AI = Instantiate(ai_Enemy_Test);
+            temp_AI.transform.position = new Vector3(cX, transform.position.y + 1f, cZ);
+            temp_AI.int_x = cX;
+            temp_AI.int_z = cZ;
+        }
+        if(type == 12)
+        {
+
+            AICharacter temp_AI = null;
+            temp_AI = Instantiate(ai_Enemy_Test_range);
+            temp_AI.transform.position = new Vector3(cX, transform.position.y + 1f, cZ);
+            temp_AI.int_x = cX;
+            temp_AI.int_z = cZ;
+        }
+
+        if(type == 13)
+        {
+
+            AICharacter temp_AI = null;
+            temp_AI = Instantiate(ai_Enemy_Test_boss);
+            temp_AI.transform.position = new Vector3(cX, transform.position.y + 1f, cZ);
+            temp_AI.int_x = cX;
+            temp_AI.int_z = cZ;
+        }
+
+       
     }
     #endregion
     //---------------------------------------------------

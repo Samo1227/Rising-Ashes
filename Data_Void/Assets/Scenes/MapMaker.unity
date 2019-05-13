@@ -1625,14 +1625,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   go_button: {fileID: 1466765064770644, guid: 1e7dfaa814b01ea4abcfe5bbeca23c31, type: 3}
-  map_x: 10
-  map_z: 10
+  map_x: 30
+  map_z: 20
   x_offset: 1
   z_offset: 1
   int_map_parts_max: 18
   int_type_shift: 0
-  st_level_name: 19
-  txt_level: {fileID: 4900000, guid: 85161651a41bbb0439fe0efe3a0b1b2d, type: 3}
+  st_level_name: cold
+  txt_level: {fileID: 4900000, guid: fd77249a183953a479bab42bd15b6a93, type: 3}
   st_level: 10,10,
   arr_at_level: []
 --- !u!4 &1310691164
@@ -1941,7 +1941,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 110, y: -11.800003}
+  m_AnchoredPosition: {x: 110, y: -11.799988}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1487201786
