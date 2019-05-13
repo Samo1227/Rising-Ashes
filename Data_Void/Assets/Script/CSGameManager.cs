@@ -348,6 +348,13 @@ public class CSGameManager : MonoBehaviour
             newHaz.bl_opaque = false;
             newHaz.SetHazardType(HazardTileType.difficultTerrain);
         }
+        if (map_layout[x, z] == 10)
+        {
+            Instantiate(Resources.Load<GameObject>("MapParts/MapElement_" + 10), newHaz.gameObject.transform);
+            newHaz.int_health = 0;
+            newHaz.bl_opaque = false;
+            newHaz.SetHazardType(HazardTileType.goalTile);
+        }
         newHaz.name = ("Tile " + x + " " + z);
         map[x, z] = newHaz;
         return newHaz;
