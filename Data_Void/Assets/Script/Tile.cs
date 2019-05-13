@@ -588,8 +588,25 @@ public class Tile : MonoBehaviour {
             if(Input.GetMouseButtonUp(0))
             {
                 CSGameManager.gameManager.AddRobot(int_X, int_Z);
+                if (CSGameManager.gameManager.ReturnPlayerRobotCount() == 4)
+                {
+                    Debug.Log("StartMission");
+                    CSGameManager.gameManager.StartMission();
+                }
+                else
+                {
+                    StartCoroutine(LateReopen(0.1f));
+                    //CSGameManager.gameManager.botMod.OpenBotmMaker();                   
+                }
             }
         }
+    }
+    IEnumerator LateReopen(float waitTime)
+    {
+        Debug.Log("AddingBotmod");
+        yield return new WaitForSeconds(waitTime);
+        CSGameManager.gameManager.botMod.OpenBotmMaker();
+        CSGameManager.gameManager.IncrementPRNum();
     }
 
     //--------------------------------------------

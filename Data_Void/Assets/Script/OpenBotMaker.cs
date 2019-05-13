@@ -6,6 +6,18 @@ public class OpenBotMaker : MonoBehaviour
 {
     public GameObject go_bot_maker;
 
+    void Start()
+    {
+        StartCoroutine(LateStart(0.1f));
+    }
+
+    IEnumerator LateStart(float waitTime)
+    {
+        Debug.Log("AddingBotmod");
+        yield return new WaitForSeconds(waitTime);
+        CSGameManager.gameManager.botMod = this;
+    }
+
     public void OpenBotmMaker()
     {
         go_bot_maker.SetActive(true);

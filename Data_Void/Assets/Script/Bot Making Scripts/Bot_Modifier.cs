@@ -10,6 +10,8 @@ public class Bot_Modifier : MonoBehaviour
     //
     public int[] int_body_type;
 
+    public int int_PlayerRobotLimit = 5;
+
     //holds the prefabs for the robot parts
     public GameObject[] go_arr_arms_prefabs;
     public GameObject[] go_arr_bodies_prefabs;
@@ -160,7 +162,7 @@ public class Bot_Modifier : MonoBehaviour
         #endregion
         WeightCalc();
     }
-
+  
     #region Part Changes
     //On button press change head
     public void HeadChange()
@@ -381,8 +383,11 @@ public class Bot_Modifier : MonoBehaviour
 
         WeightCalc();
 
-        go_bot_maker_open_button.SetActive(true);
+       // go_bot_maker_open_button.SetActive(true);
         gameObject.SetActive(false);
+        //if (CSGameManager.gameManager.ls_Player_Robots_In_Level.Count>=int_PlayerRobotLimit){
+        //    CloseBotBuilder();
+        //}
 
 
     }

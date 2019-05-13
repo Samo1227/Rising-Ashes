@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 33254811772199808}
   - component: {fileID: 23299573718523630}
   - component: {fileID: 5731052535931523886}
+  - component: {fileID: 8167974880745940215}
   m_Layer: 0
   m_Name: Arms_2
   m_TagString: Untagged
@@ -99,3 +100,22 @@ MonoBehaviour:
   int_part_heat_range: 0300000006000000
   int_part_heat_max: 8
   txt_info: {fileID: 4900000, guid: 233731c5d84ff2c4d8b44043ec49a2b8, type: 3}
+--- !u!95 &8167974880745940215
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1808649054380456}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: c76fecef017224c459632d043febe3ba, type: 3}
+  m_Controller: {fileID: 9100000, guid: 970918a0a1ddb8846b4e9e6c4430adc6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

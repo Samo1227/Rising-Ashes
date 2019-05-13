@@ -14,6 +14,7 @@ public class CSGameManager : MonoBehaviour
     public Tile tile;//publicly assigned objects
     public HazardTile haz;
     public PlayerRobot pr_PC;
+    public int int_PRNumber = 0;
     public IntroPlayerBot ipb_PC; //for intro scene
     public AICharacter ai_Enemy_Test;//might need a more robust system for the actuall game
     public Tile[,] map = new Tile[10, 10];//at the moment the map array is limited to this size, this needs changing
@@ -26,6 +27,8 @@ public class CSGameManager : MonoBehaviour
 
     public int int_map_x;
     public int int_map_z;
+
+    public bool bl_MissionStarted = false;
 
     public List<PlayerRobot> ls_Player_Robots_In_Level = new List<PlayerRobot>();//list of live player robots
     public List<AICharacter> ls_AI_Characters_In_Level = new List<AICharacter>();//list of living enemies (should perhaps be expanded for non hostile AI)
@@ -41,6 +44,7 @@ public class CSGameManager : MonoBehaviour
     public AudioClip acCalm;
     public AudioClip acIntense;
     public bool bl_CalmMusic = true;
+    public OpenBotMaker botMod;
     #endregion
     //---------------------------------------------------
     #region Singleton
@@ -99,7 +103,7 @@ public class CSGameManager : MonoBehaviour
             //-----------
             for (int i = 0; i < int_map_x; i++)
             {
-                Debug.Log(arr_at_level[temp_int]);
+               // Debug.Log(arr_at_level[temp_int]);
                 map_layout[i, j] = System.Convert.ToInt32(arr_at_level[temp_int]);
                 temp_int++;
             }
@@ -532,6 +536,12 @@ public class CSGameManager : MonoBehaviour
             }
         }
     }
+    //---------------------------------------------------
+    public void GoalReached()
+    {
+        Debug.Log("Goals");
+        SceneManager.LoadScene("WinScreen");
+    }
     #endregion
     //---------------------------------------------------
     #region ClearMap
@@ -612,6 +622,33 @@ public class CSGameManager : MonoBehaviour
         }
     } 
     //---------------------------------------------------
+    public int ReturnPlayerRobotCount()
+    {
+        return int_PRNumber;
+    }
+    public void StartMission()
+    {
+        bl_MissionStarted = true;
+    }
+    public void IncrementPRNum()
+    {
+        int_PRNumber++;
+    }
+    //---------------------------------------------------
+    public void EndPlayerTurn()
+    {
+        if (pr_currentRobot != null)
+        {
+            pr_currentRobot.Clear_Selection();
+            pr_currentRobot = null;
+        }
+        foreach(PlayerRobot _PR in ls_Player_Robots_With_Turns_Left)
+        {
+            _PR.int_Actions = 0;
+            EndTurnButton();
+        }
+    }
+
     #region Unused
     //public void BuildLevel()
     //{

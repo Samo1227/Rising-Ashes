@@ -10,6 +10,7 @@ public enum HazardTileType
     damagingCold,
     collapsingTile,
     difficultTerrain,
+    goalTile,
 }
 //=======================================================================================
 public class HazardTile : Tile
@@ -116,6 +117,9 @@ public class HazardTile : Tile
             case (HazardTileType.collapsingTile):
                 Collapse(_character);
                 return;
+            case (HazardTileType.goalTile):
+                Collapse(_character);
+                return;
             default:
                 print("No Hazard");
                 return;
@@ -177,7 +181,18 @@ public class HazardTile : Tile
         {
             print("Collapse");
         }
-    } 
+    }
+    #endregion
+    //---------------------------------------------------
+    #region GoalReached
+    public void Goal(CharacterBase _character)
+    {
+        PlayerRobot _TempPR = _character.GetComponent<PlayerRobot>();
+        if (_TempPR != null)
+        {
+            CSGameManager.gameManager.GoalReached();
+        }
+    }
     #endregion
     //---------------------------------------------------
 }//=======================================================================================

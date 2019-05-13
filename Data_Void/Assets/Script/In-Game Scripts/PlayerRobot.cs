@@ -15,7 +15,9 @@ public class PlayerRobot : CharacterBase
     public GameObject go_move_ui;//these are the two yellow rectangles that show if the PR has moved or acted
     public GameObject go_other_action;
     //-------Animation
-    private Animator[] an_Parts; // array of animators 
+    //public Animator[] an_Parts = new Animator[4]; // array of animators 
+    public List<Animator> ls_PartAnim = new List<Animator>();
+    private bool bl_MoveAnim = false;
     #endregion
     //------------------------------------------
     #region BotSetUP
@@ -50,8 +52,8 @@ public class PlayerRobot : CharacterBase
 
         for (int i = 0; i < 4; i++)
         {
-            Instantiate(Resources.Load<GameObject>(st_arr_resources[i] + int_arr_parts[i]), new Vector3(tr_arr_body[i].position.x, tr_arr_body[i].position.y, tr_arr_body[i].position.z), Quaternion.identity, tr_arr_body[i]);
-          //  an_Parts[i] = Resources.Load<GameObject>(st_arr_resources[i] + int_arr_parts[i]).GetComponent<Animator>();
+            GameObject _Temp= Instantiate(Resources.Load<GameObject>(st_arr_resources[i] + int_arr_parts[i]), new Vector3(tr_arr_body[i].position.x, tr_arr_body[i].position.y, tr_arr_body[i].position.z), Quaternion.identity, tr_arr_body[i]);
+            ls_PartAnim.Add(_Temp.GetComponent<Animator>());
         }
 
         if (int_Weight_Max > int_Weight_Current)
@@ -111,8 +113,24 @@ public class PlayerRobot : CharacterBase
             PlayerRobotDeath();
         }
         //---------
+        if (bl_Moving == false)
+        {
+            //---------
+            if (bl_MoveAnim == true)
+            {
+                StopAnim();
+            }
+            //---------
+        }
+        //---------
         if (bl_Moving)
         {
+            //---------
+            if (bl_MoveAnim == false)
+            {
+                Animate();
+            }
+            //---------
             MoveToTarget();//makes PR move
         }
         //---------
@@ -168,6 +186,10 @@ public class PlayerRobot : CharacterBase
     #region Clicking
     private void OnMouseUp()
     {
+        if (CSGameManager.gameManager.bl_MissionStarted == false)
+        {
+            return;
+        }
         //---------
         if (bl_Turn_Available )//if PR has a turn
         {
@@ -629,5 +651,28 @@ public class PlayerRobot : CharacterBase
         yield return new WaitForSeconds(0.5f);
         flame_effect.SetActive(false);
     }
-        //------------------------------------------
+    //------------------------------------------
+    #region Animation
+    public void Animate()
+    {
+        //---------
+        for (int i = 0; i < ls_PartAnim.Count; i++)
+        {
+            ls_PartAnim[i].SetBool("Moving", true);
+        }
+        //---------
+        bl_MoveAnim = true;
+    }
+    public void StopAnim()
+    {
+        //---------
+        for (int i = 0; i < ls_PartAnim.Count; i++)
+        {
+            ls_PartAnim[i].SetBool("Moving", false);
+        }
+        //---------
+        bl_MoveAnim = false;
+    }
+    #endregion
+    //------------------------------------------
 }//=======================================================================================

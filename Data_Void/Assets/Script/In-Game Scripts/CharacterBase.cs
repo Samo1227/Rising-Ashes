@@ -263,7 +263,7 @@ public class CharacterBase : MonoBehaviour {
             Vector3 v3_Target = tl_temp.transform.position;//sets the movement destination to that tile 
             v3_Target.y += 1; //so character doesn't move into the ground, will need to be reworked if we decide to add elevation to the system
             //-----------
-            if (Vector3.Distance(transform.position, v3_Target)>= 0.05f)//when it's not very close to the target position, has a margin for error for safety purposes
+            if (Vector3.Distance(transform.position, v3_Target)>= 0.1f)//when it's not very close to the target position, has a margin for error for safety purposes
             {
                 CalculateHeading(v3_Target);//work out which direction the robot is moving in
                 SetVelocity();
