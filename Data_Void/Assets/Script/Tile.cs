@@ -219,6 +219,7 @@ public class Tile : MonoBehaviour {
                 Debug.DrawRay(rob.transform.position, dir * fl_Ray_Range[0], Color.green, 0.1f);//visual representation of ray for editor
                 
             }
+
             else if (rob.int_effect == 3)
             {
 
@@ -320,6 +321,30 @@ public class Tile : MonoBehaviour {
                     rob.int_heat_current += 1;
                     bl_explosive = rob.bl_overheat;
 
+                }
+                else if (rob.int_effect == 5)
+                {
+                    if (Physics.RaycastNonAlloc(ray_cast[0], hits, fl_Ray_Range[0]) > 0)//if the raycast has hit something
+                    {
+
+                        if (hits[0].collider.gameObject.GetComponent<CharacterBase>())//the collider hit is a tile
+                        {
+                            rob.RandomDamage();
+
+                            if (rob.bl_overheat)
+                            {
+                                hits[0].collider.gameObject.GetComponent<CharacterBase>().int_Health -= rob.int_damage;
+                                rob.int_Health += rob.int_damage;
+                            }
+                            else
+                            {
+                                hits[0].collider.gameObject.GetComponent<CharacterBase>().int_Health += rob.int_damage;
+                            }
+                            rob.bl_Has_Acted = true;
+                            rob.int_Actions--;
+                            rob.Clear_Selection();
+                        }
+                    }
                 }
                 else if (rob.int_effect == 3)
                 {
