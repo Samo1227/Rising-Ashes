@@ -1,0 +1,259 @@
+fileFormatVersion: 2
+guid: 9ec92bb3f728b7e40845412710c9cbcc
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Abdomen
+    100002: Body
+    100004: Box001
+    100006: Box002
+    100008: Box009
+    100010: Box010
+    100012: Cylinder001
+    100014: Cylinder002
+    100016: Cylinder003
+    100018: Cylinder004
+    100020: Fingers
+    100022: HeavyArmL
+    100024: HeavyBod
+    100026: //RootNode
+    100028: HeavyBodanArm
+    100030: LArmLow
+    100032: LeftArmSHolder
+    100034: LFoot
+    100036: LFoot 1
+    100038: LFoot001
+    100040: LFoot002
+    100042: LKnee
+    100044: LLegDown
+    100046: LLegDown001
+    100048: LLegUp
+    100050: LLegUp001
+    100052: Mech
+    100054: MechCollarboneBone0
+    100056: MechCollarboneBone0 1
+    100058: MechLArm1
+    100060: MechLArm2
+    100062: MechLArmCollarbone
+    100064: MechLLeg1
+    100066: MechLLeg2
+    100068: MechLLegDigit01
+    100070: MechLLegDigit02
+    100072: MechLLegDigit11
+    100074: MechLLegDigit12
+    100076: MechLLegDigit21
+    100078: MechLLegDigit22
+    100080: MechLLegPalm
+    100082: MechLLegPlatform
+    100084: MechPelvis
+    100086: MechRArm1
+    100088: MechRArm2
+    100090: MechRArmCollarbone
+    100092: MechRibcage
+    100094: MechRLeg1
+    100096: MechRLeg2
+    100098: MechRLegDigit01
+    100100: MechRLegDigit02
+    100102: MechRLegDigit11
+    100104: MechRLegDigit12
+    100106: MechRLegDigit21
+    100108: MechRLegDigit22
+    100110: MechRLegPalm
+    100112: MechRLegPlatform
+    100114: MechSpine
+    100116: Pelvis
+    400000: Abdomen
+    400002: Body
+    400004: Box001
+    400006: Box002
+    400008: Box009
+    400010: Box010
+    400012: Cylinder001
+    400014: Cylinder002
+    400016: Cylinder003
+    400018: Cylinder004
+    400020: Fingers
+    400022: HeavyArmL
+    400024: HeavyBod
+    400026: //RootNode
+    400028: HeavyBodanArm
+    400030: LArmLow
+    400032: LeftArmSHolder
+    400034: LFoot
+    400036: LFoot 1
+    400038: LFoot001
+    400040: LFoot002
+    400042: LKnee
+    400044: LLegDown
+    400046: LLegDown001
+    400048: LLegUp
+    400050: LLegUp001
+    400052: Mech
+    400054: MechCollarboneBone0
+    400056: MechCollarboneBone0 1
+    400058: MechLArm1
+    400060: MechLArm2
+    400062: MechLArmCollarbone
+    400064: MechLLeg1
+    400066: MechLLeg2
+    400068: MechLLegDigit01
+    400070: MechLLegDigit02
+    400072: MechLLegDigit11
+    400074: MechLLegDigit12
+    400076: MechLLegDigit21
+    400078: MechLLegDigit22
+    400080: MechLLegPalm
+    400082: MechLLegPlatform
+    400084: MechPelvis
+    400086: MechRArm1
+    400088: MechRArm2
+    400090: MechRArmCollarbone
+    400092: MechRibcage
+    400094: MechRLeg1
+    400096: MechRLeg2
+    400098: MechRLegDigit01
+    400100: MechRLegDigit02
+    400102: MechRLegDigit11
+    400104: MechRLegDigit12
+    400106: MechRLegDigit21
+    400108: MechRLegDigit22
+    400110: MechRLegPalm
+    400112: MechRLegPlatform
+    400114: MechSpine
+    400116: Pelvis
+    2100000: No Name
+    2300000: Box001
+    3300000: Box001
+    4300000: Box001
+    4300002: Pelvis
+    4300004: LLegUp
+    4300006: LLegDown
+    4300008: LKnee
+    4300010: LFoot
+    4300012: LFoot
+    4300014: Cylinder002
+    4300016: Cylinder001
+    4300018: Box002
+    4300020: LFoot001
+    4300022: LFoot002
+    4300024: LLegDown001
+    4300026: LLegUp001
+    4300028: Box010
+    4300030: Cylinder004
+    4300032: Fingers
+    4300034: Cylinder003
+    4300036: Box009
+    4300038: LArmLow
+    4300040: LeftArmSHolder
+    4300042: Body
+    4300044: Abdomen
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: Abdomen
+    13700002: Body
+    13700004: Box002
+    13700006: Box009
+    13700008: Box010
+    13700010: Cylinder001
+    13700012: Cylinder002
+    13700014: Cylinder003
+    13700016: Cylinder004
+    13700018: Fingers
+    13700020: LArmLow
+    13700022: LeftArmSHolder
+    13700024: LFoot
+    13700026: LFoot 1
+    13700028: LFoot001
+    13700030: LFoot002
+    13700032: LKnee
+    13700034: LLegDown
+    13700036: LLegDown001
+    13700038: LLegUp
+    13700040: LLegUp001
+    13700042: Pelvis
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

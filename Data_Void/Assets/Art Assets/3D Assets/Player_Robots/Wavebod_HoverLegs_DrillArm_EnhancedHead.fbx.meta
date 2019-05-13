@@ -1,0 +1,234 @@
+fileFormatVersion: 2
+guid: e94d28ce9bcfa5c4fbb8b7677fdbd0af
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Arial
+    100002: Box001
+    100004: Box009
+    100006: Box010
+    100008: Box011
+    100010: Box012
+    100012: Came
+    100014: CamL
+    100016: CamR
+    100018: Construction Helmet
+    100020: Cylinder003
+    100022: Cylinder004
+    100024: Cylinder005
+    100026: Cylinder006
+    100028: DrillArm
+    100030: Enhanced Head
+    100032: Fingers
+    100034: Head
+    100036: LArmLow
+    100038: Laser
+    100040: Laser1
+    100042: LeftArmSHolder
+    100044: MainCam
+    100046: Mech
+    100048: MechCollarboneBone0
+    100050: MechCollarboneBone0 1
+    100052: MechLArm1
+    100054: MechLArm2
+    100056: MechLArmCollarbone
+    100058: MechPelvis
+    100060: MechRArm1
+    100062: MechRArm2
+    100064: MechRArmCollarbone
+    100066: MechRibcage
+    100068: MechRLeg1
+    100070: MechRLeg2
+    100072: MechRLegDigit01
+    100074: MechRLegDigit02
+    100076: MechRLegDigit11
+    100078: MechRLegDigit12
+    100080: MechRLegDigit21
+    100082: MechRLegDigit22
+    100084: MechRLegPalm
+    100086: MechRLegPlatform
+    100088: MechSpine
+    100090: Sphere001
+    100092: WaveArm
+    100094: WaveBod
+    100096: //RootNode
+    400000: Arial
+    400002: Box001
+    400004: Box009
+    400006: Box010
+    400008: Box011
+    400010: Box012
+    400012: Came
+    400014: CamL
+    400016: CamR
+    400018: Construction Helmet
+    400020: Cylinder003
+    400022: Cylinder004
+    400024: Cylinder005
+    400026: Cylinder006
+    400028: DrillArm
+    400030: Enhanced Head
+    400032: Fingers
+    400034: Head
+    400036: LArmLow
+    400038: Laser
+    400040: Laser1
+    400042: LeftArmSHolder
+    400044: MainCam
+    400046: Mech
+    400048: MechCollarboneBone0
+    400050: MechCollarboneBone0 1
+    400052: MechLArm1
+    400054: MechLArm2
+    400056: MechLArmCollarbone
+    400058: MechPelvis
+    400060: MechRArm1
+    400062: MechRArm2
+    400064: MechRArmCollarbone
+    400066: MechRibcage
+    400068: MechRLeg1
+    400070: MechRLeg2
+    400072: MechRLegDigit01
+    400074: MechRLegDigit02
+    400076: MechRLegDigit11
+    400078: MechRLegDigit12
+    400080: MechRLegDigit21
+    400082: MechRLegDigit22
+    400084: MechRLegPalm
+    400086: MechRLegPlatform
+    400088: MechSpine
+    400090: Sphere001
+    400092: WaveArm
+    400094: WaveBod
+    400096: //RootNode
+    2100000: No Name
+    2300000: Box001
+    3300000: Box001
+    4300000: Box001
+    4300002: Box010
+    4300004: Construction Helmet
+    4300006: CamR
+    4300008: CamL
+    4300010: Came
+    4300012: Head
+    4300014: MainCam
+    4300016: Arial
+    4300018: Box012
+    4300020: Cylinder005
+    4300022: Cylinder006
+    4300024: Laser1
+    4300026: Box009
+    4300028: Cylinder003
+    4300030: Fingers
+    4300032: LArmLow
+    4300034: LeftArmSHolder
+    4300036: Sphere001
+    4300038: Cylinder004
+    4300040: Box011
+    9500000: //RootNode
+    13700000: Arial
+    13700002: Box009
+    13700004: Box010
+    13700006: Box011
+    13700008: Box012
+    13700010: Came
+    13700012: CamL
+    13700014: CamR
+    13700016: Construction Helmet
+    13700018: Cylinder003
+    13700020: Cylinder004
+    13700022: Cylinder005
+    13700024: Cylinder006
+    13700026: Fingers
+    13700028: Head
+    13700030: LArmLow
+    13700032: Laser1
+    13700034: LeftArmSHolder
+    13700036: MainCam
+    13700038: Sphere001
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
