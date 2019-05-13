@@ -7,12 +7,13 @@ public class EndTurnButton : MonoBehaviour
 {
     public Image self;
     public Color mainCol;
-
+    public GameObject confirmationPanel;
 
     void Start()
     {
         self = gameObject.GetComponent<Image>();
         mainCol = self.color;
+        confirmationPanel = gameObject.transform.GetChild(1).gameObject;
     }
     
     void Update()
@@ -29,8 +30,22 @@ public class EndTurnButton : MonoBehaviour
         }
     }
 
+    public void OpenPanel()
+    {
+        confirmationPanel.SetActive(true);
+        if (CSGameManager.gameManager.pr_currentRobot != null)
+        {
+            CSGameManager.gameManager.pr_currentRobot.Clear_Selection();
+            CSGameManager.gameManager.pr_currentRobot = null;
+        }
+    }
+    public void ClosePanel()
+    {
+        confirmationPanel.SetActive(false);
+    }
     public void EndTurn()
     {
         CSGameManager.gameManager.EndPlayerTurn();
+        confirmationPanel.SetActive(false);
     }
 }
